@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 use App\modules\Autoproduct;
 use App\modules\Vendor;
 
+use Auth;
+
 class AutosProductController extends Controller
 {
     public function index(){
@@ -23,6 +25,7 @@ class AutosProductController extends Controller
     {
         $product = new Autoproduct();
         $product->name = $request->name;
+        $product->user_id = Auth::user()->id;
         $product ->save();
         
         return redirect('/dashboard')->with('success','Subject updated successfully');
