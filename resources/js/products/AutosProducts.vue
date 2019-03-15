@@ -48,9 +48,7 @@
             <td>{{ product.chassis }}</td>
             <td>{{ product.engine }}</td>
             <td>{{ product.cost }}</td>
-            <td> 
-              
-          </td>
+            
             <td>
                 <a :href="`/products./autos/ShowSingle/${product.id}`" class="button is-success is-small"><span class="mdi mdi-eye-circle-outline"></span></a>
                 <a :href="`/products./autos/ShowEditFrm/${product.id}`" class="button is-warning is-small"><span class="mdi mdi-pencil-box-outline"></span></a>

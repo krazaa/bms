@@ -2835,8 +2835,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['studentID'],
   data: function data() {
@@ -57092,8 +57090,6 @@ var render = function() {
                         _c("td", [_vm._v(_vm._s(product.engine))]),
                         _vm._v(" "),
                         _c("td", [_vm._v(_vm._s(product.cost))]),
-                        _vm._v(" "),
-                        _c("td"),
                         _vm._v(" "),
                         _c("td", [
                           _c(
