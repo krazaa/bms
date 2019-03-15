@@ -10,6 +10,7 @@ Route::prefix('vendors.')->group(function () {
 
 //Start products routes
 Route::prefix('products.')->group(function () {
+    Route::get('/', 'products\ProductController@Products')->name('products');
     Route::get('autos/', 'products\AutosProductController@index')->name('products.autos');
     Route::get('autos/newproduct', 'products\AutosProductController@NewProductFrom')->name('products.autos.newproduct');
     Route::get('autos/GetAutosProducts/', 'products\AutosProductController@GetAutosProducts')->name('products.autos.GetAutosProducts');
@@ -17,6 +18,15 @@ Route::prefix('products.')->group(function () {
     Route::get('autos/ShowAutosSingle/{id}', 'products\AutosProductController@ShowAutosSingle')->name('products.autos.ShowAutosSingle');
     Route::get('autos/ShowSingle/{id}', 'products\AutosProductController@ShowSingle')->name('products.autos.ShowSingle');
     Route::get('autos/ShowEdit/{id}', 'products\AutosProductController@ShowEdit')->name('products.autos.ShowEdit');
+    Route::get('autos/ShowEditFrm/{id}', 'products\AutosProductController@ShowAutosEdit')->name('products.autos.ShowEditFrm');
+    Route::post('autos/AutosUpdate/{id}', 'products\AutosProductController@AutosUpdate')->name('products.autos.AutosUpdate');
+    
+    Route::post(
+        'autos/AutoProductStore', 
+        'products\AutosProductController@AutoProductStore'
+                )
+    ->name('products.autos.AutoProductStore');
+
     Route::get('autos/ProductRemove/{id}', 'products\AutosProductController@ProductRemove')->name('products.autos.ProductRemove');
     
     //Electronic
@@ -46,6 +56,9 @@ Route::prefix('settings.')->group(function () {
 
 
 
+//dashboard
+
+Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
 /*
 |--------------------------------------------------------------------------
 | Web Routes

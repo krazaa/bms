@@ -12,7 +12,12 @@ window.Vue = require('vue');
 import Buefy from 'buefy';
 import 'buefy/dist/buefy.css';
 import Datepicker from 'buefy/dist/components/datepicker';
+import Vue from 'vue'
+import VueRouter from 'vue-router'
 
+
+
+Vue.use(VueRouter)
 Vue.use(Buefy);
 Vue.use(Datepicker);
 /**
@@ -23,19 +28,45 @@ Vue.use(Datepicker);
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('login', require('./components/login.vue').default);
+Vue.component('dashboard', require('./components/dashboard.vue').default);
 Vue.component('manageusers', require('./manage/users/UsersComponent.vue').default);
 Vue.component('singleuser', require('./manage/users/showComponent.vue').default);
 Vue.component('usercreate', require('./manage/users/UserCreate.vue').default);
 Vue.component('settings', require('./manage/settings/settings.vue').default);
 Vue.component('vendors', require('./vendors/Vendors.vue').default);
 Vue.component('autosnew', require('./products/AutosNewProduct.vue').default);
+Vue.component('productedit', require('./products/AutosEditProduct.vue').default);
 Vue.component('autosprotucts', require('./products/AutosProducts.vue').default);
 Vue.component('showautos', require('./products/AutosShow.vue').default);
 Vue.component('electronic-products', require('./products/ElectronicProducts.vue').default);
-Vue.component('showelectronic', require('./products/ElectronicShow.vue').default);
+//Vue.component('showelectronic', require('./products/ElectronicShow.vue').default);
+
+
+
+import showelectronic from './products/ElectronicShow.vue';
+// router
+const router = new VueRouter({
+    mode: 'history',
+    routes: [
+        // {
+        //     path: '/',
+        //     name: 'home',
+        //     component: Home
+        // },
+        {
+            path: '/products./electronic/showelectronic',
+            name: 'showelectronic',
+            component: showelectronic,
+        },
+    ],
+});
+
+
+
 
 const app = new Vue({
-    el: '#app'
+    el: '#app',
+    router
 });
 
 

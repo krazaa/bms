@@ -19,6 +19,17 @@ class AutosProductController extends Controller
         return view('products.autosNewProduct');
     }
 
+    public function AutoProductStore(request $request)
+    {
+        $product = new Autoproduct();
+        $product->name = $request->name;
+        $product ->save();
+        
+        return redirect('/dashboard')->with('success','Subject updated successfully');
+
+        return view('products.autosNewProduct');
+    }
+
     public function GetAutosProducts()
     {
     	$products = Autoproduct::with('vendorinfo')->get();
@@ -28,7 +39,8 @@ class AutosProductController extends Controller
     public function SearchAutosProduct(request $request){
        
         $search = $request->search;     
-        $products = Autoproduct::where('name','LIKE', "%$search%")->get();
+        $products = Autoproduct::where('name','LIKE', "%$search%")->orwhere('shortname','LIKE', "%$search%")
+        ->get();
         return $products;         
     }
 
@@ -41,8 +53,15 @@ class AutosProductController extends Controller
 
     public function ShowSingle($id)
     {
-    	$products = Autoproduct::with('vendorinfo.company')->find($id);
+    	$products = Autoproduct::find($id);
         return $products->toArray();	
+    }
+
+    public function ShowAutosEdit($id)
+    {
+        $id = $id;
+
+        return view('products.autosEditProduct', compact('id'));   
     }
 
     public function ShowEdit($id)
@@ -50,6 +69,15 @@ class AutosProductController extends Controller
     	$products = Autoproduct::find($id);
         return $products->toArray();	
     }
+     public function AutosUpdate(Request $request, $id)
+    {
+        $subjects = Autoproduct::findOrFail($id);  
+        $subjects ->update($request->all());
+        $subjects ->save();
+        
+        return redirect('/dashboard')->with('success','Subject updated successfully');
+    }
+
     public function ProductRemove($id)
     {
     	$products = Autoproduct::find($id);

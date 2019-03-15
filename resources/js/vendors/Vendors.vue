@@ -1,13 +1,11 @@
 <template>
-        <div class="box">
-           <template>
-    <section>
-        
- 
-            <b-field grouped group-multiline>
-            <div class="control is-flex">
-                <h3 class="title is-4">Manage Vedors</h3>            
-            </div>
+    <div class="box">
+        <template>
+            <section>
+                <b-field grouped group-multiline>
+                    <div class="control is-flex">
+                        <h3 class="title is-4">Manage Vedors</h3>            
+                    </div>
             <div class="control is-flex">
                 <b-field>
                     <b-input v-model="usersearch" placeholder="Keyword Seach" @input="SearchUsers"></b-input>
@@ -118,7 +116,20 @@
             })
             .catch(error => {"erro found"});
         },
+        },
+         computed: {
+    filter: function() {
+      var name_re = new RegExp(this.search_query.name, 'i')
+      var data = []
+      for (i in this.data) {
+        if (this.data[i].name.match(name_re)
+            && this.search_query.langs.includes(this.data[i].lang)) {
+          data.push(this.data[i])
         }
+      }
+      return data
+    }
+}
         
 }
 

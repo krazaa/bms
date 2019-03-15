@@ -1,7 +1,5 @@
 <template>
 <div class="columns is-multiline">
-  
-  
   <div class="column is-12">
     <div class="box">
         <b-field grouped group-multiline>
@@ -19,7 +17,6 @@
                 </b-field>
             </div>
     </b-field>
-    
       <table class="table is-fullwidth is-hoverable is-narrow is-desktop is-mobile" v-if="products.length > 0">
         <div v-if="Studentloading" v-cloak align="center" class="loading-overlay is-active">
           <i class="fas fa-circle-notch fa-spin fa-5x"></i>

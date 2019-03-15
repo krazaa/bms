@@ -1,9 +1,8 @@
 <template>
 <div class="columns is-multiline">
-  
-  
   <div class="column is-12">
     <div class="box">
+      <!-- <router-view></router-view> -->
         <b-field grouped group-multiline>
          <div class="control">
                 <h3 class="title is-4">Manage Products</h3>   
@@ -29,12 +28,12 @@
             <th><abbr title="id">#</abbr></th>
             <th><abbr title="code">Code</abbr></th>
             <th><abbr title="vendor">Vendor</abbr></th>
-            <th><abbr title="products">Product</abbr></th>
-            <th><abbr title="shortname">shortname</abbr></th>
-            <th><abbr title="color">color</abbr></th>
-            <th><abbr title="chassis">chassis</abbr></th>
-            <th><abbr title="engine">engine</abbr></th>
-            <th><abbr title="cost">cost</abbr></th>
+            <th><abbr title="name">Product</abbr></th>
+            <th><abbr title="shortname">Shortname</abbr></th>
+            <th><abbr title="color">Color</abbr></th>
+            <th><abbr title="chassis">Chassis</abbr></th>
+            <th><abbr title="engine">Engine</abbr></th>
+            <th><abbr title="cost">Cost</abbr></th>
             <th><abbr title="action">Action</abbr></th>
           </tr>
         </thead>
@@ -49,14 +48,19 @@
             <td>{{ product.chassis }}</td>
             <td>{{ product.engine }}</td>
             <td>{{ product.cost }}</td>
+            <td> 
+              
+          </td>
             <td>
                 <a :href="`/products./autos/ShowSingle/${product.id}`" class="button is-success is-small"><span class="mdi mdi-eye-circle-outline"></span></a>
-                <a :href="`/products./autos/ShowEdit/${product.id}`" class="button is-warning is-small"><span class="mdi mdi-pencil-box-outline"></span></a>
+                <a :href="`/products./autos/ShowEditFrm/${product.id}`" class="button is-warning is-small"><span class="mdi mdi-pencil-box-outline"></span></a>
                 <a :href="`/products./autos/ProductRemove/${product.id}`" class="button is-danger is-small"><span class="mdi mdi-trash-can"></span></a>
+                <!-- <router-link :to="{ name: 'showelectronic' }">Hello World</router-link> -->
             </td>
           </tr>
         </tbody>
       </table>
+
     </div>
   </div>
 </div>
@@ -81,16 +85,16 @@
             axios.get('/products./autos/SearchAutosProduct?search=' + this.search)
             .then(function(response) 
             {
-            Vue.set(searchstudents.$data, 'products', response.data).catch(error => {"erro found"});
+            Vue.set(products.$data, 'products', response.data).catch(error => {"erro found"});
             })
 
             },
             
           },
          mounted(){
-        axios.get('/products./autos/GetAutosProducts')
-        .then((response)=> this.products = this.temp = response.data)
-        .catch((error) => this.errors = error.response.data.errors)
+          axios.get('/products./autos/GetAutosProducts')
+          .then((response)=> this.products = this.temp = response.data)
+          .catch((error) => this.errors = error.response.data.errors)
     },
 
 }
