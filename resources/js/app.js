@@ -22,6 +22,7 @@ Vue.use(Datepicker);
  */
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+Vue.component('login', require('./components/login.vue').default);
 Vue.component('manageusers', require('./manage/users/UsersComponent.vue').default);
 Vue.component('singleuser', require('./manage/users/showComponent.vue').default);
 Vue.component('usercreate', require('./manage/users/UserCreate.vue').default);
