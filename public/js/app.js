@@ -2915,6 +2915,31 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['productid'],
   data: function data() {
@@ -3038,28 +3063,70 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['productid'],
+  //props: ['productid'], 
   data: function data() {
     return {
       product: [],
+      username: '',
       vendors: [],
+      state: '',
       loading: false,
       csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content')
     };
   },
+  methods: {
+    Checkcode: function Checkcode() {
+      var _this = this;
+
+      axios.get('/products./autos/SearchCode?code=' + this.username).then(function (response) {
+        return _this.state = _this.temp = response.data;
+      });
+      console.log(this.state);
+    }
+  },
   mounted: function mounted() {
-    var _this = this;
+    var _this2 = this;
 
-    axios.get('/products/autos/ShowSingle/' + this.productid).then(function (response) {
-      return _this.product = _this.temp = response.data;
-    }); //.catch((error) => this.errors = error.response.data.errors)
-
-    console.log(this.productid);
+    // axios.get('/products/autos/ShowSingle/' + this.productid)
+    // .then((response)=> this.product = this.temp = response.data)
+    //.catch((error) => this.errors = error.response.data.errors)
+    //console.log(this.productid)
     axios.get('/vendors./GetVendors/').then(function (response) {
-      return _this.vendors = _this.temp = response.data;
+      return _this2.vendors = _this2.temp = response.data;
     }).catch(function (error) {
-      return _this.errors = error.response.data.errors;
+      return _this2.errors = error.response.data.errors;
     });
   }
 });
@@ -3138,24 +3205,21 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['studentID'],
+  //props: ['studentID'], 
   data: function data() {
     return {
       products: [],
       search: '',
-      searchstudents: [],
+      autosproducts: [],
       Studentloading: false
     };
   },
   methods: {
     SearchAutos: function SearchAutos() {
-      var searchstudents = this;
+      var autosproducts = this;
       axios.get('/products./autos/SearchAutosProduct?search=' + this.search).then(function (response) {
-        Vue.set(products.$data, 'products', response.data).catch(function (error) {
+        Vue.set(autosproducts.$data, 'products', response.data).catch(function (error) {
           "erro found";
         });
       });
@@ -3199,11 +3263,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['productid'],
   data: function data() {
@@ -3215,11 +3274,11 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     var _this = this;
 
-    axios.get('/products/autos/ShowSingle/' + this.productid).then(function (response) {
+    axios.get('/products./autos/ShowSingle/' + this.productid).then(function (response) {
       return _this.product = _this.temp = response.data;
-    }); //.catch((error) => this.errors = error.response.data.errors)
-
-    console.log(this.productid);
+    }).catch(function (error) {
+      return _this.errors = error.response.data.errors;
+    }); //console.log(this.productid)
   }
 });
 
@@ -3299,15 +3358,15 @@ __webpack_require__.r(__webpack_exports__);
     return {
       products: [],
       search: '',
-      searchstudents: [],
+      electronic: [],
       Studentloading: false
     };
   },
   methods: {
-    SearchAutos: function SearchAutos() {
-      var searchstudents = this;
+    SearchElec: function SearchElec() {
+      var electronic = this;
       axios.get('/products./autos/SearchAutosProduct?search=' + this.search).then(function (response) {
-        Vue.set(searchstudents.$data, 'products', response.data).catch(function (error) {
+        Vue.set(electronic.$data, 'products', response.data).catch(function (error) {
           "erro found";
         });
       });
@@ -3372,6 +3431,135 @@ __webpack_require__.r(__webpack_exports__);
     }); //.catch((error) => this.errors = error.response.data.errors)
 
     console.log(this.productid);
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/vendors/VendorCreate.vue?vue&type=script&lang=js&":
+/*!********************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/vendors/VendorCreate.vue?vue&type=script&lang=js& ***!
+  \********************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      vendor: '',
+      search: '',
+      errors: '',
+      loading: false,
+      csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+    };
+  },
+  methods: {
+    GetVendor: function GetVendor() {
+      this.loading = true;
+      var searchv = this;
+      axios.get('/vendors./SearchVendor?company=' + this.search).then(function (response) {
+        Vue.set(searchv.$data, 'vendor', response.data);
+        searchv.loading = false;
+      }).catch(function (error) {
+        "erro found";
+      });
+    }
   }
 });
 
@@ -3462,16 +3650,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      vendors: '',
+      vendors: [],
       usersearch: '',
       isNarrowed: true,
       errors: '',
@@ -3494,29 +3676,15 @@ __webpack_require__.r(__webpack_exports__);
     });
   },
   methods: {
-    SearchUsers: function SearchUsers() {
+    VendorGet: function VendorGet() {
       this.loading = true;
       var search = this;
-      axios.get('/manage/users/SearchUsers?search=' + this.usersearch).then(function (response) {
-        Vue.set(users.$data, 'users', response.data);
+      axios.get('/vendors./VendorSearch?company=' + this.usersearch).then(function (response) {
+        Vue.set(usersearch.$data, 'vendors', response.data);
         search.loading = false;
       }).catch(function (error) {
         "erro found";
       });
-    }
-  },
-  computed: {
-    filter: function filter() {
-      var name_re = new RegExp(this.search_query.name, 'i');
-      var data = [];
-
-      for (i in this.data) {
-        if (this.data[i].name.match(name_re) && this.search_query.langs.includes(this.data[i].lang)) {
-          data.push(this.data[i]);
-        }
-      }
-
-      return data;
     }
   }
 });
@@ -57379,11 +57547,7 @@ var render = function() {
                   _c("div", { staticClass: "control" }, [
                     _c("input", {
                       staticClass: "input",
-                      attrs: {
-                        type: "text",
-                        name: "code",
-                        placeholder: "e.g B18123456"
-                      },
+                      attrs: { type: "text", name: "code", disabled: "" },
                       domProps: { value: _vm.product.code }
                     })
                   ])
@@ -57407,6 +57571,18 @@ var render = function() {
                   ])
                 ]),
                 _vm._v(" "),
+                _c("div", { staticClass: "field is-expanded" }, [
+                  _c("label", { staticClass: "label" }, [_vm._v("Model:")]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "control" }, [
+                    _c("input", {
+                      staticClass: "input",
+                      attrs: { name: "model", type: "text" },
+                      domProps: { value: _vm.product.model }
+                    })
+                  ])
+                ]),
+                _vm._v(" "),
                 _c("div", { staticClass: "field" }, [
                   _c("label", { staticClass: "label" }, [
                     _vm._v("Short Name:")
@@ -57426,8 +57602,8 @@ var render = function() {
                 ])
               ]),
               _vm._v(" "),
-              _c("div", { staticClass: "field is-grouped" }, [
-                _c("div", { staticClass: "field" }, [
+              _c("div", { staticClass: "field is-grouped is-expanded" }, [
+                _c("div", { staticClass: "field is-expanded" }, [
                   _c("label", { staticClass: "label" }, [
                     _vm._v("Select Vendor:")
                   ]),
@@ -57455,55 +57631,79 @@ var render = function() {
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "field" }, [
-                  _c("label", { staticClass: "label" }, [_vm._v("Color:")]),
+                  _c("label", { staticClass: "label" }, [_vm._v("Qty:")]),
                   _vm._v(" "),
                   _c("div", { staticClass: "control" }, [
                     _c("input", {
                       staticClass: "input",
-                      attrs: {
-                        name: "color",
-                        type: "text",
-                        placeholder: "e.g Red"
-                      },
-                      domProps: { value: _vm.product.color }
+                      attrs: { name: "qty", type: "text" },
+                      domProps: { value: _vm.product.qty }
                     })
                   ])
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "field" }, [
-                  _c("label", { staticClass: "label" }, [_vm._v("Engine:")]),
+                  _c("label", { staticClass: "label" }, [_vm._v("Max Qty:")]),
                   _vm._v(" "),
                   _c("div", { staticClass: "control" }, [
                     _c("input", {
                       staticClass: "input",
-                      attrs: {
-                        name: "engine",
-                        type: "text",
-                        placeholder: "e.g 2672"
-                      },
-                      domProps: { value: _vm.product.engine }
+                      attrs: { name: "maxqty", type: "text" },
+                      domProps: { value: _vm.product.maxqty }
                     })
                   ])
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "field" }, [
-                  _c("label", { staticClass: "label" }, [_vm._v("Chassis:")]),
+                  _c("label", { staticClass: "label" }, [_vm._v("Reorder :")]),
                   _vm._v(" "),
                   _c("div", { staticClass: "control" }, [
                     _c("input", {
                       staticClass: "input",
-                      attrs: {
-                        name: "chassis",
-                        type: "text",
-                        placeholder: "e.g EX-123-A"
-                      },
-                      domProps: { value: _vm.product.chassis }
+                      attrs: { name: "reorder", type: "text" },
+                      domProps: { value: _vm.product.reorder }
                     })
                   ])
                 ])
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "field is-grouped" }, [
+                _c("div", { staticClass: "field" }, [
+                  _c("label", { staticClass: "label" }, [
+                    _vm._v("Cash Discount:")
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "control" }, [
+                    _c("input", {
+                      staticClass: "input",
+                      attrs: {
+                        name: "cashdis",
+                        type: "text",
+                        placeholder: "e.g 2000"
+                      },
+                      domProps: { value: _vm.product.cashdis }
+                    })
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "field" }, [
+                  _c("label", { staticClass: "label" }, [
+                    _vm._v("Discount Allowed:")
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "control" }, [
+                    _c("input", {
+                      staticClass: "input",
+                      attrs: {
+                        name: "discountallowed",
+                        type: "text",
+                        placeholder: "e.g 2000"
+                      },
+                      domProps: { value: _vm.product.discountallowed }
+                    })
+                  ])
+                ]),
+                _vm._v(" "),
                 _c("div", { staticClass: "field" }, [
                   _c("label", { staticClass: "label" }, [
                     _vm._v("Cost Price:")
@@ -57522,6 +57722,26 @@ var render = function() {
                   ])
                 ]),
                 _vm._v(" "),
+                _c("div", { staticClass: "field" }, [
+                  _c("label", { staticClass: "label" }, [
+                    _vm._v("Whole Sale Price:")
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "control" }, [
+                    _c("input", {
+                      staticClass: "input",
+                      attrs: {
+                        name: "wsaleprice",
+                        type: "text",
+                        placeholder: "e.g 45,000"
+                      },
+                      domProps: { value: _vm.product.wsaleprice }
+                    })
+                  ])
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "field is-grouped" }, [
                 _c("div", { staticClass: "field" }, [
                   _c("label", { staticClass: "label" }, [
                     _vm._v("Selling Price:")
@@ -57606,42 +57826,112 @@ var render = function() {
                 ])
               ]),
               _vm._v(" "),
-              _vm._m(0),
-              _vm._v(" "),
               _c("div", { staticClass: "field is-grouped" }, [
                 _c("div", { staticClass: "field" }, [
+                  _c("label", { staticClass: "label" }, [
+                    _vm._v("Product Code: \n                        ")
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "control" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.username,
+                          expression: "username"
+                        }
+                      ],
+                      staticClass: "input",
+                      attrs: {
+                        name: "code",
+                        type: "text",
+                        placeholder: "e.g B18123456"
+                      },
+                      domProps: { value: _vm.username },
+                      on: {
+                        input: [
+                          function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.username = $event.target.value
+                          },
+                          _vm.Checkcode
+                        ]
+                      }
+                    }),
+                    _vm._v(
+                      "\n                            " +
+                        _vm._s(_vm.state) +
+                        "\n                        "
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _vm.state == "0"
+                    ? _c("p", { staticClass: "help is-success list-inline" }, [
+                        _vm._v(_vm._s(_vm.state) + " Available")
+                      ])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.state == "1"
+                    ? _c("p", { staticClass: "help is-danger" }, [
+                        _vm._v(" Not Available")
+                      ])
+                    : _vm._e()
+                ]),
+                _vm._v(" "),
+                _vm._m(0),
+                _vm._v(" "),
+                _vm._m(1),
+                _vm._v(" "),
+                _vm._m(2)
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "field is-grouped" }, [
+                _c("div", { staticClass: "field is-expanded" }, [
                   _c("label", { staticClass: "label" }, [
                     _vm._v("Select Vendor:")
                   ]),
                   _vm._v(" "),
-                  _c("div", { staticClass: "control" }, [
+                  _c("div", { staticClass: "control is-expanded" }, [
                     _c("div", { staticClass: "select" }, [
                       _c(
                         "select",
                         { attrs: { name: "vendor_id" } },
-                        _vm._l(_vm.vendors, function(vendor) {
-                          return _c(
+                        [
+                          _c(
                             "option",
-                            { domProps: { value: vendor.id } },
-                            [_vm._v(_vm._s(vendor.company))]
-                          )
-                        }),
-                        0
+                            { attrs: { selected: "", disabled: "" } },
+                            [_vm._v("Select Vendor")]
+                          ),
+                          _vm._v(" "),
+                          _vm._l(_vm.vendors, function(vendor) {
+                            return _c(
+                              "option",
+                              { domProps: { value: vendor.id } },
+                              [_vm._v(_vm._s(vendor.company))]
+                            )
+                          })
+                        ],
+                        2
                       )
                     ])
                   ])
                 ]),
                 _vm._v(" "),
-                _vm._m(1),
+                _vm._m(3),
                 _vm._v(" "),
-                _vm._m(2),
+                _vm._m(4),
                 _vm._v(" "),
-                _vm._m(3)
+                _vm._m(5)
               ]),
               _vm._v(" "),
-              _vm._m(4),
+              _vm._m(6),
               _vm._v(" "),
-              _vm._m(5)
+              _vm._m(7),
+              _vm._v(" "),
+              _vm._m(8)
             ],
             1
           )
@@ -57655,95 +57945,127 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "field is-expanded" }, [
+      _c("label", { staticClass: "label" }, [_vm._v("Product Name:")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "control is-expanded" }, [
+        _c("input", {
+          staticClass: "input",
+          attrs: { name: "name", type: "text", placeholder: "e.g Honda 125" }
+        })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "field" }, [
+      _c("label", { staticClass: "label" }, [_vm._v("Model:")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "control is-expanded" }, [
+        _c("input", {
+          staticClass: "input",
+          attrs: { name: "model", type: "text", placeholder: "e.g XX-0013" }
+        })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "field" }, [
+      _c("label", { staticClass: "label" }, [_vm._v("Short Name:")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "control" }, [
+        _c("input", {
+          staticClass: "input",
+          attrs: {
+            name: "shortname",
+            type: "text",
+            placeholder: "e.g Euro 125 CC"
+          }
+        })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "field" }, [
+      _c("label", { staticClass: "label" }, [_vm._v("Qty:")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "control" }, [
+        _c("input", {
+          staticClass: "input",
+          attrs: { name: "qty", type: "text", placeholder: "e.g 1" }
+        })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "field" }, [
+      _c("label", { staticClass: "label" }, [_vm._v("Max Qty:")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "control" }, [
+        _c("input", {
+          staticClass: "input",
+          attrs: { name: "maxqty", type: "text", placeholder: "e.g 10" }
+        })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "field" }, [
+      _c("label", { staticClass: "label" }, [_vm._v("Reorder Qty:")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "control" }, [
+        _c("input", {
+          staticClass: "input",
+          attrs: { name: "reorder", type: "text", placeholder: "e.g 15" }
+        })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
     return _c("div", { staticClass: "field is-grouped" }, [
       _c("div", { staticClass: "field" }, [
-        _c("label", { staticClass: "label" }, [_vm._v("Product Code:")]),
+        _c("label", { staticClass: "label" }, [_vm._v("Cash Discount:")]),
         _vm._v(" "),
         _c("div", { staticClass: "control" }, [
           _c("input", {
             staticClass: "input",
-            attrs: { name: "code", type: "text", placeholder: "e.g B18123456" }
-          })
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "field is-expanded" }, [
-        _c("label", { staticClass: "label" }, [_vm._v("Product Name:")]),
-        _vm._v(" "),
-        _c("div", { staticClass: "control is-expanded" }, [
-          _c("input", {
-            staticClass: "input",
-            attrs: { name: "name", type: "text", placeholder: "e.g Honda 125" }
+            attrs: { name: "cashdis", type: "text", placeholder: "e.g 2000" }
           })
         ])
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "field" }, [
-        _c("label", { staticClass: "label" }, [_vm._v("Short Name:")]),
+        _c("label", { staticClass: "label" }, [_vm._v("Discount Allowed:")]),
         _vm._v(" "),
         _c("div", { staticClass: "control" }, [
           _c("input", {
             staticClass: "input",
             attrs: {
-              name: "shortname",
+              name: "discountallowed",
               type: "text",
-              placeholder: "e.g Euro 125 CC"
+              placeholder: "e.g 2000"
             }
           })
         ])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "field" }, [
-      _c("label", { staticClass: "label" }, [_vm._v("Color:")]),
+      ]),
       _vm._v(" "),
-      _c("div", { staticClass: "control" }, [
-        _c("input", {
-          staticClass: "input",
-          attrs: { name: "color", type: "text", placeholder: "e.g Red" }
-        })
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "field" }, [
-      _c("label", { staticClass: "label" }, [_vm._v("Engine:")]),
-      _vm._v(" "),
-      _c("div", { staticClass: "control" }, [
-        _c("input", {
-          staticClass: "input",
-          attrs: { name: "engine", type: "text", placeholder: "e.g 2672" }
-        })
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "field" }, [
-      _c("label", { staticClass: "label" }, [_vm._v("Chassis:")]),
-      _vm._v(" "),
-      _c("div", { staticClass: "control" }, [
-        _c("input", {
-          staticClass: "input",
-          attrs: { name: "chassis", type: "text", placeholder: "e.g EX-123-A" }
-        })
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "field is-grouped" }, [
       _c("div", { staticClass: "field" }, [
         _c("label", { staticClass: "label" }, [_vm._v("Cost Price:")]),
         _vm._v(" "),
@@ -57755,6 +58077,27 @@ var staticRenderFns = [
         ])
       ]),
       _vm._v(" "),
+      _c("div", { staticClass: "field" }, [
+        _c("label", { staticClass: "label" }, [_vm._v("Whole Sale Price:")]),
+        _vm._v(" "),
+        _c("div", { staticClass: "control" }, [
+          _c("input", {
+            staticClass: "input",
+            attrs: {
+              name: "wsaleprice",
+              type: "text",
+              placeholder: "e.g 45,000"
+            }
+          })
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "field is-grouped" }, [
       _c("div", { staticClass: "field" }, [
         _c("label", { staticClass: "label" }, [_vm._v("Selling Price:")]),
         _vm._v(" "),
@@ -57893,17 +58236,13 @@ var render = function() {
                         _vm._v(" "),
                         _c("td", [_vm._v(_vm._s(product.code))]),
                         _vm._v(" "),
-                        _c("td", [_vm._v(_vm._s(product.vendorinfo.company))]),
+                        _c("td", [_vm._v(_vm._s(product.company))]),
                         _vm._v(" "),
                         _c("td", [_vm._v(_vm._s(product.name))]),
                         _vm._v(" "),
+                        _c("td", [_vm._v(_vm._s(product.model))]),
+                        _vm._v(" "),
                         _c("td", [_vm._v(_vm._s(product.shortname))]),
-                        _vm._v(" "),
-                        _c("td", [_vm._v(_vm._s(product.color))]),
-                        _vm._v(" "),
-                        _c("td", [_vm._v(_vm._s(product.chassis))]),
-                        _vm._v(" "),
-                        _c("td", [_vm._v(_vm._s(product.engine))]),
                         _vm._v(" "),
                         _c("td", [_vm._v(_vm._s(product.cost))]),
                         _vm._v(" "),
@@ -57913,8 +58252,7 @@ var render = function() {
                             {
                               staticClass: "button is-success is-small",
                               attrs: {
-                                href:
-                                  "/products./autos/ShowSingle/" + product.id
+                                href: "/products./autos/AutoShow/" + product.id
                               }
                             },
                             [
@@ -57985,19 +58323,11 @@ var staticRenderFns = [
         ]),
         _vm._v(" "),
         _c("th", [
+          _c("abbr", { attrs: { title: "model" } }, [_vm._v("Model")])
+        ]),
+        _vm._v(" "),
+        _c("th", [
           _c("abbr", { attrs: { title: "shortname" } }, [_vm._v("Shortname")])
-        ]),
-        _vm._v(" "),
-        _c("th", [
-          _c("abbr", { attrs: { title: "color" } }, [_vm._v("Color")])
-        ]),
-        _vm._v(" "),
-        _c("th", [
-          _c("abbr", { attrs: { title: "chassis" } }, [_vm._v("Chassis")])
-        ]),
-        _vm._v(" "),
-        _c("th", [
-          _c("abbr", { attrs: { title: "engine" } }, [_vm._v("Engine")])
         ]),
         _vm._v(" "),
         _c("th", [_c("abbr", { attrs: { title: "cost" } }, [_vm._v("Cost")])]),
@@ -58032,38 +58362,27 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "columns is-multiline" }, [
     _c("div", { staticClass: "column is-12" }, [
-      _c(
-        "div",
-        { staticClass: "box" },
-        [
-          _c("b-field", { attrs: { grouped: "", "group-multiline": "" } }, [
-            _c("div", { staticClass: "control" }, [
-              _c("h3", { staticClass: "title is-4" }, [
-                _vm._v("Manage Products")
-              ])
-            ]),
-            _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "control" },
-              [
-                _c("b-field", [
-                  _c(
-                    "a",
-                    {
-                      staticClass: "button is-info",
-                      attrs: { href: "students/register" }
-                    },
-                    [_vm._v("New Product")]
-                  )
-                ])
-              ],
-              1
+      _c("div", { staticClass: "box" }, [
+        _c("div", { staticClass: "control" }, [
+          _c("h3", { staticClass: "title is-4" }, [
+            _vm._v(
+              "\n                " +
+                _vm._s(_vm.product.code) +
+                " " +
+                _vm._s(_vm.product.company) +
+                " " +
+                _vm._s(_vm.product.name) +
+                " " +
+                _vm._s(_vm.product.model) +
+                "\n            "
             )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "control" }, [
+            _vm._v("\n                asdf\n             ")
           ])
-        ],
-        1
-      )
+        ])
+      ])
     ])
   ])
 }
@@ -58111,7 +58430,7 @@ var render = function() {
                   [
                     _c("b-input", {
                       attrs: { placeholder: "Keyword Seach" },
-                      on: { input: _vm.SearchAutos },
+                      on: { input: _vm.SearchElec },
                       model: {
                         value: _vm.search,
                         callback: function($$v) {
@@ -58356,6 +58675,294 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/vendors/VendorCreate.vue?vue&type=template&id=a71c4d34&":
+/*!************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/vendors/VendorCreate.vue?vue&type=template&id=a71c4d34& ***!
+  \************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "form",
+    { attrs: { method: "POST", action: "/vendors./VendorStore" } },
+    [
+      _c("input", {
+        attrs: { type: "hidden", name: "_token" },
+        domProps: { value: _vm.csrf }
+      }),
+      _vm._v(" "),
+      _c("div", { staticClass: "box" }, [
+        _vm._m(0),
+        _vm._v(" "),
+        _c("div", { staticClass: "field is-grouped" }, [
+          _vm._m(1),
+          _vm._v(" "),
+          _c("div", { staticClass: "field is-expanded" }, [
+            _c("label", { staticClass: "label" }, [
+              _vm._v("Company Name: \n            ")
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "control" }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.search,
+                    expression: "search"
+                  }
+                ],
+                staticClass: "input",
+                attrs: {
+                  name: "company",
+                  type: "text",
+                  placeholder: "e.g Team Xperts",
+                  autocomplete: "off"
+                },
+                domProps: { value: _vm.search },
+                on: {
+                  keyup: _vm.GetVendor,
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.search = $event.target.value
+                  }
+                }
+              })
+            ]),
+            _vm._v(" "),
+            _vm.vendor == "Available"
+              ? _c("p", { staticClass: "help is-success list-inline" }, [
+                  _vm._v(" " + _vm._s(_vm.search) + " is available.")
+                ])
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.vendor == "Not Available"
+              ? _c("p", { staticClass: "help is-danger" }, [
+                  _vm._v(" " + _vm._s(_vm.search) + " " + _vm._s(_vm.vendor))
+                ])
+              : _vm._e()
+          ]),
+          _vm._v(" "),
+          _vm._m(2),
+          _vm._v(" "),
+          _vm._m(3)
+        ]),
+        _vm._v(" "),
+        _vm._m(4),
+        _vm._v(" "),
+        _vm._m(5),
+        _vm._v(" "),
+        _vm._m(6)
+      ])
+    ]
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "control" }, [
+      _c("h3", { staticClass: "title is-4" }, [_vm._v("Add New Vendor")]),
+      _vm._v(" "),
+      _c("hr")
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "field is-expanded" }, [
+      _c("label", { staticClass: "label" }, [
+        _vm._v("Vendor Code: \n            ")
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "control" }, [
+        _c("input", {
+          staticClass: "input",
+          attrs: { name: "vnum", type: "text", placeholder: "e.g B18123456" }
+        })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "field is-expanded" }, [
+      _c("label", { staticClass: "label" }, [
+        _vm._v("Contact Person: \n            ")
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "control" }, [
+        _c("input", {
+          staticClass: "input",
+          attrs: {
+            name: "person",
+            type: "text",
+            placeholder: "e.g Person name"
+          }
+        })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "field is-expanded" }, [
+      _c("label", { staticClass: "label" }, [_vm._v("Telephone: ")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "control" }, [
+        _c("input", {
+          staticClass: "input",
+          attrs: {
+            name: "contact",
+            type: "text",
+            placeholder: "e.g Telephone no"
+          }
+        })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "field is-grouped" }, [
+      _c("div", { staticClass: "field is-expanded" }, [
+        _c("label", { staticClass: "label" }, [_vm._v("Mobile:")]),
+        _vm._v(" "),
+        _c("div", { staticClass: "control" }, [
+          _c("input", {
+            staticClass: "input",
+            attrs: {
+              name: "mobile",
+              type: "text",
+              placeholder: "e.g 923219802672"
+            }
+          })
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "field is-expanded" }, [
+        _c("label", { staticClass: "label" }, [_vm._v("Another mobile:")]),
+        _vm._v(" "),
+        _c("div", { staticClass: "control" }, [
+          _c("input", {
+            staticClass: "input",
+            attrs: {
+              name: "bmobile",
+              type: "text",
+              placeholder: "e.g 923219802672"
+            }
+          })
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "field is-expanded" }, [
+        _c("label", { staticClass: "label" }, [_vm._v("Address:")]),
+        _vm._v(" "),
+        _c("div", { staticClass: "control" }, [
+          _c("input", {
+            staticClass: "input",
+            attrs: {
+              name: "address",
+              type: "text",
+              placeholder: "e.g your address"
+            }
+          })
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "field is-expanded" }, [
+        _c("label", { staticClass: "label" }, [_vm._v("Email:")]),
+        _vm._v(" "),
+        _c("div", { staticClass: "control" }, [
+          _c("input", {
+            staticClass: "input",
+            attrs: {
+              name: "email",
+              type: "text",
+              placeholder: "e.g vendor@gmail.com"
+            }
+          })
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "field is-grouped" }, [
+      _c("div", { staticClass: "field is-expanded" }, [
+        _c("label", { staticClass: "label" }, [_vm._v("Website:")]),
+        _vm._v(" "),
+        _c("div", { staticClass: "control" }, [
+          _c("input", {
+            staticClass: "input",
+            attrs: {
+              name: "website",
+              type: "text",
+              placeholder: "e.g www.example.com"
+            }
+          })
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "field is-expanded" }, [
+        _c("label", { staticClass: "label" }, [_vm._v("NTN No:")]),
+        _vm._v(" "),
+        _c("div", { staticClass: "control" }, [
+          _c("input", {
+            staticClass: "input",
+            attrs: { name: "ntn", type: "text", placeholder: "e.g NTN 445566" }
+          })
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "field is-expanded" }, [
+        _c("label", { staticClass: "label" }, [_vm._v("Sales Tax No:")]),
+        _vm._v(" "),
+        _c("div", { staticClass: "control" }, [
+          _c("input", {
+            staticClass: "input",
+            attrs: {
+              name: "salestax",
+              type: "text",
+              placeholder: "e.g ST-33-4454533-345"
+            }
+          })
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "control is-flex is-pulled-right" }, [
+      _c("button", { staticClass: "button is-primary" }, [_vm._v("Add Vendor")])
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/vendors/Vendors.vue?vue&type=template&id=c76d9ace&":
 /*!*******************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/vendors/Vendors.vue?vue&type=template&id=c76d9ace& ***!
@@ -58394,8 +59001,11 @@ var render = function() {
                     "b-field",
                     [
                       _c("b-input", {
-                        attrs: { placeholder: "Keyword Seach" },
-                        on: { input: _vm.SearchUsers },
+                        attrs: {
+                          name: "company",
+                          placeholder: "Keyword Seach"
+                        },
+                        on: { input: _vm.VendorGet },
                         model: {
                           value: _vm.usersearch,
                           callback: function($$v) {
@@ -58454,11 +59064,11 @@ var render = function() {
                   "a",
                   {
                     staticClass: "button is-primary is-pulled-right",
-                    attrs: { href: "/manage/users/create" }
+                    attrs: { href: "/vendors./create" }
                   },
                   [
                     _c("i", { staticClass: "fa fa-user-plus m-r-10" }),
-                    _vm._v(" New Vendor\n                    ")
+                    _vm._v(" New Vendor\n            ")
                   ]
                 )
               ])
@@ -58510,9 +59120,7 @@ var render = function() {
                         },
                         [
                           _vm._v(
-                            "\n                    " +
-                              _vm._s(props.row.vnum) +
-                              "\n                "
+                            "\n        " + _vm._s(props.row.vnum) + "\n        "
                           )
                         ]
                       ),
@@ -58528,9 +59136,9 @@ var render = function() {
                         },
                         [
                           _vm._v(
-                            "\n                    " +
+                            "\n        " +
                               _vm._s(props.row.company) +
-                              "\n                "
+                              "\n        "
                           )
                         ]
                       ),
@@ -58546,9 +59154,9 @@ var render = function() {
                         },
                         [
                           _vm._v(
-                            "\n                    " +
+                            "\n        " +
                               _vm._s(props.row.person) +
-                              "\n                "
+                              "\n        "
                           )
                         ]
                       ),
@@ -58564,9 +59172,9 @@ var render = function() {
                         },
                         [
                           _vm._v(
-                            "\n                    " +
+                            "\n        " +
                               _vm._s(props.row.mobile) +
-                              "\n                "
+                              "\n        "
                           )
                         ]
                       ),
@@ -58582,9 +59190,9 @@ var render = function() {
                         },
                         [
                           _vm._v(
-                            "\n                    " +
+                            "\n        " +
                               _vm._s(props.row.contact) +
-                              "\n                "
+                              "\n        "
                           )
                         ]
                       ),
@@ -73449,6 +74057,7 @@ vue__WEBPACK_IMPORTED_MODULE_3___default.a.component('singleuser', __webpack_req
 vue__WEBPACK_IMPORTED_MODULE_3___default.a.component('usercreate', __webpack_require__(/*! ./manage/users/UserCreate.vue */ "./resources/js/manage/users/UserCreate.vue").default);
 vue__WEBPACK_IMPORTED_MODULE_3___default.a.component('settings', __webpack_require__(/*! ./manage/settings/settings.vue */ "./resources/js/manage/settings/settings.vue").default);
 vue__WEBPACK_IMPORTED_MODULE_3___default.a.component('vendors', __webpack_require__(/*! ./vendors/Vendors.vue */ "./resources/js/vendors/Vendors.vue").default);
+vue__WEBPACK_IMPORTED_MODULE_3___default.a.component('vendorcreate', __webpack_require__(/*! ./vendors/VendorCreate.vue */ "./resources/js/vendors/VendorCreate.vue").default);
 vue__WEBPACK_IMPORTED_MODULE_3___default.a.component('autosnew', __webpack_require__(/*! ./products/AutosNewProduct.vue */ "./resources/js/products/AutosNewProduct.vue").default);
 vue__WEBPACK_IMPORTED_MODULE_3___default.a.component('productedit', __webpack_require__(/*! ./products/AutosEditProduct.vue */ "./resources/js/products/AutosEditProduct.vue").default);
 vue__WEBPACK_IMPORTED_MODULE_3___default.a.component('autosprotucts', __webpack_require__(/*! ./products/AutosProducts.vue */ "./resources/js/products/AutosProducts.vue").default);
@@ -74687,6 +75296,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ElectronicShow_vue_vue_type_template_id_ecada894___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ElectronicShow_vue_vue_type_template_id_ecada894___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/vendors/VendorCreate.vue":
+/*!***********************************************!*\
+  !*** ./resources/js/vendors/VendorCreate.vue ***!
+  \***********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _VendorCreate_vue_vue_type_template_id_a71c4d34___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./VendorCreate.vue?vue&type=template&id=a71c4d34& */ "./resources/js/vendors/VendorCreate.vue?vue&type=template&id=a71c4d34&");
+/* harmony import */ var _VendorCreate_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./VendorCreate.vue?vue&type=script&lang=js& */ "./resources/js/vendors/VendorCreate.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _VendorCreate_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _VendorCreate_vue_vue_type_template_id_a71c4d34___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _VendorCreate_vue_vue_type_template_id_a71c4d34___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/vendors/VendorCreate.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/vendors/VendorCreate.vue?vue&type=script&lang=js&":
+/*!************************************************************************!*\
+  !*** ./resources/js/vendors/VendorCreate.vue?vue&type=script&lang=js& ***!
+  \************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_VendorCreate_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./VendorCreate.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/vendors/VendorCreate.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_VendorCreate_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/vendors/VendorCreate.vue?vue&type=template&id=a71c4d34&":
+/*!******************************************************************************!*\
+  !*** ./resources/js/vendors/VendorCreate.vue?vue&type=template&id=a71c4d34& ***!
+  \******************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_VendorCreate_vue_vue_type_template_id_a71c4d34___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./VendorCreate.vue?vue&type=template&id=a71c4d34& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/vendors/VendorCreate.vue?vue&type=template&id=a71c4d34&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_VendorCreate_vue_vue_type_template_id_a71c4d34___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_VendorCreate_vue_vue_type_template_id_a71c4d34___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

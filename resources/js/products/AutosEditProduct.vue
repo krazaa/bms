@@ -13,13 +13,19 @@
                 <div class="field">
                     <label class="label">Product Code:</label>
                     <div class="control">
-                        <input class="input" type="text" name="code" :value="product.code" placeholder="e.g B18123456">
+                        <input class="input" type="text" name="code" :value="product.code" disabled>
                     </div>
                 </div>
                 <div class="field is-expanded">
                     <label class="label">Product Name:</label>
                     <div class="control is-expanded">
                         <input class="input" name="name" :value="product.name" type="text" placeholder="e.g Honda 125">
+                    </div>
+                </div>
+                <div class="field is-expanded">
+                    <label class="label">Model:</label>
+                    <div class="control">
+                        <input class="input" name="model" :value="product.model" type="text">
                     </div>
                 </div>
                 <div class="field">
@@ -29,8 +35,8 @@
                     </div>
                 </div>
             </div>
-            <div class="field is-grouped">
-                <div class="field">
+            <div class="field is-grouped is-expanded">
+                <div class="field is-expanded">
                     <label class="label">Select Vendor:</label>
                     <div class="control">
                         <div class="select">
@@ -41,38 +47,57 @@
                     </div>
                 </div>
                 <div class="field">
-                    <label class="label">Color:</label>
+                    <label class="label">Qty:</label>
                     <div class="control">
-                        <input class="input" name="color" :value="product.color" type="text" placeholder="e.g Red">
+                        <input class="input" name="qty" :value="product.qty" type="text">
                     </div>
                 </div>
                 <div class="field">
-                    <label class="label">Engine:</label>
+                    <label class="label">Max Qty:</label>
                     <div class="control">
-                        <input class="input" name="engine" :value="product.engine" type="text" placeholder="e.g 2672">
+                        <input class="input" name="maxqty" :value="product.maxqty" type="text">
                     </div>
                 </div>
                 <div class="field">
-                    <label class="label">Chassis:</label>
+                    <label class="label">Reorder :</label>
                     <div class="control">
-                        <input class="input" name="chassis" :value="product.chassis" type="text" placeholder="e.g EX-123-A">
+                        <input class="input" name="reorder" :value="product.reorder" type="text">
                     </div>
                 </div>
             </div>
-            <div class="field is-grouped">
-                <div class="field">
-                    <label class="label">Cost Price:</label>
-                    <div class="control">
-                        <input class="input" name="cost" :value="product.cost" type="text" placeholder="e.g 50,000">
+           <div class="field is-grouped">
+                     <div class="field">
+                        <label class="label">Cash Discount:</label>
+                        <div class="control">
+                            <input class="input" name="cashdis" :value="product.cashdis" type="text" placeholder="e.g 2000">
+                        </div>
                     </div>
-                    
-                </div>
-                <div class="field">
-                    <label class="label">Selling Price:</label>
-                    <div class="control">
-                        <input class="input" name="saleprice" :value="product.saleprice" type="text" placeholder="e.g 55,000">
+                    <div class="field">
+                        <label class="label">Discount Allowed:</label>
+                        <div class="control">
+                            <input class="input" name="discountallowed" :value="product.discountallowed" type="text" placeholder="e.g 2000">
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label class="label">Cost Price:</label>
+                        <div class="control">
+                            <input class="input" name="cost" :value="product.cost" type="text" placeholder="e.g 50,000">
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label class="label">Whole Sale Price:</label>
+                        <div class="control">
+                            <input class="input" name="wsaleprice" :value="product.wsaleprice" type="text" placeholder="e.g 45,000">
+                        </div>
                     </div>
                 </div>
+                <div class="field is-grouped">
+                    <div class="field">
+                        <label class="label">Selling Price:</label>
+                        <div class="control">
+                            <input class="input" name="saleprice" :value="product.saleprice" type="text" placeholder="e.g 55,000">
+                        </div>
+                    </div>
                 
             </div>
             <div class="control is-flex is-pulled-right">

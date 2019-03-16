@@ -20,12 +20,48 @@ class VendorController extends Controller
         return $vendors->toArray();
     }
 
-    public function check()
+    public function create()
     {
-        if (Vendor::where('email', '=' ,'Sss@aa.com')->first()) {
-            return '<font color="red" style="margin-left:105px;"><STRONG>'.$email.'</STRONG> is not available.</font>';
+        return view('vendors.create');
+    }
+
+    public function VendorStore(request $request)
+        {
+        $product = new Vendor();
+        $product->vnum = $request->vnum;
+        $product->company = $request->company;
+        $product->person = $request->person;
+        $product->contact = $request->contact;
+        $product->mobile = $request->mobile;
+        $product->bmobile = $request->bmobile;
+        $product->address = $request->address;
+        $product->email = $request->email;
+        $product->website = $request->website;
+        $product->ntn = $request->ntn;
+        $product->salestax = $request->salestax;
+        $product->isActive = 1;
+        $product ->save();
+        
+        return redirect('/dashboard')->with('success','Vendor updated successfully');
         }
 
-        return 'OK';
+    public function SearchVendor(request $request)
+    {
+         if ($request->ajax())
+        {
+            $vendors = Vendor::where('company', '=', $request->company)->count();
+                if($vendors) {
+                    $count = 'Not Available';
+                    return Response($count);
+                } else {
+                    $count = 'Available';
+                return Response($count);
+            }
+        }
+    }
+    public function VendorSearch(request $request)
+    {
+        $vendors = Vendor::where('company','=', $request->company)->get();
+        return $vendors->toArray();    
     }
 }

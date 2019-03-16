@@ -4,7 +4,10 @@
 Route::prefix('vendors.')->group(function () {
     Route::get('/', 'vendors\VendorController@index')->name('vendors');
     Route::get('/GetVendors', 'vendors\VendorController@GetVendors')->name('vendors.GetVendors');
-    Route::get('/check', 'vendors\VendorController@check')->name('vendors.check');
+    Route::get('/create', 'vendors\VendorController@create')->name('vendors.create');
+    Route::post('/VendorStore', 'vendors\VendorController@VendorStore')->name('vendors.VendorStore');
+    Route::get('/SearchVendor', 'vendors\VendorController@SearchVendor')->name('vendors.SearchVendor');
+    Route::get('/VendorSearch', 'vendors\VendorController@VendorSearch')->name('vendors.VendorSearch');
 });
 //End vendors routes
 
@@ -15,11 +18,13 @@ Route::prefix('products.')->group(function () {
     Route::get('autos/newproduct', 'products\AutosProductController@NewProductFrom')->name('products.autos.newproduct');
     Route::get('autos/GetAutosProducts/', 'products\AutosProductController@GetAutosProducts')->name('products.autos.GetAutosProducts');
     Route::get('autos/SearchAutosProduct/', 'products\AutosProductController@SearchAutosProduct')->name('products.autos.SearchAutosProduct');
+    Route::get('autos/SearchCode/', 'products\AutosProductController@SearchCode')->name('products.autos.SearchCode');
     Route::get('autos/ShowAutosSingle/{id}', 'products\AutosProductController@ShowAutosSingle')->name('products.autos.ShowAutosSingle');
     Route::get('autos/ShowSingle/{id}', 'products\AutosProductController@ShowSingle')->name('products.autos.ShowSingle');
     Route::get('autos/ShowEdit/{id}', 'products\AutosProductController@ShowEdit')->name('products.autos.ShowEdit');
     Route::get('autos/ShowEditFrm/{id}', 'products\AutosProductController@ShowAutosEdit')->name('products.autos.ShowEditFrm');
     Route::post('autos/AutosUpdate/{id}', 'products\AutosProductController@AutosUpdate')->name('products.autos.AutosUpdate');
+    Route::get('autos/AutoShow/{id}', 'products\AutosProductController@AutoShow')->name('products.autos.AutoShow');
     
     Route::post(
         'autos/AutoProductStore', 

@@ -37,38 +37,95 @@
         </div>
         <div id="navMenubd-example" class="navbar-menu">
           <div class="navbar-start">
-            <a class="navbar-item is-active" href="#">Home</a>
             <div class="navbar-item has-dropdown is-hoverable">
-              <a class="navbar-link" href="#">Products</a>
+              <a class="navbar-link" href="#">Accounts</a>
               <div class="navbar-dropdown ">
+                <a class="navbar-item" href="{{ route('vendors') }}">Vendors</a>
+                <a class="navbar-item" href="#">Customers</a>
+                <a class="navbar-item" href="#">Agents</a>
+                <a class="navbar-item" href="#">Employees</a>
                 <a class="navbar-item" href="{{ route('products.autos') }}">Autos</a>
                 <a class="navbar-item" href="{{ route('products.electronic') }}">Electronic</a>
               </div>
             </div>
-               
             <div class="navbar-item has-dropdown is-hoverable">
-              <div class="navbar-link">
-                Purchase Order
-              </div>
-              <div id="moreDropdown" class="navbar-dropdown ">
-                <a class="navbar-item" href="{{ route('purchase-order.autos') }}">PO - Autos</a>
-                <a class="navbar-item" href="{{ route('purchase-order.electronic') }}">PO - Electronic</a>
+              <a class="navbar-link" href="#">Purchases</a>
+              <div class="navbar-dropdown ">
+                <a class="navbar-item" href="{{ route('purchase-order.autos') }}">Vehicles PO & CN</a>
+                <a class="navbar-item" href="{{ route('purchase-order.electronic') }}}">Product PO & CN</a>
               </div>
             </div>
-            <a class="navbar-item" href="{{ route('vendors') }}">Vendors</a>
-            <a class="navbar-item" href="#">Stocks</a>
+            <div class="navbar-item has-dropdown is-hoverable">
+              <a class="navbar-link" href="#">Sales</a>
+              <div class="navbar-dropdown ">
+                <a class="navbar-item" href="{{ route('products.autos') }}">Vehicles Cash & Whole Sale</a>
+                <a class="navbar-item" href="{{ route('products.autos') }}">Vehicle Lease Sale</a>
+                <a class="navbar-item" href="{{ route('products.autos') }}">Product Cash & Whole Sale</a>
+                <a class="navbar-item" href="{{ route('products.autos') }}">Product Lease Sale</a>
+              </div>
+            </div>
+            <div class="navbar-item has-dropdown is-hoverable">
+              <a class="navbar-link" href="#">Cash/Bank</a>
+              <div class="navbar-dropdown ">
+                <a class="navbar-item" href="#">Cash Receipt</a>
+                <a class="navbar-item" href="#">Cash Payments</a>
+                <a class="navbar-item" href="#">Bank Receipt</a>
+                <a class="navbar-item" href="#">Bank Payments</a>
+              </div>
+            </div>
             <div class="navbar-item has-dropdown is-hoverable">
               <div class="navbar-link">
-                Settings
+                Recovery
+              </div>
+              <div id="moreDropdown" class="navbar-dropdown ">
+                <a class="navbar-item" href="#">Bike Repossession</a>
+                <a class="navbar-item" href="#">Default Cases</a>
+                <a class="navbar-item" href="#">Calls & Collections</a>
+                <a class="navbar-item" href="#">Recovery Assignment</a>
+              </div>
+            </div>        
+            <div class="navbar-item has-dropdown is-hoverable">
+              <div class="navbar-link">
+                Setup
               </div>
               <div id="moreDropdown" class="navbar-dropdown ">
                 <a class="navbar-item" href="{{ route('settings.company') }}">Company Setup</a>
                 <a class="navbar-item" href="{{ route('settings.branches') }}">Branches Setup</a>
+                <a class="navbar-item" href="#">COA Openings</a>
+                <a class="navbar-item" href="#">Bank Setup</a>
+                <a class="navbar-item" href="#">Vehicle Setup</a>
+                <a class="navbar-item" href="#">Product Set Up</a>
+                <a class="navbar-item" href="#">Excise & Taxation Setup</a>
               </div>
             </div>
-            <a class="navbar-item " href="#">HRM</a>
-            <a class="navbar-item " href="#">Reports</a>
-            <a class="navbar-item " href="#">SMS</a>
+            <div class="navbar-item has-dropdown is-hoverable">
+              <a class="navbar-link" href="#">HRM</a>
+              <div class="navbar-dropdown ">
+                <a class="navbar-item" href="#">Employee Management</a>
+                <a class="navbar-item" href="#">Salary Management</a>
+                <a class="navbar-item" href="#">Commission Management</a>
+                <a class="navbar-item" href="#">Incentive Management</a>
+              </div>
+            </div>
+
+            <div class="navbar-item has-dropdown is-hoverable">
+              <a class="navbar-link" href="#">Reports</a>
+              <div class="navbar-dropdown ">
+                <a class="navbar-item" href="#">Financial Reports</a>
+                <a class="navbar-item" href="#">Management Reports</a>
+                <a class="navbar-item" href="#">Analysis Reports</a>
+                <a class="navbar-item" href="#">Branch Reports</a>
+                <a class="navbar-item" href="#">Category Based Reports</a>
+              </div>
+            </div>
+            <div class="navbar-item has-dropdown is-hoverable">
+              <a class="navbar-link" href="#">Transfers</a>
+              <div class="navbar-dropdown ">
+                <a class="navbar-item" href="#">Cash Transfer</a>
+                <a class="navbar-item" href="#">Stock Transfer</a>
+                <a class="navbar-item" href="#">Documents Transfer</a>
+              </div>
+            </div>
           </div>
           <div class="navbar-end">
             @if (Auth::guest())

@@ -8,7 +8,7 @@
             </div>
             <div class="control">
                 <b-field>
-                    <b-input v-model="search" placeholder="Keyword Seach" @input="SearchAutos"></b-input>
+                    <b-input v-model="search" placeholder="Keyword Seach" @input="SearchElec"></b-input>
                 </b-field>
             </div>
             <div class="control">
@@ -65,18 +65,18 @@
             return {
                products: [],
                search: '',
-               searchstudents: [],
+               electronic: [],
                Studentloading: false,
                     }
             },
               methods: {
-                SearchAutos() 
+                SearchElec() 
             {
-            var searchstudents = this
+            var electronic = this
             axios.get('/products./autos/SearchAutosProduct?search=' + this.search)
             .then(function(response) 
             {
-            Vue.set(searchstudents.$data, 'products', response.data).catch(error => {"erro found"});
+            Vue.set(electronic.$data, 'products', response.data).catch(error => {"erro found"});
             })
 
             },

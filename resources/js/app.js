@@ -34,6 +34,7 @@ Vue.component('singleuser', require('./manage/users/showComponent.vue').default)
 Vue.component('usercreate', require('./manage/users/UserCreate.vue').default);
 Vue.component('settings', require('./manage/settings/settings.vue').default);
 Vue.component('vendors', require('./vendors/Vendors.vue').default);
+Vue.component('vendorcreate', require('./vendors/VendorCreate.vue').default);
 Vue.component('autosnew', require('./products/AutosNewProduct.vue').default);
 Vue.component('productedit', require('./products/AutosEditProduct.vue').default);
 Vue.component('autosprotucts', require('./products/AutosProducts.vue').default);

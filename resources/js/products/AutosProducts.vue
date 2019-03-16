@@ -19,7 +19,7 @@
             </div>
     </b-field>
     
-      <table class="table is-fullwidth is-hoverable is-narrow is-desktop is-mobile" v-if="products.length > 0">
+       <table class="table is-fullwidth is-hoverable is-narrow is-desktop is-mobile" v-if="products.length > 0">
         <div v-if="Studentloading" v-cloak align="center" class="loading-overlay is-active">
           <i class="fas fa-circle-notch fa-spin fa-5x"></i>
         </div>
@@ -29,10 +29,11 @@
             <th><abbr title="code">Code</abbr></th>
             <th><abbr title="vendor">Vendor</abbr></th>
             <th><abbr title="name">Product</abbr></th>
+            <th><abbr title="model">Model</abbr></th>
             <th><abbr title="shortname">Shortname</abbr></th>
-            <th><abbr title="color">Color</abbr></th>
-            <th><abbr title="chassis">Chassis</abbr></th>
-            <th><abbr title="engine">Engine</abbr></th>
+            
+            
+            
             <th><abbr title="cost">Cost</abbr></th>
             <th><abbr title="action">Action</abbr></th>
           </tr>
@@ -41,16 +42,13 @@
           <tr v-for="(product , index) in products">
             <th>{{ index +1 }}</th>
             <td>{{ product.code }}</td>
-            <td>{{ product.vendorinfo.company }}</td>
+            <td>{{ product.company }}</td>
             <td>{{ product.name }}</td>
+            <td>{{ product.model }}</td>
             <td>{{ product.shortname }}</td>
-            <td>{{ product.color }}</td>
-            <td>{{ product.chassis }}</td>
-            <td>{{ product.engine }}</td>
             <td>{{ product.cost }}</td>
-            
             <td>
-                <a :href="`/products./autos/ShowSingle/${product.id}`" class="button is-success is-small"><span class="mdi mdi-eye-circle-outline"></span></a>
+                <a :href="`/products./autos/AutoShow/${product.id}`" class="button is-success is-small"><span class="mdi mdi-eye-circle-outline"></span></a>
                 <a :href="`/products./autos/ShowEditFrm/${product.id}`" class="button is-warning is-small"><span class="mdi mdi-pencil-box-outline"></span></a>
                 <a :href="`/products./autos/ProductRemove/${product.id}`" class="button is-danger is-small"><span class="mdi mdi-trash-can"></span></a>
                 <!-- <router-link :to="{ name: 'showelectronic' }">Hello World</router-link> -->
@@ -58,7 +56,6 @@
           </tr>
         </tbody>
       </table>
-
     </div>
   </div>
 </div>
@@ -67,23 +64,23 @@
 <script>
  
  export default {
- props: ['studentID'], 
+ //props: ['studentID'], 
         data() {
             return {
                products: [],
                search: '',
-               searchstudents: [],
+               autosproducts: [],
                Studentloading: false,
                     }
             },
               methods: {
                 SearchAutos() 
             {
-            var searchstudents = this
+            var autosproducts = this
             axios.get('/products./autos/SearchAutosProduct?search=' + this.search)
             .then(function(response) 
             {
-            Vue.set(products.$data, 'products', response.data).catch(error => {"erro found"});
+            Vue.set(autosproducts.$data, 'products', response.data).catch(error => {"erro found"});
             })
 
             },
