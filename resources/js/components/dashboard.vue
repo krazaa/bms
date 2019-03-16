@@ -11,7 +11,7 @@
 <div class="box">
     <div class="columns is-multiline">
         <div class="column is-one-quarter">
-            <a href="income">
+            <a href="">
                 <div class="box has-ribbon-bottom is-small">
                     <span style="color: Mediumslateblue;">
                         <i class="mdi mdi-monitor-dashboard mdi-48px"></i>
@@ -22,7 +22,7 @@
         </div>
         
         <div class="column is-one-quarter">
-            <a href="students">
+            <a href="">
                 <div class="box has-ribbon-bottom is-small">
                     <span style="color: Dodgerblue;">
                         <i class="mdi mdi-cart-arrow-right mdi-48px"></i>
@@ -42,7 +42,7 @@
             </a>
         </div>
         <div class="column is-one-quarter" id="discount">
-            <a href="discounts">
+            <a href="">
                 <div class="box has-ribbon-bottom is-small">
                     <span style="color: turquoise;">
                         <i class="mdi mdi-view-dashboard-variant mdi-48px"></i>
@@ -51,8 +51,21 @@
                 </div>
             </a>
         </div>
+
+        
         <div class="column is-one-quarter">
-            <a href="sms">
+            <a href="">
+                <div class="box has-ribbon-bottom is-small">
+                    <span style="color: purple;">
+                        <i class="mdi mdi-bank mdi-48px"></i>
+                    </span>
+                    <div class="ribbon is-medium is-danger">HRM</div>
+                </div>
+            </a>
+        </div>
+
+        <div class="column is-one-quarter">
+            <a href="">
                 <div class="box has-ribbon-bottom is-small">
                     <span style="color: Tomato;">
                         <i class="mdi mdi-message-alert mdi-48px"></i>
@@ -70,7 +83,7 @@
             </a>
         </div>
         <div class="column is-one-quarter">
-            <a href="manage/users">
+            <a href="">
                 <div class="box has-ribbon-bottom is-small">
                     <i class="mdi mdi-settings mdi-48px"></i>
                     <div class="ribbon is-medium is-link">Settings</div>

@@ -2001,6 +2001,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -55534,7 +55547,7 @@ var staticRenderFns = [
       _c("div", { staticClass: "box" }, [
         _c("div", { staticClass: "columns is-multiline" }, [
           _c("div", { staticClass: "column is-one-quarter" }, [
-            _c("a", { attrs: { href: "income" } }, [
+            _c("a", { attrs: { href: "" } }, [
               _c("div", { staticClass: "box has-ribbon-bottom is-small" }, [
                 _c("span", { staticStyle: { color: "Mediumslateblue" } }, [
                   _c("i", { staticClass: "mdi mdi-monitor-dashboard mdi-48px" })
@@ -55548,7 +55561,7 @@ var staticRenderFns = [
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "column is-one-quarter" }, [
-            _c("a", { attrs: { href: "students" } }, [
+            _c("a", { attrs: { href: "" } }, [
               _c("div", { staticClass: "box has-ribbon-bottom is-small" }, [
                 _c("span", { staticStyle: { color: "Dodgerblue" } }, [
                   _c("i", { staticClass: "mdi mdi-cart-arrow-right mdi-48px" })
@@ -55579,7 +55592,7 @@ var staticRenderFns = [
             "div",
             { staticClass: "column is-one-quarter", attrs: { id: "discount" } },
             [
-              _c("a", { attrs: { href: "discounts" } }, [
+              _c("a", { attrs: { href: "" } }, [
                 _c("div", { staticClass: "box has-ribbon-bottom is-small" }, [
                   _c("span", { staticStyle: { color: "turquoise" } }, [
                     _c("i", {
@@ -55596,7 +55609,21 @@ var staticRenderFns = [
           ),
           _vm._v(" "),
           _c("div", { staticClass: "column is-one-quarter" }, [
-            _c("a", { attrs: { href: "sms" } }, [
+            _c("a", { attrs: { href: "" } }, [
+              _c("div", { staticClass: "box has-ribbon-bottom is-small" }, [
+                _c("span", { staticStyle: { color: "purple" } }, [
+                  _c("i", { staticClass: "mdi mdi-bank mdi-48px" })
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "ribbon is-medium is-danger" }, [
+                  _vm._v("HRM")
+                ])
+              ])
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "column is-one-quarter" }, [
+            _c("a", { attrs: { href: "" } }, [
               _c("div", { staticClass: "box has-ribbon-bottom is-small" }, [
                 _c("span", { staticStyle: { color: "Tomato" } }, [
                   _c("i", { staticClass: "mdi mdi-message-alert mdi-48px" })
@@ -55622,7 +55649,7 @@ var staticRenderFns = [
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "column is-one-quarter" }, [
-            _c("a", { attrs: { href: "manage/users" } }, [
+            _c("a", { attrs: { href: "" } }, [
               _c("div", { staticClass: "box has-ribbon-bottom is-small" }, [
                 _c("i", { staticClass: "mdi mdi-settings mdi-48px" }),
                 _vm._v(" "),
