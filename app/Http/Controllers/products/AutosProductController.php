@@ -26,6 +26,13 @@ class AutosProductController extends Controller
         $product = new Autoproduct();
         $product->name = $request->name;
         $product->vendor_id = $request->vendor_id;
+        $product->code = $request->vendor_id;
+        $product->shortname = $request->shortname;
+        $product->color = $request->color;
+        $product->engine = $request->engine;
+        $product->chassis = $request->chassis;
+        $product->cost = $request->cost;
+        $product->saleprice = $request->saleprice;
         $product->user_id = Auth::user()->id;
         $product ->save();
         
