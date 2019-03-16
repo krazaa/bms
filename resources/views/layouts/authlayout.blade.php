@@ -13,7 +13,7 @@
     <div id="app">
       <nav class="navbar has-shadow is-spaced">
         <div class="navbar-brand">
-          <a href="{{ url('/#') }}" class="navbar-item"> 
+          <a href="{{ route('dashboard') }}" class="navbar-item"> 
             <i class="mdi mdi-motorbike mdi-36px"></i>
             {{-- <img src="/public/logo/{{ $logo}}"  height="60"> --}}
         {{--       <router-view></router-view> --}}

@@ -54,6 +54,12 @@ Route::prefix('settings.')->group(function () {
     // Branches
     Route::get('/branches', 'settings\BranchesController@index')->name('settings.branches');
     Route::get('/branches/GetBranches', 'settings\BranchesController@GetBranches')->name('settings.branches.GetBranches');
+    Route::get('/branches/newbranch', 'settings\BranchesController@create')->name('settings.branches.newbranch');
+    Route::post('/branches/branchstore', 'settings\BranchesController@store')->name('settings.branches.branchstore');
+    Route::get('/branches/editbranch/{id}', 'settings\BranchesController@edit')->name('settings.branches.editbranch');
+    Route::get('/branches/ShowSingle/{id}', 'settings\BranchesController@ShowSingle')->name('settings.branches.ShowSingle');
+    Route::post('branches/branchupdate/{id}', 'settings\BranchesController@BranchUpdate')->name('settings.branches.branchupdate');
+    Route::get('branches/removebranch/{id}', 'settings\BranchesController@destroy')->name('settings.branches.removebranch');
 });
 //End Settings routes
 

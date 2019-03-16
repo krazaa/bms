@@ -38,7 +38,7 @@ class AutosProductController extends Controller
         
         return redirect('/dashboard')->with('success','Subject updated successfully');
 
-        return view('products.autosNewProduct');
+ 
     }
 
     public function GetAutosProducts()

@@ -32,7 +32,7 @@ class BranchesController extends Controller
      */
     public function create()
     {
-        //
+        return view('Settings.branches.newbranch');
     }
 
     /**
@@ -43,7 +43,16 @@ class BranchesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $branch = new Branch();
+        $branch->name = $request->name;
+        $branch->address = $request->vendor_id;
+        $branch->contact = $request->contact;
+        $branch->mobile = $request->mobile;
+        $branch->email = $request->email;
+        $branch->city = $request->city;
+        $branch ->save();
+        
+        return redirect('/dashboard')->with('success','Subject updated successfully');
     }
 
     /**
@@ -65,7 +74,14 @@ class BranchesController extends Controller
      */
     public function edit($id)
     {
-        //
+        $id = $id;
+        return view('settings.branches.editbranch' , compact('id'));
+    }
+
+    public function ShowSingle($id)
+    {
+        $branch = Branch::find($id);
+        return $branch->toArray();    
     }
 
     /**
@@ -75,9 +91,13 @@ class BranchesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function BranchUpdate(Request $request, $id)
     {
-        //
+        $branch = Branch::findOrFail($id);  
+        $branch ->update($request->all());
+        $branch ->save();
+        
+        return redirect('/dashboard')->with('success','Subject updated successfully');
     }
 
     /**
@@ -88,6 +108,8 @@ class BranchesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $products = Branch::find($id);
+        $products->delete();
+        return back();
     }
 }
