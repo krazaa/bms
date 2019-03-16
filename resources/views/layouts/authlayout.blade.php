@@ -38,7 +38,6 @@
         <div id="navMenubd-example" class="navbar-menu">
           <div class="navbar-start">
             <a class="navbar-item is-active" href="#">Home</a>
-         
             <div class="navbar-item has-dropdown is-hoverable">
               <a class="navbar-link" href="#">Products</a>
               <div class="navbar-dropdown ">
@@ -52,8 +51,8 @@
                 Purchase Order
               </div>
               <div id="moreDropdown" class="navbar-dropdown ">
-                <a class="navbar-item" href="{{ route('purchase-order.autos') }}">Autos</a>
-                <a class="navbar-item" href="{{ route('purchase-order.electronic') }}">Electronic</a>
+                <a class="navbar-item" href="{{ route('purchase-order.autos') }}">PO - Autos</a>
+                <a class="navbar-item" href="{{ route('purchase-order.electronic') }}">PO - Electronic</a>
               </div>
             </div>
             <a class="navbar-item" href="{{ route('vendors') }}">Vendors</a>
