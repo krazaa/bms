@@ -48,9 +48,12 @@ Route::prefix('purchase-order.')->group(function () {
 //Start Settings routes
 Route::prefix('settings.')->group(function () {
     Route::get('/company', 'SettingController@index')->name('settings.company');
-    Route::get('/branches', 'SettingController@index2')->name('settings.branches');
 	Route::get('/getsetting', 'SettingController@GetSetting')->name('getsetting');
 	Route::post('/updatesetting', 'SettingController@UpdateSetting')->name('updatesetting');
+
+    // Branches
+    Route::get('/branches', 'settings\BranchesController@index')->name('settings.branches');
+    Route::get('/branches/GetBranches', 'settings\BranchesController@GetBranches')->name('settings.branches.GetBranches');
 });
 //End Settings routes
 

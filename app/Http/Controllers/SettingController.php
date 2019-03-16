@@ -9,11 +9,7 @@ use App\manage\Setting;
 class SettingController extends Controller
 {
     public function index(){
-    	return view('manage.settings.settings');
-    }
-
-    public function index2(){
-        return view('manage.settings.settings');
+    	return view('Settings.settings.settings');
     }
 
     public function GetSetting()

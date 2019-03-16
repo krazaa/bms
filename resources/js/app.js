@@ -39,6 +39,7 @@ Vue.component('productedit', require('./products/AutosEditProduct.vue').default)
 Vue.component('autosprotucts', require('./products/AutosProducts.vue').default);
 Vue.component('showautos', require('./products/AutosShow.vue').default);
 Vue.component('electronic-products', require('./products/ElectronicProducts.vue').default);
+Vue.component('branches', require('./manage/branches/branches.vue').default);
 //Vue.component('showelectronic', require('./products/ElectronicShow.vue').default);
 
 
