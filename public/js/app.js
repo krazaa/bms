@@ -55508,167 +55508,129 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("section", [
-    _vm._m(0),
-    _vm._v(" "),
-    _c("div", { staticClass: "box" }, [
-      _c("div", { staticClass: "columns is-multiline" }, [
-        _vm._m(1),
-        _vm._v(" "),
-        _vm._m(2),
-        _vm._v(" "),
-        _vm._m(3),
-        _vm._v(" "),
-        _c(
-          "div",
-          { staticClass: "column is-one-quarter", attrs: { id: "discount" } },
-          [
-            _c("a", { attrs: { href: "discounts" } }, [
-              _c("div", { staticClass: "box has-ribbon-bottom is-small" }, [
-                _vm._m(4),
-                _vm._v(" "),
-                _c("div", { staticClass: "ribbon is-medium is-dark" }, [
-                  _vm._v("Discount Requests " + _vm._s(_vm.stuff) + " ")
-                ])
-              ])
-            ])
-          ]
-        ),
-        _vm._v(" "),
-        _vm._m(5),
-        _vm._v(" "),
-        _vm._m(6),
-        _vm._v(" "),
-        _vm._m(7)
-      ])
-    ])
-  ])
+  return _vm._m(0)
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "columns" }, [
-      _c("div", { staticClass: "column" }, [
-        _c("h3", { staticClass: "title is-3" }, [_vm._v("Welcom to Dashboard")])
+    return _c("section", [
+      _c("div", { staticClass: "columns" }, [
+        _c("div", { staticClass: "column" }, [
+          _c("h3", { staticClass: "title is-3" }, [
+            _vm._v("Welcom to Dashboard")
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "column" }, [
+          _c("a", {
+            staticClass: "button is-white is-pulled-right",
+            attrs: { href: "#" }
+          })
+        ])
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "column" }, [
-        _c("a", {
-          staticClass: "button is-white is-pulled-right",
-          attrs: { href: "#" }
-        })
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "column is-one-quarter" }, [
-      _c("a", { attrs: { href: "income" } }, [
-        _c("div", { staticClass: "box has-ribbon-bottom is-small" }, [
-          _c("span", { staticStyle: { color: "Mediumslateblue" } }, [
-            _c("i", { staticClass: "mdi mdi-eye mdi-36px" })
+      _c("div", { staticClass: "box" }, [
+        _c("div", { staticClass: "columns is-multiline" }, [
+          _c("div", { staticClass: "column is-one-quarter" }, [
+            _c("a", { attrs: { href: "income" } }, [
+              _c("div", { staticClass: "box has-ribbon-bottom is-small" }, [
+                _c("span", { staticStyle: { color: "Mediumslateblue" } }, [
+                  _c("i", { staticClass: "mdi mdi-monitor-dashboard mdi-48px" })
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "ribbon is-medium is-primary" }, [
+                  _vm._v("Products")
+                ])
+              ])
+            ])
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "ribbon is-medium is-primary" }, [
-            _vm._v("Products")
-          ])
-        ])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "column is-one-quarter" }, [
-      _c("a", { attrs: { href: "students" } }, [
-        _c("div", { staticClass: "box has-ribbon-bottom is-small" }, [
-          _c("span", { staticStyle: { color: "Dodgerblue" } }, [
-            _c("i", { staticClass: "fas fa-graduation-cap fa-3x" })
+          _c("div", { staticClass: "column is-one-quarter" }, [
+            _c("a", { attrs: { href: "students" } }, [
+              _c("div", { staticClass: "box has-ribbon-bottom is-small" }, [
+                _c("span", { staticStyle: { color: "Dodgerblue" } }, [
+                  _c("i", { staticClass: "mdi mdi-cart-arrow-right mdi-48px" })
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "ribbon is-medium is-info" }, [
+                  _vm._v("Purchase Order ")
+                ])
+              ])
+            ])
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "ribbon is-medium is-info" }, [
-            _vm._v("Students")
-          ])
-        ])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "column is-one-quarter" }, [
-      _c("a", { attrs: { href: "reports" } }, [
-        _c("div", { staticClass: "box has-ribbon-bottom is-small" }, [
-          _c("span", { staticStyle: { color: "Mediumslateblue" } }, [
-            _c("i", { staticClass: "fas fa-chart-bar fa-3x" })
+          _c("div", { staticClass: "column is-one-quarter" }, [
+            _c("a", { attrs: { href: "reports" } }, [
+              _c("div", { staticClass: "box has-ribbon-bottom is-small" }, [
+                _c("span", { staticStyle: { color: "Mediumslateblue" } }, [
+                  _c("i", { staticClass: "mdi mdi-card-bulleted mdi-48px" })
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "ribbon is-medium is-light" }, [
+                  _vm._v("Reports")
+                ])
+              ])
+            ])
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "ribbon is-medium is-light" }, [
-            _vm._v("Reports")
-          ])
-        ])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("span", { staticStyle: { color: "turquoise" } }, [
-      _c("i", { staticClass: "fas fa-tag fa-3x" })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "column is-one-quarter" }, [
-      _c("a", { attrs: { href: "sms" } }, [
-        _c("div", { staticClass: "box has-ribbon-bottom is-small" }, [
-          _c("span", { staticStyle: { color: "Tomato" } }, [
-            _c("i", { staticClass: "fas fa-sms fa-3x" })
+          _c(
+            "div",
+            { staticClass: "column is-one-quarter", attrs: { id: "discount" } },
+            [
+              _c("a", { attrs: { href: "discounts" } }, [
+                _c("div", { staticClass: "box has-ribbon-bottom is-small" }, [
+                  _c("span", { staticStyle: { color: "turquoise" } }, [
+                    _c("i", {
+                      staticClass: "mdi mdi-view-dashboard-variant mdi-48px"
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "ribbon is-medium is-dark" }, [
+                    _vm._v("Vendors")
+                  ])
+                ])
+              ])
+            ]
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "column is-one-quarter" }, [
+            _c("a", { attrs: { href: "sms" } }, [
+              _c("div", { staticClass: "box has-ribbon-bottom is-small" }, [
+                _c("span", { staticStyle: { color: "Tomato" } }, [
+                  _c("i", { staticClass: "mdi mdi-message-alert mdi-48px" })
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "ribbon is-medium is-black" }, [
+                  _vm._v("SMS")
+                ])
+              ])
+            ])
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "ribbon is-medium is-black" }, [
-            _vm._v("SMS")
-          ])
-        ])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "column is-one-quarter" }, [
-      _c("a", { attrs: { href: "manage/users" } }, [
-        _c("div", { staticClass: "box has-ribbon-bottom is-small" }, [
-          _c("i", { staticClass: "mdi mdi-account-group mdi-48px" }),
+          _c("div", { staticClass: "column is-one-quarter" }, [
+            _c("a", { attrs: { href: "manage/users" } }, [
+              _c("div", { staticClass: "box has-ribbon-bottom is-small" }, [
+                _c("i", { staticClass: "mdi mdi-account-group mdi-48px" }),
+                _vm._v(" "),
+                _c("div", { staticClass: "ribbon is-medium is-link" }, [
+                  _vm._v("Manage Users")
+                ])
+              ])
+            ])
+          ]),
           _vm._v(" "),
-          _c("div", { staticClass: "ribbon is-medium is-link" }, [
-            _vm._v("Manage Users")
-          ])
-        ])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "column is-one-quarter" }, [
-      _c("a", { attrs: { href: "manage/users" } }, [
-        _c("div", { staticClass: "box has-ribbon-bottom is-small" }, [
-          _c("i", { staticClass: "mdi mdi-settings mdi-48px" }),
-          _vm._v(" "),
-          _c("div", { staticClass: "ribbon is-medium is-link" }, [
-            _vm._v("Settings")
+          _c("div", { staticClass: "column is-one-quarter" }, [
+            _c("a", { attrs: { href: "manage/users" } }, [
+              _c("div", { staticClass: "box has-ribbon-bottom is-small" }, [
+                _c("i", { staticClass: "mdi mdi-settings mdi-48px" }),
+                _vm._v(" "),
+                _c("div", { staticClass: "ribbon is-medium is-link" }, [
+                  _vm._v("Settings")
+                ])
+              ])
+            ])
           ])
         ])
       ])

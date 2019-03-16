@@ -14,7 +14,7 @@
             <a href="income">
                 <div class="box has-ribbon-bottom is-small">
                     <span style="color: Mediumslateblue;">
-                        <i class="mdi mdi-eye mdi-36px"></i>
+                        <i class="mdi mdi-monitor-dashboard mdi-48px"></i>
                     </span>
                     <div class="ribbon is-medium is-primary">Products</div>
                 </div>
@@ -25,9 +25,9 @@
             <a href="students">
                 <div class="box has-ribbon-bottom is-small">
                     <span style="color: Dodgerblue;">
-                        <i class="fas fa-graduation-cap fa-3x"></i>
+                        <i class="mdi mdi-cart-arrow-right mdi-48px"></i>
                     </span>
-                    <div class="ribbon is-medium is-info">Students</div>
+                    <div class="ribbon is-medium is-info">Purchase Order </div>
                 </div>
             </a>
         </div>
@@ -35,7 +35,7 @@
             <a href="reports">
                 <div class="box has-ribbon-bottom is-small">
                     <span style="color: Mediumslateblue;">
-                        <i class="fas fa-chart-bar fa-3x"></i>
+                        <i class="mdi mdi-card-bulleted mdi-48px"></i>
                     </span>
                     <div class="ribbon is-medium is-light">Reports</div>
                 </div>
@@ -45,9 +45,9 @@
             <a href="discounts">
                 <div class="box has-ribbon-bottom is-small">
                     <span style="color: turquoise;">
-                        <i class="fas fa-tag fa-3x"></i>
+                        <i class="mdi mdi-view-dashboard-variant mdi-48px"></i>
                     </span>
-                    <div class="ribbon is-medium is-dark">Discount Requests {{ stuff }} </div>
+                    <div class="ribbon is-medium is-dark">Vendors</div>
                 </div>
             </a>
         </div>
@@ -55,7 +55,7 @@
             <a href="sms">
                 <div class="box has-ribbon-bottom is-small">
                     <span style="color: Tomato;">
-                        <i class="fas fa-sms fa-3x"></i>
+                        <i class="mdi mdi-message-alert mdi-48px"></i>
                     </span>
                     <div class="ribbon is-medium is-black">SMS</div>
                 </div>
