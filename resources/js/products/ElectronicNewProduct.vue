@@ -35,7 +35,7 @@
                             <div class="select">
                                 <select name="cat_id" v-model="Addvendor.category">
                                     <option selected disabled>Select Vendor</option>
-                                    <option v-for="category in category.data" :value="category.id">{{ category.category }}</option>
+                                    <option v-for="lc in Loadcategory.data" :value="lc.id">{{ lc.category }}</option>
                                     
                                 </select>
                             </div>
@@ -176,6 +176,7 @@
         data(){
             return {               
                 product: [],
+                Loadcategory: [],
                 username:'',
                 submitted:false,
                 vendors: [],
@@ -210,15 +211,16 @@
                 })
                   //   .then(function (data) {
                   //   console.log(data);
-                  // });
-                  
-            
-        }
+                  // });     
+                },
+                getCatVan(){
+                    axios.get("/vendors./GetVendors").then(({data}) => (this.vendors = data));
+                    axios.get("/categories./GetCategories").then(({data}) => (this.Loadcategory = data));        
+                }
     },
         mounted(){
-            axios.get("/vendors./GetVendors").then(({data}) => (this.vendors = data));
-            axios.get("/categories./GetCategories").then(({data}) => (this.category = data));
-    
+            
+            this.getCatVan();
         },
     }
 </script>

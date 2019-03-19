@@ -32,10 +32,7 @@
                 }
         },
         mounted(){
-            // axios.get('/products./autos/ShowSingle/' + this.id)
-            // .then((response)=> this.product = this.temp = response.data)
-            // .catch((error) => this.errors = error.response.data.errors)
-            //console.log(this.productid)
+
               this.loadData();  
         },
          methods: {  

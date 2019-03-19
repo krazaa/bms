@@ -20,7 +20,7 @@
             </b-select>
         </div>
         <div class="control is-flex">
-            <router-link class="button is-primary is-pulled-right" :to="{ name: 'neweproduct' }"><i class="fa fa-user-plus m-r-10"></i> New Product</router-link>
+            <router-link class="button is-primary is-pulled-right" :to="{ name: 'newproduct' }"><i class="fa fa-user-plus m-r-10"></i> New Product</router-link>
         </div>
         </b-field>
         <p class="level-item">
@@ -56,7 +56,7 @@
         </b-table-column>
         
         <b-table-column label="Action" centered>
-             <router-link class="button is-success is-small" :to="{ name: 'electronicshow', params: {id: props.row.id}}"><span class="mdi mdi-eye-circle-outline"></span></router-link>
+             <router-link class="button is-success is-small" :to="{ name: 'AutosShow', params: {id: props.row.id}}"><span class="mdi mdi-eye-circle-outline"></span></router-link>
         <a :href="`/manage/users/edit/${props.row.id}`" class="button is-warning is-small"><span class="mdi mdi-pencil-box-outline"></span></a>
         <a :href="`/manage/users/edit/${props.row.id}`" class="button is-danger is-small"><span class="mdi mdi-trash-can"></span></a>
         </b-table-column>

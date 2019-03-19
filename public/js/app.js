@@ -3510,10 +3510,6 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   mounted: function mounted() {
-    // axios.get('/products./autos/ShowSingle/' + this.id)
-    // .then((response)=> this.product = this.temp = response.data)
-    // .catch((error) => this.errors = error.response.data.errors)
-    //console.log(this.productid)
     this.loadData();
   },
   methods: {
@@ -3899,6 +3895,7 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       product: [],
+      Loadcategory: [],
       username: '',
       submitted: false,
       vendors: [],
@@ -3929,20 +3926,23 @@ __webpack_require__.r(__webpack_exports__);
         console.log(error);
       }); //   .then(function (data) {
       //   console.log(data);
-      // });
+      // });     
+    },
+    getCatVan: function getCatVan() {
+      var _this2 = this;
+
+      axios.get("/vendors./GetVendors").then(function (_ref) {
+        var data = _ref.data;
+        return _this2.vendors = data;
+      });
+      axios.get("/categories./GetCategories").then(function (_ref2) {
+        var data = _ref2.data;
+        return _this2.Loadcategory = data;
+      });
     }
   },
   mounted: function mounted() {
-    var _this2 = this;
-
-    axios.get("/vendors./GetVendors").then(function (_ref) {
-      var data = _ref.data;
-      return _this2.vendors = data;
-    });
-    axios.get("/categories./GetCategories").then(function (_ref2) {
-      var data = _ref2.data;
-      return _this2.category = data;
-    });
+    this.getCatVan();
   }
 });
 
@@ -88075,7 +88075,7 @@ var render = function() {
                     "router-link",
                     {
                       staticClass: "button is-primary is-pulled-right",
-                      attrs: { to: { name: "neweproduct" } }
+                      attrs: { to: { name: "newproduct" } }
                     },
                     [
                       _c("i", { staticClass: "fa fa-user-plus m-r-10" }),
@@ -88219,7 +88219,7 @@ var render = function() {
                               staticClass: "button is-success is-small",
                               attrs: {
                                 to: {
-                                  name: "electronicshow",
+                                  name: "AutosShow",
                                   params: { id: props.row.id }
                                 }
                               }
@@ -89037,11 +89037,11 @@ var render = function() {
                                 [_vm._v("Select Vendor")]
                               ),
                               _vm._v(" "),
-                              _vm._l(_vm.category.data, function(category) {
+                              _vm._l(_vm.Loadcategory.data, function(lc) {
                                 return _c(
                                   "option",
-                                  { domProps: { value: category.id } },
-                                  [_vm._v(_vm._s(category.category))]
+                                  { domProps: { value: lc.id } },
+                                  [_vm._v(_vm._s(lc.category))]
                                 )
                               })
                             ],
