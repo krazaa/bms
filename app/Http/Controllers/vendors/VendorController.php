@@ -16,7 +16,7 @@ class VendorController extends Controller
 
     public function GetVendors()
     {
-    	$vendors = Vendor::all();
+    	$vendors = Vendor::paginate(100);
         return $vendors->toArray();
     }
 
@@ -61,7 +61,7 @@ class VendorController extends Controller
     }
     public function VendorSearch(request $request)
     {
-        $vendors = Vendor::where('company','=', $request->company)->get();
+        $vendors = Vendor::where('company','=', $request->company)->paginate(100);
         return $vendors->toArray();    
     }
 }

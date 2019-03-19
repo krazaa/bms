@@ -40,28 +40,28 @@
             <div class="navbar-item has-dropdown is-hoverable">
               <a class="navbar-link" href="#">Accounts</a>
               <div class="navbar-dropdown ">
-                <a class="navbar-item" href="{{ route('vendors') }}">Vendors</a>
-                <a class="navbar-item" href="#">Customers</a>
-                <a class="navbar-item" href="#">Agents</a>
-                <a class="navbar-item" href="#">Employees</a>
-                <a class="navbar-item" href="{{ route('products.autos') }}">Autos</a>
+                <router-link class="navbar-item" :to="{ name: 'vendors'}">Vendors</router-link>
+                <router-link class="navbar-item" :to="{ name: 'customers'}">Customers</router-link>
+                <router-link class="navbar-item" :to="{ name: 'agents'}">Agents</router-link>
+                <router-link class="navbar-item" :to="{ name: 'employees'}">Employees</router-link>
+                <router-link class="navbar-item" :to="{ name: 'autos'}">Autos</router-link>
                 <a class="navbar-item" href="{{ route('products.electronic') }}">Electronic</a>
               </div>
             </div>
             <div class="navbar-item has-dropdown is-hoverable">
               <a class="navbar-link" href="#">Purchases</a>
               <div class="navbar-dropdown ">
-                <a class="navbar-item" href="{{ route('purchase-order.autos') }}">Vehicles PO & CN</a>
-                <a class="navbar-item" href="{{ route('purchase-order.electronic') }}}">Product PO & CN</a>
+                <a class="navbar-item" href="#">Vehicles PO & CN</a>
+                <a class="navbar-item" href="#">Product PO & CN</a>
               </div>
             </div>
             <div class="navbar-item has-dropdown is-hoverable">
               <a class="navbar-link" href="#">Sales</a>
               <div class="navbar-dropdown ">
-                <a class="navbar-item" href="{{ route('products.autos') }}">Vehicles Cash & Whole Sale</a>
-                <a class="navbar-item" href="{{ route('products.autos') }}">Vehicle Lease Sale</a>
-                <a class="navbar-item" href="{{ route('products.autos') }}">Product Cash & Whole Sale</a>
-                <a class="navbar-item" href="{{ route('products.autos') }}">Product Lease Sale</a>
+                <a class="navbar-item" href="#">Vehicles Cash & Whole Sale</a>
+                <a class="navbar-item" href="#">Vehicle Lease Sale</a>
+                <a class="navbar-item" href="#">Product Cash & Whole Sale</a>
+                <a class="navbar-item" href="#">Product Lease Sale</a>
               </div>
             </div>
             <div class="navbar-item has-dropdown is-hoverable">
@@ -89,12 +89,13 @@
                 Setup
               </div>
               <div id="moreDropdown" class="navbar-dropdown ">
-                <a class="navbar-item" href="{{ route('settings.company') }}">Company Setup</a>
-                <a class="navbar-item" href="{{ route('settings.branches') }}">Branches Setup</a>
+                <router-link class="navbar-item" :to="{ name: 'company'}">Company Setup</router-link>
+                <router-link class="navbar-item" :to="{ name: 'branches'}">Company Branches</router-link>
+                {{-- <a class="navbar-item" href="{{ route('settings.branches') }}">Branches Setup</a> --}}
                 <a class="navbar-item" href="#">COA Openings</a>
                 <a class="navbar-item" href="#">Bank Setup</a>
                 <a class="navbar-item" href="#">Vehicle Setup</a>
-                <a class="navbar-item" href="#">Product Set Up</a>
+                <a class="navbar-item" href="#">Product Setup</a>
                 <a class="navbar-item" href="#">Excise & Taxation Setup</a>
               </div>
             </div>

@@ -1,8 +1,18 @@
 <?php
 
+
+Auth::routes();
+
+//Route::prefix('bms')->group(function () {
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+//Route::get('{path}', "HomeController@index")->where('path', '([A-z\d-\/_.]+)?' );
+
+
 //Start Vendors routes
 Route::prefix('vendors.')->group(function () {
-    Route::get('/', 'vendors\VendorController@index')->name('vendors');
+    //Route::get('/', 'vendors\VendorController@index')->name('vendors');
     Route::get('/GetVendors', 'vendors\VendorController@GetVendors')->name('vendors.GetVendors');
     Route::get('/create', 'vendors\VendorController@create')->name('vendors.create');
     Route::post('/VendorStore', 'vendors\VendorController@VendorStore')->name('vendors.VendorStore');
@@ -59,9 +69,9 @@ Route::prefix('settings.')->group(function () {
     // Branches
     Route::get('/branches', 'settings\BranchesController@index')->name('settings.branches');
     Route::get('/branches/GetBranches', 'settings\BranchesController@GetBranches')->name('settings.branches.GetBranches');
-    Route::get('/branches/newbranch', 'settings\BranchesController@create')->name('settings.branches.newbranch');
+    //Route::get('/branches/newbranch', 'settings\BranchesController@create')->name('settings.branches.newbranch');
     Route::post('/branches/branchstore', 'settings\BranchesController@store')->name('settings.branches.branchstore');
-    Route::get('/branches/editbranch/{id}', 'settings\BranchesController@edit')->name('settings.branches.editbranch');
+    //Route::get('/branches/editbranch/{id}', 'settings\BranchesController@edit')->name('settings.branches.editbranch');
     Route::get('/branches/ShowSingle/{id}', 'settings\BranchesController@ShowSingle')->name('settings.branches.ShowSingle');
     Route::post('branches/branchupdate/{id}', 'settings\BranchesController@BranchUpdate')->name('settings.branches.branchupdate');
     Route::get('branches/removebranch/{id}', 'settings\BranchesController@destroy')->name('settings.branches.removebranch');
@@ -96,11 +106,9 @@ return \App\modules\Autoproduct::with('vendorinfo')->get();
 
 
 
-Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
 
-Auth::routes();
+
 
 Route::get('manage/users', 'manage\UserController@index')->name('manage.users');
 Route::get('manage/users/create', 'manage\UserController@create')->name('manage.create');
@@ -120,4 +128,5 @@ Route::get('manage/getusers', 'manage\UserController@Getusers')->name('manage.ge
 Route::get('manage/users/singleuser/{id}', 'manage\UserController@GetSingleUser')->name('manage.singleuser');
 
 
-
+// bms path end
+//});

@@ -1,6 +1,7 @@
 @extends('layouts.authlayout')
 @section('content')
 <section class="section">
-        <vendors></vendors>
+        {{-- <vendors></vendors> --}}
+        <vendorssr></vendorssr>
     </section>
 @endsection

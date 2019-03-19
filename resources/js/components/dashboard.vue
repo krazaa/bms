@@ -122,8 +122,8 @@
             },
             created: function() {
 
-    this.updateStuff();
-    this.stuff = setInterval(this.updateStuff, 15000)
+    //this.updateStuff();
+    //this.stuff = setInterval(this.updateStuff, 15000)
 
 },
 

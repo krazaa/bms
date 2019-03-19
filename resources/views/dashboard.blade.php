@@ -4,6 +4,8 @@
 @include('layouts.success')
 <section class="section">
     <div class="box">
-        <dashboard></dashboard>
+        {{-- <dashboard></dashboard> --}}
+          
+        <router-view></router-view>
         </div>
 @endsection

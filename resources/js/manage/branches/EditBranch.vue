@@ -60,7 +60,8 @@
 </template>
 <script>
     export default {
-        props: ['branchid'],  
+        props: ['id'], 
+
         data(){
             return {
                 
@@ -72,13 +73,9 @@
             }
         },
         mounted(){
-        axios.get('/settings./branches/ShowSingle/' + this.branchid)
+        axios.get('/settings./branches/ShowSingle/' + this.id)
         .then((response)=> this.branch = this.temp = response.data)
-        //.catch((error) => this.errors = error.response.data.errors)
-        console.log(this.productid)
-        axios.get('/vendors./GetVendors/')
-        .then((response)=> this.vendors = this.temp = response.data)
         .catch((error) => this.errors = error.response.data.errors)
-    },
+        }
     }
 </script>

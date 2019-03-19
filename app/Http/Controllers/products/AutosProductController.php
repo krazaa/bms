@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\products;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+
 use App\Http\Controllers\Controller;
 use App\modules\Autoproduct;
 use App\modules\Vendor;
@@ -22,33 +24,41 @@ class AutosProductController extends Controller
     }
 
     public function AutoProductStore(request $request)
-    {
-        $product = new Autoproduct();
-        $product->name = $request->name;
-        $product->vendor_id = $request->vendor_id;
-        $product->code = $request->code;
-        $product->shortname = $request->shortname;
-        $product->model = $request->model;
-        $product->model = $request->model;
-        $product->discountallowed = $request->discountallowed;
-        $product->saleprice = $request->saleprice;
-        $product->wsaleprice = $request->wsaleprice;
-        $product->qty = $request->qty;
-        $product->reorder = $request->reorder;
-        $product->maxqty = $request->maxqty;
-        $product->maxqty = $request->maxqty;
-        $product->cost = $request->cost;
-        $product->saleprice = $request->saleprice;
-        $product->user_id = Auth::user()->id;
-        $product ->save();
+    {   
+        $this->validate($request,[
+            'code' => 'required',
+            'name' => 'required'
+        ]);
+                //return response()->json([$request->all()]);
+        return (['message' => 'Product was successfull']);
+        // $product = new Autoproduct();
+        // $product->name = $request->name;
+        // $product->vendor_id = $request->vendor_id;
+        // $product->code = $request->code;
+        // $product->shortname = $request->shortname;
+        // $product->model = $request->model;
+        // $product->model = $request->model;
+        // $product->discountallowed = $request->discountallowed;
+        // $product->saleprice = $request->saleprice;
+        // $product->wsaleprice = $request->wsaleprice;
+        // $product->qty = $request->qty;
+        // $product->reorder = $request->reorder;
+        // $product->maxqty = $request->maxqty;
+        // $product->maxqty = $request->maxqty;
+        // $product->cost = $request->cost;
+        // $product->saleprice = $request->saleprice;
+        // $product->user_id = Auth::user()->id;
+        // $product ->save();
         
-        return redirect('/dashboard')->with('success','Subject updated successfully');
+        // return redirect('/dashboard')->with('success','Subject updated successfully');
     }
 
     public function GetAutosProducts()
     {
-    	$products = Autoproduct::leftjoin('vendors','vendors.id','=' ,'autoproducts.vendor_id')->get();
-        return $products;
+    	$products = Autoproduct::leftjoin('vendors','vendors.id','=' ,'autoproducts.vendor_id')
+        //->get();
+        ->paginate(100);
+        return response()->json($products);
     }
 
     public function SearchAutosProduct(request $request){

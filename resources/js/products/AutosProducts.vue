@@ -14,33 +14,32 @@
             </div>
             <div class="control">
                 <b-field>
-                    <a href="/products./autos/newproduct" class="button is-info">New Product</a>
+                  <router-link class="button is-info" :to="{ name: 'newproduct' }">New Product</router-link>
+                    <!-- <a href="/products./autos/newproduct" class="button is-info">New Product</a> -->
                 </b-field>
             </div>
     </b-field>
-    
-       <table class="table is-fullwidth is-hoverable is-narrow is-desktop is-mobile" v-if="products.length > 0">
-        <div v-if="Studentloading" v-cloak align="center" class="loading-overlay is-active">
-          <i class="fas fa-circle-notch fa-spin fa-5x"></i>
+        <div v-if="loading" v-cloak align="center" class="loading-overlay is-active">
+          <i class="mdi mdi-48px mdi-spin mdi-loading"></i>
         </div>
+        <!-- <div class="loading" v-if="loading">
+      Loading...
+    </div> -->
+       <table class="table is-fullwidth is-hoverable is-narrow is-desktop is-mobile" v-if="products.data.length > 0">
+
         <thead>
           <tr>
-            <th><abbr title="id">#</abbr></th>
             <th><abbr title="code">Code</abbr></th>
             <th><abbr title="vendor">Vendor</abbr></th>
             <th><abbr title="name">Product</abbr></th>
             <th><abbr title="model">Model</abbr></th>
             <th><abbr title="shortname">Shortname</abbr></th>
-            
-            
-            
             <th><abbr title="cost">Cost</abbr></th>
             <th><abbr title="action">Action</abbr></th>
           </tr>
         </thead>
         <tbody>
-          <tr v-for="(product , index) in products">
-            <th>{{ index +1 }}</th>
+          <tr v-for="(product , index) in products.data">
             <td>{{ product.code }}</td>
             <td>{{ product.company }}</td>
             <td>{{ product.name }}</td>
@@ -56,6 +55,7 @@
           </tr>
         </tbody>
       </table>
+      <pagination :limit="4" :data="products" @pagination-change-page="getResults"></pagination>
     </div>
   </div>
 </div>
@@ -70,26 +70,29 @@
                products: [],
                search: '',
                autosproducts: [],
-               Studentloading: false,
+               loading: false,
+               
                     }
             },
-              methods: {
-                SearchAutos() 
-            {
-            var autosproducts = this
-            axios.get('/products./autos/SearchAutosProduct?search=' + this.search)
-            .then(function(response) 
-            {
-            Vue.set(autosproducts.$data, 'products', response.data).catch(error => {"erro found"});
-            })
-
-            },
+            methods: {  
+              SearchAutos(){
+                    axios.get('/products./autos/SearchAutosProduct?search=' + this.search)
+                      .then((data)=> {this.products = data })
+                      },
+              loadProducts(){
+                  this.loading = true
+                  axios.get("products./autos/GetAutosProducts").then(({data}) => (this.products = data));
+                  this.loading = false
+                      },
+              getResults(page = 1) {
+                axios.get('/products./autos/GetAutosProducts?page=' + page).then(response => {
+                  this.products = response.data;
+                  });
+            }
             
           },
          mounted(){
-          axios.get('/products./autos/GetAutosProducts')
-          .then((response)=> this.products = this.temp = response.data)
-          .catch((error) => this.errors = error.response.data.errors)
+          this.getResults();
     },
 
 }

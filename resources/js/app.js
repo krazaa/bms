@@ -12,57 +12,58 @@ window.Vue = require('vue');
 import Buefy from 'buefy';
 import 'buefy/dist/buefy.css';
 import Datepicker from 'buefy/dist/components/datepicker';
-import Vue from 'vue'
+// import Vue from 'vue'
+
 import VueRouter from 'vue-router'
-
-
+import ourRoutes from './routes.js'
+import VeeValidate from 'vee-validate';
 
 Vue.use(VueRouter)
 Vue.use(Buefy);
 Vue.use(Datepicker);
+Vue.use(VeeValidate);
+//
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component('example-component', require('./components/ExampleComponent.vue').default);
-Vue.component('login', require('./components/login.vue').default);
-Vue.component('dashboard', require('./components/dashboard.vue').default);
-Vue.component('manageusers', require('./manage/users/UsersComponent.vue').default);
-Vue.component('singleuser', require('./manage/users/showComponent.vue').default);
-Vue.component('usercreate', require('./manage/users/UserCreate.vue').default);
-Vue.component('settings', require('./manage/settings/settings.vue').default);
-Vue.component('vendors', require('./vendors/Vendors.vue').default);
-Vue.component('vendorcreate', require('./vendors/VendorCreate.vue').default);
-Vue.component('autosnew', require('./products/AutosNewProduct.vue').default);
-Vue.component('productedit', require('./products/AutosEditProduct.vue').default);
-Vue.component('autosprotucts', require('./products/AutosProducts.vue').default);
-Vue.component('showautos', require('./products/AutosShow.vue').default);
-Vue.component('electronic-products', require('./products/ElectronicProducts.vue').default);
-Vue.component('branches', require('./manage/branches/branches.vue').default);
-Vue.component('newbranch', require('./manage/branches/AddBranch.vue').default);
-Vue.component('editbranch', require('./manage/branches/EditBranch.vue').default);
+//Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+ Vue.component('login', require('./components/login.vue').default);
+// Vue.component('dashboard', require('./components/dashboard.vue').default);
+// Vue.component('manageusers', require('./manage/users/UsersComponent.vue').default);
+// Vue.component('singleuser', require('./manage/users/showComponent.vue').default);
+// Vue.component('usercreate', require('./manage/users/UserCreate.vue').default);
+// Vue.component('settings', require('./manage/settings/settings.vue').default);
+// Vue.component('vendors', require('./vendors/Vendors.vue').default);
+// Vue.component('vendorssr', require('./vendors/VendorSSR.vue').default);
+// Vue.component('vendorcreate', require('./vendors/VendorCreate.vue').default);
+// Vue.component('autosnew', require('./products/AutosNewProduct.vue').default);
+// Vue.component('productedit', require('./products/AutosEditProduct.vue').default);
+// Vue.component('autosprotucts', require('./products/AutosProducts.vue').default);
+// Vue.component('showautos', require('./products/AutosShow.vue').default);
+// Vue.component('electronic-products', require('./products/ElectronicProducts.vue').default);
+// Vue.component('branches', require('./manage/branches/branches.vue').default);
+// Vue.component('newbranch', require('./manage/branches/AddBranch.vue').default);
+// Vue.component('editbranch', require('./manage/branches/EditBranch.vue').default);
+Vue.component('pagination', require('laravel-vue-bulma-paginator'));
+
 //Vue.component('showelectronic', require('./products/ElectronicShow.vue').default);
 
+Vue.use(VueRouter);
+
+// const router = new VueRouter({
+//   routes: ourRoutes,
+
+// });
 
 
-import showelectronic from './products/ElectronicShow.vue';
 // router
 const router = new VueRouter({
-    mode: 'history',
-    routes: [
-        // {
-        //     path: '/',
-        //     name: 'home',
-        //     component: Home
-        // },
-        {
-            path: '/products./electronic/showelectronic',
-            name: 'showelectronic',
-            component: showelectronic,
-        },
-    ],
+  routes: ourRoutes,
+  mode: 'history'
+
 });
 
 

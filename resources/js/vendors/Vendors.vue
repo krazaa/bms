@@ -8,7 +8,7 @@
         </div>
         <div class="control is-flex">
             <b-field>
-            <b-input v-model="usersearch" name="company" placeholder="Keyword Seach" @input="VendorGet"></b-input>
+            <b-input v-model="searchvendor" name="company" placeholder="Keyword Seach" @input="VendorGet"></b-input>
             </b-field>
         </div>
         <div class="control is-flex">
@@ -30,15 +30,15 @@
                 <i class="fa fa-refresh fa-spin fa-2x fa-fw"></i>
             </span>
         </p>
+        <!-- {{ vendors }} -->
         <b-table
-        :data="vendors"
-        :narrowed="isNarrowed"
-        :paginated="isPaginated"
-        :per-page="perPage"
-        :current-page.sync="currentPage"
-        :pagination-simple="isPaginationSimple"
-        :default-sort-direction="defaultSortDirection"
-        default-sort="vendors.name">
+            :data="vendors.data"
+            :loading="loading"
+            :narrowed="isNarrowed"
+            
+            
+            :default-sort-direction="defaultSortDirection"
+            default-sort="vendors.name">
         <template slot-scope="props">
         <b-table-column field="vnum" label="Vendor ID" width="40" sortable>
         {{ props.row.vnum }}
@@ -64,6 +64,10 @@
         </b-table>
     </section>
     </template>
+<hr>
+<div class="box">
+        <pagination :limit="5" :show-disabled=false :data="vendors"  @pagination-change-page="getResults"></pagination>
+    </div>
 </div>
 </template>
 <style >
@@ -79,36 +83,42 @@
         data(){
             return {
                 vendors: [],
-                usersearch:'',
+                searchvendor:'',
                 isNarrowed: true,
-                errors:'',
                 loading: false,
                 isPaginated: true,
                 isPaginationSimple: false,
                 defaultSortDirection: 'asc',
-                currentPage: 1,
-                perPage: 15,
+                currentPage: 3,
+                perPage: 40,
                 isAvailable: 0,
+                searchvendor:[]
                 
             }
         },
         mounted(){
-        axios.get('/vendors./GetVendors')
-        .then((response)=> this.vendors = this.temp = response.data)
-        .catch((error) => this.errors = error.response.data.errors)
+        // axios.get('/vendors./GetVendors')
+        //     .then((response)=> this.vendors = this.temp = response.data)
+        //     .catch((error) => this.errors = error.response.data.errors)
+        this.loadVendor();  
     },
-        methods: {
-            VendorGet() 
-        {
-            this.loading = true;
-            var search = this
-            axios.get('/vendors./VendorSearch?company=' + this.usersearch)
-            .then(function(response) 
-            {
-            Vue.set(usersearch.$data, 'vendors', response.data)
-            search.loading = false;
-            })
-            .catch(error => {"erro found"});
+        methods: {  
+             loadVendor(){
+              this.loading = true
+              axios.get("vendors./GetVendors").then(({data}) => (this.vendors = data));
+              this.loading = false
+            },
+            getResults(page = 1) {
+                axios.get('/vendors./GetVendors?page=' + page)
+                  .then(response => {
+                    this.vendors = response.data;
+                });
+            },
+
+            VendorGet() {
+            //var search = this
+            axios.get('/vendors./VendorSearch?company=' + this.searchvendor)
+            .then((data)=> {this.vendors = data })
         },
     }        
 }

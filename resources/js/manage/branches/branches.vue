@@ -14,7 +14,7 @@
             </div>
             <div class="control">
                 <b-field>
-                    <a href="/settings./branches/newbranch" class="button is-info">New Branch</a>
+                    <router-link :to="{ name: 'newbranch'}" class="button is-info">New Branch</router-link>
                 </b-field>
             </div>
     </b-field>
@@ -42,7 +42,10 @@
             <td>{{ branche.mobile }}</td>
             <td>
                 <a :href="`/settings./branches/ShowSingle/${branche.id}`" class="button is-success is-small"><span class="mdi mdi-eye-circle-outline"></span></a>
-                <a :href="`/settings./branches/editbranch/${branche.id}`" class="button is-warning is-small"><span class="mdi mdi-pencil-box-outline"></span></a>
+
+                <router-link class="nbutton is-warning is-small" :to="{ name: 'editbranch', params: {id: branche.id}}"><span class="mdi mdi-pencil-box-outline"></span></router-link>
+                
+                <!-- <a :href="`/settings./branches/editbranch/${branche.id}`" class="button is-warning is-small"><span class="mdi mdi-pencil-box-outline"></span></a> -->
                 <a :href="`/settings./branches/removebranch/${branche.id}`" class="button is-danger is-small"><span class="mdi mdi-trash-can"></span></a>
                 <!-- <router-link :to="{ name: 'showelectronic' }">Hello World</router-link> -->
             </td>

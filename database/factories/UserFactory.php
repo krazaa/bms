@@ -3,7 +3,7 @@
 use App\User;
 use Illuminate\Support\Str;
 use Faker\Generator as Faker;
-
+use App\modules\Vendor;
 /*
 |--------------------------------------------------------------------------
 | Model Factories
@@ -15,12 +15,20 @@ use Faker\Generator as Faker;
 |
 */
 
-$factory->define(Autoproduct::class, function (Faker $faker) {
+$factory->define(Vendor::class, function (Faker $faker) {
     return [
-        'name' => $faker->name,
-        'code' => $faker->code,
-        'vendor_id' => $faker->vendor_id(),
-        'shortname' => $faker->shortname,
+        		//'vnum' => $faker->vnum,
+                'company' => $faker->name,
+                'person' => $faker->name,
+                'contact' => $faker->number,
+                'mobile' => $faker->number,
+                'bmobile' => $faker->number,
+                'address' => $faker->number,
+                'email' => $faker->email,
+                'website' => $faker->number,
+                'ntn' => $faker->number,
+                'salestax' => $faker->number,
+                
         
     ];
 });

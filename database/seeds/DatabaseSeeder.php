@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Database\Seeder;
-
+use Illuminate\Support\Facades\DB;
+use Faker\Factory as Faker;
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -11,8 +12,23 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-         $this->call(UsersTableSeeder::class);
+         //$this->call(UsersTableSeeder::class);
         //$this->call(LaratrustSeeder::class);
 
+
+        $faker = Faker::create();
+        foreach (range(1,500) as $index) {
+            DB::table('autoproducts')->insert([
+                'vendor_id' => $faker->randomDigit(1,100),
+                'name' => $faker->company(),
+                'code' => Str::random(10),
+                'model' => $faker->randomLetter(),
+                'cost' => $faker->randomDigit(),
+                'qty' => $faker->randomDigit(),
+                'shortname' => $faker->countryCode(),
+                
+                
+            ]);
+        }
     }
 }
