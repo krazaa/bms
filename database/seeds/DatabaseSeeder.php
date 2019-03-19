@@ -17,15 +17,17 @@ class DatabaseSeeder extends Seeder
 
 
         $faker = Faker::create();
-        foreach (range(1,500) as $index) {
-            DB::table('autoproducts')->insert([
-                'vendor_id' => $faker->randomDigit(1,100),
-                'name' => $faker->company(),
-                'code' => Str::random(10),
-                'model' => $faker->randomLetter(),
-                'cost' => $faker->randomDigit(),
-                'qty' => $faker->randomDigit(),
-                'shortname' => $faker->countryCode(),
+        foreach (range(1,5000) as $index) {
+            DB::table('categories')->insert([
+                'category' => $faker->company(),
+                //'vendor_id' => $faker->randomDigit(1,100),
+                // 'cat_id' => $faker->randomDigit(1,9),
+                // 'name' => $faker->company(),
+                // 'code' => Str::random(10),
+                // 'comppartno' => Str::random(10),
+                // 'cost' => $faker->randomDigit(),
+                // 'qty' => $faker->randomDigit(),
+                // 'shortname' => $faker->countryCode(),
                 
                 
             ]);

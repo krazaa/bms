@@ -56,6 +56,7 @@ class AutosProductController extends Controller
     public function GetAutosProducts()
     {
     	$products = Autoproduct::leftjoin('vendors','vendors.id','=' ,'autoproducts.vendor_id')
+        ->select('autoproducts.id','autoproducts.name','autoproducts.code','autoproducts.model','autoproducts.cost','autoproducts.shortname','vendors.vnum','vendors.company')
         //->get();
         ->paginate(100);
         return response()->json($products);
@@ -78,7 +79,7 @@ class AutosProductController extends Controller
        
         if ($request->ajax())
         {
-            $products = Autoproduct::where('code','=', $request->code)->count();
+            $products = Autoproduct::select('id','code')->where('code','=', $request->code)->count();
                 if($products) {
                 //abort(405, 'Code already entered'); 
                     $count = 'Not Available';

@@ -15,8 +15,22 @@ import usercreate from './manage/users/UserCreate.vue';
 // autos products
 import autos from './products/AutosProducts.vue';
 import NewProduct from './products/AutosNewProduct.vue';
+import EditProduct from './products/AutosEditProduct.vue';
+import AutosShow from './products/AutosShow.vue';
+
+// electronic
+import electronic from './products/ElectronicProducts.vue';
+import NeweProduct from './products/ElectronicNewProduct.vue';
+import EditeProduct from './products/ElectronicEditProduct.vue';
+import ElectronicShow from './products/ElectronicShow.vue';
 // vendors
 import vendors from './vendors/Vendors.vue';
+import vendorCreate from './vendors/VendorCreate.vue';
+// category
+import category from './category/Categories.vue';
+import CatCreate from './category/CatCreate.vue';
+
+// dashboard
 import dashboard from './components/dashboard.vue';
 
 export default [
@@ -75,7 +89,7 @@ export default [
     name: 'employees'
    
   },
-// products
+// products autos
     {
     path: '/autos',
     component: autos,
@@ -88,14 +102,81 @@ export default [
     name: 'newproduct'
    
   },
+  {
+    path: '/autos/editproduct/:id',
+    component: EditProduct,
+    name: 'editproduct',
+    props: true
+   
+  },
 
+  {
+    path: '/autos/AutosShow/:id',
+    component: AutosShow,
+    name: 'AutosShow',
+    props: true
+   
+  },
 
+  // products Electronic
+    {
+    path: '/electronic',
+    component: electronic,
+    name: 'electronic'
+   
+  },
+  {
+    path: '/electronic/neweproduct',
+    component: NeweProduct,
+    name: 'neweproduct'
+   
+  },
+  {
+    path: '/electronic/editeproduct/:id',
+    component: EditeProduct,
+    name: 'editeproduct',
+    props: true
+   
+  },
+
+  {
+    path: '/electronic/electronicshow/:id',
+    component: ElectronicShow,
+    name: 'electronicshow',
+    props: true
+   
+  },
+  
+
+// vendors
   {
     path: '/vendors/',
     component: vendors,
     name: 'vendors'
    
   },
+  {
+    path: '/vendors/create',
+    component: vendorCreate,
+    name: 'create'
+   
+  },
+  // category
+  {
+    path: '/category/manage',
+    component: category,
+    name: 'manage'
+   
+  },
+  {
+  path: '/category/catcreate',
+    component: CatCreate,
+    name: 'catcreate'
+   
+  },
+
+  
+
   { 
     path: '*', 
     component: NotFoundComponent,

@@ -21,6 +21,18 @@ Route::prefix('vendors.')->group(function () {
 });
 //End vendors routes
 
+//Start CategoriesController
+Route::prefix('categories.')->group(function () {
+    
+    Route::get('/GetCategories', 'category\CategoriesController@index')->name('categories.GetCategories');
+    Route::get('/create', 'category\CategoriesController@create')->name('categories.create');
+    Route::post('/CatStore', 'category\CategoriesController@CatStore')->name('categories.CatStore');
+    Route::get('/CatSearch', 'category\CategoriesController@CatSearch')->name('categories.CatSearch');
+    Route::get('/SearchCat', 'category\CategoriesController@SearchCat')->name('categories.SearchCat');
+});
+//End CategoriesController
+
+
 //Start products routes
 Route::prefix('products.')->group(function () {
     Route::get('/', 'products\ProductController@Products')->name('products');
@@ -45,9 +57,12 @@ Route::prefix('products.')->group(function () {
     Route::get('autos/ProductRemove/{id}', 'products\AutosProductController@ProductRemove')->name('products.autos.ProductRemove');
     
     //Electronic
-    Route::get('electronic/', 'products\ElectronicProductController@index')->name('products.electronic');
-    
-});
+    Route::get('/electronic/GetElectronic', 'products\ElectronicProductController@index')->name('products.electronic.GetElectronic');
+    Route::get('/electronic/create', 'products\ElectronicProductController@create')->name('products.electronic.create');
+    Route::post('/electronic/ElecStore', 'products\ElectronicProductController@ElecStore')->name('products.electronic.ElectStore');
+    Route::get('/electronic/ElecSearch', 'products\ElectronicProductController@ElecSearch')->name('products.electronic.ElectSearch');
+    Route::get('/electronic/SearchElec', 'products\ElectronicProductController@SearchElec')->name('products.electronic.SearchElec');
+    });
 //End products routes
 
 //Start Purchase Orders routes

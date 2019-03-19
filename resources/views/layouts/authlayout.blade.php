@@ -45,7 +45,8 @@
                 <router-link class="navbar-item" :to="{ name: 'agents'}">Agents</router-link>
                 <router-link class="navbar-item" :to="{ name: 'employees'}">Employees</router-link>
                 <router-link class="navbar-item" :to="{ name: 'autos'}">Autos</router-link>
-                <a class="navbar-item" href="{{ route('products.electronic') }}">Electronic</a>
+                <router-link class="navbar-item" :to="{ name: 'electronic'}">Electronic</router-link>
+                
               </div>
             </div>
             <div class="navbar-item has-dropdown is-hoverable">
@@ -91,11 +92,11 @@
               <div id="moreDropdown" class="navbar-dropdown ">
                 <router-link class="navbar-item" :to="{ name: 'company'}">Company Setup</router-link>
                 <router-link class="navbar-item" :to="{ name: 'branches'}">Company Branches</router-link>
-                {{-- <a class="navbar-item" href="{{ route('settings.branches') }}">Branches Setup</a> --}}
                 <a class="navbar-item" href="#">COA Openings</a>
                 <a class="navbar-item" href="#">Bank Setup</a>
                 <a class="navbar-item" href="#">Vehicle Setup</a>
-                <a class="navbar-item" href="#">Product Setup</a>
+                <a class="navbar-item" href="#">Electronic Setup</a>
+                <router-link class="navbar-item" :to="{ name: 'manage'}">Product Category Setup</router-link>
                 <a class="navbar-item" href="#">Excise & Taxation Setup</a>
               </div>
             </div>

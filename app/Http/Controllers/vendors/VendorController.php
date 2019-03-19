@@ -60,8 +60,12 @@ class VendorController extends Controller
         }
     }
     public function VendorSearch(request $request)
-    {
-        $vendors = Vendor::where('company','=', $request->company)->paginate(100);
+    {   
+        $search = $request->search;
+        $vendors = Vendor::select('id','vname','company','person','mobile','contact')
+        ->where('company','LIKE', "%$search%")
+        ->orwhere('vnum','LIKE', "%$search%")
+        ->paginate(100);
         return $vendors->toArray();    
     }
 }

@@ -25,6 +25,7 @@
         "@mdi/font": "^3.5.95",
         "buefy": "^0.7.3",
         "laravel-vue-bulma-paginator": "^1.0.0",
+        "moment": "^2.24.0",
         "vee-validate": "^2.2.0",
         "vue": "^2.6.9",
         "vue-2-bulma-pagination": "0.0.8",

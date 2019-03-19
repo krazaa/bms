@@ -8,7 +8,7 @@
         </div>
         <div class="control is-flex">
             <b-field>
-            <b-input v-model="searchvendor" name="company" placeholder="Keyword Seach" @input="VendorGet"></b-input>
+            <b-input v-model="searchvendor" name="search" placeholder="Keyword Seach" @input="VendorGet"></b-input>
             </b-field>
         </div>
         <div class="control is-flex">
@@ -20,9 +20,7 @@
             </b-select>
         </div>
         <div class="control is-flex">
-            <a href="/vendors./create" class="button is-primary is-pulled-right">
-                <i class="fa fa-user-plus m-r-10"></i> New Vendor
-            </a>
+            <router-link class="button is-primary is-pulled-right" :to="{ name: 'create' }"><i class="fa fa-user-plus m-r-10"></i> New Vendor</router-link>
         </div>
         </b-field>
         <p class="level-item">
@@ -35,10 +33,8 @@
             :data="vendors.data"
             :loading="loading"
             :narrowed="isNarrowed"
-            
-            
             :default-sort-direction="defaultSortDirection"
-            default-sort="vendors.name">
+             default-sort="vendors.name">
         <template slot-scope="props">
         <b-table-column field="vnum" label="Vendor ID" width="40" sortable>
         {{ props.row.vnum }}
@@ -65,9 +61,9 @@
     </section>
     </template>
 <hr>
-<div class="box">
+
         <pagination :limit="5" :show-disabled=false :data="vendors"  @pagination-change-page="getResults"></pagination>
-    </div>
+
 </div>
 </template>
 <style >
@@ -117,8 +113,9 @@
 
             VendorGet() {
             //var search = this
-            axios.get('/vendors./VendorSearch?company=' + this.searchvendor)
-            .then((data)=> {this.vendors = data })
+            axios.get('/vendors./VendorSearch?search=' + this.searchvendor)
+            .then(({data}) => (this.vendors = data));
+                //.then((data)=> {this.vendors = data })
         },
     }        
 }

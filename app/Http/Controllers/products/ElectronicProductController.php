@@ -7,46 +7,47 @@ use App\Http\Controllers\Controller;
 use App\modules\Electronicproduct;
 class ElectronicProductController extends Controller
 {
-    public function index(){
-
-    	return view('products.electronic');
-    }
-
-    public function GetAutosProducts()
+     public function index()
     {
-    	$products = Electronicproduct::all();
-        return $products->toArray();
+        $cats = Electronicproduct::leftjoin('vendors','vendors.id','=' ,'electronicproducts.vendor_id')
+        ->leftjoin('categories','categories.id','=' ,'electronicproducts.cat_id')
+        ->paginate(100); 
+        return response()->json($cats);
     }
 
-    public function SearchAutosProduct(request $request){
-       
-        $search = $request->search;     
-        $products = Electronicproduct::where('name','LIKE', "%$search%")->get();
-        return $products;         
-    }
-
-    public function ShowAutosSingle($id)
+     public function GetElec()
     {
-    	$id = $id;
-
-        return view('products.showelectronic', compact('id'));	
+        $cats = Electronicproduct::paginate(100);
+        return $cats->toArray();
     }
 
-    public function ShowSingle($id)
-    {
-    	$products = Electronicproduct::find($id);
-        return $products->toArray();	
+    public function ElecSearch(request $request)
+    {   
+        $search = $request->search;
+        $cats = Electronicproduct::leftjoin('vendors','vendors.id','=' ,'electronicproducts.vendor_id')
+        ->leftjoin('categories','categories.id','=' ,'electronicproducts.cat_id')
+        ->where('name','LIKE', "%$search%")
+        ->orwhere('vnum','LIKE', "%$search%")
+        ->orwhere('categories.category','LIKE', "%$search%")
+        ->orwhere('comppartno','LIKE', "%$search%")
+        ->orwhere('shortname','LIKE', "%$search%")
+        ->orwhere('code','LIKE', "%$search%")
+        ->paginate(100);
+        return $cats->toArray();    
     }
 
-    public function ShowEdit($id)
+    public function SearchElec(request $request)
     {
-    	$products = Electronicproduct::find($id);
-        return $products->toArray();	
-    }
-    public function ProductRemove($id)
-    {
-    	$products = Electronicproduct::find($id);
-    	$products->delete();
-        return back();
+         if ($request->ajax())
+        {
+            $vendors = Electronicproduct::where('name', '=', $request->name)->count();
+                if($vendors) {
+                    $count = 'Not Available';
+                    return Response($count);
+                } else {
+                    $count = 'Available';
+                return Response($count);
+            }
+        }
     }
 }

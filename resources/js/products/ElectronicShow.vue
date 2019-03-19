@@ -6,35 +6,26 @@
          <div class="control">
                 <h3 class="title is-4">Manage Products</h3>   
             </div>
-             
-            <div class="control">
-                <b-field>
-                    <a href="students/register" class="button is-info">New Product</a>
-                </b-field>
-            </div>
-    </b-field>
-    
+        </b-field>
     </div>
   </div>
 </div>
 </template>
-
 <script>
     export default {
-        props: ['productid'], 
+        props: ['id'], 
         data(){
             return {
-                
                 product: [],
                 loading: false
                
             }
         },
         mounted(){
-        axios.get('/products/autos/ShowSingle/' + this.productid)
+        axios.get('/products/autos/ShowSingle/' + this.id)
         .then((response)=> this.product = this.temp = response.data)
         //.catch((error) => this.errors = error.response.data.errors)
-        console.log(this.productid)
+        console.log(this.id)
     },
     }
 </script>
