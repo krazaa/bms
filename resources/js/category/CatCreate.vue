@@ -17,12 +17,7 @@
             <p class="help is-success list-inline" v-if="category == 'Available'"> {{ search }} is available.</p>
             <p class="help is-danger" v-if="category == 'Not Available'"> {{ search }} {{ vendor }}</p>
         </div>
-         
-
-        
     </div>
-  
-    
     <div class="control is-flex is-pulled-right">
                     <button class="button is-primary">Add Vendor</button>
                 </div>
@@ -48,10 +43,11 @@
             this.loading = true;
                 var searchv = this
                 axios.get('/categories./SearchCat?name=' + this.search)
-                .then(function(response) {
+                    .then(function(response) {
                 Vue.set(searchv.$data, 'category', response.data)
-                searchv.loading = false;
-                }).catch(error => {"erro found"});
+                    searchv.loading = false;
+                })
+                    //.catch(error => {"erro found"});
         },
     }
 }

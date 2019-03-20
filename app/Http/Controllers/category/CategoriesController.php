@@ -9,21 +9,21 @@ class CategoriesController extends Controller
 {
     public function index()
     {
-    	$cats = Category::paginate(100); 
+    	$cats = Category::paginate(50); 
     	return response()->json($cats);
     }
 
      public function GetVendors()
     {
-    	$cats = Category::paginate(100);
+    	$cats = Category::paginate(50);
         return $cats->toArray();
     }
 
     public function CatSearch(request $request)
     {   
         $search = $request->search;
-        $cats = Category::where('catgory','LIKE', "%$search%")
-        ->paginate(100);
+        $cats = Category::where('category','LIKE', "%$search%")
+        ->paginate(50);
         return $cats->toArray();    
     }
 

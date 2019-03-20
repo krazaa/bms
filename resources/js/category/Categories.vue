@@ -12,14 +12,6 @@
             </b-field>
         </div>
         <div class="control is-flex">
-            <b-select v-model="perPage" :disabled="!isPaginated">
-            <option value="15">15 per page</option>
-            <option value="30">30 per page</option>
-            <option value="50">50 per page</option>
-            <option value="100">100 per page</option>
-            </b-select>
-        </div>
-        <div class="control is-flex">
             <router-link class="button is-primary is-pulled-right" :to="{ name: 'catcreate' }"><i class="fa fa-user-plus m-r-10"></i> New Category</router-link>
         </div>
         </b-field>
@@ -33,7 +25,7 @@
             :loading="loading"
             :narrowed="isNarrowed"
             :default-sort-direction="defaultSortDirection"
-             default-sort="vendors.name">
+             default-sort="categories.name">
         <template slot-scope="props">
         <b-table-column field="id" label="ID" width="40" sortable>
         {{ props.row.id }}
@@ -56,8 +48,7 @@
     </section>
     </template>
 <hr>
-
-        <!-- <pagination :limit="5" :show-disabled=false :data="vendors"  @pagination-change-page="getResults"></pagination> -->
+        <pagination :limit="5" :show-disabled=false :data="categories"  @pagination-change-page="getResults"></pagination>
 
 </div>
 </template>
@@ -79,11 +70,7 @@ import moment from 'moment';
                 search:'',
                 isNarrowed: true,
                 loading: false,
-                isPaginated: true,
-                isPaginationSimple: false,
                 defaultSortDirection: 'asc',
-                currentPage: 3,
-                perPage: 40,
                 isAvailable: 0,
                 searchvendor:[]
                 
@@ -110,8 +97,8 @@ import moment from 'moment';
             .then(({data}) => (this.categories = data));
         },
     },
-    filters: {
-        CreatedAT: function(value){
+        filters: {
+            CreatedAT: function(value){
             return moment().format("DD-MM-YYYY");
         }
     }        

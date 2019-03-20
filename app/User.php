@@ -6,20 +6,25 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Laratrust\Traits\LaratrustUserTrait;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 class User extends Authenticatable
 {
     use LaratrustUserTrait;
-    use Notifiable;
+    use Notifiable, LogsActivity;
 
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
+    //protected static $logFillable = ['name','text'];
+
     protected $fillable = [
         'name', 'email', 'password',
     ];
+
+    protected static $logFillable = true;
 
     /**
      * The attributes that should be hidden for arrays.

@@ -44,8 +44,7 @@
                 <router-link class="navbar-item" :to="{ name: 'customers'}">Customers</router-link>
                 <router-link class="navbar-item" :to="{ name: 'agents'}">Agents</router-link>
                 <router-link class="navbar-item" :to="{ name: 'employees'}">Employees</router-link>
-                <router-link class="navbar-item" :to="{ name: 'autos'}">Autos</router-link>
-                <router-link class="navbar-item" :to="{ name: 'electronic'}">Electronic</router-link>
+               
                 
               </div>
             </div>
@@ -94,8 +93,8 @@
                 <router-link class="navbar-item" :to="{ name: 'branches'}">Company Branches</router-link>
                 <a class="navbar-item" href="#">COA Openings</a>
                 <a class="navbar-item" href="#">Bank Setup</a>
-                <a class="navbar-item" href="#">Vehicle Setup</a>
-                <a class="navbar-item" href="#">Electronic Setup</a>
+                 <router-link class="navbar-item" :to="{ name: 'autos'}">Vehicle Setup</router-link>
+                <router-link class="navbar-item" :to="{ name: 'electronic'}">Electronic Setup</router-link>
                 <router-link class="navbar-item" :to="{ name: 'manage'}">Product Category Setup</router-link>
                 <a class="navbar-item" href="#">Excise & Taxation Setup</a>
               </div>

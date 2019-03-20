@@ -1826,11 +1826,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -1848,9 +1843,7 @@ __webpack_require__.r(__webpack_exports__);
       axios.get('/categories./SearchCat?name=' + this.search).then(function (response) {
         Vue.set(searchv.$data, 'category', response.data);
         searchv.loading = false;
-      }).catch(function (error) {
-        "erro found";
-      });
+      }); //.catch(error => {"erro found"});
     }
   }
 });
@@ -1930,15 +1923,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
  //import VueMomentLib from "vue-moment-lib";
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -1948,11 +1932,7 @@ __webpack_require__.r(__webpack_exports__);
       search: '',
       isNarrowed: true,
       loading: false,
-      isPaginated: true,
-      isPaginationSimple: false,
       defaultSortDirection: 'asc',
-      currentPage: 3,
-      perPage: 40,
       isAvailable: 0,
       searchvendor: []
     };
@@ -85452,44 +85432,6 @@ var render = function() {
                 { staticClass: "control is-flex" },
                 [
                   _c(
-                    "b-select",
-                    {
-                      attrs: { disabled: !_vm.isPaginated },
-                      model: {
-                        value: _vm.perPage,
-                        callback: function($$v) {
-                          _vm.perPage = $$v
-                        },
-                        expression: "perPage"
-                      }
-                    },
-                    [
-                      _c("option", { attrs: { value: "15" } }, [
-                        _vm._v("15 per page")
-                      ]),
-                      _vm._v(" "),
-                      _c("option", { attrs: { value: "30" } }, [
-                        _vm._v("30 per page")
-                      ]),
-                      _vm._v(" "),
-                      _c("option", { attrs: { value: "50" } }, [
-                        _vm._v("50 per page")
-                      ]),
-                      _vm._v(" "),
-                      _c("option", { attrs: { value: "100" } }, [
-                        _vm._v("100 per page")
-                      ])
-                    ]
-                  )
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "control is-flex" },
-                [
-                  _c(
                     "router-link",
                     {
                       staticClass: "button is-primary is-pulled-right",
@@ -85521,7 +85463,7 @@ var render = function() {
                 loading: _vm.loading,
                 narrowed: _vm.isNarrowed,
                 "default-sort-direction": _vm.defaultSortDirection,
-                "default-sort": "vendors.name"
+                "default-sort": "categories.name"
               },
               scopedSlots: _vm._u([
                 {
@@ -85635,7 +85577,12 @@ var render = function() {
         )
       ],
       _vm._v(" "),
-      _c("hr")
+      _c("hr"),
+      _vm._v(" "),
+      _c("pagination", {
+        attrs: { limit: 5, "show-disabled": false, data: _vm.categories },
+        on: { "pagination-change-page": _vm.getResults }
+      })
     ],
     2
   )
