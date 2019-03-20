@@ -50,4 +50,11 @@ class ElectronicProductController extends Controller
             }
         }
     }
+     public function ShowSingle($id)
+    {
+        $products = Electronicproduct::leftjoin('vendors','vendors.id' ,'=','electronicproducts.vendor_id')
+        ->select('electronicproducts.id','electronicproducts.name','electronicproducts.code','electronicproducts.cost','electronicproducts.shortname','vendors.vnum','vendors.company')
+        ->find($id);
+        return $products->toArray();    
+    }
 }

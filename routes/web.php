@@ -62,6 +62,9 @@ Route::prefix('products.')->group(function () {
     Route::post('/electronic/ElecStore', 'products\ElectronicProductController@ElecStore')->name('products.electronic.ElectStore');
     Route::get('/electronic/ElecSearch', 'products\ElectronicProductController@ElecSearch')->name('products.electronic.ElectSearch');
     Route::get('/electronic/SearchElec', 'products\ElectronicProductController@SearchElec')->name('products.electronic.SearchElec');
+    Route::get('/electronic/ShowSingle/{id}', 'products\ElectronicProductController@ShowSingle')->name('products.electronic.ShowSingle');
+
+    
     });
 //End products routes
 
