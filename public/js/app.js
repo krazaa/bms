@@ -3502,6 +3502,167 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['id'],
   data: function data() {
@@ -88301,36 +88462,303 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { staticClass: "box" },
-    [
-      _c("b-field", { attrs: { grouped: "", "group-multiline": "" } }, [
-        _c("div", { staticClass: "control is-flex" }, [
-          _c("h3", { staticClass: "title is-4" }, [
-            _vm._v("Product Information")
-          ])
-        ])
-      ]),
-      _vm._v(" "),
-      _c("p", { staticClass: "level-item" }, [
-        _vm.loading
-          ? _c("span", { staticClass: "is-pulled-right" }, [
-              _c("i", { staticClass: "fa fa-refresh fa-spin fa-2x fa-fw" })
+  return _c("div", { staticClass: "box" }, [
+    _c("div", { staticClass: "columns" }, [
+      _c(
+        "div",
+        { staticClass: "column is-6 is-offset-3" },
+        [
+          _c("b-field", { attrs: { grouped: "", "group-multiline": "" } }, [
+            _c("div", { staticClass: "control is-flex" }, [
+              _c("h3", { staticClass: "title is-4" }, [
+                _vm._v("Product Information")
+              ])
             ])
-          : _vm._e()
-      ]),
-      _vm._v(" "),
-      _c("table", { staticClass: "table" }, [
-        _c("tbody", [_c("tr", [_c("td", [_vm._v(_vm._s(_vm.product.name))])])])
-      ]),
-      _vm._v(" "),
-      _c("hr")
-    ],
-    1
-  )
+          ]),
+          _vm._v(" "),
+          _c("p", { staticClass: "level-item" }, [
+            _vm.loading
+              ? _c("span", { staticClass: "is-pulled-right" }, [
+                  _c("i", { staticClass: "fa fa-refresh fa-spin fa-2x fa-fw" })
+                ])
+              : _vm._e()
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "box" }, [
+            _c("div", { staticClass: "columns is-multiline" }, [
+              _vm._m(0),
+              _vm._v(" "),
+              _c("div", { staticClass: "column is-4" }, [
+                _c("div", { staticClass: "field is-horizontal" }, [
+                  _c("label", { staticClass: "label" }, [
+                    _vm._v(_vm._s(_vm.product.name) + " ")
+                  ])
+                ])
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "columns is-multiline" }, [
+              _vm._m(1),
+              _vm._v(" "),
+              _c("div", { staticClass: "column is-4" }, [
+                _c("div", { staticClass: "field is-horizontal" }, [
+                  _c("label", { staticClass: "label" }, [
+                    _vm._v(_vm._s(_vm.product.code) + " ")
+                  ])
+                ])
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "columns is-multiline" }, [
+              _vm._m(2),
+              _vm._v(" "),
+              _c("div", { staticClass: "column is-4" }, [
+                _c("div", { staticClass: "field is-horizontal" }, [
+                  _c("label", { staticClass: "label" }, [
+                    _vm._v(_vm._s(_vm.product.vendor_id) + " ")
+                  ])
+                ])
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "columns is-multiline" }, [
+              _vm._m(3),
+              _vm._v(" "),
+              _c("div", { staticClass: "column is-4" }, [
+                _c("div", { staticClass: "field is-horizontal" }, [
+                  _c("label", { staticClass: "label" }, [
+                    _vm._v(_vm._s(_vm.product.model) + " ")
+                  ])
+                ])
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "columns is-multiline" }, [
+              _vm._m(4),
+              _vm._v(" "),
+              _c("div", { staticClass: "column is-4" }, [
+                _c("div", { staticClass: "field is-horizontal" }, [
+                  _c("label", { staticClass: "label" }, [
+                    _vm._v(_vm._s(_vm.product.shortname) + " ")
+                  ])
+                ])
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "columns is-multiline" }, [
+              _vm._m(5),
+              _vm._v(" "),
+              _c("div", { staticClass: "column is-4" }, [
+                _c("div", { staticClass: "field is-horizontal" }, [
+                  _c("label", { staticClass: "label" }, [
+                    _vm._v(_vm._s(_vm.product.reorder) + " ")
+                  ])
+                ])
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "columns is-multiline" }, [
+              _vm._m(6),
+              _vm._v(" "),
+              _c("div", { staticClass: "column is-4" }, [
+                _c("div", { staticClass: "field is-horizontal" }, [
+                  _c("label", { staticClass: "label" }, [
+                    _vm._v(_vm._s(_vm.product.maxqty) + " ")
+                  ])
+                ])
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "columns is-multiline" }, [
+              _vm._m(7),
+              _vm._v(" "),
+              _c("div", { staticClass: "column is-4" }, [
+                _c("div", { staticClass: "field is-horizontal" }, [
+                  _c("label", { staticClass: "label" }, [
+                    _vm._v(_vm._s(_vm.product.cost) + " ")
+                  ])
+                ])
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "columns is-multiline" }, [
+              _vm._m(8),
+              _vm._v(" "),
+              _c("div", { staticClass: "column is-4" }, [
+                _c("div", { staticClass: "field is-horizontal" }, [
+                  _c("label", { staticClass: "label" }, [
+                    _vm._v(_vm._s(_vm.product.cost) + " ")
+                  ])
+                ])
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "columns is-multiline" }, [
+              _vm._m(9),
+              _vm._v(" "),
+              _c("div", { staticClass: "column is-4" }, [
+                _c("div", { staticClass: "field is-horizontal" }, [
+                  _c("label", { staticClass: "label" }, [
+                    _vm._v(_vm._s(_vm.product.wsaleprice) + " ")
+                  ])
+                ])
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "columns is-multiline" }, [
+              _vm._m(10),
+              _vm._v(" "),
+              _c("div", { staticClass: "column is-4" }, [
+                _c("div", { staticClass: "field is-horizontal" }, [
+                  _c("label", { staticClass: "label" }, [
+                    _vm._v(_vm._s(_vm.product.discountallowed) + " ")
+                  ])
+                ])
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "columns is-multiline" }, [
+              _vm._m(11),
+              _vm._v(" "),
+              _c("div", { staticClass: "column is-4" }, [
+                _c("div", { staticClass: "field is-horizontal" }, [
+                  _c("label", { staticClass: "label" }, [
+                    _vm._v(_vm._s(_vm.product.saleprice) + " ")
+                  ])
+                ])
+              ])
+            ])
+          ])
+        ],
+        1
+      )
+    ]),
+    _vm._v(" "),
+    _c("hr")
+  ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "column is-4" }, [
+      _c("div", { staticClass: "field is-horizontal" }, [
+        _c("label", { staticClass: "label" }, [_vm._v("Product Code: ")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "column is-4" }, [
+      _c("div", { staticClass: "field is-horizontal" }, [
+        _c("label", { staticClass: "label" }, [_vm._v("Product Code: ")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "column is-4" }, [
+      _c("div", { staticClass: "field is-horizontal" }, [
+        _c("label", { staticClass: "label" }, [_vm._v("Preffered Vendor:")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "column is-4" }, [
+      _c("div", { staticClass: "field is-horizontal" }, [
+        _c("label", { staticClass: "label" }, [_vm._v("Model:")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "column is-4" }, [
+      _c("div", { staticClass: "field is-horizontal" }, [
+        _c("label", { staticClass: "label" }, [_vm._v("Short Name:")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "column is-4" }, [
+      _c("div", { staticClass: "field is-horizontal" }, [
+        _c("label", { staticClass: "label" }, [_vm._v("Re - Oder Quantity::")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "column is-4" }, [
+      _c("div", { staticClass: "field is-horizontal" }, [
+        _c("label", { staticClass: "label" }, [_vm._v("Maximum Quantity:")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "column is-4" }, [
+      _c("div", { staticClass: "field is-horizontal" }, [
+        _c("label", { staticClass: "label" }, [_vm._v("Cost Price:")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "column is-4" }, [
+      _c("div", { staticClass: "field is-horizontal" }, [
+        _c("label", { staticClass: "label" }, [_vm._v("Cash Discount:")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "column is-4" }, [
+      _c("div", { staticClass: "field is-horizontal" }, [
+        _c("label", { staticClass: "label" }, [_vm._v("Whole Sale Price:")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "column is-4" }, [
+      _c("div", { staticClass: "field is-horizontal" }, [
+        _c("label", { staticClass: "label" }, [_vm._v("Discount Allowed:")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "column is-4" }, [
+      _c("div", { staticClass: "field is-horizontal" }, [
+        _c("label", { staticClass: "label" }, [_vm._v("Sale Price:")])
+      ])
+    ])
+  }
+]
 render._withStripped = true
 
 
