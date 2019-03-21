@@ -11,23 +11,16 @@
             <b-input v-model="search" name="search" placeholder="Keyword Seach" @input="ElectronicGet"></b-input>
             </b-field>
         </div>
-        <div class="control is-flex">
-            <b-select v-model="perPage" :disabled="!isPaginated">
-            <option value="15">15 per page</option>
-            <option value="30">30 per page</option>
-            <option value="50">50 per page</option>
-            <option value="100">100 per page</option>
-            </b-select>
-        </div>
+        
         <div class="control is-flex">
             <router-link class="button is-primary is-pulled-right" :to="{ name: 'neweproduct' }"><i class="fa fa-user-plus m-r-10"></i> New Product</router-link>
         </div>
         </b-field>
         <p class="level-item">
             <span class="is-pulled-right" v-if="loading">
-                <i class="fa fa-refresh fa-spin fa-2x fa-fw"></i>
+                <i class="mdi mdi-loading mdi-spin mdi-48px"></i>
             </span>
-        </p>
+        </p> 
         <b-table
             :data="electronic.data"
             :loading="loading"
@@ -59,7 +52,8 @@
         
         <b-table-column label="Action" centered>
              <router-link class="button is-success is-small" :to="{ name: 'electronicshow', params: {id: props.row.id}}"><span class="mdi mdi-eye-circle-outline"></span></router-link>
-        <a :href="`/manage/users/edit/${props.row.id}`" class="button is-warning is-small"><span class="mdi mdi-pencil-box-outline"></span></a>
+             <router-link class="button is-warning is-small" :to="{ name: 'editeproduct', params: {id: props.row.id}}"><span class="mdi mdi-pencil-outline"></span></router-link>
+        
         <a :href="`/manage/users/edit/${props.row.id}`" class="button is-danger is-small"><span class="mdi mdi-trash-can"></span></a>
         </b-table-column>
         </template>
@@ -81,11 +75,7 @@
                 search:'',
                 isNarrowed: true,
                 loading: false,
-                isPaginated: true,
-                isPaginationSimple: false,
                 defaultSortDirection: 'asc',
-                currentPage: 3,
-                perPage: 40,
                 isAvailable: 0,
             }
         },

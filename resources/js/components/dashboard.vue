@@ -108,24 +108,9 @@
                  }
             },            
             methods: {
-                updateStuff: function () {
-                    axios.get('discountreq').then(response => this.stuff = response.data);
-                    // axios.get('/discountreq').then((response) => {
-                    //     //console.log(response.data.data);
-                    //     this.stuff = response.data.stuff;
-                    // }, (response) => {
-                    //     console.log('ERROR');
-                    //     console.log(response);
-                    // });
-                    // setTimeout(this.updateStuff, 5000);
+            
                 }
-            },
-            created: function() {
-
-    //this.updateStuff();
-    //this.stuff = setInterval(this.updateStuff, 15000)
-
-},
+            
 
         }
     

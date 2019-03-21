@@ -6,9 +6,9 @@
         <div class="column is-10 is-offset-1">
             <div class="box">
                 <b-field grouped group-multiline>
-                <div class="control">
-                    <h3 class="title is-4">Add New Product</h3>
-                </div>
+                    <div class="control">
+                        <h3 class="title is-4">Add New Product</h3>
+                    </div>
                 </b-field>
                 <div class="field">
                      <div class="field">

@@ -12,23 +12,14 @@
             </b-field>
         </div>
         <div class="control is-flex">
-            <b-select v-model="perPage" :disabled="!isPaginated">
-            <option value="15">15 per page</option>
-            <option value="30">30 per page</option>
-            <option value="50">50 per page</option>
-            <option value="100">100 per page</option>
-            </b-select>
-        </div>
-        <div class="control is-flex">
             <router-link class="button is-primary is-pulled-right" :to="{ name: 'create' }"><i class="fa fa-user-plus m-r-10"></i> New Vendor</router-link>
         </div>
         </b-field>
         <p class="level-item">
             <span class="is-pulled-right" v-if="loading">
-                <i class="fa fa-refresh fa-spin fa-2x fa-fw"></i>
+                <i class="mdi mdi-loading mdi-spin mdi-48px"></i>
             </span>
-        </p>
-        <!-- {{ vendors }} -->
+        </p> 
         <b-table
             :data="vendors.data"
             :loading="loading"
@@ -82,11 +73,8 @@
                 searchvendor:'',
                 isNarrowed: true,
                 loading: false,
-                isPaginated: true,
-                isPaginationSimple: false,
+                
                 defaultSortDirection: 'asc',
-                currentPage: 3,
-                perPage: 40,
                 isAvailable: 0,
                 searchvendor:[]
                 

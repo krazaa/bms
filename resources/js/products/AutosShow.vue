@@ -24,7 +24,7 @@
                 <div class="columns is-multiline">
                     <div class="column is-4">
                         <div class="field is-horizontal">
-                            <label class="label">Product Code: </label>
+                            <label class="label">Product Name: </label>
                         </div>
                     </div>
                     <div class="column is-4">

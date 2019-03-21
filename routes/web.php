@@ -32,6 +32,20 @@ Route::prefix('categories.')->group(function () {
 });
 //End CategoriesController
 
+//Start cogs
+Route::prefix('cogs.')->group(function () {
+    
+    Route::get('/AcCheck', 'cogs\CogController@AcCheck')->name('cogs.AcCheck');
+    Route::get('/CogsList', 'cogs\CogController@CogsList')->name('cogs.CogsList');
+    Route::get('/AcCat', 'cogs\CogController@AcCat')->name('cogs.AcCat');
+    Route::get('/AcTypes', 'cogs\CogController@AcTypes')->name('cogs.AcTypes');
+    Route::get('/GetMainAcc', 'cogs\CogController@GetMainAcc')->name('cogs.GetMainAcc');
+    Route::get('/GetSubAcc', 'cogs\CogController@GetSubAcc')->name('cogs.GetSubAcc');
+    Route::post('/CogStoreAcc', 'cogs\CogController@CogStoreAcc')->name('cogs.CogStoreAcc');
+    
+});
+//End cogs
+
 
 //Start products routes
 Route::prefix('products.')->group(function () {
@@ -118,7 +132,7 @@ Route::get('/', function () {
 
 Route::get('/gg', function(){
 
-return \App\modules\Autoproduct::with('vendorinfo')->get();
+return \App\modules\Cogcategory::get();
 
 });
 

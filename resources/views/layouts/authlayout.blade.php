@@ -38,7 +38,9 @@
         <div id="navMenubd-example" class="navbar-menu">
           <div class="navbar-start">
             <div class="navbar-item has-dropdown is-hoverable">
+              
               <a class="navbar-link" href="#">Accounts</a>
+               
               <div class="navbar-dropdown ">
                 <router-link class="navbar-item" :to="{ name: 'vendors'}">Vendors</router-link>
                 <router-link class="navbar-item" :to="{ name: 'customers'}">Customers</router-link>
@@ -91,7 +93,7 @@
               <div id="moreDropdown" class="navbar-dropdown ">
                 <router-link class="navbar-item" :to="{ name: 'company'}">Company Setup</router-link>
                 <router-link class="navbar-item" :to="{ name: 'branches'}">Company Branches</router-link>
-                <a class="navbar-item" href="#">COA Openings</a>
+                <router-link class="navbar-item" :to="{ name: 'cogs'}">COA Openings</router-link>
                 <a class="navbar-item" href="#">Bank Setup</a>
                  <router-link class="navbar-item" :to="{ name: 'autos'}">Vehicle Setup</router-link>
                 <router-link class="navbar-item" :to="{ name: 'electronic'}">Electronic Setup</router-link>

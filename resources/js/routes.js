@@ -4,6 +4,12 @@ import companysetting from './manage/settings/settings.vue';
 import branches from './manage/branches/branches.vue';
 import newbranch from './manage/branches/AddBranch.vue';
 import editbranch from './manage/branches/EditBranch.vue';
+
+
+// COGS Account
+import cogList from './cogaccounts/cogaccounts.vue';
+import cogCreate from './cogaccounts/Create.vue';
+
 //Customser
 import customers from './customers/Customers.vue';
 // Agents
@@ -35,154 +41,46 @@ import dashboard from './components/dashboard.vue';
 
 export default [
   
-  {
-    path: '/dashboard',
-    component: dashboard,
-    name: 'dashboard'
-   
-  },
-  {
-    path: '/settings/branches',
-    component: branches,
-    name: 'branches'
-   
-  },
-  {
-    path: '/settings/branches/newbranch',
-    component: newbranch,
-    name: 'newbranch'
-   
-  },
-    {
-    path: '/settings/branches/editbranch/:id',
-    component: editbranch,
-    name: 'editbranch',
-    props: true
-   
-  },
-
-  {
-    path: '/settings/company',
-    component: companysetting,
-    name: 'company'
-   
-  },
-//customers
-
-    {
-    path: '/customers',
-    component: customers,
-    name: 'customers'
-   
-  }, 
-  // agents
-      {
-    path: '/agents',
-    component: agents,
-    name: 'agents'
-   
-  },
-//Employees
-      {
-    path: '/employees',
-    component: employees,
-    name: 'employees'
-   
-  },
-// products autos
-    {
-    path: '/autos',
-    component: autos,
-    name: 'autos'
-   
-  },
-  {
-    path: '/autos/newproduct',
-    component: NewProduct,
-    name: 'newproduct'
-   
-  },
-  {
-    path: '/autos/editproduct/:id',
-    component: EditProduct,
-    name: 'editproduct',
-    props: true
-   
-  },
-
-  {
-    path: '/autos/AutosShow/:id',
-    component: AutosShow,
-    name: 'AutosShow',
-    props: true
-   
-  },
-
-  // products Electronic
-    {
-    path: '/electronic',
-    component: electronic,
-    name: 'electronic'
-   
-  },
-  {
-    path: '/electronic/neweproduct',
-    component: NeweProduct,
-    name: 'neweproduct'
-   
-  },
-  {
-    path: '/electronic/editeproduct/:id',
-    component: EditeProduct,
-    name: 'editeproduct',
-    props: true
-   
-  },
-
-  {
-    path: '/electronic/electronicshow/:id',
-    component: ElectronicShow,
-    name: 'electronicshow',
-    props: true
-   
-  },
+  { path: '/dashboard', component: dashboard, name: 'dashboard'},
+// cogs Accounts
+  { path: '/cogs', component: cogList, name: 'cogs'},
+  { path: '/cogs/cogCreate', component: cogCreate, name: 'cogCreate'},
   
+// Settings 
+  { path: '/settings/branches', component: branches, name: 'branches'},
+  { path: '/settings/branches/newbranch', component: newbranch, name: 'newbranch'},
+  { path: '/settings/branches/editbranch/:id', component: editbranch, name: 'editbranch', props: true},
+  { path: '/settings/company', component: companysetting, name: 'company'},
+
+//customers
+  { path: '/customers', component: customers, name: 'customers'}, 
+
+// agents
+  { path: '/agents', component: agents, name: 'agents'},
+
+//Employees
+  { path: '/employees', component: employees, name: 'employees'},
+
+// products autos
+  { path: '/autos', component: autos, name: 'autos'},
+  { path: '/autos/newproduct', component: NewProduct, name: 'newproduct'},
+  { path: '/autos/editproduct/:id', component: EditProduct, name: 'editproduct', props: true},
+  { path: '/autos/AutosShow/:id', component: AutosShow, name: 'AutosShow',props: true},
+
+// products Electronic
+  { path: '/electronic', component: electronic, name: 'electronic'},
+  { path: '/electronic/neweproduct', component: NeweProduct, name: 'neweproduct'},
+  { path: '/electronic/editeproduct/:id', component: EditeProduct, name: 'editeproduct', props: true},
+  { path: '/electronic/electronicshow/:id', component: ElectronicShow, name: 'electronicshow', props: true},
 
 // vendors
-  {
-    path: '/vendors/',
-    component: vendors,
-    name: 'vendors'
-   
-  },
-  {
-    path: '/vendors/create',
-    component: vendorCreate,
-    name: 'create'
-   
-  },
-  // category
-  {
-    path: '/category/manage',
-    component: category,
-    name: 'manage'
-   
-  },
-  {
-  path: '/category/catcreate',
-    component: CatCreate,
-    name: 'catcreate'
-   
-  },
+  { path: '/vendors/', component: vendors, name: 'vendors'},
+  { path: '/vendors/create', component: vendorCreate, name: 'create'},
 
-  
+// category
+  { path: '/category/manage', component: category, name: 'manage'},
+  { path: '/category/catcreate', component: CatCreate, name: 'catcreate'},
 
-  { 
-    path: '*', 
-    component: NotFoundComponent,
-    name: 'NotFoundComponent' 
-    }
-  
-
+  { path: '*', component: NotFoundComponent, name: 'NotFoundComponent'}
 
   ];

@@ -11,14 +11,7 @@
             <b-input v-model="search" name="search" placeholder="Keyword Seach" @input="SearchAutos"></b-input>
             </b-field>
         </div>
-        <div class="control is-flex">
-            <b-select v-model="perPage" :disabled="!isPaginated">
-            <option value="15">15 per page</option>
-            <option value="30">30 per page</option>
-            <option value="50">50 per page</option>
-            <option value="100">100 per page</option>
-            </b-select>
-        </div>
+        
         <div class="control is-flex">
             <router-link class="button is-primary is-pulled-right" :to="{ name: 'newproduct' }"><i class="fa fa-user-plus m-r-10"></i> New Product</router-link>
         </div>
@@ -33,15 +26,14 @@
             :loading="loading"
             :narrowed="isNarrowed"
             :default-sort-direction="defaultSortDirection"
-             default-sort="electronic.name">
+             default-sort="products.name">
         <template slot-scope="props">
-        <b-table-column field="vnum" label="Vendor ID" width="40" sortable>
+        <b-table-column field="vnum" label="VendorID" width="40" sortable>
         {{ props.row.vnum }}
         </b-table-column>
         <b-table-column field="vendor" label="Vendor" sortable>
         {{ props.row.company }}
         </b-table-column>
-        
         <b-table-column field="name" label="Product Name" sortable>
         {{ props.row.name }}
         </b-table-column>
@@ -54,7 +46,9 @@
         <b-table-column field="cost" label="Cost" sortable>
         {{ props.row.cost }}
         </b-table-column>
+        <b-table-column field="ed" label="E/D" sortable>
         
+        </b-table-column>
         <b-table-column label="Action" centered>
              <router-link class="button is-success is-small" :to="{ name: 'AutosShow', params: {id: props.row.id}}"><span class="mdi mdi-eye-circle-outline"></span></router-link>
         <a :href="`/manage/users/edit/${props.row.id}`" class="button is-warning is-small"><span class="mdi mdi-pencil-box-outline"></span></a>
@@ -65,9 +59,7 @@
     </section>
     </template>
 <hr>
-
         <pagination :limit="5" :show-disabled=false :data="products"  @pagination-change-page="getResults"></pagination>
-
 </div>
 </template>
 
@@ -81,12 +73,7 @@
                 search:'',
                 isNarrowed: true,
                 loading: false,
-                isPaginated: true,
-                isPaginationSimple: false,
                 defaultSortDirection: 'asc',
-                currentPage: 3,
-                perPage: 40,
-                loading: false,
                
                     }
             },
