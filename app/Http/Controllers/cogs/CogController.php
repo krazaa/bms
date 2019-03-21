@@ -80,7 +80,7 @@ class CogController extends Controller
         	$Cogas->subtype = $request->subtype;
     	} else {
         	$Cogas->subtype = 0;
-    		}
+    		 }
         $Cogas->subtype = $request->subtype;
         $Cogas->incom_balance_id = $request->inbal;
         $Cogas->acat_id = $request->acat_id;
