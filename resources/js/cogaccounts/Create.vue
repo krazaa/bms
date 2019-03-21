@@ -27,7 +27,7 @@
                         </div>
                     </div>
                     <div class="column is-4">
-                        <div class="field" v-if="cogFrom.htype > 0">
+                        <div class="field" v-if="cogFrom.typeid > 0">
                             <div class="field">
                                 <label class="label">Subhead Type:</label>
                                 <div class="control">
@@ -158,7 +158,7 @@
                     acat_id: '',
                     debitcredit: '',
                     actype: '',
-                    subtype: '',
+                    subtype: '0',
                     htype: '',
                     aname:'',
                     search:'',

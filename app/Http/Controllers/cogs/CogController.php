@@ -63,10 +63,14 @@ class CogController extends Controller
 
     public function GetSubAcc(Request $req)
     {
-    	return response(Cogas::select('id','aname','typeid')->where('typeid', '>', '0')->where('subtype','=', $req->type)->get());
+    	return response(Cogas::select('id','aname','typeid')
+    		->where('typeid', '>', '0')
+    		//->where('subtype','=', $req->type)
+    		->get());
     }
     public function CogStoreAcc(Request $request)
     {
+    
  		$this->validate($request, [
  			'search' => 'required',
  			'aname' => 'required'
@@ -76,12 +80,8 @@ class CogController extends Controller
         $Cogas->acode = $request->search;
         $Cogas->aname = $request->aname;
         $Cogas->typeid = $request->typeid;
-        if($request->has('subtype')) {
-        	$Cogas->subtype = $request->subtype;
-    	} else {
-        	$Cogas->subtype = 0;
-    		 }
-        $Cogas->subtype = $request->subtype;
+        $Cogas->subtype = $request->typeid;
+        $Cogas->subtype2 = $request->subtype;
         $Cogas->incom_balance_id = $request->inbal;
         $Cogas->acat_id = $request->acat_id;
         $Cogas->debitcredit = $request->debitcredit;

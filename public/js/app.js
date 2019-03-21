@@ -2144,7 +2144,7 @@ __webpack_require__.r(__webpack_exports__);
         acat_id: '',
         debitcredit: '',
         actype: '',
-        subtype: '',
+        subtype: '0',
         htype: '',
         aname: '',
         search: '' //csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content')
@@ -86075,7 +86075,7 @@ var render = function() {
                     ]),
                     _vm._v(" "),
                     _c("div", { staticClass: "column is-4" }, [
-                      _vm.cogFrom.htype > 0
+                      _vm.cogFrom.typeid > 0
                         ? _c("div", { staticClass: "field" }, [
                             _c("div", { staticClass: "field" }, [
                               _c("label", { staticClass: "label" }, [
