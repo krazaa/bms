@@ -2124,7 +2124,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['data'],
   data: function data() {
@@ -2140,6 +2139,12 @@ __webpack_require__.r(__webpack_exports__);
       search: '',
       loading: false,
       cogFrom: {
+        typeid: '',
+        inbal: '',
+        acat_id: '',
+        debitcredit: '',
+        actype: '',
+        subtype: '',
         htype: '',
         aname: '',
         search: '' //csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content')
@@ -2185,9 +2190,9 @@ __webpack_require__.r(__webpack_exports__);
 
       axios.post('/cogs./CogStoreAcc', this.cogFrom).then(function (response) {
         _this3.success = true;
-      }) //.then(response => alert('success'))
-      .catch(function (error) {
-        _this3.allerros = error.response.data.errors; //this.success = false;
+      }).catch(function (error) {
+        _this3.allerros = error.response.data.errors;
+        _this3.success = false;
       });
     }
   },
@@ -86011,8 +86016,8 @@ var render = function() {
                                     {
                                       name: "model",
                                       rawName: "v-model",
-                                      value: _vm.cogFrom.htype,
-                                      expression: "cogFrom.htype"
+                                      value: _vm.cogFrom.typeid,
+                                      expression: "cogFrom.typeid"
                                     }
                                   ],
                                   attrs: { name: "typeid", required: "" },
@@ -86034,7 +86039,7 @@ var render = function() {
                                         })
                                       _vm.$set(
                                         _vm.cogFrom,
-                                        "htype",
+                                        "typeid",
                                         $event.target.multiple
                                           ? $$selectedVal
                                           : $$selectedVal[0]
@@ -86081,7 +86086,42 @@ var render = function() {
                                 _c("div", { staticClass: "select" }, [
                                   _c(
                                     "select",
-                                    { attrs: { name: "subtype" } },
+                                    {
+                                      directives: [
+                                        {
+                                          name: "model",
+                                          rawName: "v-model",
+                                          value: _vm.cogFrom.subtype,
+                                          expression: "cogFrom.subtype"
+                                        }
+                                      ],
+                                      attrs: { name: "subtype" },
+                                      on: {
+                                        change: function($event) {
+                                          var $$selectedVal = Array.prototype.filter
+                                            .call(
+                                              $event.target.options,
+                                              function(o) {
+                                                return o.selected
+                                              }
+                                            )
+                                            .map(function(o) {
+                                              var val =
+                                                "_value" in o
+                                                  ? o._value
+                                                  : o.value
+                                              return val
+                                            })
+                                          _vm.$set(
+                                            _vm.cogFrom,
+                                            "subtype",
+                                            $event.target.multiple
+                                              ? $$selectedVal
+                                              : $$selectedVal[0]
+                                          )
+                                        }
+                                      }
+                                    },
                                     [
                                       _c(
                                         "option",
@@ -86117,7 +86157,7 @@ var render = function() {
                     _c("div", { staticClass: "column is-4" }, [
                       _c("div", { staticClass: "field" }, [
                         _c("label", { staticClass: "label" }, [
-                          _vm._v("Account Code: \n                        ")
+                          _vm._v("Account Code:\n                            ")
                         ]),
                         _vm._v(" "),
                         _c("div", { staticClass: "control" }, [
@@ -86219,7 +86259,67 @@ var render = function() {
                       ])
                     ]),
                     _vm._v(" "),
-                    _vm._m(0),
+                    _c("div", { staticClass: "column is-3" }, [
+                      _c("div", { staticClass: "field" }, [
+                        _c("label", { staticClass: "label" }, [
+                          _vm._v("Income/ Balance:")
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "control" }, [
+                          _c("div", { staticClass: "select" }, [
+                            _c(
+                              "select",
+                              {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.cogFrom.inbal,
+                                    expression: "cogFrom.inbal"
+                                  }
+                                ],
+                                attrs: { name: "inbal", required: "" },
+                                on: {
+                                  change: function($event) {
+                                    var $$selectedVal = Array.prototype.filter
+                                      .call($event.target.options, function(o) {
+                                        return o.selected
+                                      })
+                                      .map(function(o) {
+                                        var val =
+                                          "_value" in o ? o._value : o.value
+                                        return val
+                                      })
+                                    _vm.$set(
+                                      _vm.cogFrom,
+                                      "inbal",
+                                      $event.target.multiple
+                                        ? $$selectedVal
+                                        : $$selectedVal[0]
+                                    )
+                                  }
+                                }
+                              },
+                              [
+                                _c(
+                                  "option",
+                                  { attrs: { selected: "", disabled: "" } },
+                                  [_vm._v("Select one")]
+                                ),
+                                _vm._v(" "),
+                                _c("option", { attrs: { value: "1" } }, [
+                                  _vm._v("Income Statement ")
+                                ]),
+                                _vm._v(" "),
+                                _c("option", { attrs: { value: "2" } }, [
+                                  _vm._v("Balance Sheet")
+                                ])
+                              ]
+                            )
+                          ])
+                        ])
+                      ])
+                    ]),
                     _vm._v(" "),
                     _c("div", { staticClass: "column is-3" }, [
                       _c("div", { staticClass: "field" }, [
@@ -86231,7 +86331,37 @@ var render = function() {
                           _c("div", { staticClass: "select" }, [
                             _c(
                               "select",
-                              { attrs: { name: "acat_id", required: "" } },
+                              {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.cogFrom.acat_id,
+                                    expression: "cogFrom.acat_id"
+                                  }
+                                ],
+                                attrs: { name: "acat_id", required: "" },
+                                on: {
+                                  change: function($event) {
+                                    var $$selectedVal = Array.prototype.filter
+                                      .call($event.target.options, function(o) {
+                                        return o.selected
+                                      })
+                                      .map(function(o) {
+                                        var val =
+                                          "_value" in o ? o._value : o.value
+                                        return val
+                                      })
+                                    _vm.$set(
+                                      _vm.cogFrom,
+                                      "acat_id",
+                                      $event.target.multiple
+                                        ? $$selectedVal
+                                        : $$selectedVal[0]
+                                    )
+                                  }
+                                }
+                              },
                               [
                                 _c(
                                   "option",
@@ -86254,7 +86384,71 @@ var render = function() {
                       ])
                     ]),
                     _vm._v(" "),
-                    _vm._m(1),
+                    _c("div", { staticClass: "column is-3" }, [
+                      _c("div", { staticClass: "field" }, [
+                        _c("label", { staticClass: "label" }, [
+                          _vm._v("Debit / Credit:")
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "control" }, [
+                          _c("div", { staticClass: "select" }, [
+                            _c(
+                              "select",
+                              {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.cogFrom.debitcredit,
+                                    expression: "cogFrom.debitcredit"
+                                  }
+                                ],
+                                attrs: { name: "debitcredit", required: "" },
+                                on: {
+                                  change: function($event) {
+                                    var $$selectedVal = Array.prototype.filter
+                                      .call($event.target.options, function(o) {
+                                        return o.selected
+                                      })
+                                      .map(function(o) {
+                                        var val =
+                                          "_value" in o ? o._value : o.value
+                                        return val
+                                      })
+                                    _vm.$set(
+                                      _vm.cogFrom,
+                                      "debitcredit",
+                                      $event.target.multiple
+                                        ? $$selectedVal
+                                        : $$selectedVal[0]
+                                    )
+                                  }
+                                }
+                              },
+                              [
+                                _c(
+                                  "option",
+                                  { attrs: { selected: "", disabled: "" } },
+                                  [_vm._v("Select one")]
+                                ),
+                                _vm._v(" "),
+                                _c("option", { attrs: { value: "1" } }, [
+                                  _vm._v("Both")
+                                ]),
+                                _vm._v(" "),
+                                _c("option", { attrs: { value: "2" } }, [
+                                  _vm._v("Debit")
+                                ]),
+                                _vm._v(" "),
+                                _c("option", { attrs: { value: "3" } }, [
+                                  _vm._v("Credit")
+                                ])
+                              ]
+                            )
+                          ])
+                        ])
+                      ])
+                    ]),
                     _vm._v(" "),
                     _c("div", { staticClass: "column is-3" }, [
                       _c("div", { staticClass: "field" }, [
@@ -86266,7 +86460,37 @@ var render = function() {
                           _c("div", { staticClass: "select" }, [
                             _c(
                               "select",
-                              { attrs: { name: "actype_id", required: "" } },
+                              {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.cogFrom.actype,
+                                    expression: "cogFrom.actype"
+                                  }
+                                ],
+                                attrs: { name: "actype_id", required: "" },
+                                on: {
+                                  change: function($event) {
+                                    var $$selectedVal = Array.prototype.filter
+                                      .call($event.target.options, function(o) {
+                                        return o.selected
+                                      })
+                                      .map(function(o) {
+                                        var val =
+                                          "_value" in o ? o._value : o.value
+                                        return val
+                                      })
+                                    _vm.$set(
+                                      _vm.cogFrom,
+                                      "actype",
+                                      $event.target.multiple
+                                        ? $$selectedVal
+                                        : $$selectedVal[0]
+                                    )
+                                  }
+                                }
+                              },
                               [
                                 _c(
                                   "option",
@@ -86337,66 +86561,7 @@ var render = function() {
     ]
   )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "column is-3" }, [
-      _c("div", { staticClass: "field" }, [
-        _c("label", { staticClass: "label" }, [_vm._v("Income/ Balance:")]),
-        _vm._v(" "),
-        _c("div", { staticClass: "control" }, [
-          _c("div", { staticClass: "select" }, [
-            _c(
-              "select",
-              { attrs: { name: "incom_balance_id", required: "" } },
-              [
-                _c("option", { attrs: { selected: "", disabled: "" } }, [
-                  _vm._v("Select one")
-                ]),
-                _vm._v(" "),
-                _c("option", { attrs: { value: "1" } }, [
-                  _vm._v("Income Statement ")
-                ]),
-                _vm._v(" "),
-                _c("option", { attrs: { value: "2" } }, [
-                  _vm._v("Balance Sheet")
-                ])
-              ]
-            )
-          ])
-        ])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "column is-3" }, [
-      _c("div", { staticClass: "field" }, [
-        _c("label", { staticClass: "label" }, [_vm._v("Debit / Credit:")]),
-        _vm._v(" "),
-        _c("div", { staticClass: "control" }, [
-          _c("div", { staticClass: "select" }, [
-            _c("select", { attrs: { name: "debitcredit", required: "" } }, [
-              _c("option", { attrs: { selected: "", disabled: "" } }, [
-                _vm._v("Select one")
-              ]),
-              _vm._v(" "),
-              _c("option", { attrs: { value: "1" } }, [_vm._v("Both")]),
-              _vm._v(" "),
-              _c("option", { attrs: { value: "2" } }, [_vm._v("Debit")]),
-              _vm._v(" "),
-              _c("option", { attrs: { value: "3" } }, [_vm._v("Credit")])
-            ])
-          ])
-        ])
-      ])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 

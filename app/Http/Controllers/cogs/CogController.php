@@ -72,10 +72,21 @@ class CogController extends Controller
  			'aname' => 'required'
  		]);
 
- 		Cogas::forceCreate([
- 			'acode' => request('search'),
- 			'aname' => request('aname')
- 		]);
+		$Cogas = new Cogas();
+        $Cogas->acode = $request->search;
+        $Cogas->aname = $request->aname;
+        $Cogas->typeid = $request->typeid;
+        if($request->has('subtype')) {
+        	$Cogas->subtype = $request->subtype;
+    	} else {
+        	$Cogas->subtype = 0;
+    		}
+        $Cogas->subtype = $request->subtype;
+        $Cogas->incom_balance_id = $request->inbal;
+        $Cogas->acat_id = $request->acat_id;
+        $Cogas->debitcredit = $request->debitcredit;
+        $Cogas->actype_id = $request->actype;
+        $Cogas ->save();
 
     	return ['message' => 'Record successfully added'];
     }
