@@ -129,7 +129,7 @@
             </div>
         </div>
     </div>
-    <div class="notification is-primary" v-if="success">
+    <div class="notification is-success" v-if="success">
         <h2 class="title is-2"> COA submitted successfully! </h2>
         <br>
         <router-link class="button is-primary is-pulled-right" :to="{ name: 'cogs' }"><i class="fa fa-user-plus m-r-10"></i>Click to Back Chart of Accounts</router-link>

@@ -86535,7 +86535,7 @@ var render = function() {
       _vm.success
         ? _c(
             "div",
-            { staticClass: "notification is-primary" },
+            { staticClass: "notification is-success" },
             [
               _c("h2", { staticClass: "title is-2" }, [
                 _vm._v(" COA submitted successfully! ")
