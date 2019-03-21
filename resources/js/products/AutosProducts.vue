@@ -69,7 +69,7 @@
  //props: ['studentID'], 
         data() {
             return {
-                products: [],
+                products: {},
                 search:'',
                 isNarrowed: true,
                 loading: false,

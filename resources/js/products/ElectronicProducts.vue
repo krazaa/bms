@@ -54,7 +54,7 @@
              <router-link class="button is-success is-small" :to="{ name: 'electronicshow', params: {id: props.row.id}}"><span class="mdi mdi-eye-circle-outline"></span></router-link>
              <router-link class="button is-warning is-small" :to="{ name: 'editeproduct', params: {id: props.row.id}}"><span class="mdi mdi-pencil-outline"></span></router-link>
         
-        <a :href="`/manage/users/edit/${props.row.id}`" class="button is-danger is-small"><span class="mdi mdi-trash-can"></span></a>
+        <a  class="button is-danger is-small"><span class="mdi mdi-trash-can"></span></a>
         </b-table-column>
         </template>
         </b-table>
@@ -71,7 +71,7 @@
     export default {
         data(){
             return {
-                electronic: [],
+                electronic: {},
                 search:'',
                 isNarrowed: true,
                 loading: false,

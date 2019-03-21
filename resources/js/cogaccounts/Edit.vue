@@ -12,13 +12,13 @@
                     <div class="column is-4">
                         <div class="field">
                             <div class="field">
-                                <label class="label">Primary / Secondary Account:</label>
+                                <label class="label">Head Type:</label>
                                 <div class="control">
                                     <div class="select">
                                         <select name="typeid" v-model="cogFrom.typeid" @input="GetSubHeads()" required>
-                                            <option selected disabled>Select one</option>
-                                            <option value="0">Primary Account</option>
-                                            <option v-for="mcl in macload" :value="mcl.id">{{ mcl.aname }} </option>
+                                            <option disabled>Select one</option>
+                                            <option value="0">Root Account</option>
+                                            <option v-for="mcl in macload" :value="mcl.id" :selected="cogFrom.typeid == mcl.id">{{ mcl.aname }} </option>
                                             
                                         </select>
                                     </div>
@@ -29,12 +29,12 @@
                     <div class="column is-4">
                         <div class="field" v-if="cogFrom.typeid > 0">
                             <div class="field">
-                                <label class="label">Sub Account:</label>
+                                <label class="label">Subhead Type:</label>
                                 <div class="control">
                                     <div class="select">
                                         <select name="subtype" v-model="cogFrom.subtype">
                                             <option selected disabled value="0">Select Type</option>
-                                            <option v-for="scl in subacload" :value="scl.id">{{ scl.aname }} </option>
+                                            <option v-for="scl in subacload" :value="scl.id" :selected="cogFrom.subtype == scl.id">{{ scl.aname }} </option>
                                         </select>
                                     </div>
                                 </div>
@@ -49,11 +49,11 @@
                             <label class="label">Account Code:
                             </label>
                             <div class="control">
-                                <input class="input" v-model="cogFrom.search" name="acode" type="text" placeholder="e.g B18123456" @keyup="AcCheck()">
+                                <input class="input" v-model="cogFrom.acode"  name="acode" type="text" placeholder="e.g B18123456" @keyup="AcCheck()">
                                 <span class="help is-danger">{{ allerros.acode }}</span>
                             </div>
                             
-                            <p class="help is-success list-inline" v-if="account == 'Available'">{{ search }} Available</p>
+                            <p class="help is-success list-inline" v-if="account == 'Available'">{{ acode }} Available</p>
                             <p class="help is-danger" v-if="account == 'Not Available'"> Not Available</p>
                         </div>
                     </div>
@@ -116,10 +116,9 @@
                                 <div class="select">
                                     <select name="actype_id" v-model="cogFrom.actype" required>
                                         <option selected disabled>Select one</option>
-                                        <option v-for="act in actypeload" :value="act.id">{{ act.name }} </option>
+                                        <option v-for="act in actypeload" :value="act.id" :selected="cogFrom.actype == act.id">{{ act.name }} </option>
                                     </select>
                                 </div>
-
                             </div>
                         </div>
                     </div>
@@ -140,7 +139,7 @@
 <script>
 
     export default {
-        props: ['data'], 
+        props: ['id'], 
         data(){
             return {
                 success : false,   
@@ -155,24 +154,32 @@
                 loading: false,
                 cogFrom: {
                     typeid: '',
+                    acode: '',
                     inbal: '',
                     acat_id: '',
                     debitcredit: '',
                     actype: '',
-                    subtype: '0',
+                    subtype: '',
                     htype: '',
                     aname:'',
                     search:'',
-                }
+                },
+                cogsAccEdit:[],
                 //csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content')
                 
             }
         },
         methods: {
+            AcEdit(){
+                axios.get('/cogs./AcEdit/' + this.id)
+                    .then(response => {
+                  this.cogFrom = response.data;
+                  });
+            },
             AcCheck() {
                 this.loading = true;
                     var searchv = this
-                    axios.get('/cogs./AcCheck?code=' + this.cogFrom.search)
+                    axios.get('/cogs./AcCheck?code=' + this.cogFrom.acode)
                     .then(function(response) {
                     Vue.set(searchv.$data, 'account', response.data)
                     searchv.loading = false;
@@ -201,6 +208,7 @@
     },
     mounted(){
         this.AcCatLoad();  
+        this.AcEdit();  
         }
 }
 

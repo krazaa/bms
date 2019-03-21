@@ -30,7 +30,7 @@ class CogController extends Controller
     {
     	$cogs = Cogas::leftjoin('cogacctypes','cogacctypes.id','=' ,'cogas.actype_id')
     	->leftjoin('cogcategories','cogcategories.id','=' ,'cogas.acat_id')
-    	->select('cogas.id','cogas.acode','cogas.aname','cogas.incom_balance_id','cogacctypes.name as tname','cogcategories.name as cname',
+    	->select('cogas.id','cogas.acode','cogas.aname','cogas.incom_balance_id','cogacctypes.name as tname','cogcategories.name as cname','cogas.isActive',
     			DB::raw('(CASE 
                         WHEN cogas.incom_balance_id = "1" THEN "Income Statement" 
                         WHEN cogas.incom_balance_id = "2" THEN "Balance Sheet" 
@@ -43,6 +43,14 @@ class CogController extends Controller
                         ELSE "" 
                         END) AS debitcredit'))
     	->paginate(50); 
+    	return response()->json($cogs);
+    }
+
+    public function AcEdit($id)
+    {
+    	$cogs = DB::table('cogas')
+    	->select('id','typeid','acode','aname','incom_balance_id as inbal','debitcredit','actype_id as actype','acat_id','subtype','subtype','isActive')
+    	->find($id);
     	return response()->json($cogs);
     }
 

@@ -21,6 +21,20 @@ Route::prefix('vendors.')->group(function () {
 });
 //End vendors routes
 
+//Start Agents routes
+Route::prefix('agents.')->group(function () {
+    Route::get('/AgentsListGet', 'agents\AgentController@AgentsListGet')->name('agents.AgentsListGet');
+    Route::get('/AgentSearch', 'agents\AgentController@AgentSearch')->name('agents.AgentSearch');
+    Route::get('/AgentEdit/{id}', 'agents\AgentController@AgentEdit')->name('agents.AgentEdit');
+    Route::get('/AgentED/{id}', 'agents\AgentController@AgentED')->name('agents.AgentED');
+    Route::get('/AgentDelete/{id}', 'agents\AgentController@AgentDelete')->name('agents.AgentDelete');
+    Route::get('/CheckCompany', 'agents\AgentController@AvailabilityCheck')->name('agents.CheckCompany');
+    Route::post('/AgentStore', 'agents\AgentController@AgentStore')->name('agents.AgentStore');
+    Route::post('/AgentUpdate/{id}', 'agents\AgentController@AgentUpdate')->name('agents.AgentUpdate');
+    
+});
+//End Agents routes
+
 //Start CategoriesController
 Route::prefix('categories.')->group(function () {
     
@@ -37,6 +51,7 @@ Route::prefix('cogs.')->group(function () {
     
     Route::get('/AcCheck', 'cogs\CogController@AcCheck')->name('cogs.AcCheck');
     Route::get('/CogsList', 'cogs\CogController@CogsList')->name('cogs.CogsList');
+    Route::get('/AcEdit/{id}', 'cogs\CogController@AcEdit')->name('cogs.AcEdit');
     Route::get('/AcCat', 'cogs\CogController@AcCat')->name('cogs.AcCat');
     Route::get('/AcTypes', 'cogs\CogController@AcTypes')->name('cogs.AcTypes');
     Route::get('/GetMainAcc', 'cogs\CogController@GetMainAcc')->name('cogs.GetMainAcc');

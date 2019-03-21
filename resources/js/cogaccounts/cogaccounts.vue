@@ -4,7 +4,7 @@
     <section>
         <b-field grouped group-multiline>
         <div class="control is-flex">
-            <h3 class="title is-4">Manage COA</h3>
+            <h3 class="title is-4">Manage Chart of Accounts</h3>
         </div>
         <div class="control is-flex">
             <b-field>
@@ -48,11 +48,18 @@
         <b-table-column field="actype_id" label="Account Type" sortable>
         {{ props.row.tname}}
         </b-table-column>
-        
+        <b-table-column field="isActive" label="E/D" sortable>
+            <b-switch v-model="props.row.isActive"
+            :true-value="1" 
+            :false-value="0"
+                type="is-success" @change="AccED(props.row.isActive)">
+            </b-switch>
+        </b-table-column>
         
         <b-table-column label="Action" centered>
-        <a :href="`/manage/users/singleuser/${props.row.id}`" class="button is-success is-small"><span class="mdi mdi-eye"></span></a>
-        <a :href="`/manage/users/edit/${props.row.id}`" class="button is-warning is-small"><span class="mdi mdi-pencil-box-outline"></span></a>
+            <router-link class="button is-success is-small" :to="{ name: 'cogShow', params: {id: props.row.id }}"><span class="mdi mdi-eye"></span></router-link>
+            <router-link class="button is-warning is-small" :to="{ name: 'cogEdit', params: {id: props.row.id }}"><span class="mdi mdi-pencil-box-outline"></span></router-link>
+        
         <a :href="`/manage/users/edit/${props.row.id}`" class="button is-danger is-small"><span class="mdi mdi-trash-can"></span></a>
         </b-table-column>
         </template>
@@ -78,8 +85,9 @@ import moment from 'moment';
     export default {
         data(){
             return {
-                cogsList: [],
+                cogsList: {},
                 search:'',
+                isActive:'',
                 isNarrowed: true,
                 loading: false,
                 defaultSortDirection: 'asc',
@@ -91,7 +99,12 @@ import moment from 'moment';
         mounted(){
         this.loadCats();  
     },
-        methods: {  
+        methods: { 
+            AccED(){
+              axios.get("/cogs./CogsList/" +this.row.isActive)
+              //.then(({data}) => (this.cogsList = data));
+              console.log()  
+            }, 
              loadCats(){
               this.loading = true
               axios.get("/cogs./CogsList").then(({data}) => (this.cogsList = data));
@@ -113,7 +126,8 @@ import moment from 'moment';
             CreatedAT: function(value){
             return moment().format("DD-MM-YYYY");
         }
-    }        
+    },
+
 }
 
     

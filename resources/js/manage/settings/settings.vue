@@ -105,14 +105,14 @@
                 company:'',
                 email:'',
                 password:'',
-                errors: [],
+                allerrors:'',
                 csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
             }
         },
         mounted(){
         axios.get('/settings./getsetting/')
         .then((response)=> this.setting = this.temp = response.data)
-        .catch((error) => this.errors = error.response.data.errors)
+        .catch((error) => this.allerrors = error.response.data.errors)
     },
     }
 </script>

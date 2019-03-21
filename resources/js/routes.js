@@ -9,11 +9,15 @@ import editbranch from './manage/branches/EditBranch.vue';
 // COGS Account
 import cogList from './cogaccounts/cogaccounts.vue';
 import cogCreate from './cogaccounts/Create.vue';
+import cogEdit from './cogaccounts/Edit.vue';
+import cogShow from './cogaccounts/Show.vue';
 
 //Customser
 import customers from './customers/Customers.vue';
 // Agents
 import agents from './agents/Agents.vue';
+import agentCreate from './agents/Create.vue';
+import agentEdit from './agents/Edit.vue';
 // Employees
 import employees from './employees/Employees.vue';
 //
@@ -45,6 +49,8 @@ export default [
 // cogs Accounts
   { path: '/cogs', component: cogList, name: 'cogs'},
   { path: '/cogs/cogCreate', component: cogCreate, name: 'cogCreate'},
+  { path: '/cogs/cogEdit/:id', component: cogEdit, name: 'cogEdit', props: true},
+  { path: '/cogs/cogShow/:id', component: cogShow, name: 'cogShow', props: true},
   
 // Settings 
   { path: '/settings/branches', component: branches, name: 'branches'},
@@ -57,6 +63,8 @@ export default [
 
 // agents
   { path: '/agents', component: agents, name: 'agents'},
+  { path: '/agents/agentCreate', component: agentCreate, name: 'agentCreate'},
+  { path: '/agents/agentEdit/:id', component: agentEdit, name: 'agentEdit', props: true},
 
 //Employees
   { path: '/employees', component: employees, name: 'employees'},
