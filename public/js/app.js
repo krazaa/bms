@@ -4002,9 +4002,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -90954,7 +90951,7 @@ var render = function() {
                 _c("div", { staticClass: "column is-4" }, [
                   _c("div", { staticClass: "field" }, [
                     _c("label", { staticClass: "label" }, [
-                      _vm._v("Company Name:\n                            ")
+                      _vm._v("Company Name:\n                        ")
                     ]),
                     _vm._v(" "),
                     _c("div", { staticClass: "control" }, [
@@ -91283,11 +91280,6 @@ var render = function() {
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "column is-6" }, [
-                  _vm._v(
-                    "\n                        " +
-                      _vm._s(config.id) +
-                      "\n                        "
-                  ),
                   _c("figure", { staticClass: "image is-128x128" }, [
                     _c("img", { attrs: { src: "/public/logo/" + config.logo } })
                   ]),
@@ -91330,9 +91322,9 @@ var render = function() {
                             config.file
                               ? _c("span", { staticClass: "file-name" }, [
                                   _vm._v(
-                                    "\n                                    " +
+                                    "\n                                " +
                                       _vm._s(_vm.file.name) +
-                                      "\n                                "
+                                      "\n                            "
                                   )
                                 ])
                               : _vm._e()
