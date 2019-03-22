@@ -1,8 +1,8 @@
 <template>
 <div class="box">
-    <li v-if="!agentsload.data.length">No item found</li>
+    <p v-show="!agentsload.data.length">No Agents available</p>
     <template>
-    <section >
+    <section v-if="agentsload.data.length > 0">
         <b-field grouped group-multiline>
         <div class="control is-flex">
             <h3 class="title is-4">Manage Agents</h3>
