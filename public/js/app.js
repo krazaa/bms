@@ -3103,6 +3103,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
  //import VueMomentLib from "vue-moment-lib";
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -86468,21 +86473,6 @@ var render = function() {
     "div",
     { staticClass: "box" },
     [
-      _c(
-        "p",
-        {
-          directives: [
-            {
-              name: "show",
-              rawName: "v-show",
-              value: !_vm.agentsload.data.length,
-              expression: "!agentsload.data.length"
-            }
-          ]
-        },
-        [_vm._v("No Agents available")]
-      ),
-      _vm._v(" "),
       [
         _vm.agentsload.data.length > 0
           ? _c(
@@ -86781,7 +86771,22 @@ var render = function() {
               ],
               1
             )
-          : _vm._e()
+          : _vm._e(),
+        _vm._v(" "),
+        _c(
+          "p",
+          {
+            directives: [
+              {
+                name: "show",
+                rawName: "v-show",
+                value: !_vm.agentsload.data.length,
+                expression: "!agentsload.data.length"
+              }
+            ]
+          },
+          [_vm._v("No Agents available")]
+        )
       ],
       _vm._v(" "),
       _c("hr"),
@@ -89417,292 +89422,351 @@ var render = function() {
     { staticClass: "box" },
     [
       [
-        _c(
-          "section",
-          [
-            _c("b-field", { attrs: { grouped: "", "group-multiline": "" } }, [
-              _c("div", { staticClass: "control is-flex" }, [
-                _c("h3", { staticClass: "title is-4" }, [
-                  _vm._v("Manage Chart of Accounts")
-                ])
-              ]),
-              _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "control is-flex" },
-                [
-                  _c(
-                    "b-field",
-                    [
-                      _c("b-input", {
-                        attrs: { name: "search", placeholder: "Keyword Seach" },
-                        on: { input: _vm.SearchGet },
-                        model: {
-                          value: _vm.search,
-                          callback: function($$v) {
-                            _vm.search = $$v
-                          },
-                          expression: "search"
-                        }
-                      })
-                    ],
-                    1
-                  )
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "control is-flex" },
-                [
-                  _c(
-                    "router-link",
-                    {
-                      staticClass: "button is-primary is-pulled-right",
-                      attrs: { to: { name: "cogCreate" } }
-                    },
-                    [
-                      _c("i", { staticClass: "fa fa-user-plus m-r-10" }),
-                      _vm._v(" New COA")
-                    ]
-                  )
-                ],
-                1
-              )
-            ]),
-            _vm._v(" "),
-            _c("p", { staticClass: "level-item" }, [
-              _vm.loading
-                ? _c("span", { staticClass: "is-pulled-right" }, [
-                    _c("i", {
-                      staticClass: "fa fa-refresh fa-spin fa-2x fa-fw"
-                    })
-                  ])
-                : _vm._e()
-            ]),
-            _vm._v(" "),
-            _c("b-table", {
-              attrs: {
-                data: _vm.cogsList.data,
-                loading: _vm.loading,
-                narrowed: _vm.isNarrowed,
-                "default-sort-direction": _vm.defaultSortDirection,
-                "default-sort": "cogsList.aname"
-              },
-              scopedSlots: _vm._u([
-                {
-                  key: "default",
-                  fn: function(props) {
-                    return [
-                      _c(
-                        "b-table-column",
-                        {
-                          attrs: {
-                            field: "id",
-                            label: "ID",
-                            width: "40",
-                            sortable: ""
-                          }
-                        },
-                        [
-                          _vm._v(
-                            "\n        " + _vm._s(props.row.id) + "\n        "
-                          )
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "b-table-column",
-                        {
-                          attrs: { field: "acode", label: "Code", sortable: "" }
-                        },
-                        [
-                          _vm._v(
-                            "\n        " +
-                              _vm._s(props.row.acode) +
-                              "\n        "
-                          )
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "b-table-column",
-                        {
-                          attrs: {
-                            field: "aname",
-                            label: "Account Name",
-                            sortable: ""
-                          }
-                        },
-                        [
-                          _vm._v(
-                            "\n        " +
-                              _vm._s(props.row.aname) +
-                              "\n        "
-                          )
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "b-table-column",
-                        {
-                          attrs: {
-                            field: "incmbal",
-                            label: "Income/ Balance",
-                            sortable: ""
-                          }
-                        },
-                        [
-                          _vm._v(
-                            "\n        " +
-                              _vm._s(props.row.incmbal) +
-                              "\n        "
-                          )
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "b-table-column",
-                        {
-                          attrs: {
-                            field: "debitcredit",
-                            label: "Debit / Credite",
-                            sortable: ""
-                          }
-                        },
-                        [
-                          _vm._v(
-                            "\n        " +
-                              _vm._s(props.row.debitcredit) +
-                              "\n        "
-                          )
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "b-table-column",
-                        {
-                          attrs: {
-                            field: "acat_id",
-                            label: "Acc Category",
-                            sortable: ""
-                          }
-                        },
-                        [
-                          _vm._v(
-                            "\n        " +
-                              _vm._s(props.row.cname) +
-                              "\n        "
-                          )
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "b-table-column",
-                        {
-                          attrs: {
-                            field: "actype_id",
-                            label: "Account Type",
-                            sortable: ""
-                          }
-                        },
-                        [
-                          _vm._v(
-                            "\n        " +
-                              _vm._s(props.row.tname) +
-                              "\n        "
-                          )
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "b-table-column",
-                        {
-                          attrs: {
-                            field: "isActive",
-                            label: "E/D",
-                            sortable: ""
-                          }
-                        },
-                        [
-                          _c("b-switch", {
-                            attrs: {
-                              "true-value": 1,
-                              "false-value": 0,
-                              type: "is-success"
-                            },
-                            on: {
-                              change: function($event) {
-                                return _vm.AccED(props.row.isActive)
-                              }
-                            },
-                            model: {
-                              value: props.row.isActive,
-                              callback: function($$v) {
-                                _vm.$set(props.row, "isActive", $$v)
+        _vm.cogsList.data.length > 0
+          ? _c(
+              "section",
+              [
+                _c(
+                  "b-field",
+                  { attrs: { grouped: "", "group-multiline": "" } },
+                  [
+                    _c("div", { staticClass: "control is-flex" }, [
+                      _c("h3", { staticClass: "title is-4" }, [
+                        _vm._v("Manage Chart of Accounts")
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "control is-flex" },
+                      [
+                        _c(
+                          "b-field",
+                          [
+                            _c("b-input", {
+                              attrs: {
+                                name: "search",
+                                placeholder: "Keyword Seach"
                               },
-                              expression: "props.row.isActive"
-                            }
-                          })
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "b-table-column",
-                        { attrs: { label: "Action", centered: "" } },
-                        [
-                          _c(
-                            "router-link",
-                            {
-                              staticClass: "button is-success is-small",
-                              attrs: {
-                                to: {
-                                  name: "cogShow",
-                                  params: { id: props.row.id }
+                              on: { input: _vm.SearchGet },
+                              model: {
+                                value: _vm.search,
+                                callback: function($$v) {
+                                  _vm.search = $$v
+                                },
+                                expression: "search"
+                              }
+                            })
+                          ],
+                          1
+                        )
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "control is-flex" },
+                      [
+                        _c(
+                          "router-link",
+                          {
+                            staticClass: "button is-primary is-pulled-right",
+                            attrs: { to: { name: "cogCreate" } }
+                          },
+                          [
+                            _c("i", { staticClass: "fa fa-user-plus m-r-10" }),
+                            _vm._v(" New COA")
+                          ]
+                        )
+                      ],
+                      1
+                    )
+                  ]
+                ),
+                _vm._v(" "),
+                _c("p", { staticClass: "level-item" }, [
+                  _vm.loading
+                    ? _c("span", { staticClass: "is-pulled-right" }, [
+                        _c("i", {
+                          staticClass: "fa fa-refresh fa-spin fa-2x fa-fw"
+                        })
+                      ])
+                    : _vm._e()
+                ]),
+                _vm._v(" "),
+                _c("b-table", {
+                  attrs: {
+                    data: _vm.cogsList.data,
+                    loading: _vm.loading,
+                    narrowed: _vm.isNarrowed,
+                    "default-sort-direction": _vm.defaultSortDirection,
+                    "default-sort": "cogsList.aname"
+                  },
+                  scopedSlots: _vm._u(
+                    [
+                      {
+                        key: "default",
+                        fn: function(props) {
+                          return [
+                            _c(
+                              "b-table-column",
+                              {
+                                attrs: {
+                                  field: "id",
+                                  label: "ID",
+                                  width: "40",
+                                  sortable: ""
                                 }
-                              }
-                            },
-                            [_c("span", { staticClass: "mdi mdi-eye" })]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "router-link",
-                            {
-                              staticClass: "button is-warning is-small",
-                              attrs: {
-                                to: {
-                                  name: "cogEdit",
-                                  params: { id: props.row.id }
+                              },
+                              [
+                                _vm._v(
+                                  "\n        " +
+                                    _vm._s(props.row.id) +
+                                    "\n        "
+                                )
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "b-table-column",
+                              {
+                                attrs: {
+                                  field: "acode",
+                                  label: "Code",
+                                  sortable: ""
                                 }
-                              }
-                            },
-                            [
-                              _c("span", {
-                                staticClass: "mdi mdi-pencil-box-outline"
-                              })
-                            ]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "a",
-                            {
-                              staticClass: "button is-danger is-small",
-                              attrs: {
-                                href: "/manage/users/edit/" + props.row.id
-                              }
-                            },
-                            [_c("span", { staticClass: "mdi mdi-trash-can" })]
-                          )
-                        ],
-                        1
-                      )
-                    ]
-                  }
-                }
-              ])
-            })
+                              },
+                              [
+                                _vm._v(
+                                  "\n        " +
+                                    _vm._s(props.row.acode) +
+                                    "\n        "
+                                )
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "b-table-column",
+                              {
+                                attrs: {
+                                  field: "aname",
+                                  label: "Account Name",
+                                  sortable: ""
+                                }
+                              },
+                              [
+                                _vm._v(
+                                  "\n        " +
+                                    _vm._s(props.row.aname) +
+                                    "\n        "
+                                )
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "b-table-column",
+                              {
+                                attrs: {
+                                  field: "incmbal",
+                                  label: "Income/ Balance",
+                                  sortable: ""
+                                }
+                              },
+                              [
+                                _vm._v(
+                                  "\n        " +
+                                    _vm._s(props.row.incmbal) +
+                                    "\n        "
+                                )
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "b-table-column",
+                              {
+                                attrs: {
+                                  field: "debitcredit",
+                                  label: "Debit / Credite",
+                                  sortable: ""
+                                }
+                              },
+                              [
+                                _vm._v(
+                                  "\n        " +
+                                    _vm._s(props.row.debitcredit) +
+                                    "\n        "
+                                )
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "b-table-column",
+                              {
+                                attrs: {
+                                  field: "acat_id",
+                                  label: "Acc Category",
+                                  sortable: ""
+                                }
+                              },
+                              [
+                                _vm._v(
+                                  "\n        " +
+                                    _vm._s(props.row.cname) +
+                                    "\n        "
+                                )
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "b-table-column",
+                              {
+                                attrs: {
+                                  field: "actype_id",
+                                  label: "Account Type",
+                                  sortable: ""
+                                }
+                              },
+                              [
+                                _vm._v(
+                                  "\n        " +
+                                    _vm._s(props.row.tname) +
+                                    "\n        "
+                                )
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "b-table-column",
+                              {
+                                attrs: {
+                                  field: "isActive",
+                                  label: "E/D",
+                                  sortable: ""
+                                }
+                              },
+                              [
+                                _c("b-switch", {
+                                  attrs: {
+                                    "true-value": 1,
+                                    "false-value": 0,
+                                    type: "is-success"
+                                  },
+                                  on: {
+                                    change: function($event) {
+                                      return _vm.AccED(props.row.isActive)
+                                    }
+                                  },
+                                  model: {
+                                    value: props.row.isActive,
+                                    callback: function($$v) {
+                                      _vm.$set(props.row, "isActive", $$v)
+                                    },
+                                    expression: "props.row.isActive"
+                                  }
+                                })
+                              ],
+                              1
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "b-table-column",
+                              { attrs: { label: "Action", centered: "" } },
+                              [
+                                _c(
+                                  "router-link",
+                                  {
+                                    staticClass: "button is-success is-small",
+                                    attrs: {
+                                      to: {
+                                        name: "cogShow",
+                                        params: { id: props.row.id }
+                                      }
+                                    }
+                                  },
+                                  [_c("span", { staticClass: "mdi mdi-eye" })]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "router-link",
+                                  {
+                                    staticClass: "button is-warning is-small",
+                                    attrs: {
+                                      to: {
+                                        name: "cogEdit",
+                                        params: { id: props.row.id }
+                                      }
+                                    }
+                                  },
+                                  [
+                                    _c("span", {
+                                      staticClass: "mdi mdi-pencil-box-outline"
+                                    })
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "a",
+                                  {
+                                    staticClass: "button is-danger is-small",
+                                    attrs: {
+                                      href: "/manage/users/edit/" + props.row.id
+                                    }
+                                  },
+                                  [
+                                    _c("span", {
+                                      staticClass: "mdi mdi-trash-can"
+                                    })
+                                  ]
+                                )
+                              ],
+                              1
+                            )
+                          ]
+                        }
+                      }
+                    ],
+                    null,
+                    false,
+                    982669471
+                  )
+                })
+              ],
+              1
+            )
+          : _vm._e(),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            directives: [
+              {
+                name: "show",
+                rawName: "v-show",
+                value: !_vm.cogsList.data.length,
+                expression: "!cogsList.data.length"
+              }
+            ],
+            staticClass: "control has-text-centered"
+          },
+          [
+            _c("h1", { staticClass: "title is-2 is-warning" }, [
+              _vm._v("Record not found")
+            ]),
+            _vm._v(" "),
+            _c("hr"),
+            _vm._v(" "),
+            _c(
+              "router-link",
+              {
+                staticClass: "button is-primary ",
+                attrs: { to: { name: "cogCreate" } }
+              },
+              [
+                _c("i", { staticClass: "fa fa-user-plus m-r-10" }),
+                _vm._v(" Add your first Chart of account click here")
+              ]
+            )
           ],
           1
         )

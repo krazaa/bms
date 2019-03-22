@@ -1,6 +1,5 @@
 <template>
 <div class="box">
-    <p v-show="!agentsload.data.length">No Agents available</p>
     <template>
     <section v-if="agentsload.data.length > 0">
         <b-field grouped group-multiline>
@@ -61,6 +60,7 @@
         </template>
         </b-table>
     </section>
+    <p v-show="!agentsload.data.length">No Agents available</p>
     </template>
 <hr>
         <pagination :limit="5" :show-disabled=false :data="agentsload"  @pagination-change-page="getResults"></pagination>
