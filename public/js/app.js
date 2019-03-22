@@ -1841,6 +1841,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
  //import VueMomentLib from "vue-moment-lib";
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -86459,322 +86464,313 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm.agentsload > 0
-    ? _c(
-        "div",
-        { staticClass: "box" },
-        [
+  return _c(
+    "div",
+    { staticClass: "box" },
+    [
+      !_vm.agentsload.data.length
+        ? _c("li", [_vm._v("No item found")])
+        : _vm._e(),
+      _vm._v(" "),
+      [
+        _c(
+          "section",
           [
-            _c(
-              "section",
-              [
-                _c(
-                  "b-field",
-                  { attrs: { grouped: "", "group-multiline": "" } },
-                  [
-                    _c("div", { staticClass: "control is-flex" }, [
-                      _c("h3", { staticClass: "title is-4" }, [
-                        _vm._v("Manage Agents")
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "control is-flex" },
-                      [
-                        _c(
-                          "b-field",
-                          [
-                            _c("b-input", {
-                              attrs: {
-                                name: "search",
-                                placeholder: "Keyword Seach"
-                              },
-                              on: { input: _vm.SearchGet },
-                              model: {
-                                value: _vm.search,
-                                callback: function($$v) {
-                                  _vm.search = $$v
-                                },
-                                expression: "search"
-                              }
-                            })
-                          ],
-                          1
-                        )
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "control is-flex" },
-                      [
-                        _c(
-                          "router-link",
-                          {
-                            staticClass: "button is-primary is-pulled-right",
-                            attrs: { to: { name: "agentCreate" } }
-                          },
-                          [
-                            _c("i", { staticClass: "fa fa-user-plus m-r-10" }),
-                            _vm._v(" New Agent")
-                          ]
-                        )
-                      ],
-                      1
-                    )
-                  ]
-                ),
-                _vm._v(" "),
-                _c("p", { staticClass: "level-item" }, [
-                  _vm.loading
-                    ? _c("span", { staticClass: "is-pulled-right" }, [
-                        _c("i", {
-                          staticClass: "fa fa-refresh fa-spin fa-2x fa-fw"
-                        })
-                      ])
-                    : _vm._e()
-                ]),
-                _vm._v(" "),
-                _c("b-table", {
-                  attrs: {
-                    data: _vm.agentsload.data,
-                    loading: _vm.loading,
-                    narrowed: _vm.isNarrowed,
-                    "default-sort-direction": _vm.defaultSortDirection,
-                    "default-sort": "agentsload.company"
-                  },
-                  scopedSlots: _vm._u(
+            _c("b-field", { attrs: { grouped: "", "group-multiline": "" } }, [
+              _c("div", { staticClass: "control is-flex" }, [
+                _c("h3", { staticClass: "title is-4" }, [
+                  _vm._v("Manage Agents")
+                ])
+              ]),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "control is-flex" },
+                [
+                  _c(
+                    "b-field",
                     [
-                      {
-                        key: "default",
-                        fn: function(props) {
-                          return [
-                            _c(
-                              "b-table-column",
-                              {
-                                attrs: {
-                                  field: "id",
-                                  label: "ID",
-                                  width: "40",
-                                  sortable: ""
-                                }
-                              },
-                              [
-                                _vm._v(
-                                  "\n        " +
-                                    _vm._s(props.row.id) +
-                                    "\n        "
-                                )
-                              ]
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "b-table-column",
-                              {
-                                attrs: {
-                                  field: "company",
-                                  label: "Company",
-                                  sortable: ""
-                                }
-                              },
-                              [
-                                _vm._v(
-                                  "\n        " +
-                                    _vm._s(props.row.company) +
-                                    "\n        "
-                                )
-                              ]
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "b-table-column",
-                              {
-                                attrs: {
-                                  field: "person",
-                                  label: "Contact Person",
-                                  sortable: ""
-                                }
-                              },
-                              [
-                                _vm._v(
-                                  "\n        " +
-                                    _vm._s(props.row.person) +
-                                    "\n        "
-                                )
-                              ]
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "b-table-column",
-                              {
-                                attrs: {
-                                  field: "person2",
-                                  label: "Contact Person 2",
-                                  sortable: ""
-                                }
-                              },
-                              [
-                                _vm._v(
-                                  "\n        " +
-                                    _vm._s(props.row.person2) +
-                                    "\n        "
-                                )
-                              ]
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "b-table-column",
-                              {
-                                attrs: {
-                                  field: "mobile",
-                                  label: "Mobile",
-                                  sortable: ""
-                                }
-                              },
-                              [
-                                _vm._v(
-                                  "\n        " +
-                                    _vm._s(props.row.mobile) +
-                                    "\n        "
-                                )
-                              ]
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "b-table-column",
-                              {
-                                attrs: {
-                                  field: "tel",
-                                  label: "Telephone",
-                                  sortable: ""
-                                }
-                              },
-                              [
-                                _vm._v(
-                                  "\n        " +
-                                    _vm._s(props.row.tel) +
-                                    "\n        "
-                                )
-                              ]
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "b-table-column",
-                              {
-                                attrs: {
-                                  field: "isActive",
-                                  label: "Status",
-                                  sortable: ""
-                                }
-                              },
-                              [
-                                _c("b-switch", {
-                                  attrs: {
-                                    name: "isActive",
-                                    "true-value": 1,
-                                    "false-value": 0,
-                                    type: "is-success"
-                                  },
-                                  on: {
-                                    input: function($event) {
-                                      return _vm.AgentED(props.row.id)
-                                    }
-                                  },
-                                  model: {
-                                    value: props.row.isActive,
-                                    callback: function($$v) {
-                                      _vm.$set(props.row, "isActive", $$v)
-                                    },
-                                    expression: "props.row.isActive"
-                                  }
-                                })
-                              ],
-                              1
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "b-table-column",
-                              { attrs: { label: "Action", centered: "" } },
-                              [
-                                _c(
-                                  "router-link",
-                                  {
-                                    staticClass: "button is-success is-small",
-                                    attrs: {
-                                      to: {
-                                        name: "agentShow",
-                                        params: { id: props.row.id }
-                                      }
-                                    }
-                                  },
-                                  [_c("span", { staticClass: "mdi mdi-eye" })]
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "router-link",
-                                  {
-                                    staticClass: "button is-warning is-small",
-                                    attrs: {
-                                      to: {
-                                        name: "agentEdit",
-                                        params: { id: props.row.id }
-                                      }
-                                    }
-                                  },
-                                  [
-                                    _c("span", {
-                                      staticClass: "mdi mdi-pencil-box-outline"
-                                    })
-                                  ]
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "a",
-                                  {
-                                    staticClass: "button is-danger is-small",
-                                    on: {
-                                      click: function($event) {
-                                        return _vm.AgentDelete(props.row.id)
-                                      }
-                                    }
-                                  },
-                                  [
-                                    _c("span", {
-                                      staticClass: "mdi mdi-trash-can"
-                                    })
-                                  ]
-                                )
-                              ],
-                              1
-                            )
-                          ]
+                      _c("b-input", {
+                        attrs: { name: "search", placeholder: "Keyword Seach" },
+                        on: { input: _vm.SearchGet },
+                        model: {
+                          value: _vm.search,
+                          callback: function($$v) {
+                            _vm.search = $$v
+                          },
+                          expression: "search"
                         }
-                      }
+                      })
                     ],
-                    null,
-                    false,
-                    2433183467
+                    1
                   )
-                })
-              ],
-              1
-            )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "control is-flex" },
+                [
+                  _c(
+                    "router-link",
+                    {
+                      staticClass: "button is-primary is-pulled-right",
+                      attrs: { to: { name: "agentCreate" } }
+                    },
+                    [
+                      _c("i", { staticClass: "fa fa-user-plus m-r-10" }),
+                      _vm._v(" New Agent")
+                    ]
+                  )
+                ],
+                1
+              )
+            ]),
+            _vm._v(" "),
+            _c("p", { staticClass: "level-item" }, [
+              _vm.loading
+                ? _c("span", { staticClass: "is-pulled-right" }, [
+                    _c("i", {
+                      staticClass: "fa fa-refresh fa-spin fa-2x fa-fw"
+                    })
+                  ])
+                : _vm._e()
+            ]),
+            _vm._v(" "),
+            _c("b-table", {
+              attrs: {
+                data: _vm.agentsload.data,
+                loading: _vm.loading,
+                narrowed: _vm.isNarrowed,
+                "default-sort-direction": _vm.defaultSortDirection,
+                "default-sort": "agentsload.company"
+              },
+              scopedSlots: _vm._u([
+                {
+                  key: "default",
+                  fn: function(props) {
+                    return [
+                      _c(
+                        "b-table-column",
+                        {
+                          attrs: {
+                            field: "id",
+                            label: "ID",
+                            width: "40",
+                            sortable: ""
+                          }
+                        },
+                        [
+                          _vm._v(
+                            "\n        " + _vm._s(props.row.id) + "\n        "
+                          )
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "b-table-column",
+                        {
+                          attrs: {
+                            field: "company",
+                            label: "Company",
+                            sortable: ""
+                          }
+                        },
+                        [
+                          _vm._v(
+                            "\n        " +
+                              _vm._s(props.row.company) +
+                              "\n        "
+                          )
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "b-table-column",
+                        {
+                          attrs: {
+                            field: "person",
+                            label: "Contact Person",
+                            sortable: ""
+                          }
+                        },
+                        [
+                          _vm._v(
+                            "\n        " +
+                              _vm._s(props.row.person) +
+                              "\n        "
+                          )
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "b-table-column",
+                        {
+                          attrs: {
+                            field: "person2",
+                            label: "Contact Person 2",
+                            sortable: ""
+                          }
+                        },
+                        [
+                          _vm._v(
+                            "\n        " +
+                              _vm._s(props.row.person2) +
+                              "\n        "
+                          )
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "b-table-column",
+                        {
+                          attrs: {
+                            field: "mobile",
+                            label: "Mobile",
+                            sortable: ""
+                          }
+                        },
+                        [
+                          _vm._v(
+                            "\n        " +
+                              _vm._s(props.row.mobile) +
+                              "\n        "
+                          )
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "b-table-column",
+                        {
+                          attrs: {
+                            field: "tel",
+                            label: "Telephone",
+                            sortable: ""
+                          }
+                        },
+                        [
+                          _vm._v(
+                            "\n        " + _vm._s(props.row.tel) + "\n        "
+                          )
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "b-table-column",
+                        {
+                          attrs: {
+                            field: "isActive",
+                            label: "Status",
+                            sortable: ""
+                          }
+                        },
+                        [
+                          _c("b-switch", {
+                            attrs: {
+                              name: "isActive",
+                              "true-value": 1,
+                              "false-value": 0,
+                              type: "is-success"
+                            },
+                            on: {
+                              input: function($event) {
+                                return _vm.AgentED(props.row.id)
+                              }
+                            },
+                            model: {
+                              value: props.row.isActive,
+                              callback: function($$v) {
+                                _vm.$set(props.row, "isActive", $$v)
+                              },
+                              expression: "props.row.isActive"
+                            }
+                          })
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "b-table-column",
+                        { attrs: { label: "Action", centered: "" } },
+                        [
+                          _c(
+                            "router-link",
+                            {
+                              staticClass: "button is-success is-small",
+                              attrs: {
+                                to: {
+                                  name: "agentShow",
+                                  params: { id: props.row.id }
+                                }
+                              }
+                            },
+                            [_c("span", { staticClass: "mdi mdi-eye" })]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "router-link",
+                            {
+                              staticClass: "button is-warning is-small",
+                              attrs: {
+                                to: {
+                                  name: "agentEdit",
+                                  params: { id: props.row.id }
+                                }
+                              }
+                            },
+                            [
+                              _c("span", {
+                                staticClass: "mdi mdi-pencil-box-outline"
+                              })
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "a",
+                            {
+                              staticClass: "button is-danger is-small",
+                              on: {
+                                click: function($event) {
+                                  return _vm.AgentDelete(props.row.id)
+                                }
+                              }
+                            },
+                            [_c("span", { staticClass: "mdi mdi-trash-can" })]
+                          )
+                        ],
+                        1
+                      )
+                    ]
+                  }
+                }
+              ])
+            })
           ],
-          _vm._v(" "),
-          _c("hr"),
-          _vm._v(" "),
-          _c("pagination", {
-            attrs: { limit: 5, "show-disabled": false, data: _vm.agentsload },
-            on: { "pagination-change-page": _vm.getResults }
-          })
-        ],
-        2
-      )
-    : _vm._e()
+          1
+        )
+      ],
+      _vm._v(" "),
+      _c("hr"),
+      _vm._v(" "),
+      _c("pagination", {
+        attrs: { limit: 5, "show-disabled": false, data: _vm.agentsload },
+        on: { "pagination-change-page": _vm.getResults }
+      }),
+      _vm._v(" "),
+      _vm._m(0)
+    ],
+    2
+  )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "box" }, [_c("h1", [_vm._v("Oh no 😢")])])
+  }
+]
 render._withStripped = true
 
 

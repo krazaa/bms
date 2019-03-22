@@ -1,7 +1,8 @@
 <template>
-<div class="box" v-if="agentsload > 0">
+<div class="box">
+    <li v-if="!agentsload.data.length">No item found</li>
     <template>
-    <section>
+    <section >
         <b-field grouped group-multiline>
         <div class="control is-flex">
             <h3 class="title is-4">Manage Agents</h3>
@@ -63,8 +64,12 @@
     </template>
 <hr>
         <pagination :limit="5" :show-disabled=false :data="agentsload"  @pagination-change-page="getResults"></pagination>
-
+        <div class="box">
+        <h1 >Oh no 😢</h1>
+    </div>
 </div>
+
+
 </template>
 <style >
 .available{
