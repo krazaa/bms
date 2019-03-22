@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\manage\Setting;
+use Image;
+use Storage;
 
 class SettingController extends Controller
 {
@@ -23,24 +25,18 @@ class SettingController extends Controller
     	$settings = Setting::findOrFail($request->settingid);
     	$settings->update($request->all());
 
-    	if($request->hasFile('logo')){
-            $companylogo = $request->file('logo');
-            $originalFileName = $companylogo->getClientOriginalName();
-            $extension = $companylogo->getClientOriginalExtension();
-            $fileNameOnly = pathinfo($originalFileName, PATHINFO_FILENAME);
-            $fileName = $fileNameOnly. "-" . time().".".$extension;
 
+        if($request->hasFile('logo')){
+        $companylogo = $request->file('logo');
+        $filename = time() . '.' . $companylogo->getClientOriginalExtension();
+        Image::make($companylogo)->resize(300, 300)->save(public_path('/logo/' . $filename));
         
-            
-         //Image::make($StdPhoto)->resize(300, 300)->save(public_path('/logo/' . $filename));
-        
-        //$oldpic = $settings->logo;
+        $oldlogo = $settings->logo;
         //updateimg
-        $settings->logo = $companylogo->storeAs('logos', $fileName);
+        $settings->logo = $filename;
         //delet img
-    
-        // if ($oldpic)
-        //   unlink(public_path('/settings-pics/'. $oldpic));
+         if ($oldlogo)
+            Storage::delete($oldlogo);
         }
 
         $settings ->save();

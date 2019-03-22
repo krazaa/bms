@@ -1846,10 +1846,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
  //import VueMomentLib from "vue-moment-lib";
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['id'],
   data: function data() {
     return {
       agentsload: {},
@@ -3120,7 +3127,8 @@ __webpack_require__.r(__webpack_exports__);
       loading: false,
       defaultSortDirection: 'asc',
       isAvailable: 0,
-      searchvendor: []
+      searchvendor: [],
+      isLoading: false
     };
   },
   mounted: function mounted() {
@@ -3129,18 +3137,16 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     AccED: function AccED() {
       axios.get("/cogs./CogsList/" + this.row.isActive); //.then(({data}) => (this.cogsList = data));
-
-      console.log();
     },
     loadCats: function loadCats() {
       var _this = this;
 
-      this.loading = true;
+      this.isLoading = true;
       axios.get("/cogs./CogsList").then(function (_ref) {
         var data = _ref.data;
         return _this.cogsList = data;
       });
-      this.loading = false;
+      this.isLoading = false;
     },
     getResults: function getResults() {
       var _this2 = this;
@@ -3975,27 +3981,68 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      setting: [],
-      file: null,
-      loading: false,
+      setting: {},
       company: '',
       email: '',
-      password: '',
-      allerrors: '',
-      csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+      logo: '',
+      address: '',
+      contactone: '',
+      contacttwo: '',
+      fax: '',
+      website: '',
+      ntn: '',
+      strn: '',
+      file: null,
+      loading: false,
+      allerrors: '' //csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+
     };
   },
+  methods: {
+    onSubmit: function onSubmit() {
+      var _this = this;
+
+      axios.post('/settings./updatesetting/', +this.company + this.email + this.logo + this.address + this.fax + this.website + this.ntn + this.strn + this.contactone + this.contacttwo).then(function (response) {
+        _this.success = true;
+      }).catch(function (error) {
+        _this.allerros = error.response.data.errors;
+        _this.success = false;
+      });
+    }
+  },
   mounted: function mounted() {
-    var _this = this;
+    var _this2 = this;
 
     axios.get('/settings./getsetting/').then(function (response) {
-      return _this.setting = _this.temp = response.data;
-    }).catch(function (error) {
-      return _this.allerrors = error.response.data.errors;
-    });
+      return _this2.setting = response.data;
+    }); //.catch((error) => this.allerrors = error.response.data.errors)
   }
 });
 
@@ -86473,6 +86520,16 @@ var render = function() {
     "div",
     { staticClass: "box" },
     [
+      _vm.loading
+        ? _c("div", [
+            _vm._v(
+              "\n            here put a spinner or whatever you want to do when request is on proccess\n        "
+            )
+          ])
+        : _vm._e(),
+      _vm._v(" "),
+      !_vm.loading ? _c("div") : _vm._e(),
+      _vm._v(" "),
       [
         _vm.agentsload.data.length > 0
           ? _c(
@@ -90873,57 +90930,284 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("section", [
-    _c(
-      "form",
-      {
-        staticClass: "login-form",
-        attrs: {
-          method: "POST",
-          action: "/manage/updatesetting",
-          enctype: "multipart/form-data"
+  return _c(
+    "form",
+    {
+      attrs: { method: "POST", action: "/settings./updatesetting/" },
+      on: {
+        submit: function($event) {
+          $event.preventDefault()
+          return _vm.onSubmit()
         }
-      },
-      [
-        _c("input", {
-          attrs: { type: "hidden", name: "_token" },
-          domProps: { value: _vm.csrf }
-        }),
-        _vm._v(" "),
-        _vm._m(0),
-        _vm._v(" "),
-        _vm._l(_vm.setting, function(setting) {
-          return _c(
-            "div",
-            { staticClass: "box" },
-            [
-              _c("input", {
-                attrs: { type: "hidden", name: "settingid" },
-                domProps: { value: setting.id }
-              }),
-              _vm._v(" "),
-              _c("div", { staticClass: "column" }, [
-                _c("div", { staticClass: "field" }, [
+      }
+    },
+    [
+      _c(
+        "div",
+        { staticClass: "column is-10 is-offset-1" },
+        [
+          _vm._m(0),
+          _vm._v(" "),
+          _vm._l(_vm.setting, function(config) {
+            return _c("div", { staticClass: "box" }, [
+              _c("div", { staticClass: "columns is-multiline" }, [
+                _c("div", { staticClass: "column is-4" }, [
+                  _c("div", { staticClass: "field" }, [
+                    _c("label", { staticClass: "label" }, [
+                      _vm._v("Company Name:\n                            ")
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "control" }, [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: config.company,
+                            expression: "config.company"
+                          }
+                        ],
+                        staticClass: "input",
+                        attrs: {
+                          name: "company",
+                          type: "text",
+                          placeholder: "e.g PTCL",
+                          autocomplete: "off"
+                        },
+                        domProps: { value: config.company },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(config, "company", $event.target.value)
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "help is-danger" }, [
+                        _vm._v(_vm._s(_vm.allerrors.company))
+                      ])
+                    ])
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "column is-4" }, [
+                  _c("div", { staticClass: "field" }, [
+                    _c("label", { staticClass: "label" }, [
+                      _vm._v("Primary Contact:")
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "control" }, [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: config.contactone,
+                            expression: "config.contactone"
+                          }
+                        ],
+                        staticClass: "input",
+                        attrs: {
+                          name: "contactone",
+                          type: "text",
+                          placeholder: "e.g Tair",
+                          autocomplete: "off"
+                        },
+                        domProps: { value: config.contactone },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(config, "contactone", $event.target.value)
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "help is-danger" }, [
+                        _vm._v(_vm._s(_vm.allerrors.contactone))
+                      ])
+                    ])
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "column is-4" }, [
+                  _c("div", { staticClass: "field" }, [
+                    _c("label", { staticClass: "label" }, [
+                      _vm._v("Secondry Contact:")
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "control" }, [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: config.contacttwo,
+                            expression: "config.contacttwo"
+                          }
+                        ],
+                        staticClass: "input",
+                        attrs: {
+                          name: "contacttwo",
+                          type: "text",
+                          placeholder: "e.g Zia",
+                          autocomplete: "off"
+                        },
+                        domProps: { value: config.contacttwo },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(config, "contacttwo", $event.target.value)
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "help is-danger" }, [
+                        _vm._v(_vm._s(_vm.allerrors.contacttwo))
+                      ])
+                    ])
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "column is-4" }, [
+                  _c("div", { staticClass: "field" }, [
+                    _c("label", { staticClass: "label" }, [_vm._v("Fax:")]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "control" }, [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: config.fax,
+                            expression: "config.fax"
+                          }
+                        ],
+                        staticClass: "input",
+                        attrs: {
+                          name: "fax",
+                          type: "number",
+                          placeholder: "e.g 923211234567",
+                          autocomplete: "off"
+                        },
+                        domProps: { value: config.fax },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(config, "fax", $event.target.value)
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "help is-danger" }, [
+                        _vm._v(_vm._s(_vm.allerrors.fax))
+                      ])
+                    ])
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "column is-4" }, [
+                  _c("div", { staticClass: "field" }, [
+                    _c("label", { staticClass: "label" }, [_vm._v("Email:")]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "control" }, [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: config.email,
+                            expression: "config.email"
+                          }
+                        ],
+                        staticClass: "input",
+                        attrs: {
+                          name: "email",
+                          type: "email",
+                          placeholder: "e.g comanyname@gmail.com",
+                          autocomplete: "off"
+                        },
+                        domProps: { value: config.email },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(config, "email", $event.target.value)
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "help is-danger" }, [
+                        _vm._v(_vm._s(_vm.allerrors.email))
+                      ])
+                    ])
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "column is-4" }, [
+                  _c("div", { staticClass: "field" }, [
+                    _c("label", { staticClass: "label" }, [_vm._v("Website:")]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "control" }, [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: config.website,
+                            expression: "config.website"
+                          }
+                        ],
+                        staticClass: "input",
+                        attrs: {
+                          name: "website",
+                          type: "number",
+                          placeholder: "e.g www.company.com",
+                          autocomplete: "off"
+                        },
+                        domProps: { value: config.website },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(config, "website", $event.target.value)
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "help is-danger" }, [
+                        _vm._v(_vm._s(_vm.allerrors.website))
+                      ])
+                    ])
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "column is-4" }, [
                   _c(
                     "div",
-                    { staticClass: "control" },
+                    { staticClass: "field" },
                     [
                       _c(
                         "b-field",
-                        { attrs: { label: "Company Name" } },
+                        { attrs: { label: "NTN No." } },
                         [
                           _c("b-input", {
-                            attrs: {
-                              name: "company",
-                              value: "setting.company",
-                              placeholder: "Company Name"
-                            },
+                            attrs: { name: "ntn", placeholder: "NTN" },
                             model: {
-                              value: setting.company,
+                              value: config.ntn,
                               callback: function($$v) {
-                                _vm.$set(setting, "company", $$v)
+                                _vm.$set(config, "ntn", $$v)
                               },
-                              expression: "setting.company"
+                              expression: "config.ntn"
                             }
                           })
                         ],
@@ -90932,295 +91216,148 @@ var render = function() {
                     ],
                     1
                   )
-                ])
-              ]),
-              _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "column" },
-                [
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "column is-4" }, [
                   _c(
-                    "b-field",
-                    { attrs: { label: "Address" } },
+                    "div",
+                    { staticClass: "field" },
                     [
-                      _c("b-input", {
-                        attrs: {
-                          type: "textarea",
-                          name: "address",
-                          placeholder: "Address"
-                        },
-                        model: {
-                          value: setting.address,
-                          callback: function($$v) {
-                            _vm.$set(setting, "address", $$v)
-                          },
-                          expression: "setting.address"
-                        }
-                      })
+                      _c(
+                        "b-field",
+                        { attrs: { label: "STRN No." } },
+                        [
+                          _c("b-input", {
+                            attrs: { name: "strn", placeholder: "STRN No" },
+                            model: {
+                              value: config.strn,
+                              callback: function($$v) {
+                                _vm.$set(config, "strn", $$v)
+                              },
+                              expression: "config.strn"
+                            }
+                          })
+                        ],
+                        1
+                      )
                     ],
                     1
                   )
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c("div", { staticClass: "columns" }, [
-                _c(
-                  "div",
-                  { staticClass: "column" },
-                  [
-                    _c(
-                      "b-field",
-                      { attrs: { label: "Primary Contact" } },
-                      [
-                        _c("b-input", {
-                          attrs: {
-                            name: "contaceone",
-                            placeholder: "Contact one"
-                          },
-                          model: {
-                            value: setting.contactone,
-                            callback: function($$v) {
-                              _vm.$set(setting, "contactone", $$v)
-                            },
-                            expression: "setting.contactone"
-                          }
-                        })
-                      ],
-                      1
-                    )
-                  ],
-                  1
-                ),
+                ]),
                 _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "column" },
-                  [
+                _c("div", { staticClass: "column is-6" }, [
+                  _c("div", { staticClass: "field" }, [
                     _c(
-                      "b-field",
-                      { attrs: { label: "Secondry Contact" } },
+                      "div",
+                      { staticClass: "control" },
                       [
-                        _c("b-input", {
-                          attrs: {
-                            name: "contacttwo",
-                            placeholder: "Contact two"
-                          },
-                          model: {
-                            value: setting.contacttwo,
-                            callback: function($$v) {
-                              _vm.$set(setting, "contacttwo", $$v)
-                            },
-                            expression: "setting.contacttwo"
-                          }
-                        })
+                        _c(
+                          "b-field",
+                          { attrs: { label: "Address:" } },
+                          [
+                            _c("b-input", {
+                              attrs: {
+                                type: "textarea",
+                                name: "address",
+                                placeholder: "Address"
+                              },
+                              model: {
+                                value: config.address,
+                                callback: function($$v) {
+                                  _vm.$set(config, "address", $$v)
+                                },
+                                expression: "config.address"
+                              }
+                            })
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c("span", { staticClass: "help is-danger" }, [
+                          _vm._v(_vm._s(_vm.allerrors.address))
+                        ])
                       ],
                       1
                     )
-                  ],
-                  1
-                ),
+                  ])
+                ]),
                 _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "column" },
-                  [
-                    _c(
-                      "b-field",
-                      { attrs: { label: "Fax" } },
-                      [
-                        _c("b-input", {
-                          attrs: { name: "fax", placeholder: "Fax" },
-                          model: {
-                            value: setting.fax,
-                            callback: function($$v) {
-                              _vm.$set(setting, "fax", $$v)
-                            },
-                            expression: "setting.fax"
-                          }
-                        })
-                      ],
-                      1
-                    )
-                  ],
-                  1
-                )
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "columns" }, [
-                _c(
-                  "div",
-                  { staticClass: "column" },
-                  [
-                    _c(
-                      "b-field",
-                      { attrs: { label: "Email" } },
-                      [
-                        _c("b-input", {
-                          attrs: { name: "email", placeholder: "Email" },
-                          model: {
-                            value: setting.email,
-                            callback: function($$v) {
-                              _vm.$set(setting, "email", $$v)
-                            },
-                            expression: "setting.email"
-                          }
-                        })
-                      ],
-                      1
-                    )
-                  ],
-                  1
-                ),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "column" },
-                  [
-                    _c(
-                      "b-field",
-                      { attrs: { label: "Website" } },
-                      [
-                        _c("b-input", {
-                          attrs: {
-                            name: "website",
-                            placeholder: "http://www.yourbms.com"
-                          },
-                          model: {
-                            value: setting.website,
-                            callback: function($$v) {
-                              _vm.$set(setting, "website", $$v)
-                            },
-                            expression: "setting.website"
-                          }
-                        })
-                      ],
-                      1
-                    )
-                  ],
-                  1
-                )
-              ]),
-              _vm._v(" "),
-              _c("b-field", { attrs: { grouped: "", "group-multiline": "" } }, [
-                _c(
-                  "div",
-                  { staticClass: "control" },
-                  [
-                    _c(
-                      "b-field",
-                      { attrs: { label: "NTN No." } },
-                      [
-                        _c("b-input", {
-                          attrs: { name: "ntn", placeholder: "NTN" },
-                          model: {
-                            value: setting.ntn,
-                            callback: function($$v) {
-                              _vm.$set(setting, "ntn", $$v)
-                            },
-                            expression: "setting.ntn"
-                          }
-                        })
-                      ],
-                      1
-                    )
-                  ],
-                  1
-                ),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "control" },
-                  [
-                    _c(
-                      "b-field",
-                      { attrs: { label: "STRN No" } },
-                      [
-                        _c("b-input", {
-                          attrs: { name: "strn", placeholder: "STRN No" },
-                          model: {
-                            value: setting.strn,
-                            callback: function($$v) {
-                              _vm.$set(setting, "strn", $$v)
-                            },
-                            expression: "setting.strn"
-                          }
-                        })
-                      ],
-                      1
-                    )
-                  ],
-                  1
-                )
-              ]),
-              _vm._v(" "),
-              _c("b-field", { attrs: { label: "Company Logo" } }, [
-                _c("div", { staticClass: "control is-flex" }, [
+                _c("div", { staticClass: "column is-6" }, [
+                  _vm._v(
+                    "\n                        " +
+                      _vm._s(config.id) +
+                      "\n                        "
+                  ),
                   _c("figure", { staticClass: "image is-128x128" }, [
-                    _c("img", { attrs: { src: "logo/" + setting.logo } })
+                    _c("img", { attrs: { src: "/public/logo/" + config.logo } })
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "field" }, [
+                    _c(
+                      "div",
+                      { staticClass: "control" },
+                      [
+                        _c(
+                          "b-field",
+                          { staticClass: "file" },
+                          [
+                            _c(
+                              "b-upload",
+                              {
+                                attrs: { name: "logo" },
+                                model: {
+                                  value: config.file,
+                                  callback: function($$v) {
+                                    _vm.$set(config, "file", $$v)
+                                  },
+                                  expression: "config.file"
+                                }
+                              },
+                              [
+                                _c(
+                                  "a",
+                                  { staticClass: "button is-primary" },
+                                  [
+                                    _c("b-icon", { attrs: { icon: "upload" } }),
+                                    _vm._v(" "),
+                                    _c("span", [_vm._v("Logo upload")])
+                                  ],
+                                  1
+                                )
+                              ]
+                            ),
+                            _vm._v(" "),
+                            config.file
+                              ? _c("span", { staticClass: "file-name" }, [
+                                  _vm._v(
+                                    "\n                                    " +
+                                      _vm._s(_vm.file.name) +
+                                      "\n                                "
+                                  )
+                                ])
+                              : _vm._e()
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c("span", { staticClass: "help is-danger" }, [
+                          _vm._v(_vm._s(_vm.allerrors.logo))
+                        ])
+                      ],
+                      1
+                    )
                   ])
                 ])
               ]),
               _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "control is-flex" },
-                [
-                  _c(
-                    "b-field",
-                    { staticClass: "file" },
-                    [
-                      _c(
-                        "b-upload",
-                        {
-                          attrs: { name: "logo" },
-                          model: {
-                            value: _vm.file,
-                            callback: function($$v) {
-                              _vm.file = $$v
-                            },
-                            expression: "file"
-                          }
-                        },
-                        [
-                          _c(
-                            "a",
-                            { staticClass: "button is-primary" },
-                            [
-                              _c("b-icon", { attrs: { icon: "upload" } }),
-                              _vm._v(" "),
-                              _c("span", [_vm._v("Logo upload")])
-                            ],
-                            1
-                          )
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _vm.file
-                        ? _c("span", { staticClass: "file-name" }, [
-                            _vm._v(
-                              "\n                    " +
-                                _vm._s(_vm.file.name) +
-                                "\n                "
-                            )
-                          ])
-                        : _vm._e()
-                    ],
-                    1
-                  )
-                ],
-                1
-              ),
-              _vm._v(" "),
               _vm._m(1, true)
-            ],
-            1
-          )
-        })
-      ],
-      2
-    )
-  ])
+            ])
+          })
+        ],
+        2
+      )
+    ]
+  )
 }
 var staticRenderFns = [
   function() {

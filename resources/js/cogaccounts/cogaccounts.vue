@@ -97,7 +97,8 @@ import moment from 'moment';
                 loading: false,
                 defaultSortDirection: 'asc',
                 isAvailable: 0,
-                searchvendor:[]
+                searchvendor:[],
+                isLoading: false
                 
             }
         },
@@ -108,12 +109,11 @@ import moment from 'moment';
             AccED(){
               axios.get("/cogs./CogsList/" +this.row.isActive)
               //.then(({data}) => (this.cogsList = data));
-              console.log()  
             }, 
              loadCats(){
-              this.loading = true
+              this.isLoading = true
               axios.get("/cogs./CogsList").then(({data}) => (this.cogsList = data));
-              this.loading = false
+              this.isLoading = false
             },
             getResults(page = 1) {
                 axios.get('/cogs./CogsList?page=' + page)

@@ -1,7 +1,15 @@
 <template>
 <div class="box">
+    <div v-if="loading">
+            here put a spinner or whatever you want to do when request is on proccess
+        </div>
+
+        <div v-if="!loading">
+            <!-- here is your application code -->
+        </div>
     <template>
     <section v-if="agentsload.data.length > 0">
+
         <b-field grouped group-multiline>
         <div class="control is-flex">
             <h3 class="title is-4">Manage Agents</h3>
@@ -83,7 +91,6 @@
 import moment from 'moment';
 //import VueMomentLib from "vue-moment-lib";
     export default {
-        props: ['id'],
         data(){
             return {
                 agentsload: {},
@@ -109,7 +116,8 @@ import moment from 'moment';
             }, 
              loadAgents(){
               this.loading = true
-              axios.get("/agents./AgentsListGet").then(({data}) => (this.agentsload = data));
+              axios.get("/agents./AgentsListGet").then(({data}) => (this.agentsload = data)
+                )
               this.loading = false
             },
             getResults(page = 1) {
