@@ -1,5 +1,5 @@
 <template>
-<div class="box">
+<div class="box" v-if="agentsload > 0">
     <template>
     <section>
         <b-field grouped group-multiline>
