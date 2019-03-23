@@ -94,11 +94,13 @@
                 <router-link class="navbar-item" :to="{ name: 'company'}">Company Setup</router-link>
                 <router-link class="navbar-item" :to="{ name: 'branches'}">Company Branches</router-link>
                 <router-link class="navbar-item" :to="{ name: 'cogs'}">COA Openings</router-link>
-                <a class="navbar-item" href="#">Bank Setup</a>
+                <router-link class="navbar-item" :to="{ name: 'banks'}">Bank Setup</router-link>
+        
                  <router-link class="navbar-item" :to="{ name: 'autos'}">Vehicle Setup</router-link>
                 <router-link class="navbar-item" :to="{ name: 'electronic'}">Electronic Setup</router-link>
                 <router-link class="navbar-item" :to="{ name: 'manage'}">Product Category Setup</router-link>
-                <a class="navbar-item" href="#">Excise & Taxation Setup</a>
+                <router-link class="navbar-item" :to="{ name: 'excisentaxation'}">Excise & Taxation Setup</router-link>
+                
               </div>
             </div>
             <div class="navbar-item has-dropdown is-hoverable">

@@ -1,43 +1,62 @@
 <template>
-<form method="POST" action="/cogs./CogStoreAcc" @submit.prevent="onSubmit">
+<form method="POST" action="/banks./BankStore" @submit.prevent="onSubmit">
     <div class="columns" v-if="!success">
         <div class="column is-10 is-offset-1">
             <div class="box">
                 <b-field grouped group-multiline>
                 <div class="control">
-                    <h3 class="title is-4">Add New Agent</h3>
+                    <h3 class="title is-4">Add New Bank</h3>
                 </div>
                 </b-field>
                 
                 <div class="columns is-multiline">
                     <div class="column is-4">
                         <div class="field">
-                            <label class="label">Company Name:
+                            <label class="label">Bank Name:</label>
+                            <div class="control">
+                                <input class="input" v-model="DataFrom.bank" name="bank" type="text" placeholder="e.g National Bank of Pakistan" autocomplete="off">
+                                <span class="help is-danger">{{ allerros.bank }}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="column is-4">
+                        <div class="field">
+                            <label class="label">Account No:
                             </label>
                             <div class="control">
-                                <input class="input" v-model="AgentFrom.company" name="company" type="text" placeholder="e.g PTCL" @keyup="Availability()" autocomplete="off">
-                                <span class="help is-danger">{{ allerros.company }}</span>
+                                <input class="input" v-model="DataFrom.account" name="account" type="text" placeholder="e.g 345345-3" @keyup="Availability()" autocomplete="off">
+                                <span class="help is-danger">{{ allerros.account }}</span>
                             </div>
                             
-                            <p class="help is-success list-inline" v-if="account == 'Available'">{{ AgentFrom.company }} Available</p>
+                            <p class="help is-success list-inline" v-if="account == 'Available'">{{ DataFrom.account }} Available</p>
                             <p class="help is-danger" v-if="account == 'Not Available'"> Not Available</p>
                         </div>
                     </div>
                     <div class="column is-4">
                         <div class="field">
-                            <label class="label">Contact Person:</label>
+                            <label class="label">IBAN No:</label>
                             <div class="control">
-                                <input class="input" v-model="AgentFrom.person" name="person" type="text" placeholder="e.g Tair" autocomplete="off">
-                                <span class="help is-danger">{{ allerros.person }}</span>
+                                <input class="input" v-model="DataFrom.iban" name="iban" type="text" placeholder="e.g NA-87888881" autocomplete="off">
+                                <span class="help is-danger">{{ allerros.iban }}</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="column is-4">
+                        <div class="field">
+                            <label class="label">Branch Code:</label>
+                            <div class="control">
+                                <input class="input" v-model="DataFrom.branchcode" name="branchcode" type="text" placeholder="e.g 0545" autocomplete="off">
+                                <span class="help is-danger">{{ allerros.branchcode }}</span>
                             </div>
                         </div>
                     </div>
                     <div class="column is-4">
                         <div class="field">
-                            <label class="label">CNIC:</label>
+                            <label class="label">Telephone:</label>
                             <div class="control">
-                                <input class="input" v-model="AgentFrom.cnic" name="cnic" type="text" placeholder="e.g 13101-8788888-1" autocomplete="off">
-                                <span class="help is-danger">{{ allerros.cnic }}</span>
+                                <input class="input" v-model="DataFrom.phone" name="phone" type="number" placeholder="e.g 92992654321" autocomplete="off">
+                                <span class="help is-danger">{{ allerros.phone }}</span>
                             </div>
                         </div>
                     </div>
@@ -46,60 +65,41 @@
                         <div class="field">
                             <label class="label">Mobile:</label>
                             <div class="control">
-                                <input class="input" v-model="AgentFrom.mobile" name="mobile" type="number" placeholder="e.g 923211234567" autocomplete="off">
+                                <input class="input" v-model="DataFrom.mobile" name="mobile" type="number" placeholder="e.g 923001234567" autocomplete="off">
                                 <span class="help is-danger">{{ allerros.mobile }}</span>
                             </div>
                         </div>
                     </div>
-                    <div class="column is-4">
+                    <div class="column is-6">
                         <div class="field">
-                            <label class="label">Telephone:</label>
+                            <label class="label">City:</label>
                             <div class="control">
-                                <input class="input" v-model="AgentFrom.tel" name="tel" type="number" placeholder="e.g 92992654321" autocomplete="off">
-                                <span class="help is-danger">{{ allerros.tel }}</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="column is-4">
-                        <div class="field">
-                            <label class="label">Email:</label>
-                            <div class="control">
-                                <input class="input" v-model="AgentFrom.email" name="email" type="email" placeholder="e.g agent@abc.com" autocomplete="off">
-                                <span class="help is-danger">{{ allerros.email }}</span>
+                                <input class="input" v-model="DataFrom.city" name="city" type="text" placeholder="e.g City" autocomplete="off">
+                                <span class="help is-danger">{{ allerros.city }}</span>
                             </div>
                         </div>
                     </div>
                     <div class="column is-6">
                         <div class="field">
-                            <label class="label">Business Address:</label>
+                            <label class="label">Address:</label>
                             <div class="control">
-                                <input class="input" v-model="AgentFrom.baddress" name="baddress" type="text" placeholder="e.g Business address" autocomplete="off">
-                                <span class="help is-danger">{{ allerros.baddress }}</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="column is-6">
-                        <div class="field">
-                            <label class="label">Home Address:</label>
-                            <div class="control">
-                                <input class="input" v-model="AgentFrom.haddress" name="haddress" type="text" placeholder="e.g Home address" autocomplete="off">
-                                <span class="help is-danger">{{ allerros.haddress }}</span>
+                                <input class="input" v-model="DataFrom.address" name="address" type="text" placeholder="e.g Address" autocomplete="off">
+                                <span class="help is-danger">{{ allerros.address }}</span>
                             </div>
                         </div>
                     </div>
                 
                 </div>
                 <div class="control is-flex is-pulled-right">
-                    <button class="button is-primary" v-if="account == 'Available'">Add Product</button>
+                    <button class="button is-primary" v-if="account == 'Available'">Add Bank</button>
                 </div>
             </div>
         </div>
     </div>
     <div class="notification is-success" v-if="success">
-        <h2 class="title is-2"> Agent successfully Stored! </h2>
+        <h2 class="title is-2"> Bank successfully Stored! </h2>
         <br>
-        <router-link class="button is-primary is-pulled-right" :to="{ name: 'agents' }"><i class="fa fa-user-plus m-r-10"></i>Click to Back Agents</router-link>
+        <router-link class="button is-primary is-pulled-right" :to="{ name: 'banks' }"><i class="fa fa-user-plus m-r-10"></i>Click to Back Banks list</router-link>
     </div>
 </form>
 </template>
@@ -114,15 +114,15 @@
                 account: '',
                 status: '',
                 loading: false,
-                AgentFrom: {
-                    company: '',
-                    person: '',
-                    cnic: '',
-                    mobile: '',
-                    tel: '',
-                    haddress: '',
-                    email: '',
-                    baddress:'',
+                DataFrom: {
+                    bank: '',
+                    account: '',
+                    iban: '',
+                    branchcode: '',
+                    phone: '',
+                    address: '',
+                    city: '',
+                    mobile:'',
                     
                 }
                 //csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content')
@@ -133,7 +133,7 @@
             Availability() {
                 this.loading = true;
                     var searchv = this
-                    axios.get('/agents./CheckCompany?company=' + this.AgentFrom.company)
+                    axios.get('/banks./CheckAccount?account=' + this.DataFrom.account)
                     .then(function(response) {
                     Vue.set(searchv.$data, 'account', response.data)
                     searchv.loading = false;
@@ -141,7 +141,7 @@
                     //.catch(`error` => {"erro found"});
             },
             onSubmit(){
-                axios.post('/agents./AgentStore', this.AgentFrom)
+                axios.post('/banks./BankStore', this.DataFrom)
                       .then(response => { this.success = true;
                       })
                     .catch((error) => {

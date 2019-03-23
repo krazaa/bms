@@ -18,15 +18,14 @@ class DatabaseSeeder extends Seeder
 
         $faker = Faker::create();
         foreach (range(1,100) as $index) {
-            DB::table('agents')->insert([
-                'company' => $faker->company(),
-                'person' => $faker->firstNameMale(),
-                'person2' => $faker->lastName(),
-                'mobile' => $faker->randomNumber(),
-                'tel' => $faker->randomNumber(),
-                'tel2' => $faker->randomNumber(),
-                'email' => $faker->email(),
-                'address' => $faker->address(),
+            DB::table('excises')->insert([
+                'office' => $faker->name(),
+                'model' => $faker->firstNameMale(),
+                'cost' => $faker->randomNumber(),
+                'selling' => $faker->randomNumber(),
+                'agent_id' => $faker->randomNumber(),
+                // 'phone' => $faker->phoneNumber(),
+                // 'address' => $faker->address(),
                 // 'cat_id' => $faker->randomDigit(1,9),
                 // 'name' => $faker->company(),
                 // 'code' => Str::random(10),

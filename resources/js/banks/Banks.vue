@@ -1,18 +1,18 @@
 <template>
 <div class="box">
     <div v-if="loading">
-            here put a spinner or whatever you want to do when request is on proccess
+            
         </div>
 
         <div v-if="!loading">
             <!-- here is your application code -->
         </div>
     <template>
-    <section v-if="agentsload.data.length > 0">
+    <section v-if="banksload.data.length > 0">
 
         <b-field grouped group-multiline>
         <div class="control is-flex">
-            <h3 class="title is-4">Manage Agents</h3>
+            <h3 class="title is-4">Manage Banks</h3>
         </div>
         <div class="control is-flex">
             <b-field>
@@ -20,7 +20,7 @@
             </b-field>
         </div>
         <div class="control is-flex">
-            <router-link class="button is-primary is-pulled-right" :to="{ name: 'agentCreate' }"><i class="fa fa-user-plus m-r-10"></i> New Agent</router-link>
+            <router-link class="button is-primary is-pulled-right" :to="{ name: 'bankCreate' }"><i class="fa fa-user-plus m-r-10"></i> New Bank</router-link>
         </div>
         </b-field>
         <p class="level-item">
@@ -29,52 +29,54 @@
             </span>
         </p>
         <b-table
-            :data="agentsload.data"
+            :data="banksload.data"
             :loading="loading"
             :narrowed="isNarrowed"
             :default-sort-direction="defaultSortDirection"
-             default-sort="agentsload.company">
+             default-sort="banksload.company">
         <template slot-scope="props">
         <b-table-column field="id" label="ID" width="40" sortable>
         {{ props.row.id }}
         </b-table-column>
-        <b-table-column field="company" label="Company Name" sortable>
-        {{ props.row.company }}
+        <b-table-column field="bank" label="Bank Name" sortable>
+        {{ props.row.bank }}
         </b-table-column>
-        <b-table-column field="person" label="Contact Person" sortable>
-        {{ props.row.person }}
+        <b-table-column field="account" label="Account No" sortable>
+        {{ props.row.account }}
         </b-table-column>
-        <b-table-column field="cnic" label="CNIC" sortable>
-        {{ props.row.cnic }}
+        <b-table-column field="iban" label="IBAN No" sortable>
+        {{ props.row.iban }}
         </b-table-column>
-        <b-table-column field="mobile" label="Mobile" sortable>
-        {{ props.row.mobile }}
+        <b-table-column field="branchcode" label="Branch Code" sortable>
+        {{ props.row.branchcode }}
         </b-table-column>
-        <b-table-column field="tel" label="Telephone" sortable>
-        {{ props.row.tel}}
+        <b-table-column field="city" label="city" sortable>
+        {{ props.row.city}}
         </b-table-column>        
         <b-table-column field="isActive" label="Status" sortable>
             <b-switch v-model="props.row.isActive" name="isActive"
             :true-value="1" 
             :false-value="0"
-            type="is-success" @input="AgentED(props.row.id)">
+            type="is-success" @input="BankED(props.row.id)">
             </b-switch>
         </b-table-column>
         <b-table-column label="Action" centered>
-            <router-link class="button is-success is-small" :to="{ name: 'agentShow', params: {id: props.row.id }}"><span class="mdi mdi-eye"></span></router-link>
-            <router-link class="button is-warning is-small" :to="{ name: 'agentEdit', params: {id: props.row.id }}"><span class="mdi mdi-pencil-box-outline"></span></router-link>
-        <a @click="AgentDelete(props.row.id)" class="button is-danger is-small"><span class="mdi mdi-trash-can"></span></a>
+            <router-link class="button is-success is-small" :to="{ name: 'bankShow', params: {id: props.row.id }}"><span class="mdi mdi-eye"></span></router-link>
+            <router-link class="button is-warning is-small" :to="{ name: 'bankEdit', params: {id: props.row.id }}"><span class="mdi mdi-pencil-box-outline"></span></router-link>
+        <a @click="BankDelete(props.row.id)" class="button is-danger is-small"><span class="mdi mdi-trash-can"></span></a>
         </b-table-column>
         </template>
         </b-table>
     </section>
-    <p v-show="!agentsload.data.length">No Agents available</p>
+            <div class="control has-text-centered" v-show="!banksload.data.length">
+        <h1 class="title is-2 is-warning">Record not found</h1>
+        <hr>
+        <router-link class="button is-primary " :to="{ name: 'bankCreate' }"><i class="fa fa-user-plus m-r-10"></i> Add your first Bank Account click here</router-link>
+    </div>
     </template>
 <hr>
-        <pagination :limit="5" :show-disabled=false :data="agentsload"  @pagination-change-page="getResults"></pagination>
-        <div class="box">
-        <h1 >Oh no 😢</h1>
-    </div>
+        <pagination :limit="5" :show-disabled=false :data="banksload"  @pagination-change-page="getResults"></pagination>
+        
 </div>
 
 
@@ -93,7 +95,7 @@ import moment from 'moment';
     export default {
         data(){
             return {
-                agentsload: {},
+                banksload: {},
                 search:'',
                 isActive:'',
                 isNarrowed: true,
@@ -105,36 +107,36 @@ import moment from 'moment';
             }
         },
         mounted(){
-        this.loadAgents();  
+        this.loadBanks();  
     },
         methods: { 
-            AgentED(id,){
-              axios.get("/agents./AgentED/" + id )
+            BankED(id,){
+              axios.get("/banks./BankED/" + id )
               // .then(response => { this.success = true;
               //         })
-            this.loadAgents();
+            this.loadBanks();
             }, 
-             loadAgents(){
+             loadBanks(){
               this.loading = true
-              axios.get("/agents./AgentsListGet").then(({data}) => (this.agentsload = data)
+              axios.get("/banks./BanksListGet").then(({data}) => (this.banksload = data)
                 )
               this.loading = false
             },
             getResults(page = 1) {
-                axios.get('/agents./AgentsListGet?page=' + page)
+                axios.get('/banks./BanksListGet?page=' + page)
                   .then(response => {
-                    this.agentsload = response.data;
+                    this.banksload = response.data;
                 });
             },
             SearchGet() {
-            axios.get('/agents./CheckAvailable?search=' + this.search)
-            .then(({data}) => (this.agentsload = data));
+            axios.get('/banks./BankSearch?search=' + this.search)
+            .then(({data}) => (this.banksload = data));
             },
-            AgentDelete(id) {
-            axios.get('/agents./AgentDelete/' + id)
+            BankDelete(id) {
+            axios.get('/banks./BankDelete/' + id)
             .then(response => { this.success = true;
                       })
-            this.loadAgents();
+            this.loadBanks();
             },
     },
         filters: {

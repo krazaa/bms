@@ -35,6 +35,36 @@ Route::prefix('agents.')->group(function () {
 });
 //End Agents routes
 
+//Start Banks routes
+Route::prefix('banks.')->group(function () {
+    Route::get('/BanksListGet', 'banks\BanksController@BanksListGet')->name('banks.BanksListGet');
+    Route::get('/BankSearch', 'banks\BanksController@BankSearch')->name('banks.BankSearch');
+    Route::get('/BankEdit/{id}', 'banks\BanksController@BankEdit')->name('banks.BankEdit');
+    Route::get('/BankED/{id}', 'banks\BanksController@BankED')->name('banks.BankED');
+    Route::get('/BankDelete/{id}', 'banks\BanksController@BanksDelete')->name('banks.BankDelete');
+    Route::get('/CheckAccount', 'banks\BanksController@AvailabilityCheck')->name('banks.CheckAccount');
+    Route::post('/BankStore', 'banks\BanksController@BankStore')->name('banks.BankStore');
+    Route::post('/BankUpdate/{id}', 'banks\BanksController@BanksUpdate')->name('banks.BankUpdate');
+    
+});
+//End Banks routes
+
+//Start excisentax routes
+Route::prefix('excise.')->group(function () {
+    Route::get('/ExciseListGet', 'excise\ExciseController@ExciseListGet')->name('excise.ExciseListGet');
+    Route::get('/ExciseSearch', 'excise\ExciseController@ExciseSearch')->name('excise.ExciseSearch');
+    Route::get('/ExciseEdit/{id}', 'excise\ExciseController@ExciseEdit')->name('excise.ExciseEdit');
+    Route::get('/ExciseED/{id}', 'excise\ExciseController@ExciseED')->name('excise.ExciseED');
+    Route::get('/GetAgents', 'excise\ExciseController@GetAgents')->name('excise.GetAgents');
+    Route::get('/ExciseDelete/{id}', 'excise\ExciseController@ExciseDelete')->name('excise.ExciseDelete');
+    Route::get('/CheckAccount', 'excise\ExciseController@AvailabilityCheck')->name('excise.CheckAccount');
+    Route::post('/ExciseStore', 'excise\ExciseController@ExciseStore')->name('excise.ExciseStore');
+    Route::post('/ExciseUpdate/{id}', 'excise\ExciseController@ExciseUpdate')->name('excise.ExciseUpdate');
+    
+});
+//End excisentax routes
+
+
 //Start CategoriesController
 Route::prefix('categories.')->group(function () {
     

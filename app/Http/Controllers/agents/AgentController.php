@@ -12,23 +12,33 @@ class AgentController extends Controller
 {
     public function AgentsListGet()
     {
-    	$agents = Agent::select('id','company','person','person2','tel','tel2','email','address','isActive')->paginate(50);
+    	$agents = Agent::select('id','company','person','cnic','tel','mobile','email','baddress','haddress','isActive')->paginate(50);
         return $agents->toArray();
     }
     public function AgentEdit($id)
     {
-    	$agents = Agent::select('id','company','person','person2','tel','tel2','email','address','isActive')->find($id);
+    	$agents = Agent::select('id','company','person','cnic','tel','mobile','email','baddress','haddress','isActive')->find($id);
         return $agents->toArray();
     }
     public function AgentED($id)
     {
-    	DB::table('agents')->where('id', $id)->update(['isActive' => 0]);
+    $agent = Agent::find($id);
+
+        if($agent->isActive == 1)
+             { 
+                DB::table('agents')->where('id', $id)->update(['isActive' => 0]);
+             
+             }elseif ($agent->isActive == 0) {
+                 DB::table('agents')->where('id', $id)->update(['isActive' => 1]);
+             }
 
     	return ['message' => 'Agent successfully Updated'];
     }
     public function AgentUpdate(Request $request, $id)
     {
-    	 $Agents = Agent::find($id);
+    	 
+            return $id;
+         $Agents = Agent::find($id);
 
     	 $Agents->update($request->all());
 
@@ -40,7 +50,7 @@ class AgentController extends Controller
         $search = $request->search;
         $agents = Agent::where('company','LIKE', "%$search%")
         ->orwhere('person','LIKE', "%$search%")
-        ->orwhere('person2','LIKE', "%$search%")
+        ->orwhere('cnic','LIKE', "%$search%")
         ->orwhere('mobile','LIKE', "%$search%")
         ->orwhere('tel','LIKE', "%$search%")
         ->paginate(50);
@@ -53,18 +63,18 @@ class AgentController extends Controller
  			'person' => 'required',
  			'mobile' => 'required',
  			'tel' => 'required',
- 			'address' => 'required'
+ 			'baddress' => 'required'
  		]);
 
 		$Agent = new Agent();
         $Agent->company = $request->company;
         $Agent->person = $request->person;
-        $Agent->person2 = $request->person2;
+        $Agent->cnic = $request->cnic;
         $Agent->mobile = $request->mobile;
         $Agent->tel = $request->tel;
-        $Agent->tel2 = $request->tel2;
+        $Agent->haddress = $request->haddress;
         $Agent->email = $request->email;
-        $Agent->address = $request->address;
+        $Agent->baddress = $request->baddress;
         $Agent->isActive = 1;
         $Agent ->save();
 

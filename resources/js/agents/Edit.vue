@@ -1,5 +1,6 @@
 <template>
-<form method="POST" action="/agents./AgentUpdate/{AgentForm.id}" @submit.prevent="onSubmit(AgentFrom.id)">
+<form @submit.prevent="updateItem(AgentFrom.id)">
+
     <div class="columns" v-if="!success">
         <div class="column is-10 is-offset-1">
             <div class="box">
@@ -8,9 +9,9 @@
                     <h3 class="title is-4">Add Edit Agent</h3>
                 </div>
                 </b-field>
-                
+                    <input class="input" v-model="AgentFrom.agentid" name="id" type="hidden">            
                 <div class="columns is-multiline">
-                    <div class="column is-4">
+                        <div class="column is-4">
                         <div class="field">
                             <label class="label">Company Name:
                             </label>
@@ -34,10 +35,10 @@
                     </div>
                     <div class="column is-4">
                         <div class="field">
-                            <label class="label">Contact Person 2:</label>
+                            <label class="label">CNIC:</label>
                             <div class="control">
-                                <input class="input" v-model="AgentFrom.person2" name="person2" type="text" placeholder="e.g Zia" autocomplete="off">
-                                <span class="help is-danger">{{ allerros.person2 }}</span>
+                                <input class="input" v-model="AgentFrom.cnic" name="cnic" type="text" placeholder="e.g 13101-1122300-1" autocomplete="off">
+                                <span class="help is-danger">{{ allerros.cnic }}</span>
                             </div>
                         </div>
                     </div>
@@ -62,15 +63,6 @@
                     </div>
                     <div class="column is-4">
                         <div class="field">
-                            <label class="label">Mobile:</label>
-                            <div class="control">
-                                <input class="input" v-model="AgentFrom.tel2" name="tel2" type="number" placeholder="e.g 92992654321" autocomplete="off">
-                                <span class="help is-danger">{{ allerros.tel2 }}</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="column is-4">
-                        <div class="field">
                             <label class="label">Email:</label>
                             <div class="control">
                                 <input class="input" v-model="AgentFrom.email" name="email" type="email" placeholder="e.g agent@abc.com" autocomplete="off">
@@ -78,19 +70,28 @@
                             </div>
                         </div>
                     </div>
-                    <div class="column is-12">
+                    <div class="column is-6">
                         <div class="field">
+                            <label class="label">Business Address:</label>
                             <div class="control">
-                               <b-field label="Address:">
-                                <b-input type="textarea" v-model="AgentFrom.address" name="address" placeholder="Address"></b-input>
-                                </b-field>
-                                <span class="help is-danger">{{ allerros.address }}</span>
+                                <input class="input" v-model="AgentFrom.baddress" name="baddress" type="text" placeholder="e.g Business address" autocomplete="off">
+                                <span class="help is-danger">{{ allerros.baddress }}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="column is-6">
+                        <div class="field">
+                            <label class="label">Home Address:</label>
+                            <div class="control">
+                                <input class="input" v-model="AgentFrom.haddress" name="haddress" type="text" placeholder="e.g Home address" autocomplete="off">
+                                <span class="help is-danger">{{ allerros.haddress }}</span>
                             </div>
                         </div>
                     </div>
                 </div>
+    
                 <div class="control is-flex is-pulled-right">
-                    <button class="button is-primary" v-if="account == 'Available'">Add Product</button>
+                    <button class="button is-primary">Update Agent</button>
                 </div>
             </div>
         </div>
@@ -113,15 +114,17 @@
                 account: '',
                 status: '',
                 loading: false,
+                fillItem: this.record,
                 AgentFrom: {
+                    agentid: '',
                     company: '',
                     person: '',
-                    person2: '',
+                    cnic: '',
                     mobile: '',
                     tel: '',
-                    tel2: '',
                     email: '',
-                    address:'',   
+                    baddress:'',   
+                    haddress: '',
                 }
                 
             }
@@ -143,15 +146,41 @@
                         })
                     //.catch(`error` => {"erro found"});
             },
-            onSubmit(id){
-                axios.post('/agents./AgentUpdate/', + id, + this.AgentFrom)
+            onSubmit(){
+                axios.post(`/agents./AgentUpdate/${this.$route.params.id}`, +this.AgentFrom)
                       .then(response => { this.success = true;
                       })
                     .catch((error) => {
                         this.allerros = error.response.data.errors;
                         this.success = false;
                    });
+                },
+                    updateItem: function(id){
+                    // console.log('u')
+                    //alert('clicked');
+        
+                    var input = this.AgentFrom;
+                    console.log(this.AgentFrom);
+                    return;
+                    axios.patch('/agents./AgentUpdate' + id,{
+                    params: input
+                    }).then(function (response) {
+                    alert('Item Updated Successfully.');
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
                 }
+                // updateForm: function(){
+                //     var form = document.querySelector('form');
+                //     var formdata = new FormData(form);
+                //     axios.post(`/agents./AgentUpdate/${this.$route.params.id}`, +this.$route.params.id, formdata).then((response) =>{
+                //         this.$router.push({path: '/', query: {alert: response.message}})
+                //     },(response) => {
+                //         console.log('error callback')
+                //     }
+                //     );
+                // }
             },
         mounted(){
         this.AgentEdit();  

@@ -18,6 +18,15 @@ import customers from './customers/Customers.vue';
 import agents from './agents/Agents.vue';
 import agentCreate from './agents/Create.vue';
 import agentEdit from './agents/Edit.vue';
+// banks
+import banks from './banks/Banks.vue';
+import bankCreate from './banks/Create.vue';
+import bankEdit from './banks/Edit.vue';
+// Excise and Taxation
+import excise from './excise/Excise.vue';
+import exciseCreate from './excise/Create.vue';
+import exciseEdit from './excise/Edit.vue';
+
 // Employees
 import employees from './employees/Employees.vue';
 //
@@ -65,6 +74,16 @@ export default [
   { path: '/agents', component: agents, name: 'agents'},
   { path: '/agents/agentCreate', component: agentCreate, name: 'agentCreate'},
   { path: '/agents/agentEdit/:id', component: agentEdit, name: 'agentEdit', props: true},
+
+  // Banks
+  { path: '/banks', component: banks, name: 'banks'},
+  { path: '/banks/bankCreate', component: bankCreate, name: 'bankCreate'},
+  { path: '/banks/bankEdit/:id', component: bankEdit, name: 'bankEdit', props: true},
+
+// Excise and Taxation
+  { path: '/excisentaxation', component: excise, name: 'excisentaxation'},
+  { path: '/excisentaxation/exciseCreate', component: exciseCreate, name: 'excisentaxationCreate'},
+  { path: '/excisentaxation/exciseEdit/:id', component: exciseEdit, name: 'excisentaxationEdit', props: true},
 
 //Employees
   { path: '/employees', component: employees, name: 'employees'},
