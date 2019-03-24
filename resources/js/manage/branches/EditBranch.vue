@@ -4,52 +4,86 @@
     <div class="columns is-multiline">
         <div class="column is-12">
             <div class="box">
-                <b-field grouped group-multiline>
-                <div class="control">
-                    <h3 class="title is-4">Edit Branch</h3>
+                <div class="columns is-multiline">
+                    <div class="column is-4"><h3 class="title is-4">Update Branch</h3></div>
+                    <div class="column is-8">
+                        <nav class="breadcrumb is-right" aria-label="breadcrumbs">
+                            <ul>
+                                <li>
+                                    <span class="icon is-small">
+                                        <i class="mdi mdi-home" aria-hidden="true"></i>
+                                    </span>
+                                    <router-link to="/dashboard"><span>Home</span></router-link>
+                                </li>
+                                <li>
+                                    <span class="icon is-small">
+                                        <i class="mdi mdi-source-branch" aria-hidden="true"></i>
+                                    </span>
+                                    <router-link :to="{ name: 'branches' }"><span>Branches</span></router-link>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
                 </div>
-                </b-field>
-                <div class="field is-grouped">
+        
+                  <div class="columns is-multiline">
+                    <div class="column is-2">
+                       <div class="field">
+                        <label class="label">Code:</label>
+                        <div class="control is-expanded">
+                            <input class="input" name="code" v-model="branch.code" type="text" placeholder="1234">
+                        </div>
+                    </div> 
+                    </div>
+                    <div class="column is-2">
                     <div class="field">
                         <label class="label">Branch Name:</label>
                         <div class="control">
-                            <input class="input" name="name" :value="branch.name" type="text" placeholder="Branch Name">
-                        </div>
-                    </div>
-                    <div class="field is-expanded">
-                        <label class="label">Address:</label>
-                        <div class="control is-expanded">
-                            <input class="input" :value="branch.address" name="address" type="text" placeholder="Address">
-                        </div>
-                    </div>
-                    <div class="field">
-                        <label class="label">Email:</label>
-                        <div class="control">
-                            <input class="input" :value="branch.email" name="email" type="text" placeholder="example@pmb.com.pk">
+                            <input class="input" name="name" v-model="branch.name" type="text" placeholder="Branch Name">
                         </div>
                     </div>
                 </div>
-                <div class="field is-grouped">
-                    <div class="field">
+                <div class="column is-2">
+                <div class="field">
                         <label class="label">Telephone:</label>
                         <div class="control">
-                            <input class="input" :value="branch.contact" name="contact" type="text" placeholder="0992-123456">
+                            <input class="input" name="contact" v-model="branch.contact" type="text" placeholder="0992-123456">
                         </div>
                     </div>
+                </div>
+                    <div class="column is-2">
                     <div class="field">
                         <label class="label">Mobile:</label>
                         <div class="control">
-                            <input class="input" :value="branch.mobile" name="mobile" type="text" placeholder="e.g 923219802672">
+                            <input class="input" name="mobile" v-model="branch.mobile" type="text" placeholder="e.g 923219802672">
                         </div>
                     </div>
+                    </div>
+                    <div class="column is-2">
                     <div class="field">
+                        <label class="label">Email:</label>
+                        <div class="control">
+                            <input class="input" name="email" v-model="branch.email" type="email" placeholder="example@pmb.com.pk">
+                        </div>
+                    </div>
+                </div>
+                <div class="column is-2">
+                <div class="field">
                         <label class="label">City:</label>
                         <div class="control">
-                            <input class="input" :value="branch.city" name="city" type="text" placeholder="e.g Abbottabad">
+                            <input class="input" name="city" v-model="branch.city" type="text" placeholder="e.g Abbottabad">
                         </div>
                     </div>
-                    
                 </div>
+                    <div class="column is-3">
+                    <div class="field">
+                        <label class="label">Address:</label>
+                        <div class="control">
+                            <input class="input" name="address" v-model="branch.address" type="text" placeholder="Address">
+                        </div>
+                    </div>
+                </div>
+            </div>
                 <div class="control is-flex is-pulled-right">
                     <button class="button is-primary">Update Branch</button>
                 </div>
@@ -66,7 +100,6 @@
             return {
                 
                 branch: [],
-                vendors: [],
                 loading: false,
                 csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
                

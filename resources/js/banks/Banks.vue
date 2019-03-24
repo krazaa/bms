@@ -1,12 +1,9 @@
 <template>
 <div class="box">
-    <div v-if="loading">
-            
-        </div>
-
-        <div v-if="!loading">
-            <!-- here is your application code -->
-        </div>
+    <div v-if="isLoading">
+        <b-loading :active.sync="isLoading" :can-cancel="true"></b-loading>
+    </div>
+    <div v-if="!isLoading">
     <template>
     <section v-if="banksload.data.length > 0">
 
@@ -39,7 +36,7 @@
         {{ props.row.id }}
         </b-table-column>
         <b-table-column field="bank" label="Bank Name" sortable>
-        {{ props.row.bank }}
+        {{ props.row.bank | capitalize}}
         </b-table-column>
         <b-table-column field="account" label="Account No" sortable>
         {{ props.row.account }}
@@ -50,8 +47,8 @@
         <b-table-column field="branchcode" label="Branch Code" sortable>
         {{ props.row.branchcode }}
         </b-table-column>
-        <b-table-column field="city" label="city" sortable>
-        {{ props.row.city}}
+        <b-table-column field="city" label="City" sortable>
+        {{ props.row.city | capitalize}}
         </b-table-column>        
         <b-table-column field="isActive" label="Status" sortable>
             <b-switch v-model="props.row.isActive" name="isActive"
@@ -61,7 +58,6 @@
             </b-switch>
         </b-table-column>
         <b-table-column label="Action" centered>
-            <router-link class="button is-success is-small" :to="{ name: 'bankShow', params: {id: props.row.id }}"><span class="mdi mdi-eye"></span></router-link>
             <router-link class="button is-warning is-small" :to="{ name: 'bankEdit', params: {id: props.row.id }}"><span class="mdi mdi-pencil-box-outline"></span></router-link>
         <a @click="BankDelete(props.row.id)" class="button is-danger is-small"><span class="mdi mdi-trash-can"></span></a>
         </b-table-column>
@@ -76,7 +72,7 @@
     </template>
 <hr>
         <pagination :limit="5" :show-disabled=false :data="banksload"  @pagination-change-page="getResults"></pagination>
-        
+        </div>
 </div>
 
 
@@ -99,7 +95,7 @@ import moment from 'moment';
                 search:'',
                 isActive:'',
                 isNarrowed: true,
-                loading: false,
+                isLoading: false,
                 defaultSortDirection: 'asc',
                 isAvailable: 0,
                 searchvendor:[]
@@ -116,15 +112,18 @@ import moment from 'moment';
               //         })
             this.loadBanks();
             }, 
-             loadBanks(){
-              this.loading = true
-              axios.get("/banks./BanksListGet").then(({data}) => (this.banksload = data)
-                )
-              this.loading = false
-            },
+            loadBanks(){
+              this.isLoading = true
+              axios.get("banks./BanksListGet").then(({data}) => {
+                  this.isLoading = false
+                  this.banksload = data
+            });
+          },
             getResults(page = 1) {
+                this.isLoading = true
                 axios.get('/banks./BanksListGet?page=' + page)
                   .then(response => {
+                    this.isLoading = false
                     this.banksload = response.data;
                 });
             },
@@ -144,6 +143,11 @@ import moment from 'moment';
             return moment().format("DD-MM-YYYY");
         }
     },
+     capitalize: function (value) {
+    if (!value) return ''
+    value = value.toString()
+    return value.charAt(0).toUpperCase() + value.slice(1)
+  }
 
 }
 

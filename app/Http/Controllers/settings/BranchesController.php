@@ -45,6 +45,7 @@ class BranchesController extends Controller
     {
         $branch = new Branch();
         $branch->name = $request->name;
+        $branch->code = $request->code;
         $branch->address = $request->vendor_id;
         $branch->contact = $request->contact;
         $branch->mobile = $request->mobile;

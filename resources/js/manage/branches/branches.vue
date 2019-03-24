@@ -2,16 +2,15 @@
 <div class="columns is-multiline">
   <div class="column is-12">
     <div class="box">
-      <!-- <router-view></router-view> -->
+        <div v-if="isLoading">
+        <b-loading :active.sync="isLoading" :can-cancel="true"></b-loading>
+    </div>
+    <div v-if="!isLoading">
         <b-field grouped group-multiline>
          <div class="control">
                 <h3 class="title is-4">Manage Branches</h3>   
             </div>
-            <div class="control">
-                <b-field>
-                    <b-input v-model="search" placeholder="Keyword Seach" @input="SearchAutos"></b-input>
-                </b-field>
-            </div>
+            
             <div class="control">
                 <b-field>
                     <router-link :to="{ name: 'newbranch'}" class="button is-info">New Branch</router-link>
@@ -26,6 +25,7 @@
         <thead>
           <tr>
             <th><abbr title="id">#</abbr></th>
+            <th><abbr title="code">Code</abbr></th>
             <th><abbr title="name">Branch</abbr></th>
             <th><abbr title="city">City</abbr></th>
             <th><abbr title="contact">Telephone</abbr></th>
@@ -36,16 +36,15 @@
         <tbody>
           <tr v-for="(branche , index) in branches">
             <th>{{ index +1 }}</th>
+            <td>{{ branche.code }}</td>
             <td>{{ branche.name }}</td>
             <td>{{ branche.city }}</td>
             <td>{{ branche.contact }}</td>
             <td>{{ branche.mobile }}</td>
             <td>
-                <a :href="`/settings./branches/ShowSingle/${branche.id}`" class="button is-success is-small"><span class="mdi mdi-eye-circle-outline"></span></a>
-
-                <router-link class="nbutton is-warning is-small" :to="{ name: 'editbranch', params: {id: branche.id}}"><span class="mdi mdi-pencil-box-outline"></span></router-link>
                 
-                <!-- <a :href="`/settings./branches/editbranch/${branche.id}`" class="button is-warning is-small"><span class="mdi mdi-pencil-box-outline"></span></a> -->
+
+                <router-link class="button is-warning is-small" :to="{ name: 'editbranch', params: {id: branche.id}}"><span class="mdi mdi-pencil-box-outline"></span></router-link>
                 <a :href="`/settings./branches/removebranch/${branche.id}`" class="button is-danger is-small"><span class="mdi mdi-trash-can"></span></a>
                 <!-- <router-link :to="{ name: 'showelectronic' }">Hello World</router-link> -->
             </td>
@@ -53,6 +52,7 @@
         </tbody>
       </table>
 
+      </div>
     </div>
   </div>
 </div>
@@ -65,28 +65,22 @@
         data() {
             return {
                branches: [],
-               search: '',
-               searchstudents: [],
-               Studentloading: false,
+               isLoading: false,
                     }
             },
-              methods: {
-                SearchAutos() 
-            {
-            var searchstudents = this
-            axios.get('/products./autos/SearchAutosProduct?search=' + this.search)
-            .then(function(response) 
-            {
-            Vue.set(branches.$data, 'products', response.data).catch(error => {"erro found"});
-            })
-
-            },
-            
+            methods:{
+              loadBranchers(){
+              this.isLoading = true
+              axios.get('/settings./branches/GetBranches').then(({data}) => {
+                  this.isLoading = false
+                  this.branches = data
+            });
+            }
           },
          mounted(){
-          axios.get('/settings./branches/GetBranches')
-          .then((response)=> this.branches = this.temp = response.data)
-          .catch((error) => this.errors = error.response.data.errors)
+            this.loadBranchers();
+          // .then((response)=> this.branches = this.temp = response.data)
+          // .catch((error) => this.errors = error.response.data.errors)
     },
 
 }

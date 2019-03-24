@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 use App\User;
 use App\Branch;
 use App\Role;
-
+use DB;
 use Hash;
 
 class UserController extends Controller
@@ -17,14 +17,11 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        return view('manage.users.users');
-    }
+    
 
     public function Getusers()
     {
-        $users = User::all();
+        $users = User::paginate(50); 
         return $users->toArray();
     }
 
@@ -32,6 +29,21 @@ class UserController extends Controller
     {
         $users = User::with('roles')->find($id);
         return $users->toArray();
+    }
+
+    public function StautsChange($id)
+    {
+    $user = USer::find($id);
+
+        if($user->isActive == 1)
+             { 
+                DB::table('users')->where('id', $id)->update(['isActive' => 0]);
+             
+             }elseif ($user->isActive == 0) {
+                 DB::table('users')->where('id', $id)->update(['isActive' => 1]);
+             }
+
+        return ['message' => 'user successfully Updated'];
     }
 
     public function GetBranches()
@@ -44,6 +56,15 @@ class UserController extends Controller
     {
         $roles = Role::all();
         return $roles->toArray();
+    }
+
+     public function UserSearch(request $request)
+    {   
+        $search = $request->search;
+        $agents = User::where('name','LIKE', "%$search%")
+        ->orwhere('email','LIKE', "%$search%")
+        ->paginate(50);
+        return $agents->toArray();    
     }
 
     public function SearchUsers(request $request)
@@ -153,14 +174,9 @@ class UserController extends Controller
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
+    public function UserDelete($id)
     {
-        //
+        $data = User::find($id)->delete();
+        return ['message' => 'User successfully Deleted'];
     }
 }

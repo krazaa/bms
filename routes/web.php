@@ -11,7 +11,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 
 //Start Vendors routes
-Route::prefix('vendors.')->group(function () {
+Route::prefix('vendors.')->middleware('role:superadministrator|administrator|editor|author|contributor')->group(function () {
     //Route::get('/', 'vendors\VendorController@index')->name('vendors');
     Route::get('/GetVendors', 'vendors\VendorController@GetVendors')->name('vendors.GetVendors');
     Route::get('/create', 'vendors\VendorController@create')->name('vendors.create');
@@ -22,7 +22,7 @@ Route::prefix('vendors.')->group(function () {
 //End vendors routes
 
 //Start Agents routes
-Route::prefix('agents.')->group(function () {
+Route::prefix('agents.')->middleware('role:superadministrator|administrator|editor|author|contributor')->group(function () {
     Route::get('/AgentsListGet', 'agents\AgentController@AgentsListGet')->name('agents.AgentsListGet');
     Route::get('/AgentSearch', 'agents\AgentController@AgentSearch')->name('agents.AgentSearch');
     Route::get('/AgentEdit/{id}', 'agents\AgentController@AgentEdit')->name('agents.AgentEdit');
@@ -175,35 +175,32 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/gg', function(){
 
-return \App\modules\Cogcategory::get();
+Route::prefix('manage.')->group(function () {
+Route::get('/users', 'manage\UserController@Getusers')->name('users');
+Route::get('/users/create', 'manage\UserController@create')->name('users.create');
+Route::get('/users/StautsChange/{id}', 'manage\UserController@StautsChange')->name('users.StautsChange');
+Route::get('/users/UserSearch', 'manage\UserController@UserSearch')->name('users.UserSearch');
+Route::get('/users/UserDelete/{id}', 'manage\UserController@UserDelete')->name('users.UserDelete');
+Route::get('/users/show/{id}', 'manage\UserController@show')->name('users.show');
+Route::post('/users/store', 'manage\UserController@store')->name('users.store');
 
-});
-
-
-
-
-
-
-
-Route::get('manage/users', 'manage\UserController@index')->name('manage.users');
-Route::get('manage/users/create', 'manage\UserController@create')->name('manage.create');
-Route::get('manage/users/show/{id}', 'manage\UserController@show')->name('manage.show');
-Route::post('manage/users/store', 'manage\UserController@store')->name('manage.store');
-
-Route::get('manage/users/SearchUsers', 'manage\UserController@SearchUsers')->name('manage.SearchUsers');
+Route::get('users/SearchUsers', 'manage\UserController@SearchUsers')->name('manage.SearchUsers');
 
 // branches
-Route::get('manage/branches', 'manage\UserController@GetBranches')->name('manage.branches');
+Route::get('branches', 'manage\UserController@GetBranches')->name('manage.branches');
 
 // Roles
-Route::get('manage/roles', 'manage\UserController@GetRoles')->name('manage.roles');
+Route::get('roles', 'manage\RoleController@index')->name('manage.roles');
+Route::get('roles/RoleEdit/{id}', 'manage\RoleController@RoleEdit')->name('manage.roles.RoleEdit');
+
+// Roles
+Route::get('permissions', 'manage\PermissionController@index')->name('manage.permissions');
 
 //for vue
-Route::get('manage/getusers', 'manage\UserController@Getusers')->name('manage.getusers');
-Route::get('manage/users/singleuser/{id}', 'manage\UserController@GetSingleUser')->name('manage.singleuser');
 
+Route::get('manage/users/singleuser/{id}', 'manage\UserController@GetSingleUser')->name('manage.singleuser');
+});
 
 // bms path end
 //});

@@ -3,14 +3,44 @@
     <div class="columns" v-if="!success">
         <div class="column is-10 is-offset-1">
             <div class="box">
-                <b-field grouped group-multiline>
-                <div class="control">
-                    <h3 class="title is-4">Add New Bank</h3>
-                </div>
-                </b-field>
-                
                 <div class="columns is-multiline">
-                    <div class="column is-4">
+                    <div class="column is-4"><h3 class="title is-4">Add New Bank</h3></div>
+                    <div class="column is-8">
+                        <nav class="breadcrumb is-right" aria-label="breadcrumbs">
+                            <ul>
+                                <li>
+                                    <span class="icon is-small">
+                                        <i class="mdi mdi-home" aria-hidden="true"></i>
+                                    </span>
+                                    <router-link to="/dashboard"><span>Home</span></router-link>
+                                </li>
+                                <li>
+                                    <span class="icon is-small">
+                                        <i class="mdi mdi-bank" aria-hidden="true"></i>
+                                    </span>
+                                    <router-link :to="{ name: 'banks' }"><span>Banks</span></router-link>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+                <div class="columns is-multiline">
+                    <div class="column is-2">
+                        <div class="field">
+                            <b-field label="Branch Code:">
+                            <b-input
+                            v-model="DataFrom.branchcode"
+                            name="branchcode"
+                            minlength="3"
+                            maxlength="6"
+                            placeholder="Code">
+                            </b-input>
+                            </b-field>
+                            <span class="help is-danger">{{ allerros.branchcode }}</span>
+                            
+                        </div>
+                    </div>
+                    <div class="column is-3">
                         <div class="field">
                             <label class="label">Bank Name:</label>
                             <div class="control">
@@ -32,7 +62,7 @@
                             <p class="help is-danger" v-if="account == 'Not Available'"> Not Available</p>
                         </div>
                     </div>
-                    <div class="column is-4">
+                    <div class="column is-3">
                         <div class="field">
                             <label class="label">IBAN No:</label>
                             <div class="control">
@@ -41,17 +71,7 @@
                             </div>
                         </div>
                     </div>
-                    
-                    <div class="column is-4">
-                        <div class="field">
-                            <label class="label">Branch Code:</label>
-                            <div class="control">
-                                <input class="input" v-model="DataFrom.branchcode" name="branchcode" type="text" placeholder="e.g 0545" autocomplete="off">
-                                <span class="help is-danger">{{ allerros.branchcode }}</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="column is-4">
+                    <div class="column is-2">
                         <div class="field">
                             <label class="label">Telephone:</label>
                             <div class="control">
@@ -60,8 +80,7 @@
                             </div>
                         </div>
                     </div>
-                    
-                    <div class="column is-4">
+                    <div class="column is-2">
                         <div class="field">
                             <label class="label">Mobile:</label>
                             <div class="control">
@@ -70,7 +89,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="column is-6">
+                    <div class="column is-2">
                         <div class="field">
                             <label class="label">City:</label>
                             <div class="control">
@@ -79,7 +98,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="column is-6">
+                    <div class="column is-3">
                         <div class="field">
                             <label class="label">Address:</label>
                             <div class="control">
@@ -88,7 +107,7 @@
                             </div>
                         </div>
                     </div>
-                
+                    
                 </div>
                 <div class="control is-flex is-pulled-right">
                     <button class="button is-primary" v-if="account == 'Available'">Add Bank</button>

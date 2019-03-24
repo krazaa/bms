@@ -1,10 +1,14 @@
 <template>
 <div class="box">
+    <div v-if="isLoading">
+        <b-loading :active.sync="isLoading" :can-cancel="true"></b-loading>
+    </div>
+    <div v-if="!isLoading">
     <template>
     <section>
         <b-field grouped group-multiline>
         <div class="control is-flex">
-            <h3 class="title is-4">Manage Electronic Products</h3>
+            <h3 class="title is-4">Manage Electronic</h3>
         </div>
         <div class="control is-flex">
             <b-field>
@@ -23,16 +27,13 @@
         </p> 
         <b-table
             :data="electronic.data"
-            :loading="loading"
+            :loading="isLoading"
             :narrowed="isNarrowed"
             :default-sort-direction="defaultSortDirection"
              default-sort="electronic.name">
         <template slot-scope="props">
-        <b-table-column field="vnum" label="Vendor ID" width="40" sortable>
-        {{ props.row.vnum }}
-        </b-table-column>
-        <b-table-column field="category" label="Category" sortable>
-        {{ props.row.category }}
+        <b-table-column field="id" label="ID" width="40" sortable>
+        {{ props.row.id }}
         </b-table-column>
         <b-table-column field="code" label="Product Code" sortable>
         {{ props.row.code }}
@@ -40,14 +41,25 @@
         <b-table-column field="name" label="Product Name" sortable>
         {{ props.row.name }}
         </b-table-column>
-        <b-table-column field="comppartno" label="Part No" sortable>
-        {{ props.row.comppartno }}
+        <b-table-column field="category" label="Category" sortable>
+        {{ props.row.category }}
         </b-table-column>
-        <b-table-column field="shortname" label="Short Name" sortable>
-        {{ props.row.shortname }}
+        <b-table-column field="vendor" label="Vendor" sortable>
+        {{ props.row.company }}
+        </b-table-column>
+        <b-table-column field="comppartno" label="Man Part No" sortable>
+        {{ props.row.comppartno }}
         </b-table-column>
         <b-table-column field="cost" label="Cost" sortable>
         {{ props.row.cost }}
+        </b-table-column>
+           <b-table-column field="isActive" label="Status" sortable>
+            
+            <b-switch v-model="props.row.isActive" name="isActive"
+            :true-value="1" 
+            :false-value="0"
+            type="is-success">
+            </b-switch>
         </b-table-column>
         
         <b-table-column label="Action" centered>
@@ -63,7 +75,7 @@
 <hr>
 
         <pagination :limit="5" :show-disabled=false :data="electronic"  @pagination-change-page="getResults"></pagination>
-
+</div>
 </div>
 </template>
 
@@ -74,7 +86,7 @@
                 electronic: {},
                 search:'',
                 isNarrowed: true,
-                loading: false,
+                isLoading: false,
                 defaultSortDirection: 'asc',
                 isAvailable: 0,
             }
@@ -84,9 +96,10 @@
     },
         methods: {  
              loadElectronic(){
-              this.loading = true
-              axios.get("products./electronic/GetElectronic").then(({data}) => (this.electronic = data));
-              this.loading = false
+                this.isLoading = true
+              axios.get("products./electronic/GetElectronic").then(({data}) => {
+                  this.isLoading = false
+                  this.electronic = data   });  
             },
             getResults(page = 1) {
                 axios.get('/products./electronic/GetElectronic?page=' + page)

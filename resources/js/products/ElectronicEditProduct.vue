@@ -6,11 +6,27 @@
         <div class="column is-10 is-offset-1">
             <div class="box">
         
-            <b-field grouped group-multiline>
-            <div class="control">
-                <h3 class="title is-4">Update Product</h3>
-            </div>
-            </b-field>
+             <div class="columns is-multiline">
+                    <div class="column is-4"><h3 class="title is-4">Update Product Detail</h3></div>
+                    <div class="column is-8">
+                        <nav class="breadcrumb is-right" aria-label="breadcrumbs">
+                            <ul>
+                                <li>
+                                    <span class="icon is-small">
+                                        <i class="mdi mdi-home" aria-hidden="true"></i>
+                                    </span>
+                                    <router-link to="/dashboard"><span>Home</span></router-link>
+                                </li>
+                                <li>
+                                    <span class="icon is-small">
+                                        <i class="mdi mdi-microwave" aria-hidden="true"></i>
+                                    </span>
+                                    <router-link :to="{ name: 'electronic' }"><span>Electronic</span></router-link>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
               <div class="field">
                      <div class="field">
                         <label class="label">Select Vendor:</label>

@@ -11,7 +11,9 @@
   </head>
   <body>
     <div id="app">
-      <nav class="navbar has-shadow is-spaced">
+    
+</nav>
+      <nav class="navbar has-shadow navbar-top is-spaced">
         <div class="navbar-brand">
           <a href="{{ route('dashboard') }}" class="navbar-item"> 
             <i class="mdi mdi-motorbike mdi-36px"></i>
@@ -46,6 +48,7 @@
                 <router-link class="navbar-item" :to="{ name: 'customers'}">Customers</router-link>
                 <router-link class="navbar-item" :to="{ name: 'agents'}">Agents</router-link>
                 <router-link class="navbar-item" :to="{ name: 'employees'}">Employees</router-link>
+                <router-link class="navbar-item" :to="{ name: 'users'}">Manage Users</router-link>
                
                 
               </div>

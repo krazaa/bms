@@ -1,83 +1,75 @@
 <template>
 <div class="box">
-    <div v-if="loading">
-            here put a spinner or whatever you want to do when request is on proccess
-        </div>
-
-        <div v-if="!loading">
-            <!-- here is your application code -->
-        </div>
-    <template>
-    <section v-if="agentsload.data.length > 0">
-
-        <b-field grouped group-multiline>
-        <div class="control is-flex">
-            <h3 class="title is-4">Manage Agents</h3>
-        </div>
-        <div class="control is-flex">
-            <b-field>
-            <b-input v-model="search" name="search" placeholder="Keyword Seach" @input="SearchGet"></b-input>
+    <div v-if="isLoading">
+        <b-loading :active.sync="isLoading" :can-cancel="true"></b-loading>
+    </div>
+    <div v-if="!isLoading">
+        <template>
+        <section v-if="agentsload.data.length > 0">
+            <b-field grouped group-multiline>
+            <div class="control is-flex">
+                <h3 class="title is-4">Manage Agents</h3>
+            </div>
+            <div class="control is-flex">
+                <b-field>
+                <b-input v-model="search" name="search" placeholder="Keyword Seach" @input="SearchGet"></b-input>
+                </b-field>
+            </div>
+            <div class="control is-flex">
+                <router-link class="button is-primary is-pulled-right" :to="{ name: 'agentCreate' }"><i class="fa fa-user-plus m-r-10"></i> New Agent</router-link>
+            </div>
             </b-field>
-        </div>
-        <div class="control is-flex">
-            <router-link class="button is-primary is-pulled-right" :to="{ name: 'agentCreate' }"><i class="fa fa-user-plus m-r-10"></i> New Agent</router-link>
-        </div>
-        </b-field>
-        <p class="level-item">
-            <span class="is-pulled-right" v-if="loading">
-                <i class="fa fa-refresh fa-spin fa-2x fa-fw"></i>
-            </span>
-        </p>
-        <b-table
+            <p class="level-item">
+                <span class="is-pulled-right" v-if="loading">
+                    <i class="fa fa-refresh fa-spin fa-2x fa-fw"></i>
+                </span>
+            </p>
+            <b-table
             :data="agentsload.data"
             :loading="loading"
             :narrowed="isNarrowed"
             :default-sort-direction="defaultSortDirection"
-             default-sort="agentsload.company">
-        <template slot-scope="props">
-        <b-table-column field="id" label="ID" width="40" sortable>
-        {{ props.row.id }}
-        </b-table-column>
-        <b-table-column field="company" label="Company Name" sortable>
-        {{ props.row.company }}
-        </b-table-column>
-        <b-table-column field="person" label="Contact Person" sortable>
-        {{ props.row.person }}
-        </b-table-column>
-        <b-table-column field="cnic" label="CNIC" sortable>
-        {{ props.row.cnic }}
-        </b-table-column>
-        <b-table-column field="mobile" label="Mobile" sortable>
-        {{ props.row.mobile }}
-        </b-table-column>
-        <b-table-column field="tel" label="Telephone" sortable>
-        {{ props.row.tel}}
-        </b-table-column>        
-        <b-table-column field="isActive" label="Status" sortable>
+            default-sort="agentsload.company">
+            <template slot-scope="props">
+            <b-table-column field="id" label="ID" width="40" sortable>
+            {{ props.row.id }}
+            </b-table-column>
+            <b-table-column field="company" label="Company Name" sortable>
+            {{ props.row.company }}
+            </b-table-column>
+            <b-table-column field="person" label="Contact Person" sortable>
+            {{ props.row.person }}
+            </b-table-column>
+            <b-table-column field="cnic" label="CNIC" sortable>
+            {{ props.row.cnic }}
+            </b-table-column>
+            <b-table-column field="mobile" label="Mobile" sortable>
+            {{ props.row.mobile }}
+            </b-table-column>
+            <b-table-column field="tel" label="Telephone" sortable>
+            {{ props.row.tel}}
+            </b-table-column>
+            <b-table-column field="isActive" label="Status" sortable>
             <b-switch v-model="props.row.isActive" name="isActive"
-            :true-value="1" 
+            :true-value="1"
             :false-value="0"
             type="is-success" @input="AgentED(props.row.id)">
             </b-switch>
-        </b-table-column>
-        <b-table-column label="Action" centered>
+            </b-table-column>
+            <b-table-column label="Action" centered>
             <router-link class="button is-success is-small" :to="{ name: 'agentShow', params: {id: props.row.id }}"><span class="mdi mdi-eye"></span></router-link>
             <router-link class="button is-warning is-small" :to="{ name: 'agentEdit', params: {id: props.row.id }}"><span class="mdi mdi-pencil-box-outline"></span></router-link>
-        <a @click="AgentDelete(props.row.id)" class="button is-danger is-small"><span class="mdi mdi-trash-can"></span></a>
-        </b-table-column>
+            <a @click="AgentDelete(props.row.id)" class="button is-danger is-small"><span class="mdi mdi-trash-can"></span></a>
+            </b-table-column>
+            </template>
+            </b-table>
+        </section>
+        <p v-show="!agentsload.data.length">No Agents available</p>
         </template>
-        </b-table>
-    </section>
-    <p v-show="!agentsload.data.length">No Agents available</p>
-    </template>
-<hr>
-        <pagination :limit="5" :show-disabled=false :data="agentsload"  @pagination-change-page="getResults"></pagination>
-        <div class="box">
-        <h1 >Oh no 😢</h1>
+        <hr>
+    <pagination :limit="5" :show-disabled=false :data="agentsload"  @pagination-change-page="getResults"></pagination>
     </div>
 </div>
-
-
 </template>
 <style >
 .available{
@@ -97,7 +89,7 @@ import moment from 'moment';
                 search:'',
                 isActive:'',
                 isNarrowed: true,
-                loading: false,
+                isLoading: false,
                 defaultSortDirection: 'asc',
                 isAvailable: 0,
                 searchvendor:[]
@@ -115,10 +107,15 @@ import moment from 'moment';
             this.loadAgents();
             }, 
              loadAgents(){
-              this.loading = true
-              axios.get("/agents./AgentsListGet").then(({data}) => (this.agentsload = data)
-                )
-              this.loading = false
+              this.isLoading = true
+              axios.get("/agents./AgentsListGet").then(({data}) => {
+                this.isLoading = false;
+                (this.agentsload = data)
+                })
+              
+              .catch(function (error) {
+                console.log(error.response);
+            });
             },
             getResults(page = 1) {
                 axios.get('/agents./AgentsListGet?page=' + page)

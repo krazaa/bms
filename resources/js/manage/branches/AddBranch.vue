@@ -9,19 +9,40 @@
                     <h3 class="title is-4">Add New Branch</h3>
                 </div>
                 </b-field>
-                <div class="field is-grouped">
+                <div class="columns is-multiline">
+                    <div class="column is-2">
+                       <div class="field">
+                        <label class="label">Code:</label>
+                        <div class="control is-expanded">
+                            <input class="input" name="code" type="text" placeholder="1234">
+                        </div>
+                    </div> 
+                    </div>
+                    <div class="column is-2">
                     <div class="field">
                         <label class="label">Branch Name:</label>
                         <div class="control">
                             <input class="input" name="name" type="text" placeholder="Branch Name">
                         </div>
                     </div>
-                    <div class="field is-expanded">
-                        <label class="label">Address:</label>
-                        <div class="control is-expanded">
-                            <input class="input" name="address" type="text" placeholder="Address">
+                </div>
+                <div class="column is-2">
+                <div class="field">
+                        <label class="label">Telephone:</label>
+                        <div class="control">
+                            <input class="input" name="contact" type="text" placeholder="0992-123456">
                         </div>
                     </div>
+                </div>
+                    <div class="column is-2">
+                    <div class="field">
+                        <label class="label">Mobile:</label>
+                        <div class="control">
+                            <input class="input" name="mobile" type="text" placeholder="e.g 923219802672">
+                        </div>
+                    </div>
+                    </div>
+                    <div class="column is-2">
                     <div class="field">
                         <label class="label">Email:</label>
                         <div class="control">
@@ -29,29 +50,26 @@
                         </div>
                     </div>
                 </div>
-                <div class="field is-grouped">
-                    <div class="field">
-                        <label class="label">Telephone:</label>
-                        <div class="control">
-                            <input class="input" name="contact" type="text" placeholder="0992-123456">
-                        </div>
-                    </div>
-                    <div class="field">
-                        <label class="label">Mobile:</label>
-                        <div class="control">
-                            <input class="input" name="mobile" type="text" placeholder="e.g 923219802672">
-                        </div>
-                    </div>
-                    <div class="field">
+                <div class="column is-2">
+                <div class="field">
                         <label class="label">City:</label>
                         <div class="control">
                             <input class="input" name="city" type="text" placeholder="e.g Abbottabad">
                         </div>
                     </div>
-                    
                 </div>
+                    <div class="column is-3">
+                    <div class="field">
+                        <label class="label">Address:</label>
+                        <div class="control is-expanded">
+                            <input class="input" name="address" type="text" placeholder="Address">
+                        </div>
+                    </div>
+                </div>
+            </div>
                 <div class="control is-flex is-pulled-right">
-                    <button class="button is-primary">Add Product</button>
+                    <button class="button is-primary">Add Branch</button>
+                </div>
                 </div>
             </div>
         </div>

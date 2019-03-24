@@ -57,7 +57,10 @@ Vue.use(VueRouter);
 //   routes: ourRoutes,
 
 // });
-
+const token = localStorage.getItem('user-token')
+if (token) {
+  axios.defaults.headers.common['Authorization'] = token
+}
 
 // router
 const router = new VueRouter({
@@ -66,8 +69,27 @@ const router = new VueRouter({
 
 });
 
+////
 
+router.beforeEach((to, from, next) => {
+  if (to.matched.some(record => record.meta.requiresAuth)) {
+    // this route requires auth, check if logged in
+    // if not, redirect to login page.
+    if (!auth.loggedIn()) {
+      next({
+        path: '/agents',
+        query: { redirect: to.fullPath }
+      })
+    } else {
+      next()
+    }
+  } else {
+    next() // make sure to always call next()!
+  }
+})
+////
 
+export default router
 
 const app = new Vue({
     el: '#app',

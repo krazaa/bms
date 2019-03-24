@@ -10,6 +10,11 @@ use DB;
 
 class AgentController extends Controller
 {
+    public function __construct()
+    {
+    $this->middleware('auth');
+    }
+    
     public function AgentsListGet()
     {
     	$agents = Agent::select('id','company','person','cnic','tel','mobile','email','baddress','haddress','isActive')->paginate(50);

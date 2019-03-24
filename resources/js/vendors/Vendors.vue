@@ -1,5 +1,9 @@
 <template>
 <div class="box">
+    <div v-if="isLoading">
+        <b-loading :active.sync="isLoading" :can-cancel="true"></b-loading>
+    </div>
+    <div v-if="!isLoading">
     <template>
     <section>
         <b-field grouped group-multiline>
@@ -54,7 +58,8 @@
 <hr>
 
         <pagination :limit="5" :show-disabled=false :data="vendors"  @pagination-change-page="getResults"></pagination>
-
+</div>
+</div>
 </div>
 </template>
 <style >
@@ -72,37 +77,39 @@
                 vendors: [],
                 searchvendor:'',
                 isNarrowed: true,
-                loading: false,
-                
+                isLoading: false,
                 defaultSortDirection: 'asc',
                 isAvailable: 0,
                 searchvendor:[]
-                
             }
         },
         mounted(){
-        // axios.get('/vendors./GetVendors')
-        //     .then((response)=> this.vendors = this.temp = response.data)
-        //     .catch((error) => this.errors = error.response.data.errors)
-        this.loadVendor();  
+            this.loadVendor();  
     },
         methods: {  
              loadVendor(){
-              this.loading = true
-              axios.get("vendors./GetVendors").then(({data}) => (this.vendors = data));
-              this.loading = false
+              this.isLoading = true
+              axios.get("vendors./GetVendors").then(({data}) => {
+                  this.isLoading = false
+                  this.vendors = data
+            });
             },
             getResults(page = 1) {
+                this.isLoading = true
                 axios.get('/vendors./GetVendors?page=' + page)
                   .then(response => {
+                    this.isLoading = false
                     this.vendors = response.data;
                 });
             },
 
             VendorGet() {
-            //var search = this
+            //this.isLoading = true
             axios.get('/vendors./VendorSearch?search=' + this.searchvendor)
-            .then(({data}) => (this.vendors = data));
+            .then(({data}) => {
+                        this.isLoading = false
+                    //this.vendors = data
+            });
                 //.then((data)=> {this.vendors = data })
         },
     }        

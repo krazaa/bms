@@ -1,5 +1,9 @@
 <template>
 <div class="box">
+     <div v-if="isLoading">
+        <b-loading :active.sync="isLoading" :can-cancel="true"></b-loading>
+    </div>
+    <div v-if="!isLoading">
     <template>
        <section v-if="cogsList.data.length > 0">
         <b-field grouped group-multiline>
@@ -22,7 +26,7 @@
         </p>
         <b-table
             :data="cogsList.data"
-            :loading="loading"
+            :loading="isLoading"
             :narrowed="isNarrowed"
             :default-sort-direction="defaultSortDirection"
              default-sort="cogsList.aname">
@@ -34,21 +38,21 @@
         {{ props.row.acode }}
         </b-table-column>
         <b-table-column field="aname" label="Account Name" sortable>
-        {{ props.row.aname }}
+        {{ props.row.aname | uppercase}}
         </b-table-column>
         <b-table-column field="incmbal" label="Income/ Balance" sortable>
         {{ props.row.incmbal }}
         </b-table-column>
-        <b-table-column field="debitcredit" label="Debit / Credite" sortable>
+        <b-table-column field="debitcredit" label="Dr/Cr" sortable>
         {{ props.row.debitcredit }}
         </b-table-column>
-        <b-table-column field="acat_id" label="Acc Category" sortable>
+        <b-table-column field="acat_id" label="Category" sortable>
         {{ props.row.cname}}
         </b-table-column>
-        <b-table-column field="actype_id" label="Account Type" sortable>
+        <b-table-column field="actype_id" label="Type" sortable>
         {{ props.row.tname}}
         </b-table-column>
-        <b-table-column field="isActive" label="E/D" sortable>
+        <b-table-column field="isActive" label="Status" sortable>
             <b-switch v-model="props.row.isActive"
             :true-value="1" 
             :false-value="0"
@@ -74,6 +78,7 @@
 <hr>
         <pagination :limit="5" :show-disabled=false :data="cogsList"  @pagination-change-page="getResults"></pagination>
 
+</div>
 </div>
 </template>
 <style >
@@ -111,9 +116,12 @@ import moment from 'moment';
               //.then(({data}) => (this.cogsList = data));
             }, 
              loadCats(){
-              this.isLoading = true
-              axios.get("/cogs./CogsList").then(({data}) => (this.cogsList = data));
-              this.isLoading = false
+                this.isLoading = true
+              axios.get('/cogs./CogsList').then(({data}) => {
+                  this.isLoading = false
+                  this.cogsList = data
+            });
+
             },
             getResults(page = 1) {
                 axios.get('/cogs./CogsList?page=' + page)
@@ -132,6 +140,11 @@ import moment from 'moment';
             return moment().format("DD-MM-YYYY");
         }
     },
+    filters: {
+        uppercase: function(v) {
+      return v.toUpperCase();
+    }
+}
 
 }
 

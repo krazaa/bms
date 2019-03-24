@@ -29,8 +29,21 @@ import exciseEdit from './excise/Edit.vue';
 
 // Employees
 import employees from './employees/Employees.vue';
-//
-import usercreate from './manage/users/UserCreate.vue';
+
+// Users
+import users from './manage/users/Users.vue';
+import userShow from './manage/users/Show.vue';
+import userCreate from './manage/users/UserCreate.vue';
+//import usercreate from './manage/users/UserCreate.vue';
+
+//Roles
+import userRoles from './manage/users/roles/Roles.vue';
+import RoleCreate from './manage/users/roles/RoleCreate.vue';
+import RoleEdit from './manage/users/roles/RoleEdit.vue';
+
+//Permissions
+import userPermissions from './manage/users/permissions/Permissions.vue';
+
 // autos products
 import autos from './products/AutosProducts.vue';
 import NewProduct from './products/AutosNewProduct.vue';
@@ -67,12 +80,25 @@ export default [
   { path: '/settings/branches/editbranch/:id', component: editbranch, name: 'editbranch', props: true},
   { path: '/settings/company', component: companysetting, name: 'company'},
 
+// Users management
+  { path: '/users', component: users, name: 'users'}, 
+  { path: '/userShow', component: userShow, name: 'UserShow'}, 
+  { path: '/userCreate', component: userCreate, name: 'userCreate'}, 
+
+// Roles
+  { path: '/roles', component: userRoles, name: 'userRoles'}, 
+  { path: '/roles/RoleCreate', component: RoleCreate, name: 'RoleCreate'}, 
+  { path: '/roles/RoleEdit/:id', component: RoleEdit, name: 'RoleEdit', props: true }, 
+
+  // Permissions
+  { path: '/permissions', component: userPermissions, name: 'userPermissions'}, 
+
 //customers
   { path: '/customers', component: customers, name: 'customers'}, 
 
 // agents
-  { path: '/agents', component: agents, name: 'agents'},
-  { path: '/agents/agentCreate', component: agentCreate, name: 'agentCreate'},
+  { path: '/agents', component: agents, name: 'agents', meta: { requiresAuth: false }},
+  { path: '/agents/agentCreate', component: agentCreate, name: 'agentCreate', meta: { requiresAuth: false }},
   { path: '/agents/agentEdit/:id', component: agentEdit, name: 'agentEdit', props: true},
 
   // Banks
