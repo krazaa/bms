@@ -107,15 +107,11 @@ import moment from 'moment';
             this.loadAgents();
             }, 
              loadAgents(){
-              this.isLoading = true
-              axios.get("/agents./AgentsListGet").then(({data}) => {
-                this.isLoading = false;
-                (this.agentsload = data)
-                })
-              
-              .catch(function (error) {
-                console.log(error.response);
-            });
+                 this.isLoading = true
+              axios.get("agents./AgentsListGet").then(({data}) => {
+                  this.isLoading = false
+                  this.agentsload = data  });
+
             },
             getResults(page = 1) {
                 axios.get('/agents./AgentsListGet?page=' + page)
