@@ -29,6 +29,7 @@
         "vee-validate": "^2.2.0",
         "vue": "^2.6.9",
         "vue-2-bulma-pagination": "0.0.8",
+        "vue-ads-table-tree": "^2.3.0",
         "vue-router": "^3.0.2"
     }
 }

@@ -42,7 +42,7 @@ class CogController extends Controller
                         WHEN cogas.debitcredit = "3" THEN "Credit" 
                         ELSE "" 
                         END) AS debitcredit'))
-    	->paginate(50); 
+    	->with('subheads')->paginate(50); 
     	return response()->json($cogs);
     }
 
