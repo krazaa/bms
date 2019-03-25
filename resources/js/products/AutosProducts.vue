@@ -50,7 +50,7 @@
             <b-switch v-model="props.row.isActive" name="isActive"
             :true-value="1" 
             :false-value="0"
-            type="is-success">
+            type="is-success" @input="ChangeStatus(props.row.id)">
             </b-switch>
         </b-table-column>
         <b-table-column label="Action" centered>
@@ -86,6 +86,13 @@
                     }
             },
             methods: {  
+                   ChangeStatus(id,){
+              axios.get("/products./autos/ChangeStatus/" + id )
+              // .then(response => { this.success = true;
+              //         })
+            //this.loadBanks();
+            },
+                
               SearchAutos(){
                     axios.get('/products./autos/SearchAutosProduct?search=' + this.search)
                       .then((data)=> {this.products = data })

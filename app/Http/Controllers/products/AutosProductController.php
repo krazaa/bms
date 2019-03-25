@@ -3,12 +3,11 @@
 namespace App\Http\Controllers\products;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
 
 use App\Http\Controllers\Controller;
 use App\modules\Autoproduct;
 use App\modules\Vendor;
-
+use DB;
 use Auth;
 
 class AutosProductController extends Controller
@@ -25,40 +24,42 @@ class AutosProductController extends Controller
 
     public function AutoProductStore(request $request)
     {   
-        $this->validate($request,[
-            'code' => 'required',
-            'name' => 'required'
+       $this->validate($request, [
+            'code' => 'required|unique:autoproducts',
+            'name' => 'required',
+            'model' => 'required'
+            
         ]);
-                //return response()->json([$request->all()]);
-        return (['message' => 'Product was successfull']);
-        // $product = new Autoproduct();
-        // $product->name = $request->name;
-        // $product->vendor_id = $request->vendor_id;
-        // $product->code = $request->code;
-        // $product->shortname = $request->shortname;
-        // $product->model = $request->model;
-        // $product->model = $request->model;
-        // $product->discountallowed = $request->discountallowed;
-        // $product->saleprice = $request->saleprice;
-        // $product->wsaleprice = $request->wsaleprice;
+                
+        $product = new Autoproduct();
+        $product->name = $request->name;
+        $product->vendor_id = $request->vendor_id;
+        $product->code = $request->code;
+        $product->shortname = $request->shortname;
+        $product->model = $request->model;
+        $product->model = $request->model;
+        $product->discountallowed = $request->discountallowed;
+        $product->saleprice = $request->saleprice;
+        $product->wsaleprice = $request->wsaleprice;
         // $product->qty = $request->qty;
-        // $product->reorder = $request->reorder;
-        // $product->maxqty = $request->maxqty;
-        // $product->maxqty = $request->maxqty;
-        // $product->cost = $request->cost;
-        // $product->saleprice = $request->saleprice;
-        // $product->user_id = Auth::user()->id;
-        // $product ->save();
+        $product->reorder = $request->reorder;
+        $product->maxqty = $request->maxqty;
+        $product->maxqty = $request->maxqty;
+        $product->cost = $request->cost;
+        $product->saleprice = $request->saleprice;
+        $product->user_id = Auth::user()->id;
+        $product ->save();
         
+        return (['message' => 'Product was successfull']);
         // return redirect('/dashboard')->with('success','Subject updated successfully');
     }
 
     public function GetAutosProducts()
     {
     	$products = Autoproduct::leftjoin('vendors','vendors.id','=' ,'autoproducts.vendor_id')
-        ->select('autoproducts.id','autoproducts.name','autoproducts.code','autoproducts.model','autoproducts.cost','autoproducts.shortname','vendors.vnum','vendors.company')
+        ->select('autoproducts.id','autoproducts.name','autoproducts.code','autoproducts.model','autoproducts.cost','autoproducts.shortname','vendors.vnum','vendors.company','autoproducts.isActive')
         //->get();
-        ->paginate(100);
+        ->paginate(20);
         return response()->json($products);
     }
 
@@ -73,6 +74,21 @@ class AutosProductController extends Controller
         ->orwhere('shortname','LIKE', "%$search%")
         ->get();
         return $products;         
+    }
+
+    public function ChangeStatus($id)
+        {
+        $bank = Autoproduct::find($id);
+
+        if($bank->isActive == 1)
+             { 
+                DB::table('autoproducts')->where('id', $id)->update(['isActive' => 0]);
+             
+             }elseif ($bank->isActive == 0) {
+                 DB::table('autoproducts')->where('id', $id)->update(['isActive' => 1]);
+             }
+
+        return ['message' => 'successfully Updated'];
     }
 
     public function SearchCode(request $request){

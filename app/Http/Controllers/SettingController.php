@@ -14,20 +14,20 @@ class SettingController extends Controller
     	return view('Settings.settings.settings');
     }
 
-    public function GetSetting()
+    public function GetSetting($id) 
     {
-    	$settings = Setting::all();
+    	$settings = Setting::find($id);
         return $settings->toArray();
     }
 
-    public function UpdateSetting(Request $request)
+    public function UpdateSetting(Request $request, $id)
     {
-    	$settings = Setting::findOrFail($request->settingid);
+    	$settings = Setting::findOrFail($id);
     	$settings->update($request->all());
 
 
-        if($request->hasFile('logo')){
-        $companylogo = $request->file('logo');
+        if($request->hasFile('file')){
+        $companylogo = $request->file('file');
         $filename = time() . '.' . $companylogo->getClientOriginalExtension();
         Image::make($companylogo)->resize(300, 300)->save(public_path('/logo/' . $filename));
         
@@ -41,6 +41,7 @@ class SettingController extends Controller
 
         $settings ->save();
 
-        return redirect('home')->with('success','Setting updated successfully');
+
+        return ['message' => 'Company Setting successfully Updated'];
     }
 }

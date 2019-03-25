@@ -10,7 +10,7 @@
                 </b-field>
                 
                 <div class="columns is-multiline">
-                    <div class="column is-4">
+                    <div class="column is-3">
                         <div class="field">
                             <label class="label">Company Name:
                             </label>
@@ -23,7 +23,7 @@
                             <p class="help is-danger" v-if="account == 'Not Available'"> Not Available</p>
                         </div>
                     </div>
-                    <div class="column is-4">
+                    <div class="column is-3">
                         <div class="field">
                             <label class="label">Contact Person:</label>
                             <div class="control">
@@ -32,7 +32,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="column is-4">
+                    <div class="column is-2">
                         <div class="field">
                             <label class="label">CNIC:</label>
                             <div class="control">
@@ -42,7 +42,7 @@
                         </div>
                     </div>
                     
-                    <div class="column is-4">
+                    <div class="column is-2">
                         <div class="field">
                             <label class="label">Mobile:</label>
                             <div class="control">
@@ -51,7 +51,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="column is-4">
+                    <div class="column is-2">
                         <div class="field">
                             <label class="label">Telephone:</label>
                             <div class="control">
@@ -61,7 +61,7 @@
                         </div>
                     </div>
                     
-                    <div class="column is-4">
+                    <div class="column is-2">
                         <div class="field">
                             <label class="label">Email:</label>
                             <div class="control">
@@ -70,7 +70,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="column is-6">
+                    <div class="column is-3">
                         <div class="field">
                             <label class="label">Business Address:</label>
                             <div class="control">
@@ -79,7 +79,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="column is-6">
+                    <div class="column is-3">
                         <div class="field">
                             <label class="label">Home Address:</label>
                             <div class="control">

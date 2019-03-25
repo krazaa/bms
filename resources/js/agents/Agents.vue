@@ -19,14 +19,10 @@
                 <router-link class="button is-primary is-pulled-right" :to="{ name: 'agentCreate' }"><i class="fa fa-user-plus m-r-10"></i> New Agent</router-link>
             </div>
             </b-field>
-            <p class="level-item">
-                <span class="is-pulled-right" v-if="loading">
-                    <i class="fa fa-refresh fa-spin fa-2x fa-fw"></i>
-                </span>
-            </p>
+            
             <b-table
             :data="agentsload.data"
-            :loading="loading"
+            :loading="isLoading"
             :narrowed="isNarrowed"
             :default-sort-direction="defaultSortDirection"
             default-sort="agentsload.company">
@@ -57,7 +53,7 @@
             </b-switch>
             </b-table-column>
             <b-table-column label="Action" centered>
-            <router-link class="button is-success is-small" :to="{ name: 'agentShow', params: {id: props.row.id }}"><span class="mdi mdi-eye"></span></router-link>
+        <!--     <router-link class="button is-success is-small" :to="{ name: 'agentShow', params: {id: props.row.id }}"><span class="mdi mdi-eye"></span></router-link> -->
             <router-link class="button is-warning is-small" :to="{ name: 'agentEdit', params: {id: props.row.id }}"><span class="mdi mdi-pencil-box-outline"></span></router-link>
             <a @click="AgentDelete(props.row.id)" class="button is-danger is-small"><span class="mdi mdi-trash-can"></span></a>
             </b-table-column>

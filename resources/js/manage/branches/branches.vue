@@ -19,9 +19,7 @@
     </b-field>
     
       <table class="table is-fullwidth is-hoverable is-narrow is-desktop is-mobile" v-if="branches.length > 0">
-        <div v-if="Studentloading" v-cloak align="center" class="loading-overlay is-active">
-          <i class="fas fa-circle-notch fa-spin fa-5x"></i>
-        </div>
+        
         <thead>
           <tr>
             <th><abbr title="id">#</abbr></th>
@@ -30,6 +28,7 @@
             <th><abbr title="city">City</abbr></th>
             <th><abbr title="contact">Telephone</abbr></th>
             <th><abbr title="mobile">Mobile</abbr></th>
+            <th><abbr title="mobile">Status</abbr></th>
             <th><abbr title="action">Action</abbr></th>
           </tr>
         </thead>
@@ -42,8 +41,13 @@
             <td>{{ branche.contact }}</td>
             <td>{{ branche.mobile }}</td>
             <td>
-                
-
+            <b-switch v-model="branche.isActive" name="isActive"
+            :true-value="1"
+            :false-value="0"
+            type="is-success" @input="StatusChange(branche.id)">
+            </b-switch>
+            </td>
+            <td>
                 <router-link class="button is-warning is-small" :to="{ name: 'editbranch', params: {id: branche.id}}"><span class="mdi mdi-pencil-box-outline"></span></router-link>
                 <a :href="`/settings./branches/removebranch/${branche.id}`" class="button is-danger is-small"><span class="mdi mdi-trash-can"></span></a>
                 <!-- <router-link :to="{ name: 'showelectronic' }">Hello World</router-link> -->
@@ -69,6 +73,12 @@
                     }
             },
             methods:{
+              StatusChange(id,){
+              axios.get("/settings./branches/ChangeStatus/" + id )
+              // .then(response => { this.success = true;
+              //         })
+            //this.loadBranchers();
+            }, 
               loadBranchers(){
               this.isLoading = true
               axios.get('/settings./branches/GetBranches').then(({data}) => {

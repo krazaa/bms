@@ -42,14 +42,14 @@ class CogController extends Controller
                         WHEN cogas.debitcredit = "3" THEN "Credit" 
                         ELSE "" 
                         END) AS debitcredit'))
-    	->with('subheads')->paginate(50); 
+    	->with('subheads')->paginate(20); 
     	return response()->json($cogs);
     }
 
     public function AcEdit($id)
     {
     	$cogs = DB::table('cogas')
-    	->select('id','typeid','acode','aname','incom_balance_id as inbal','debitcredit','actype_id as actype','acat_id','subtype','subtype','isActive')
+    	->select('id','typeid','acode','aname','incom_balance_id as inbal','debitcredit','actype_id as actype','acat_id','subtype','subtype','class','isActive')
     	->find($id);
     	return response()->json($cogs);
     }
@@ -90,6 +90,7 @@ class CogController extends Controller
         $Cogas->typeid = $request->typeid;
         $Cogas->subtype = $request->typeid;
         $Cogas->subtype2 = $request->subtype;
+        $Cogas->class = $request->class;
         $Cogas->incom_balance_id = $request->inbal;
         $Cogas->acat_id = $request->acat_id;
         $Cogas->debitcredit = $request->debitcredit;

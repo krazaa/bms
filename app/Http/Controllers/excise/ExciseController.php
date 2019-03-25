@@ -41,7 +41,7 @@ class ExciseController extends Controller
     }
     public function ExciseUpdate(Request $request, $id)
     {
-    	 $data = Bank::find($id);
+    	 $data = Excise::find($id);
 
     	 $data->update($request->all());
 

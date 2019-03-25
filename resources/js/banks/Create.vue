@@ -49,7 +49,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="column is-4">
+                    <div class="column is-2">
                         <div class="field">
                             <label class="label">Account No:
                             </label>
@@ -62,7 +62,7 @@
                             <p class="help is-danger" v-if="account == 'Not Available'"> Not Available</p>
                         </div>
                     </div>
-                    <div class="column is-3">
+                    <div class="column is-2">
                         <div class="field">
                             <label class="label">IBAN No:</label>
                             <div class="control">
@@ -89,21 +89,22 @@
                             </div>
                         </div>
                     </div>
-                    <div class="column is-2">
-                        <div class="field">
-                            <label class="label">City:</label>
-                            <div class="control">
-                                <input class="input" v-model="DataFrom.city" name="city" type="text" placeholder="e.g City" autocomplete="off">
-                                <span class="help is-danger">{{ allerros.city }}</span>
-                            </div>
-                        </div>
-                    </div>
+                    
                     <div class="column is-3">
                         <div class="field">
                             <label class="label">Address:</label>
                             <div class="control">
                                 <input class="input" v-model="DataFrom.address" name="address" type="text" placeholder="e.g Address" autocomplete="off">
                                 <span class="help is-danger">{{ allerros.address }}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="column is-2">
+                        <div class="field">
+                            <label class="label">City:</label>
+                            <div class="control">
+                                <input class="input" v-model="DataFrom.city" name="city" type="text" placeholder="e.g City" autocomplete="off">
+                                <span class="help is-danger">{{ allerros.city }}</span>
                             </div>
                         </div>
                     </div>

@@ -11,7 +11,7 @@ import cogList from './cogaccounts/cogaccounts.vue';
 import cogCreate from './cogaccounts/Create.vue';
 import cogEdit from './cogaccounts/Edit.vue';
 import cogShow from './cogaccounts/Show.vue';
-
+ 
 //Customser
 import customers from './customers/Customers.vue';
 // Agents
@@ -58,6 +58,7 @@ import ElectronicShow from './products/ElectronicShow.vue';
 // vendors
 import vendors from './vendors/Vendors.vue';
 import vendorCreate from './vendors/VendorCreate.vue';
+import VendorEdit from './vendors/VendorEdit.vue';
 // category
 import category from './category/Categories.vue';
 import CatCreate from './category/CatCreate.vue';
@@ -129,6 +130,7 @@ export default [
 // vendors
   { path: '/vendors/', component: vendors, name: 'vendors'},
   { path: '/vendors/create', component: vendorCreate, name: 'create'},
+  { path: '/vendors/vendorEdit/:id', component: VendorEdit, name: 'vendorEdit', props: true},
 
 // category
   { path: '/category/manage', component: category, name: 'manage'},

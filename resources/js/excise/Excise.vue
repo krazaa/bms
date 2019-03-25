@@ -23,11 +23,6 @@
             <router-link class="button is-primary is-pulled-right" :to="{ name: 'excisentaxationCreate' }"><i class="fa fa-user-plus m-r-10"></i> New Office</router-link>
         </div>
         </b-field>
-        <p class="level-item">
-            <span class="is-pulled-right" v-if="loading">
-                <i class="fa fa-refresh fa-spin fa-2x fa-fw"></i>
-            </span>
-        </p>
         <b-table
             :data="exciseload.data"
             :loading="loading"
@@ -52,9 +47,16 @@
         </b-table-column>
         <b-table-column field="selling" label="Selling" sortable>
         {{ props.row.selling}}
-        </b-table-column>        
+        </b-table-column>
+        <b-table-column field="isActive" label="Status" sortable>
+            <b-switch v-model="props.row.isActive" name="isActive"
+            :true-value="1"
+            :false-value="0"
+            type="is-success" @input="ExciseED(props.row.id)">
+            </b-switch>
+            </b-table-column>        
         <b-table-column label="Action" centered>
-            <router-link class="button is-success is-small" :to="{ name: 'bankShow', params: {id: props.row.id }}"><span class="mdi mdi-eye"></span></router-link>
+            <!-- <router-link class="button is-success is-small" :to="{ name: 'bankShow', params: {id: props.row.id }}"><span class="mdi mdi-eye"></span></router-link> -->
             <router-link class="button is-warning is-small" :to="{ name: 'excisentaxationEdit', params: {id: props.row.id }}"><span class="mdi mdi-pencil-box-outline"></span></router-link>
         <a @click="ExciseDelete(props.row.id)" class="button is-danger is-small"><span class="mdi mdi-trash-can"></span></a>
         </b-table-column>
@@ -107,13 +109,12 @@ import moment from 'moment';
               axios.get("/excise./ExciseED/" + id )
               // .then(response => { this.success = true;
               //         })
-            this.loadBanks();
             }, 
              loadExcise(){
-              this.loading = true
-              axios.get("/excise./ExciseListGet").then(({data}) => (this.exciseload = data)
-                )
-              this.loading = false
+              
+              axios.get("/excise./ExciseListGet")
+              .then(({data}) => (this.exciseload = data))
+              
             },
             getResults(page = 1) {
                 axios.get('/excise./ExciseListGet?page=' + page)

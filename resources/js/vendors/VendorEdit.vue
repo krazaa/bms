@@ -1,10 +1,10 @@
 <template>
-<form method="POST" @submit.prevent="onSubmit">
+<form method="POST" @submit.prevent="updateSignal(vendors.id)">
     <!-- <input type="hidden" name="_token" :value="csrf"> -->
     <div class="columns" v-if="!success">
         <div class="box">
             <div class="columns is-multiline">
-                <div class="column is-4"><h3 class="title is-4">Add New Vendor</h3></div>
+                <div class="column is-4"><h3 class="title is-4">Edit Vendor</h3></div>
                 <div class="column is-8">
                     <nav class="breadcrumb is-right" aria-label="breadcrumbs">
                         <ul>
@@ -29,7 +29,7 @@
                     <div class="field">
                         <label class="label">Vendor Code: </label>
                         <div class="control">
-                            <input class="input" v-model="FromData.vnum" name="vnum" type="text" placeholder="e.g B18123456">
+                            <input class="input" v-model="vendors.vnum" name="vnum" type="text" placeholder="e.g B18123456">
                         </div>
                     </div>
                 </div>
@@ -37,17 +37,17 @@
                     <label class="label">Company Name: </label>
                     <div class="field">
                         <div class="control">
-                            <input class="input" v-model="FromData.company" name="company" type="text" placeholder="e.g Team Xperts"  @keyup="GetVendor" autocomplete="off">
+                            <input class="input" v-model="vendors.company" name="company" type="text" placeholder="e.g Team Xperts"  autocomplete="off">
                         </div>
-                        <p class="help is-success list-inline" v-if="vendor == 'Available'"> {{ vendor }} is available.</p>
-                        <p class="help is-danger" v-if="vendor == 'Not Available'"> {{ vendor }} Not Available.</p>
+                    <!--     <p class="help is-success list-inline" v-if="vendor == 'Available'"> {{ vendor }} is available.</p>
+                        <p class="help is-danger" v-if="vendor == 'Not Available'"> {{ vendor }} Not Available.</p> -->
                     </div>
                 </div>
                 <div class="column is-2">
                     <div class="field">
                         <label class="label">Contact Person: </label>
                         <div class="control">
-                            <input class="input" v-model="FromData.person" name="person" type="text" placeholder="e.g Person name">
+                            <input class="input" v-model="vendors.person" name="person" type="text" placeholder="e.g Person name">
                         </div>
                     </div>
                 </div>
@@ -55,7 +55,7 @@
                     <div class="field">
                         <label class="label">Telephone: </label>
                         <div class="control">
-                            <input class="input" v-model="FromData.contact" name="contact" type="text" placeholder="e.g Telephone no">
+                            <input class="input" v-model="vendors.contact" name="contact" type="text" placeholder="e.g Telephone no">
                         </div>
                     </div>
                 </div>
@@ -63,7 +63,7 @@
                     <div class="field">
                         <label class="label">Mobile:</label>
                         <div class="control">
-                            <input class="input" v-model="FromData.mobile" name="mobile" type="text" placeholder="e.g 923219802672">
+                            <input class="input" v-model="vendors.mobile" name="mobile" type="text" placeholder="e.g 923219802672">
                         </div>
                     </div>
                 </div>
@@ -72,7 +72,7 @@
                     <div class="field">
                         <label class="label">Another mobile:</label>
                         <div class="control">
-                            <input class="input" v-model="FromData.bmobile" name="bmobile" type="text" placeholder="e.g 923219802672">
+                            <input class="input" v-model="vendors.bmobile" name="bmobile" type="text" placeholder="e.g 923219802672">
                         </div>
                     </div>
                 </div>
@@ -80,7 +80,7 @@
                     <div class="field">
                         <label class="label">Address:</label>
                         <div class="control">
-                            <input class="input" v-model="FromData.address" name="address" type="text" placeholder="e.g your address">
+                            <input class="input" v-model="vendors.address" name="address" type="text" placeholder="e.g your address">
                         </div>
                     </div>
                 </div>
@@ -88,7 +88,7 @@
                     <div class="field">
                         <label class="label">Email:</label>
                         <div class="control">
-                            <input class="input" v-model="FromData.email" name="email" type="text" placeholder="e.g vendor@gmail.com">
+                            <input class="input" v-model="vendors.email" name="email" type="text" placeholder="e.g vendor@gmail.com">
                         </div>
                     </div>
                 </div>
@@ -96,7 +96,7 @@
                     <div class="field">
                         <label class="label">Website:</label>
                         <div class="control">
-                            <input class="input" v-model="FromData.website" name="website" type="text" placeholder="e.g www.example.com">
+                            <input class="input" v-model="vendors.website" name="website" type="text" placeholder="e.g www.example.com">
                         </div>
                     </div>
                 </div>
@@ -104,7 +104,7 @@
                     <div class="field">
                         <label class="label">NTN No:</label>
                         <div class="control">
-                            <input class="input" v-model="FromData.ntn" name="ntn" type="text" placeholder="e.g NTN 445566">
+                            <input class="input" v-model="vendors.ntn" name="ntn" type="text" placeholder="e.g NTN 445566">
                         </div>
                     </div>
                 </div>
@@ -112,7 +112,7 @@
                     <div class="field">
                         <label class="label">Sales Tax No:</label>
                         <div class="control">
-                            <input class="input" v-model="FromData.salestax" name="salestax" type="text" placeholder="e.g ST-33-44545">
+                            <input class="input" v-model="vendors.salestax" name="salestax" type="text" placeholder="e.g ST-33-44545">
                         </div>
                     </div>
                 </div>
@@ -120,7 +120,7 @@
         </div>
     </div>
     <div class="control is-flex is-pulled-right">
-        <button class="button is-primary">Add Vendor</button>
+        <button class="button is-primary">Update Vendor</button>
     </div>
 </div>
 </div>
@@ -128,57 +128,53 @@
 <div class="notification is-success" v-if="success">
 <h2 class="title is-2"> Vendor successfully Stored! </h2>
 <br>
-<router-link class="button is-primary is-pulled-right" :to="{ name: 'vendors' }"><i class="fa fa-user-plus m-r-10"></i>Click to Back Vendor</router-link>
+<router-link class="button is-info is-pulled-right" :to="{ name: 'vendors' }"><i class="fa fa-user-plus m-r-10"></i>Click to Back Vendor</router-link>
 </div>
 </form>
 </template>
 <script>
     export default {
+        props: ['id'], 
         data(){
-            return {
-                vendor: '',
-                search:'',
-                success: false,
-                allerros:'',
-                loading: false,
-                FromData: {
-                    vnum: '',
-                    company: '',
-                    person: '',
-                    contact: '',
-                    mobile: '',
-                    bmobile: '',
-                    address: '',
+            return {                
+                vendors: {
+                    vnum:'',
+                    company:'',
+                    person:'',
+                    contact:'',
+                    mobile:'',
+                    bmobile:'',
+                    address:'',
                     email:'',
                     website:'',
                     ntn:'',
                     salestax:'',
-                    
-                }
-                //csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-                
+                    },
+                allerros: false,
+                success: false,
+                loading: false,
+               
             }
         },
-        methods: {
-            GetVendor() {
-            //this.loading = true;
-                var searchv = this
-                axios.get('/vendors./SearchVendor?company=' + this.FromData.company)
-                .then(function(response) {
-                Vue.set(searchv.$data, 'vendor', response.data)
-                //searchv.loading = false;
-                }).catch(error => {"erro found"});
-        },
-         onSubmit(){
-                axios.post('/vendors./VendorStore', this.FromData)
-                      .then(response => { this.success = true;
-                      })
+        methods:{
+             updateSignal: function (id) {
+            axios.post('/vendors./VendorhUpdate/' + id, this.vendors)
+                .then(response => { this.success = true;
+                 })
                     .catch((error) => {
                         this.allerros = error.response.data.errors;
                         this.success = false;
                    });
-                }
-    }
-}
+        },
+        ShowSingle(){
+            axios.get(`/vendors./editVendor/${this.$route.params.id}`)
+            .then((response)=> this.vendors = this.temp = response.data)
+            .catch((error) => this.errors = error.response.data.errors)
+            }
 
+            },
+        mounted(){
+            this.ShowSingle();            
+        }
+    }
 </script>

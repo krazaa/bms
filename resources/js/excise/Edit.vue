@@ -1,105 +1,81 @@
 <template>
-<!-- <form method="POST" action="/agents./AgentUpdate/{AgentForm.id}" @submit.prevent="onSubmit"> -->
-<form>
+<form @submit.prevent="updateSignal(excise.id)">
     <div class="columns" v-if="!success">
         <div class="column is-10 is-offset-1">
             <div class="box">
                 <b-field grouped group-multiline>
                 <div class="control">
-                    <h3 class="title is-4">Add Edit Bank</h3>
+                    <h3 class="title is-4">Update Excise and Taxation Office</h3>
                 </div>
                 </b-field>
-                    <input class="input" v-model="DataFrom.agentid" name="id" type="hidden">            
+                
                 <div class="columns is-multiline">
-                    <div class="column is-4">
+                    <div class="column is-3">
                         <div class="field">
-                            <label class="label">Bank Name:</label>
+                            <label class="label">Excise and Taxation Office:</label>
                             <div class="control">
-                                <input class="input" v-model="DataFrom.bank" name="bank" type="text" placeholder="e.g National Bank of Pakistan" autocomplete="off">
-                                <span class="help is-danger">{{ allerros.bank }}</span>
+                                <input class="input" v-model="excise.office" name="office" type="text" placeholder="e.g Office Name" autocomplete="off">
+                                <span class="help is-danger">{{ allerros.office }}</span>
                             </div>
                         </div>
                     </div>
-                    <div class="column is-4">
+                    <div class="column is-2">
                         <div class="field">
-                            <label class="label">Account No:
+                            <label class="label">Model:
                             </label>
                             <div class="control">
-                                <input class="input" v-model="DataFrom.account" name="account" type="text" placeholder="e.g 830158" @keyup="Availability()" autocomplete="off">
-                                <span class="help is-danger">{{ allerros.account }}</span>
+                                <input class="input" v-model="excise.model" name="model" type="text" placeholder="e.g 345345-3" autocomplete="off">
+                                <span class="help is-danger">{{ allerros.model }}</span>
                             </div>
-                            
-                            <p class="help is-success list-inline" v-if="account == 'Available'">{{ DataFrom.account }} Available</p>
-                            <p class="help is-danger" v-if="account == 'Not Available'"> Not Available</p>
                         </div>
                     </div>
-                    <div class="column is-4">
+                    <div class="column is-3">
                         <div class="field">
-                            <label class="label">IBAN No:</label>
-                            <div class="control">
-                                <input class="input" v-model="DataFrom.iban" name="iban" type="text" placeholder="e.g KZ750902L8R3Y6P5PP0N" autocomplete="off">
-                                <span class="help is-danger">{{ allerros.iban }}</span>
+                            <div class="field">
+                                <label class="label">Select Agent:</label>
+                                <div class="control">
+                                    <div class="select">
+                                        <select name="agent_id" v-model="excise.agent_id" required>
+                                            <option selected disabled>Select one</option>
+                                            <option v-for="agent in agentsload" :value="agent.id">{{ agent.company }} {{ agent.person }} </option>
+                                            
+                                        </select>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                     
-                    <div class="column is-4">
+                    <div class="column is-2">
                         <div class="field">
-                            <label class="label">Branch Code:</label>
+                            <label class="label">Cost:</label>
                             <div class="control">
-                                <input class="input" v-model="DataFrom.branchcode" name="branchcode" type="text" placeholder="e.g DQMPFCI4" autocomplete="off">
-                                <span class="help is-danger">{{ allerros.branchcode }}</span>
+                                <input class="input" v-model="excise.cost" name="Cost" type="number" placeholder="e.g 0545" autocomplete="off">
+                                <span class="help is-danger">{{ allerros.Cost }}</span>
                             </div>
                         </div>
                     </div>
-                    <div class="column is-4">
+                    <div class="column is-2">
                         <div class="field">
-                            <label class="label">Telephone:</label>
+                            <label class="label">Selling:</label>
                             <div class="control">
-                                <input class="input" v-model="DataFrom.phone" name="phone" type="text" placeholder="e.g 92992654321" autocomplete="off">
-                                <span class="help is-danger">{{ allerros.phone }}</span>
+                                <input class="input" v-model="excise.selling" name="selling" type="number" placeholder="e.g Rs,23423" autocomplete="off">
+                                <span class="help is-danger">{{ allerros.selling }}</span>
                             </div>
                         </div>
                     </div>
-                    <div class="column is-4">
-                        <div class="field">
-                            <label class="label">Mobile:</label>
-                            <div class="control">
-                                <input class="input" v-model="DataFrom.mobile" name="mobile" type="text" placeholder="e.g 92992654000" autocomplete="off">
-                                <span class="help is-danger">{{ allerros.mobile }}</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="column is-6">
-                        <div class="field">
-                            <label class="label">City:</label>
-                            <div class="control">
-                                <input class="input" v-model="DataFrom.city" name="city" type="text" placeholder="e.g City" autocomplete="off">
-                                <span class="help is-danger">{{ allerros.city }}</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="column is-6">
-                        <div class="field">
-                            <label class="label">Address:</label>
-                            <div class="control">
-                                <input class="input" v-model="DataFrom.address" name="address" type="text" placeholder="e.g Bank address" autocomplete="off">
-                                <span class="help is-danger">{{ allerros.address }}</span>
-                            </div>
-                        </div>
-                    </div>
+
                 </div>
-    
                 <div class="control is-flex is-pulled-right">
-                    <button class="button is-primary" @click="onSubmit">Update Bank</button>
+                    <button class="button is-primary">Update Office</button>
                 </div>
             </div>
         </div>
     </div>
     <div class="notification is-success" v-if="success">
-        <h2 class="title is-2"> Bank successfully Stored! </h2>
+        <h2 class="title is-2"> Excise and Taxation Office successfully Stored! </h2>
         <br>
-        <router-link class="button is-primary is-pulled-right" :to="{ name: 'banks' }"><i class="fa fa-user-plus m-r-10"></i>Click to Back Banks</router-link>
+        <router-link class="button is-info is-pulled-right" :to="{ name: 'excisentaxation' }"><i class="fa fa-user-plus m-r-10"></i>Click to Back Excise and Taxation Office list</router-link>
     </div>
 </form>
 </template>
@@ -113,50 +89,42 @@
                 allerros: [],
                 account: '',
                 status: '',
-                loading: false,
-                DataFrom: {
-                    bank: '',
-                    account: '',
-                    iban: '',
-                    branchcode: '',
-                    phone: '',
-                    address: '',
-                    city: '',
-                    mobile:'',
-                }
+                agentsload: '',
+                isLoading: false,
+                
+                excise: {
+                    office: '',
+                    model: '',
+                    agent_id: '',
+                    cost: '',
+                    selling: '',
+                },
+               
                 
             }
         },
         methods: {
-                BankEdit(){
-                axios.get('/banks./BankEdit/' + this.id)
-                    .then(response => {
-                  this.DataFrom = response.data;
-                  });
-            },
-            Availability() {
-                this.loading = true;
-                    var searchv = this
-                    axios.get('/banks./CheckAccount?account=' + this.DataFrom.account)
-                    .then(function(response) {
-                    Vue.set(searchv.$data, 'account', response.data)
-                    searchv.loading = false;
-                        })
-                    //.catch(`error` => {"erro found"});
-            },
-            onSubmit(){
-                axios.put('/banks./BankUpdate/', this.$route.params.DataFrom, this.DataFrom)
-                      .then(response => { this.success = true;
-                      })
+                updateSignal: function (id) {
+                 axios.post('/excise./ExciseUpdate/' + id, this.excise)
+                .then(response => { this.success = true;
+                 })
                     .catch((error) => {
                         this.allerros = error.response.data.errors;
                         this.success = false;
                    });
-                }
             },
+            
+             ShowSingle(){
+            axios.get(`/excise./ExciseEdit/${this.$route.params.id}`)
+                .then((response)=> this.excise = this.temp = response.data)
+                //.catch((error) => this.errors = error.response.data.errors)
+                        }    
+                },
+    
         mounted(){
-        this.BankEdit();  
-        
+            this.ShowSingle();  
+            axios.get("/excise./GetAgents").then(({data}) => (this.agentsload = data));  
+            
         },    
 }
 

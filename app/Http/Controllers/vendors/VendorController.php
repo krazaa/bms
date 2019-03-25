@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 use App\modules\Vendor;
+use DB;
 
 class VendorController extends Controller
 {
@@ -16,13 +17,27 @@ class VendorController extends Controller
 
     public function GetVendors()
     {
-    	$vendors = Vendor::paginate(50);
+    	$vendors = Vendor::select('id','vnum','company','person','contact','mobile','bmobile','address','email','website','salestax','ntn','isActive')->paginate(20);
         return $vendors->toArray();
     }
 
     public function create()
     {
         return view('vendors.create');
+    }
+     public function VendorEdit($id)
+    {
+        $vendors = Vendor::find($id);
+        return $vendors->toArray();
+    }
+
+        public function VendorhUpdate(Request $request, $id)
+    {
+        $Vendor = Vendor::findOrFail($id);  
+        $Vendor ->update($request->all());
+        $Vendor ->save();
+        
+        return ['message' => 'Vendor successfully Updated'];
     }
 
     public function VendorStore(request $request)
@@ -67,5 +82,25 @@ class VendorController extends Controller
         ->orwhere('vnum','LIKE', "%$search%")
         ->paginate(50);
         return $vendors->toArray();    
+    }
+
+    public function VendorED($id)
+    {
+    $vendor = Vendor::find($id);
+
+        if($vendor->isActive == 1)
+             { 
+                DB::table('vendors')->where('id', $id)->update(['isActive' => 0]);
+             
+             }elseif ($vendor->isActive == 0) {
+                 DB::table('vendors')->where('id', $id)->update(['isActive' => 1]);
+             }
+
+        return ['message' => 'Vendor successfully Updated'];
+    }
+    public function RecordDelete($id)
+    {
+        $data = Vendor::find($id)->delete();
+        return ['message' => 'Vendor successfully Deleted'];
     }
 }

@@ -1,6 +1,6 @@
 <template>
-    <form class="form-horizontal" method="POST" :action="`/settings./branches/branchupdate/${branch.id}`">
-    <input type="hidden" name="_token" :value="csrf">
+    <form class="form-horizontal" method="POST" @submit.prevent="updateSignal(branch.id)">
+    <div class="columns" v-if="!success">
     <div class="columns is-multiline">
         <div class="column is-12">
             <div class="box">
@@ -90,25 +90,54 @@
             </div>
         </div>
     </div>
+    </div>
+     <div class="notification is-success" v-if="success">
+        <h2 class="title is-2"> Branch successfully Updated! </h2>
+        <br>
+        <router-link class="button is-primary is-pulled-right" :to="{ name: 'branches' }"><i class="fa fa-user-plus m-r-10"></i>Click to Back Branches</router-link>
+</div>
 </form>
 </template>
 <script>
     export default {
         props: ['id'], 
-
         data(){
             return {
                 
-                branch: [],
+                branch: {
+                    name:'',
+                    code:'',
+                    address:'',
+                    mobile:'',
+                    email:'',
+                    city:'',
+                    },
+                allerros: false,
+                success: false,
                 loading: false,
-                csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+                //csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
                
             }
         },
+        methods:{
+             updateSignal: function (id) {
+            axios.post('/settings./branches/branchupdate/' + id, this.branch)
+                .then(response => { this.success = true;
+                 })
+                    .catch((error) => {
+                        this.allerros = error.response.data.errors;
+                        this.success = false;
+                   });
+        },
+        ShowSingle(){
+            axios.get(`/settings./branches/ShowSingle/${this.$route.params.id}`)
+            .then((response)=> this.branch = this.temp = response.data)
+            .catch((error) => this.errors = error.response.data.errors)
+            }
+
+            },
         mounted(){
-        axios.get('/settings./branches/ShowSingle/' + this.id)
-        .then((response)=> this.branch = this.temp = response.data)
-        .catch((error) => this.errors = error.response.data.errors)
+            this.ShowSingle();            
         }
     }
 </script>

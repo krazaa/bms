@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 
 use App\Branch;
 
+use DB;
+
 class BranchesController extends Controller
 {
     /**
@@ -80,8 +82,8 @@ class BranchesController extends Controller
     }
 
     public function ShowSingle($id)
-    {
-        $branch = Branch::find($id);
+    { 
+        $branch = Branch::find($id); 
         return $branch->toArray();    
     }
 
@@ -98,7 +100,22 @@ class BranchesController extends Controller
         $branch ->update($request->all());
         $branch ->save();
         
-        return redirect('/dashboard')->with('success','Subject updated successfully');
+        return ['message' => 'Branch successfully Updated'];
+    }
+
+     public function ChangeStatus($id)
+        {
+        $vendor = Branch::find($id);
+
+        if($vendor->isActive == 1)
+             { 
+                DB::table('branches')->where('id', $id)->update(['isActive' => 0]);
+             
+             }elseif ($vendor->isActive == 0) {
+                 DB::table('branches')->where('id', $id)->update(['isActive' => 1]);
+             }
+
+        return ['message' => 'successfully Updated'];
     }
 
     /**

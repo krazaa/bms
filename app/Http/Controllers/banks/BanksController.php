@@ -11,7 +11,7 @@ class BanksController extends Controller
 {
      public function banksListGet()
     {
-    	$banks = Bank::select('id','account','bank','iban','branchcode','mobile','phone','address','city','isActive')->paginate(50);
+    	$banks = Bank::select('id','account','bank','iban','branchcode','mobile','phone','address','city','isActive')->paginate(20);
         return $banks->toArray();
     }
     public function BankEdit($id)
@@ -49,7 +49,7 @@ class BanksController extends Controller
         ->orwhere('account','LIKE', "%$search%")
         ->orwhere('city','LIKE', "%$search%")
         ->orwhere('branchcode','LIKE', "%$search%")
-        ->paginate(50);
+        ->paginate(20);
         return $banks->toArray();    
     }
     public function BankStore(Request $request)

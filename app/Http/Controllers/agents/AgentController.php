@@ -5,24 +5,24 @@ namespace App\Http\Controllers\agents;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\modules\Agent;
-
 use DB;
 
 class AgentController extends Controller
 {
-    public function __construct()
-    {
-    $this->middleware('auth');
-    }
+    // public function __construct()
+    // {
+    // $this->middleware('auth');
+    // }
     
     public function AgentsListGet()
     {
-    	$agents = Agent::select('id','company','person','cnic','tel','mobile','email','baddress','haddress','isActive')->paginate(50);
+        $agents = Agent::select('id','company','person','cnic','tel','mobile','email','baddress','haddress','isActive')->paginate(20);
         return $agents->toArray();
     }
+
     public function AgentEdit($id)
     {
-    	$agents = Agent::select('id','company','person','cnic','tel','mobile','email','baddress','haddress','isActive')->find($id);
+    	$agents = Agent::find($id);
         return $agents->toArray();
     }
     public function AgentED($id)
@@ -42,12 +42,10 @@ class AgentController extends Controller
     public function AgentUpdate(Request $request, $id)
     {
     	 
-            return $id;
          $Agents = Agent::find($id);
-
     	 $Agents->update($request->all());
 
-    	return ['message' => 'Agent successfully Updated'];
+    return response()->json(['message' => 'This request succeeded.'], 200);
 
     }
     public function AgentSearch(request $request)
@@ -58,7 +56,7 @@ class AgentController extends Controller
         ->orwhere('cnic','LIKE', "%$search%")
         ->orwhere('mobile','LIKE', "%$search%")
         ->orwhere('tel','LIKE', "%$search%")
-        ->paginate(50);
+        ->paginate(20);
         return $agents->toArray();    
     }
     public function AgentStore(Request $request)

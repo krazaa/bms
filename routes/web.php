@@ -1,7 +1,7 @@
 <?php
 
 
-Auth::routes();
+Auth::routes(); 
 
 //Route::prefix('bms')->group(function () {
 
@@ -9,15 +9,19 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 //Route::get('{path}', "HomeController@index")->where('path', '([A-z\d-\/_.]+)?' );
 
-
+ 
 //Start Vendors routes
 Route::prefix('vendors.')->middleware('role:superadministrator|administrator|editor|author|contributor')->group(function () {
     //Route::get('/', 'vendors\VendorController@index')->name('vendors');
     Route::get('/GetVendors', 'vendors\VendorController@GetVendors')->name('vendors.GetVendors');
+    Route::get('/editVendor/{id}', 'vendors\VendorController@VendorEdit')->name('vendors.editVendor');
     Route::get('/create', 'vendors\VendorController@create')->name('vendors.create');
     Route::post('/VendorStore', 'vendors\VendorController@VendorStore')->name('vendors.VendorStore');
+    Route::post('/VendorhUpdate/{id}', 'vendors\VendorController@VendorhUpdate')->name('vendors.VendorhUpdate');
     Route::get('/SearchVendor', 'vendors\VendorController@SearchVendor')->name('vendors.SearchVendor');
     Route::get('/VendorSearch', 'vendors\VendorController@VendorSearch')->name('vendors.VendorSearch');
+    Route::get('/VendorED/{id}', 'vendors\VendorController@VendorED')->name('vendors.VendorED');
+    Route::get('/VendorDelete/{id}', 'vendors\VendorController@RecordDelete')->name('vendors.VendorDelete');
 });
 //End vendors routes
 
@@ -41,10 +45,10 @@ Route::prefix('banks.')->group(function () {
     Route::get('/BankSearch', 'banks\BanksController@BankSearch')->name('banks.BankSearch');
     Route::get('/BankEdit/{id}', 'banks\BanksController@BankEdit')->name('banks.BankEdit');
     Route::get('/BankED/{id}', 'banks\BanksController@BankED')->name('banks.BankED');
-    Route::get('/BankDelete/{id}', 'banks\BanksController@BanksDelete')->name('banks.BankDelete');
+    Route::get('/BankDelete/{id}', 'banks\BanksController@bankDelete')->name('banks.BankDelete');
     Route::get('/CheckAccount', 'banks\BanksController@AvailabilityCheck')->name('banks.CheckAccount');
     Route::post('/BankStore', 'banks\BanksController@BankStore')->name('banks.BankStore');
-    Route::post('/BankUpdate/{id}', 'banks\BanksController@BanksUpdate')->name('banks.BankUpdate');
+    Route::post('/bankUpdate/{id}', 'banks\BanksController@bankUpdate')->name('banks.bankUpdate');
     
 });
 //End Banks routes
@@ -101,6 +105,7 @@ Route::prefix('products.')->group(function () {
     Route::get('autos/SearchAutosProduct/', 'products\AutosProductController@SearchAutosProduct')->name('products.autos.SearchAutosProduct');
     Route::get('autos/SearchCode/', 'products\AutosProductController@SearchCode')->name('products.autos.SearchCode');
     Route::get('autos/ShowAutosSingle/{id}', 'products\AutosProductController@ShowAutosSingle')->name('products.autos.ShowAutosSingle');
+    Route::get('autos/ChangeStatus/{id}', 'products\AutosProductController@ChangeStatus')->name('products.autos.ChangeStatus');
     Route::get('autos/ShowSingle/{id}', 'products\AutosProductController@ShowSingle')->name('products.autos.ShowSingle');
     Route::get('autos/ShowEdit/{id}', 'products\AutosProductController@ShowEdit')->name('products.autos.ShowEdit');
     Route::get('autos/ShowEditFrm/{id}', 'products\AutosProductController@ShowAutosEdit')->name('products.autos.ShowEditFrm');
@@ -124,7 +129,7 @@ Route::prefix('products.')->group(function () {
     Route::get('/electronic/ShowSingle/{id}', 'products\ElectronicProductController@ShowSingle')->name('products.electronic.ShowSingle');
 
     
-    });
+    }); 
 //End products routes
 
 //Start Purchase Orders routes
@@ -138,15 +143,16 @@ Route::prefix('purchase-order.')->group(function () {
 //End Purchase Orders routes
 
 //Start Settings routes
+// Route::post('/cutest', 'SettingController@cutest')->name('cutest');
 Route::prefix('settings.')->group(function () {
     Route::get('/company', 'SettingController@index')->name('settings.company');
-	Route::get('/getsetting', 'SettingController@GetSetting')->name('settings.getsetting');
-	Route::post('/updatesetting', 'SettingController@UpdateSetting')->name('settings.updatesetting');
+	Route::get('/getsetting/{id}', 'SettingController@GetSetting')->name('settings.getsetting');
+	Route::post('/updatesetting/{id}', 'SettingController@UpdateSetting')->name('settings.updatesetting');
 
     // Branches
     Route::get('/branches', 'settings\BranchesController@index')->name('settings.branches');
     Route::get('/branches/GetBranches', 'settings\BranchesController@GetBranches')->name('settings.branches.GetBranches');
-    //Route::get('/branches/newbranch', 'settings\BranchesController@create')->name('settings.branches.newbranch');
+    Route::get('/branches/ChangeStatus/{id}', 'settings\BranchesController@ChangeStatus')->name('settings.branches.ChangeStatus');
     Route::post('/branches/branchstore', 'settings\BranchesController@store')->name('settings.branches.branchstore');
     //Route::get('/branches/editbranch/{id}', 'settings\BranchesController@edit')->name('settings.branches.editbranch');
     Route::get('/branches/ShowSingle/{id}', 'settings\BranchesController@ShowSingle')->name('settings.branches.ShowSingle');

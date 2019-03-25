@@ -10,7 +10,7 @@
                 </b-field>
                 
                 <div class="columns is-multiline">
-                    <div class="column is-4">
+                    <div class="column is-3">
                         <div class="field">
                             <label class="label">Excise and Taxation Office:</label>
                             <div class="control">
@@ -19,9 +19,9 @@
                             </div>
                         </div>
                     </div>
-                    <div class="column is-4">
+                    <div class="column is-2">
                         <div class="field">
-                            <label class="label">Model :
+                            <label class="label">Model:
                             </label>
                             <div class="control">
                                 <input class="input" v-model="DataFrom.model" name="model" type="text" placeholder="e.g 345345-3" autocomplete="off">
@@ -29,7 +29,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="column is-4">
+                    <div class="column is-3">
                         <div class="field">
                             <div class="field">
                                 <label class="label">Select Agent:</label>
@@ -46,7 +46,7 @@
                         </div>
                     </div>
                     
-                    <div class="column is-4">
+                    <div class="column is-2">
                         <div class="field">
                             <label class="label">Cost:</label>
                             <div class="control">
@@ -55,7 +55,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="column is-4">
+                    <div class="column is-2">
                         <div class="field">
                             <label class="label">Selling:</label>
                             <div class="control">

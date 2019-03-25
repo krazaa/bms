@@ -4,14 +4,14 @@
         <b-loading :active.sync="isLoading" :can-cancel="true"></b-loading>
     </div>
     <div v-if="!isLoading">
-        <form @submit.prevent="updateItem(AgentFrom.id)">
+        <form @submit.prevent="updateSignal(agents.id)">
             <div class="columns" v-if="!success">
                 <div class="column is-10 is-offset-1">
                     <div class="box">
                        <div class="columns is-multiline">
                     <div class="column is-4"><h3 class="title is-4">Update Agent</h3></div>
                     <div class="column is-8">
-                        <nav class="breadcrumb is-right" aria-label="breadcrumbs">
+                         <nav class="breadcrumb is-right" aria-label="breadcrumbs">
                             <ul>
                                 <li>
                                     <span class="icon is-small">
@@ -29,81 +29,79 @@
                         </nav>
                     </div>
                 </div>
-                        <input class="input" v-model="AgentFrom.agentid" name="id" type="hidden">
+                        
                         <div class="columns is-multiline">
-                            <div class="column is-4">
+                            <div class="column is-3">
                                 <div class="field">
                                     <label class="label">Company Name:
                                     </label>
                                     <div class="control">
-                                        <input class="input" v-model="AgentFrom.company" name="company" type="text" placeholder="e.g PTCL" @keyup="Availability()" autocomplete="off">
+                                        <input class="input" v-model="agents.company" name="company" type="text" placeholder="e.g PTCL" autocomplete="off">
                                         <span class="help is-danger">{{ allerros.company }}</span>
                                     </div>
                                     
-                                    <p class="help is-success list-inline" v-if="account == 'Available'">{{ AgentFrom.company }} Available</p>
-                                    <p class="help is-danger" v-if="account == 'Not Available'"> Not Available</p>
                                 </div>
                             </div>
-                            <div class="column is-4">
+                            <div class="column is-3">
                                 <div class="field">
                                     <label class="label">Contact Person:</label>
                                     <div class="control">
-                                        <input class="input" v-model="AgentFrom.person" name="person" type="text" placeholder="e.g Tair" autocomplete="off">
+                                        <input class="input" v-model="agents.person" name="person" type="text" placeholder="e.g Tair" autocomplete="off">
                                         <span class="help is-danger">{{ allerros.person }}</span>
                                     </div>
                                 </div>
                             </div>
-                            <div class="column is-4">
+                            <div class="column is-2">
                                 <div class="field">
                                     <label class="label">CNIC:</label>
                                     <div class="control">
-                                        <input class="input" v-model="AgentFrom.cnic" name="cnic" type="text" placeholder="e.g 13101-1122300-1" autocomplete="off">
+                                        <input class="input" v-model="agents.cnic" name="cnic" type="text" placeholder="e.g 13101-1122300-1" autocomplete="off">
                                         <span class="help is-danger">{{ allerros.cnic }}</span>
                                     </div>
                                 </div>
                             </div>
                             
-                            <div class="column is-4">
+                            <div class="column is-2">
                                 <div class="field">
                                     <label class="label">Mobile:</label>
                                     <div class="control">
-                                        <input class="input" v-model="AgentFrom.mobile" name="mobile" type="number" placeholder="e.g 923211234567" autocomplete="off">
+                                        <input class="input" v-model="agents.mobile" name="mobile" type="number" placeholder="e.g 923211234567" autocomplete="off">
                                         <span class="help is-danger">{{ allerros.mobile }}</span>
                                     </div>
                                 </div>
                             </div>
-                            <div class="column is-4">
+                            <div class="column is-2">
                                 <div class="field">
                                     <label class="label">Telephone:</label>
                                     <div class="control">
-                                        <input class="input" v-model="AgentFrom.tel" name="tel" type="number" placeholder="e.g 92992654321" autocomplete="off">
+                                        <input class="input" v-model="agents.tel" name="tel" type="number" placeholder="e.g 92992654321" autocomplete="off">
                                         <span class="help is-danger">{{ allerros.tel }}</span>
                                     </div>
                                 </div>
                             </div>
-                            <div class="column is-4">
+                            <div class="column is-2">
                                 <div class="field">
                                     <label class="label">Email:</label>
                                     <div class="control">
-                                        <input class="input" v-model="AgentFrom.email" name="email" type="email" placeholder="e.g agent@abc.com" autocomplete="off">
+                                        <input class="input" v-model="agents.email" name="email" type="email" placeholder="e.g agent@abc.com" autocomplete="off">
                                         <span class="help is-danger">{{ allerros.email }}</span>
                                     </div>
                                 </div>
                             </div>
-                            <div class="column is-6">
+                            <div class="column is-3">
                                 <div class="field">
                                     <label class="label">Business Address:</label>
                                     <div class="control">
-                                        <input class="input" v-model="AgentFrom.baddress" name="baddress" type="text" placeholder="e.g Business address" autocomplete="off">
+                                        <input class="input" v-model="agents.baddress" name="baddress" type="text" placeholder="e.g Business address" autocomplete="off">
                                         <span class="help is-danger">{{ allerros.baddress }}</span>
                                     </div>
                                 </div>
                             </div>
-                            <div class="column is-6">
+                            <div class="column is-3">
                                 <div class="field">
                                     <label class="label">Home Address:</label>
                                     <div class="control">
-                                        <input class="input" v-model="AgentFrom.haddress" name="haddress" type="text" placeholder="e.g Home address" autocomplete="off">
+                                        <input class="input" v-model="agents.haddress" name="haddress" type="text" placeholder="e.g Home address" autocomplete="off">
                                         <span class="help is-danger">{{ allerros.haddress }}</span>
                                     </div>
                                 </div>
@@ -119,7 +117,7 @@
             <div class="notification is-success" v-if="success">
                 <h2 class="title is-2"> Agent successfully Stored! </h2>
                 <br>
-                <router-link class="button is-primary is-pulled-right" :to="{ name: 'agents' }"><i class="fa fa-user-plus m-r-10"></i>Click to Back Agents</router-link>
+                <router-link class="button is-info is-pulled-right" :to="{ name: 'agents' }"><i class="fa fa-user-plus m-r-10"></i>Click to Back Agents</router-link>
             </div>
         </form>
     </div>
@@ -136,9 +134,8 @@
                 account: '',
                 status: '',
                 isLoading: false,
-                fillItem: this.record,
-                AgentFrom: {
-                    agentid: '',
+                
+                agents: {
                     company: '',
                     person: '',
                     cnic: '',
@@ -147,63 +144,30 @@
                     email: '',
                     baddress:'',   
                     haddress: '',
-                }
+                },
+               
                 
             }
         },
         methods: {
-                AgentEdit(){
-                axios.get('/agents./AgentEdit/' + this.id)
-                    .then(response => {this.AgentFrom = response.data }) 
-            },
-            Availability() {
-                this.loading = true;
-                    var searchv = this
-                    axios.get('/agents./CheckCompany?company=' + this.AgentFrom.company)
-                    .then(function(response) {
-                    Vue.set(searchv.$data, 'account', response.data)
-                    searchv.loading = false;
-                        })
-                    //.catch(`error` => {"erro found"});
-            },
-            onSubmit(){
-                axios.post(`/agents./AgentUpdate/${this.$route.params.id}`, +this.AgentFrom)
-                      .then(response => { this.success = true;
-                      })
+                updateSignal: function (id) {
+                 axios.post('/agents./AgentUpdate/' + id, this.agents)
+                .then(response => { this.success = true;
+                 })
                     .catch((error) => {
                         this.allerros = error.response.data.errors;
                         this.success = false;
                    });
-                },
-                    updateItem: function(id){
-                    // console.log('u')
-                    //alert('clicked');
-        
-                    var input = this.AgentFrom;
-                    console.log(this.AgentFrom);
-                    return;
-                    axios.patch('/agents./AgentUpdate' + id,{
-                    params: input
-                    }).then(function (response) {
-                    alert('Item Updated Successfully.');
-                    })
-                    .catch(function (error) {
-                        console.log(error);
-                    });
-                }
-                // updateForm: function(){
-                //     var form = document.querySelector('form');
-                //     var formdata = new FormData(form);
-                //     axios.post(`/agents./AgentUpdate/${this.$route.params.id}`, +this.$route.params.id, formdata).then((response) =>{
-                //         this.$router.push({path: '/', query: {alert: response.message}})
-                //     },(response) => {
-                //         console.log('error callback')
-                //     }
-                //     );
-                // }
             },
+            
+             ShowSingle(){
+            axios.get(`/agents./AgentEdit/${this.$route.params.id}`)
+                .then((response)=> this.agents = this.temp = response.data)
+                .catch((error) => this.errors = error.response.data.errors)
+                        }    
+                },
         mounted(){
-            this.AgentEdit();  
+            this.ShowSingle();  
         },    
 }
 

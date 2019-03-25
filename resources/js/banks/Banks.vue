@@ -20,14 +20,10 @@
             <router-link class="button is-primary is-pulled-right" :to="{ name: 'bankCreate' }"><i class="fa fa-user-plus m-r-10"></i> New Bank</router-link>
         </div>
         </b-field>
-        <p class="level-item">
-            <span class="is-pulled-right" v-if="loading">
-                <i class="fa fa-refresh fa-spin fa-2x fa-fw"></i>
-            </span>
-        </p>
+      
         <b-table
             :data="banksload.data"
-            :loading="loading"
+            :loading="isLoading"
             :narrowed="isNarrowed"
             :default-sort-direction="defaultSortDirection"
              default-sort="banksload.company">
@@ -36,7 +32,7 @@
         {{ props.row.id }}
         </b-table-column>
         <b-table-column field="bank" label="Bank Name" sortable>
-        {{ props.row.bank | capitalize}}
+        {{ props.row.bank }}
         </b-table-column>
         <b-table-column field="account" label="Account No" sortable>
         {{ props.row.account }}
@@ -48,7 +44,7 @@
         {{ props.row.branchcode }}
         </b-table-column>
         <b-table-column field="city" label="City" sortable>
-        {{ props.row.city | capitalize}}
+        {{ props.row.city }}
         </b-table-column>        
         <b-table-column field="isActive" label="Status" sortable>
             <b-switch v-model="props.row.isActive" name="isActive"
@@ -110,7 +106,7 @@ import moment from 'moment';
               axios.get("/banks./BankED/" + id )
               // .then(response => { this.success = true;
               //         })
-            this.loadBanks();
+            //this.loadBanks();
             }, 
             loadBanks(){
               this.isLoading = true
@@ -143,11 +139,7 @@ import moment from 'moment';
             return moment().format("DD-MM-YYYY");
         }
     },
-     capitalize: function (value) {
-    if (!value) return ''
-    value = value.toString()
-    return value.charAt(0).toUpperCase() + value.slice(1)
-  }
+  
 
 }
 
