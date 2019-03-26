@@ -119,7 +119,7 @@
                             <label class="label">Class:</label>
                             <div class="control">
                                 <div class="select">
-                                    <select name="actype_id" v-model="cogFrom.actype" required>
+                                    <select name="actype_id" v-model="cogFrom.class" required>
                                         <option selected disabled>Select one</option>
                                         <option value="1">Variable</option>
                                         <option value="2">Fixed</option>
@@ -187,6 +187,7 @@
                     debitcredit: '',
                     actype: '',
                     subtype: '',
+                    class: '',
                     htype: '',
                     aname:'',
                     
