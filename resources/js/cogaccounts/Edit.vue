@@ -213,8 +213,8 @@
             GetSubHeads(){
                 axios.get("/cogs./GetSubAcc?type=" +this.cogFrom.htype).then(({data}) => (this.subacload = data));
             },
-            onSubmit(){
-                axios.post('/cogs./CoaUpdate', this.cogFrom)
+            updateSignal: function (id) {
+                axios.post('/cogs./CoaUpdate/' + id, this.cogFrom)
                       .then(response => { this.success = true;
                       })
                     .catch((error) => {
