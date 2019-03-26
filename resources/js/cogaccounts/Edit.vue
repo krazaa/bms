@@ -152,7 +152,7 @@
                     </div>
                 </div>
                 <div class="control is-flex is-pulled-right">
-                    <button class="button is-primary" v-if="account == 'Available'">Add Product</button>
+                    <button class="button is-primary">Update COA</button>
                 </div>
             </div>
         </div>
