@@ -137,7 +137,7 @@ import moment from 'moment';
             axios.get('/cogs./CoaDelete/' + id)
             .then(response => { this.success = true;
                       })
-            this.loadCats();
+            this.loadBanks();
             },
     },
         filters: {
