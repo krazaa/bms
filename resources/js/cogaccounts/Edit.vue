@@ -135,11 +135,10 @@
                             <label class="label">Account Code:
                             </label>
                             <div class="control">
-                                <input class="input" v-model="cogFrom.acode" name="acode" type="text" placeholder="e.g B18123456" @keyup="AcCheck()">
+                                <input class="input" v-model="cogFrom.acode" name="acode" type="text" placeholder="e.g B18123456">
                                 <span class="help is-danger">{{ allerros.acode }}</span>
                             </div>
-                            <p class="help is-success list-inline" v-if="account == 'Available'">{{ acode }} Available</p>
-                            <p class="help is-danger" v-if="account == 'Not Available'"> Not Available</p>
+                            
                         </div>
                     </div>
                     <div class="column is-2">
@@ -205,16 +204,7 @@
                   this.cogFrom = response.data;
                   });
             },
-            AcCheck() {
-                this.loading = true;
-                    var searchv = this
-                    axios.get('/cogs./AcCheck?code=' + this.cogFrom.acode)
-                    .then(function(response) {
-                    Vue.set(searchv.$data, 'account', response.data)
-                    searchv.loading = false;
-                        })
-                    //.catch(`error` => {"erro found"});
-                    },
+        
             AcCatLoad(){
                     axios.get("/cogs./AcCat").then(({data}) => (this.catsload = data));
                     axios.get("/cogs./AcTypes").then(({data}) => (this.actypeload = data));
