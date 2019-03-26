@@ -190,7 +190,7 @@
                     subtype: '',
                     htype: '',
                     aname:'',
-                    search:'',
+                    
                 },
                 cogsAccEdit:[],
                 //csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content')
