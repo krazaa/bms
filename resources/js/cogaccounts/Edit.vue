@@ -178,7 +178,6 @@
                 macload: [],
                 status: '',
                 subacload: '',
-                search:'',
                 loading: false,
                 cogFrom: {
                     typeid: '',
