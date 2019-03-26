@@ -15,13 +15,8 @@
             <router-link class="button is-primary is-pulled-right" :to="{ name: 'catcreate' }"><i class="fa fa-user-plus m-r-10"></i> New Category</router-link>
         </div>
         </b-field>
-        <p class="level-item">
-            <span class="is-pulled-right" v-if="loading">
-                <i class="fa fa-refresh fa-spin fa-2x fa-fw"></i>
-            </span>
-        </p>
         <b-table
-            :data="categories.data"
+            :data="categories.data" 
             :loading="loading"
             :narrowed="isNarrowed"
             :default-sort-direction="defaultSortDirection"
@@ -30,24 +25,42 @@
         <b-table-column field="id" label="ID" width="40" sortable>
         {{ props.row.id }}
         </b-table-column>
-        <b-table-column field="catgory" label="Catgory" sortable>
-        {{ props.row.category }}
+        <b-table-column field="type" label="Type" sortable>
+            {{ props.row.type == '1' ? 'Vehicle' : 'Electronic' }}
         </b-table-column>
-        <b-table-column field="created_at" label="Created" sortable>
-        {{ props.row.created_at | CreatedAT}}
+        <b-table-column field="catgory" label="Catgory">
+        <b>{{ props.row.category }} </b>
+                 <ul>        
+                    <li v-for="sub in props.row.subcats">
+                        <i class="mdi mdi-subdirectory-arrow-right"></i>
+                    {{ sub.category }} 
+                    <b-switch v-model="sub.isActive" name="isActive"
+                        :true-value="1"
+                        :false-value="0"
+                        type="is-success" @input="StatusChange(sub.id)">
+                    </b-switch>
+                    <a :href="`/manage/users/edit/${props.row.id}`" class="button is-warning is-small"><span class="mdi mdi-pencil-box-outline"></span></a>
+        <a @click="DataSubDelete(props.row.id)" class="button is-danger is-small"><span class="mdi mdi-trash-can"></span></a>
+                    </li>
+                </ul> 
+        </b-table-column>        
+        <b-table-column label="Status">
+            <b-switch v-model="props.row.isActive" name="isActive"
+                :true-value="1"
+                :false-value="0"
+                type="is-success" @input="StatusChange(props.row.id)">
+            </b-switch>
         </b-table-column>
-        
         
         <b-table-column label="Action" centered>
-        <a :href="`/manage/users/singleuser/${props.row.id}`" class="button is-success is-small"><span class="mdi mdi-eye"></span></a>
         <a :href="`/manage/users/edit/${props.row.id}`" class="button is-warning is-small"><span class="mdi mdi-pencil-box-outline"></span></a>
-        <a :href="`/manage/users/edit/${props.row.id}`" class="button is-danger is-small"><span class="mdi mdi-trash-can"></span></a>
+        <a @click="DataDelete(props.row.id)" class="button is-danger is-small"><span class="mdi mdi-trash-can"></span></a>
         </b-table-column>
         </template>
         </b-table>
     </section>
     </template>
-<hr>
+        <hr>
         <pagination :limit="5" :show-disabled=false :data="categories"  @pagination-change-page="getResults"></pagination>
 
 </div>
@@ -60,13 +73,14 @@
   color: red;
 }
 </style>
-<script>
+<script> 
 import moment from 'moment';
 //import VueMomentLib from "vue-moment-lib";
     export default {
         data(){
             return {
-                categories: [],
+                categories: {},
+                subcats: {},
                 search:'',
                 isNarrowed: true,
                 loading: false,
@@ -77,9 +91,17 @@ import moment from 'moment';
             }
         },
         mounted(){
-        this.loadCats();  
+        this.loadCats();
+        this.loadSubCats();
+
     },
+       
         methods: {  
+            StatusChange(id,){
+              axios.get("/categories./ChangeStatus/" + id )
+              // .then(response => { this.success = true;
+              //         })
+            }, 
              loadCats(){
               this.loading = true
               axios.get("/categories./GetCategories").then(({data}) => (this.categories = data));
@@ -91,11 +113,28 @@ import moment from 'moment';
                     this.categories = response.data;
                 });
             },
+            loadSubCats(){
+              this.loading = true
+              axios.get("/categories./SubCats").then(({data}) => (this.subcats = data));
+              this.loading = false
+            },
 
             SearchGet() {
             axios.get('/categories./CatSearch?search=' + this.search)
             .then(({data}) => (this.categories = data));
-        },
+            },
+            DataDelete(id) {
+            axios.get('/categories./CatDelete/' + id)
+            .then(response => { this.success = true;
+                      })
+            this.loadCats();
+            },
+            DataSubDelete(id) {
+            axios.get('/categories./SubCatDelete/' + id)
+            .then(response => { this.success = true;
+                      })
+            this.loadCats();
+            },
     },
         filters: {
             CreatedAT: function(value){

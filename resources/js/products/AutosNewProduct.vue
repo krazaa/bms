@@ -1,5 +1,6 @@
 <template>
-    <form  v-on:submit.prevent="onSubmit()">
+    <form  @submit.prevent="onSubmit()">
+        <div class="columns" v-if="!success">
     <div class="columns">
         <div class="column is-10 is-offset-1">
             <div class="box">
@@ -8,7 +9,9 @@
                         <h3 class="title is-4">Add New Product</h3>
                     </div>
                 </b-field>
-                <div class="field">
+                <div class="columns is-multiline">
+                       <div class="column is-4">
+                
                      <div class="field">
                         <label class="label">Select Vendor:</label>
                         <div class="control">
@@ -22,6 +25,21 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="column is-4">
+                     <div class="field">
+                        <label class="label">Select Category:</label>
+                        <div class="control">
+                            <div class="select">
+                                <select name="category_id" v-model="autos.category_id">
+                                    <option selected disabled>Select Category</option>
+                                    <option v-for="cat in getcats" :value="cat.id">{{ cat.category }}</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
                     <div class="columns is-multiline">
                         <div class="column is-2">
                     <div class="field">
@@ -123,12 +141,12 @@
             </div>
         </div>
     </div>
-
-<!-- <div class="box" v-if="submitted"> -->
-    <!-- <div class="control" v-if="submitted">
-        <p class="title is-1">Product Successfully Addred!</p>
-    </div> -->
-<!-- </div> -->
+    </div>
+    <div class="notification is-success" v-if="success">
+        <h2 class="title is-2"> Record successfully Stored! </h2>
+        <br>
+        <router-link class="button is-info is-pulled-right" :to="{ name: 'banks' }"><i class="fa fa-user-plus m-r-10"></i>Click to Back Vehicles</router-link>
+    </div>
 
 </form>
 </template>
@@ -137,11 +155,13 @@
         data(){
             return {               
                 
-                submitted:false,
+                success: false,
+                getcats:[],
                 vendors: [],
                 autos: {
                     vendor:'',
                     vendor_id:'',
+                    category_id:'',
                     code:'',
                     name:'',
                     cashdis:'',
@@ -180,6 +200,7 @@
         mounted(){
         
             axios.get("/vendors./GetVendors").then(({data}) => (this.vendors = data));
+            axios.get("/products./autos/CatsGet").then(({data}) => (this.getcats = data));
     
     },
     }

@@ -77,6 +77,10 @@ Route::prefix('categories.')->group(function () {
     Route::post('/CatStore', 'category\CategoriesController@CatStore')->name('categories.CatStore');
     Route::get('/CatSearch', 'category\CategoriesController@CatSearch')->name('categories.CatSearch');
     Route::get('/SearchCat', 'category\CategoriesController@SearchCat')->name('categories.SearchCat');
+    Route::get('/SubCats', 'category\CategoriesController@SubCats')->name('categories.SubCats');
+    Route::get('/ChangeStatus/{id}', 'category\CategoriesController@ChangeStatus')->name('categories.ChangeStatus');
+    Route::get('/CatDelete/{id}', 'category\CategoriesController@CatDelete')->name('categories.CatDelete');
+    Route::get('/SubCatDelete/{id}', 'category\CategoriesController@SubCatDelete')->name('categories.SubCatDelete');
 });
 //End CategoriesController
 
@@ -111,6 +115,7 @@ Route::prefix('products.')->group(function () {
     Route::get('autos/ShowEditFrm/{id}', 'products\AutosProductController@ShowAutosEdit')->name('products.autos.ShowEditFrm');
     Route::post('autos/AutosUpdate/{id}', 'products\AutosProductController@AutosUpdate')->name('products.autos.AutosUpdate');
     Route::get('autos/AutoShow/{id}', 'products\AutosProductController@AutoShow')->name('products.autos.AutoShow');
+    Route::get('autos/CatsGet', 'products\AutosProductController@CatsGet')->name('products.autos.CatsGet');
     
     Route::post(
         'autos/AutoProductStore', 

@@ -88,6 +88,15 @@
                             </div>
                         </div>
                     </div>
+                    <div class="column is-3">
+                        <div class="field">
+                            <label class="label">City:</label>
+                            <div class="control">
+                                <input class="input" v-model="AgentFrom.city" name="city" type="text" placeholder="e.g City" autocomplete="off">
+                                <span class="help is-danger">{{ allerros.city }}</span>
+                            </div>
+                        </div>
+                    </div>
                 
                 </div>
                 <div class="control is-flex is-pulled-right">
@@ -121,6 +130,7 @@
                     mobile: '',
                     tel: '',
                     haddress: '',
+                    city: '',
                     email: '',
                     baddress:'',
                     

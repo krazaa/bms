@@ -30,17 +30,23 @@
             :default-sort-direction="defaultSortDirection"
              default-sort="products.name">
         <template slot-scope="props">
-        <b-table-column field="vnum" label="VehicleID" width="60" sortable>
-        VAC-{{ props.row.vnum }}
+        <b-table-column field="id" label="ID" width="60" sortable>
+        {{ props.row.id }}
         </b-table-column>
-        <b-table-column field="vendor" label="Vendor" sortable>
-        {{ props.row.company }}
+        <b-table-column field="code" label="Product No" width="60" sortable>
+        {{ props.row.code }}
         </b-table-column>
-        <b-table-column field="name" label="Product Name" sortable>
+        <b-table-column field="name" label="Product" sortable>
         {{ props.row.name }}
         </b-table-column>
         <b-table-column field="model" label="Model" sortable>
         {{ props.row.model }}
+        </b-table-column>
+        <b-table-column field="vendor" label="Vendor" sortable>
+        {{ props.row.company }}
+        </b-table-column>
+        <b-table-column field="category" label="Category" sortable>
+        {{ props.row.category }}
         </b-table-column>
         <b-table-column field="cost" label="Cost" sortable>
         {{ props.row.cost }}

@@ -17,7 +17,7 @@ class VendorController extends Controller
 
     public function GetVendors()
     {
-    	$vendors = Vendor::select('id','vnum','company','person','contact','mobile','bmobile','address','email','website','salestax','ntn','isActive')->paginate(20);
+    	$vendors = Vendor::paginate(20);
         return $vendors->toArray();
     }
 

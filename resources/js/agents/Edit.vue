@@ -29,7 +29,6 @@
                         </nav>
                     </div>
                 </div>
-                        
                         <div class="columns is-multiline">
                             <div class="column is-3">
                                 <div class="field">
@@ -106,7 +105,16 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="column is-2">
+                        <div class="field">
+                            <label class="label">City:</label>
+                            <div class="control">
+                                <input class="input" v-model="AgentFrom.city" name="city" type="text" placeholder="e.g City" autocomplete="off">
+                                <span class="help is-danger">{{ allerros.city }}</span>
+                            </div>
                         </div>
+                    </div>
+                        
                         
                         <div class="control is-flex is-pulled-right">
                             <button class="button is-primary">Update Agent</button>
@@ -114,6 +122,7 @@
                     </div>
                 </div>
             </div>
+        </div>
             <div class="notification is-success" v-if="success">
                 <h2 class="title is-2"> Agent successfully Stored! </h2>
                 <br>
@@ -134,13 +143,14 @@
                 account: '',
                 status: '',
                 isLoading: false,
-                
+                agentsload: {},
                 agents: {
                     company: '',
                     person: '',
                     cnic: '',
                     mobile: '',
                     tel: '',
+                    city: '',
                     email: '',
                     baddress:'',   
                     haddress: '',

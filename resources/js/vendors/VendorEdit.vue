@@ -25,9 +25,9 @@
                 </div>
             </div>
             <div class="columns is-multiline">
-                <div class="column is-2">
+                <div class="column is-1">
                     <div class="field">
-                        <label class="label">Vendor Code: </label>
+                        <label class="label">Code: </label>
                         <div class="control">
                             <input class="input" v-model="vendors.vnum" name="vnum" type="text" placeholder="e.g B18123456">
                         </div>
@@ -81,6 +81,14 @@
                         <label class="label">Address:</label>
                         <div class="control">
                             <input class="input" v-model="vendors.address" name="address" type="text" placeholder="e.g your address">
+                        </div>
+                    </div>
+                </div>
+                <div class="column is-2">
+                    <div class="field">
+                        <label class="label">City:</label>
+                        <div class="control">
+                            <input class="input" v-model="vendors.city" name="city" type="text" placeholder=" your city">
                         </div>
                     </div>
                 </div>
@@ -146,6 +154,7 @@
                     bmobile:'',
                     address:'',
                     email:'',
+                    city:'',
                     website:'',
                     ntn:'',
                     salestax:'',

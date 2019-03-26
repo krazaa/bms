@@ -24,10 +24,10 @@
             :default-sort-direction="defaultSortDirection"
              default-sort="vendors.company">
         <template slot-scope="props">
-        <b-table-column field="vnum" label="Vendor ID" width="40" sortable>
+        <b-table-column field="vnum" label="ID" width="40" sortable>
         {{ props.row.vnum }}
         </b-table-column>
-        <b-table-column field="company" label="Company" sortable>
+        <b-table-column field="company" label="Vendor Name" sortable>
         {{ props.row.company }}
         </b-table-column>
         <b-table-column field="person" label="Contact Person" sortable>
@@ -36,10 +36,13 @@
         <b-table-column field="mobile" label="Mobile" sortable>
         {{ props.row.mobile }}
         </b-table-column>
-        <b-table-column field="contact" label="Telephone" sortable>
-        {{ props.row.contact }}
+        <b-table-column field="ntn" label="NTN" sortable>
+        {{ props.row.ntn }}
         </b-table-column>
-        <b-table-column field="isActive" label="Status" sortable>
+        <b-table-column field="strn" label="STRN" sortable>
+        {{ props.row.salestax }}
+        </b-table-column>
+        <b-table-column field="isActive" label="Status">
             <b-switch v-model="props.row.isActive" name="isActive"
             :true-value="1"
             :false-value="0"

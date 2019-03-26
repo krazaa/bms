@@ -85,6 +85,7 @@ import moment from 'moment';
                 search:'',
                 isActive:'',
                 isNarrowed: true,
+                success: false,
                 isLoading: false,
                 defaultSortDirection: 'asc',
                 isAvailable: 0,
@@ -100,7 +101,7 @@ import moment from 'moment';
               axios.get("/agents./AgentED/" + id )
               // .then(response => { this.success = true;
               //         })
-            this.loadAgents();
+            //this.loadAgents();
             }, 
              loadAgents(){
                  this.isLoading = true

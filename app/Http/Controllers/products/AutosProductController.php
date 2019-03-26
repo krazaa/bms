@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\modules\Autoproduct;
 use App\modules\Vendor;
+use App\modules\Category;
 use DB;
 use Auth;
 
@@ -37,7 +38,7 @@ class AutosProductController extends Controller
         $product->code = $request->code;
         $product->shortname = $request->shortname;
         $product->model = $request->model;
-        $product->model = $request->model;
+        $product->category_id = $request->category_id;
         $product->discountallowed = $request->discountallowed;
         $product->saleprice = $request->saleprice;
         $product->wsaleprice = $request->wsaleprice;
@@ -57,7 +58,8 @@ class AutosProductController extends Controller
     public function GetAutosProducts()
     {
     	$products = Autoproduct::leftjoin('vendors','vendors.id','=' ,'autoproducts.vendor_id')
-        ->select('autoproducts.id','autoproducts.name','autoproducts.code','autoproducts.model','autoproducts.cost','autoproducts.shortname','vendors.vnum','vendors.company','autoproducts.isActive')
+        ->leftjoin('categories','categories.id','=' ,'autoproducts.category_id')
+        ->select('autoproducts.id','autoproducts.name','autoproducts.code','autoproducts.model','autoproducts.cost','autoproducts.shortname','vendors.vnum','vendors.company','autoproducts.isActive','categories.category')
         //->get();
         ->paginate(20);
         return response()->json($products);
@@ -116,7 +118,10 @@ class AutosProductController extends Controller
 
     public function ShowSingle($id)
     {
-    	$products = Autoproduct::leftjoin('vendors','vendors.id' ,'=','autoproducts.vendor_id')->find($id);
+    	$products = 
+        Autoproduct::leftjoin('vendors','vendors.id','=' ,'autoproducts.vendor_id')
+        ->leftjoin('categories','categories.id','=' ,'autoproducts.category_id')
+        ->select('autoproducts.id','autoproducts.name','autoproducts.code','autoproducts.model','autoproducts.cost','autoproducts.shortname','autoproducts.vendor_id','autoproducts.reorder','autoproducts.maxqty','autoproducts.cost','autoproducts.cashdis','autoproducts.discountallowed','autoproducts.saleprice','autoproducts.isActive','autoproducts.wsaleprice')->find($id);
         return $products->toArray();	
     }
 
@@ -131,6 +136,12 @@ class AutosProductController extends Controller
     {
     	$products = Autoproduct::find($id);
         return $products->toArray();	
+    }
+
+    public function CatsGet()
+    {
+        $cats = Category::where('type','=','1')->where('isActive',true)->get();
+        return $cats->toArray();    
     }
      public function AutosUpdate(Request $request, $id)
     {

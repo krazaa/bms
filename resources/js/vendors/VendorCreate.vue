@@ -25,9 +25,9 @@
                 </div>
             </div>
             <div class="columns is-multiline">
-                <div class="column is-2">
+                <div class="column is-1">
                     <div class="field">
-                        <label class="label">Vendor Code: </label>
+                        <label class="label">Code: </label>
                         <div class="control">
                             <input class="input" v-model="FromData.vnum" name="vnum" type="text" placeholder="e.g B18123456">
                         </div>
@@ -86,6 +86,14 @@
                 </div>
                 <div class="column is-2">
                     <div class="field">
+                        <label class="label">City:</label>
+                        <div class="control">
+                            <input class="input" v-model="FromData.city" name="city" type="text" placeholder="e.g your city">
+                        </div>
+                    </div>
+                </div>
+                <div class="column is-2">
+                    <div class="field">
                         <label class="label">Email:</label>
                         <div class="control">
                             <input class="input" v-model="FromData.email" name="email" type="text" placeholder="e.g vendor@gmail.com">
@@ -104,7 +112,7 @@
                     <div class="field">
                         <label class="label">NTN No:</label>
                         <div class="control">
-                            <input class="input" v-model="FromData.ntn" name="ntn" type="text" placeholder="e.g NTN 445566">
+                            <input class="input" v-model="FromData.ntn" name="ntn" type="text" placeholder="445566">
                         </div>
                     </div>
                 </div>
@@ -112,7 +120,7 @@
                     <div class="field">
                         <label class="label">Sales Tax No:</label>
                         <div class="control">
-                            <input class="input" v-model="FromData.salestax" name="salestax" type="text" placeholder="e.g ST-33-44545">
+                            <input class="input" v-model="FromData.salestax" name="salestax" type="text" placeholder="1232">
                         </div>
                     </div>
                 </div>
@@ -124,11 +132,11 @@
     </div>
 </div>
 </div>
-</div>
 <div class="notification is-success" v-if="success">
 <h2 class="title is-2"> Vendor successfully Stored! </h2>
 <br>
 <router-link class="button is-primary is-pulled-right" :to="{ name: 'vendors' }"><i class="fa fa-user-plus m-r-10"></i>Click to Back Vendor</router-link>
+</div>
 </div>
 </form>
 </template>
@@ -150,6 +158,7 @@
                     bmobile: '',
                     address: '',
                     email:'',
+                    city:'',
                     website:'',
                     ntn:'',
                     salestax:'',
