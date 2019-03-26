@@ -1,5 +1,5 @@
 <template>
-<form method="POST" @submit.prevent="onSubmit">
+<form method="POST" @submit.prevent="onSubmit(cogFrom.id)">
     <div class="columns" v-if="!success">
         <div class="column is-10 is-offset-1">
             <div class="box">
