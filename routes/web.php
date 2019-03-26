@@ -96,6 +96,7 @@ Route::prefix('cogs.')->group(function () {
     Route::get('/GetSubAcc', 'cogs\CogController@GetSubAcc')->name('cogs.GetSubAcc');
     Route::get('/CoaDelete/{id}', 'cogs\CogController@CoaDelete')->name('cogs.CoaDelete');
     Route::post('/CogStoreAcc', 'cogs\CogController@CogStoreAcc')->name('cogs.CogStoreAcc');
+    Route::post('/CoaUpdate/{id}', 'cogs\CogController@CoaUpdate')->name('cogs.CoaUpdate');
     
 });
 //End cogs

@@ -99,6 +99,16 @@ class CogController extends Controller
 
     	return ['message' => 'Record successfully added'];
     }
+
+       public function CoaUpdate(Request $request, $id)
+    {
+        $subjects = Cogas::findOrFail($id);  
+        $subjects ->update($request->all());
+        $subjects ->save();
+        
+        return redirect('/dashboard')->with('success','Subject updated successfully');
+    }
+
     public function CoaDelete($id)
     {
         $data = Cogas::find($id)->delete();

@@ -1,5 +1,5 @@
 <template>
-<form method="POST" action="/cogs./CogStoreAcc" @submit.prevent="onSubmit">
+<form method="POST" @submit.prevent="onSubmit">
     <div class="columns" v-if="!success">
         <div class="column is-10 is-offset-1">
             <div class="box">
@@ -214,7 +214,7 @@
                 axios.get("/cogs./GetSubAcc?type=" +this.cogFrom.htype).then(({data}) => (this.subacload = data));
             },
             onSubmit(){
-                axios.post('/cogs./CogStoreAcc', this.cogFrom)
+                axios.post('/cogs./CoaUpdate', this.cogFrom)
                       .then(response => { this.success = true;
                       })
                     .catch((error) => {
