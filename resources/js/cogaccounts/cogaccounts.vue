@@ -63,8 +63,7 @@
         <b-table-column label="Action" centered>
             <router-link class="button is-success is-small" :to="{ name: 'cogShow', params: {id: props.row.id }}"><span class="mdi mdi-eye"></span></router-link>
             <router-link class="button is-warning is-small" :to="{ name: 'cogEdit', params: {id: props.row.id }}"><span class="mdi mdi-pencil-box-outline"></span></router-link>
-        
-        <a :href="`/manage/users/edit/${props.row.id}`" class="button is-danger is-small"><span class="mdi mdi-trash-can"></span></a>
+        <a @click="CoaDelete(props.row.id)" class="button is-danger is-small"><span class="mdi mdi-trash-can"></span></a>
         </b-table-column>
         </template>
         </b-table>
@@ -134,6 +133,12 @@ import moment from 'moment';
             axios.get('/categories./CatSearch?search=' + this.search)
             .then(({data}) => (this.cogsList = data));
         },
+        CoaDelete(id) {
+            axios.get('/cogs./CoaDelete/' + id)
+            .then(response => { this.success = true;
+                      })
+            this.loadCats();
+            },
     },
         filters: {
             CreatedAT: function(value){

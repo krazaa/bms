@@ -99,4 +99,9 @@ class CogController extends Controller
 
     	return ['message' => 'Record successfully added'];
     }
+    public function CoaDelete($id)
+    {
+        $data = Cogas::find($id)->delete();
+        return ['message' => 'Record successfully Deleted'];
+    }
 }

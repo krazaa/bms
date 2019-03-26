@@ -94,6 +94,7 @@ Route::prefix('cogs.')->group(function () {
     Route::get('/AcTypes', 'cogs\CogController@AcTypes')->name('cogs.AcTypes');
     Route::get('/GetMainAcc', 'cogs\CogController@GetMainAcc')->name('cogs.GetMainAcc');
     Route::get('/GetSubAcc', 'cogs\CogController@GetSubAcc')->name('cogs.GetSubAcc');
+    Route::get('/CoaDelete/{id}', 'cogs\CogController@CoaDelete')->name('cogs.CoaDelete');
     Route::post('/CogStoreAcc', 'cogs\CogController@CogStoreAcc')->name('cogs.CogStoreAcc');
     
 });
