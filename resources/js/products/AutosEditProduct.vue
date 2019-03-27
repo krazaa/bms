@@ -2,7 +2,7 @@
     <form class="form-horizontal" method="POST" @submit.prevent="updateSignal(autos.id)">
 
     <div class="columns" v-if="!success">
-    <div class="columns">
+
         <div class="column is-10 is-offset-1">
             <div class="box">
         
@@ -57,7 +57,7 @@
                 </div>
             </div>
                 <div class="columns is-multiline">
-                    <div class="column is-4">
+                    <div class="column is-2">
                     <div class="field">
                         <label class="label">Product Code: 
                         </label>
@@ -66,7 +66,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="column is-4">
+                <div class="column is-2">
                     <div class="field">
                         <label class="label">autos Name:</label>
                         <div class="control">
@@ -74,7 +74,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="column is-4">
+                <div class="column is-2">
                     <div class="field">
                         <label class="label">Model:</label>
                         <div class="control">
@@ -82,19 +82,12 @@
                         </div>
                     </div>
                 </div>
-            </div>
-
-     <div class="columns is-multiline">
-                        <div class="column is-4">
-                    <div class="field">
-                        <label class="label">Short Name:</label>
-                        <div class="control">
-                            <input class="input" v-model="autos.shortname" name="shortname" type="text" placeholder="e.g Euro 125 CC">
-                        </div>
-                    </div>
-                </div>
             
-                   <div class="column is-4">
+
+     
+                      
+            
+                   <div class="column is-2">
                     <div class="field">
                         <label class="label">Max Qty:</label>
                         <div class="control">
@@ -102,10 +95,9 @@
                         </div>
                     </div>
                     </div>
-                </div>
 
-<div class="columns is-multiline">
-                        <div class="column is-4">
+
+                        <div class="column is-2">
                     <div class="field">
                         <label class="label">Reorder Qty:</label>
                         <div class="control">
@@ -113,7 +105,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="column is-4">
+                <div class="column is-2">
                      <div class="field">
                         <label class="label">Cash Discount:</label>
                         <div class="control">
@@ -121,7 +113,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="column is-4">
+                <div class="column is-2">
                     <div class="field">
                         <label class="label">Discount Allowed:</label>
                         <div class="control">
@@ -129,9 +121,8 @@
                         </div>
                     </div>
                     </div>
-                </div>
-<div class="columns is-multiline">
-                        <div class="column is-4">
+                
+                        <div class="column is-2">
                     <div class="field">
                         <label class="label">Cost Price:</label>
                         <div class="control">
@@ -139,7 +130,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="column is-4">
+                <div class="column is-2">
                     <div class="field">
                         <label class="label">Whole Sale Price:</label>
                         <div class="control">
@@ -147,7 +138,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="column is-4">
+                <div class="column is-2">
                     <div class="field">
                         <label class="label">Selling Price:</label>
                         <div class="control">

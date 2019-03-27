@@ -188,6 +188,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/ac', function () {
+
+    $logs = \App\Activity::all();   
+    return view('log', compact('logs'));
+});
+
+
 
 Route::prefix('manage.')->group(function () {
 Route::get('/users', 'manage\UserController@Getusers')->name('users');

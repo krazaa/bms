@@ -63,7 +63,7 @@
              <!-- <router-link class="button is-success is-small" :to="{ name: 'AutosShow', params: {id: props.row.id}}"><span class="mdi mdi-eye-circle-outline"></span></router-link> -->
              <router-link class="button is-info is-small" :to="{ name: 'editproduct', params: {id: props.row.id}}"><span class="mdi mdi-pencil-box-outline"></span></router-link>
         
-        <a :href="`/manage/users/edit/${props.row.id}`" class="button is-danger is-small"><span class="mdi mdi-trash-can"></span></a>
+        <a @click="vDelete(props.row.id)" class="button is-danger is-small"><span class="mdi mdi-trash-can"></span></a>
         </b-table-column>
         </template>
         </b-table>
@@ -115,7 +115,13 @@
                 axios.get('/products./autos/GetAutosProducts?page=' + page).then(response => {
                   this.products = response.data;
                   });
-            }
+            },
+            vDelete(id) {
+            axios.get('/products./autos/ProductRemove/' + id)
+            .then(response => { this.success = true;
+                      })
+            this.loadProducts();
+            },
             
           },
          mounted(){

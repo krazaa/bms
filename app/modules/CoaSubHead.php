@@ -8,5 +8,5 @@ class CoaSubHead extends Model
 {
     protected $table = 'subheads';
 
-
+    
 }

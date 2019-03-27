@@ -8,7 +8,7 @@ use Spatie\Activitylog\Traits\LogsActivity;
 
 class Setting extends Model
 {
-	//use LogsActivity;
+	use LogsActivity;
     protected $table = 'settings';
     // protected static $logAttributes = ['name', 'text'];
     protected static $logFillable = true;

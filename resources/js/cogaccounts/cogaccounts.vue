@@ -40,14 +40,21 @@
         <b-table-column field="aname" label="Account Name" sortable>
         {{ props.row.aname | uppercase}}
         </b-table-column>
+        <b-table-column field="acat_id" label="Category" sortable>
+        {{ props.row.cname}}
+        </b-table-column>
+        <b-table-column label="Sub Account Of">
+ 
+                
+        </b-table-column>
         <b-table-column field="incmbal" label="Income/ Balance" sortable>
         {{ props.row.incmbal }}
         </b-table-column>
         <b-table-column field="debitcredit" label="Dr/Cr" sortable>
         {{ props.row.debitcredit }}
         </b-table-column>
-        <b-table-column field="acat_id" label="Category" sortable>
-        {{ props.row.cname}}
+        <b-table-column field="class" label="Class" sortable>
+        {{ props.row.class}}
         </b-table-column>
         <b-table-column field="actype_id" label="Type" sortable>
         {{ props.row.tname}}

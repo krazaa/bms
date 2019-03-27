@@ -102,7 +102,7 @@
                             <label class="label">Class:</label>
                             <div class="control">
                                 <div class="select">
-                                    <select name="actype_id" v-model="cogFrom.actype" required>
+                                    <select name="class" v-model="cogFrom.class" required>
                                         <option selected disabled>Select one</option>
                                         <option value="1">Variable</option>
                                         <option value="2">Fixed</option>
@@ -172,6 +172,7 @@
                     actype: '',
                     subtype: '0',
                     htype: '',
+                    class: '',
                     aname:'',
                     search:'',
                 }

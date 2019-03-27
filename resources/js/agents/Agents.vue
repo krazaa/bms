@@ -25,7 +25,7 @@
             :loading="isLoading"
             :narrowed="isNarrowed"
             :default-sort-direction="defaultSortDirection"
-            default-sort="agentsload.company">
+            default-sort="agentsload.data.company">
             <template slot-scope="props">
             <b-table-column field="id" label="ID" width="40" sortable>
             {{ props.row.id }}

@@ -4,7 +4,7 @@
         <b-loading :active.sync="isLoading" :can-cancel="true"></b-loading>
     </div>
     <div v-if="!isLoading">
-        <form @submit.prevent="updateSignal(agents.id)">
+        <form @submit.prevent="updateSignal(AgentFrom.id)">
             <div class="columns" v-if="!success">
                 <div class="column is-10 is-offset-1">
                     <div class="box">
@@ -35,7 +35,7 @@
                                     <label class="label">Company Name:
                                     </label>
                                     <div class="control">
-                                        <input class="input" v-model="agents.company" name="company" type="text" placeholder="e.g PTCL" autocomplete="off">
+                                        <input class="input" v-model="AgentFrom.company" name="company" type="text" placeholder="e.g PTCL" autocomplete="off">
                                         <span class="help is-danger">{{ allerros.company }}</span>
                                     </div>
                                     
@@ -45,7 +45,7 @@
                                 <div class="field">
                                     <label class="label">Contact Person:</label>
                                     <div class="control">
-                                        <input class="input" v-model="agents.person" name="person" type="text" placeholder="e.g Tair" autocomplete="off">
+                                        <input class="input" v-model="AgentFrom.person" name="person" type="text" placeholder="e.g Tair" autocomplete="off">
                                         <span class="help is-danger">{{ allerros.person }}</span>
                                     </div>
                                 </div>
@@ -54,7 +54,7 @@
                                 <div class="field">
                                     <label class="label">CNIC:</label>
                                     <div class="control">
-                                        <input class="input" v-model="agents.cnic" name="cnic" type="text" placeholder="e.g 13101-1122300-1" autocomplete="off">
+                                        <input class="input" v-model="AgentFrom.cnic" name="cnic" type="text" placeholder="e.g 13101-1122300-1" autocomplete="off">
                                         <span class="help is-danger">{{ allerros.cnic }}</span>
                                     </div>
                                 </div>
@@ -64,7 +64,7 @@
                                 <div class="field">
                                     <label class="label">Mobile:</label>
                                     <div class="control">
-                                        <input class="input" v-model="agents.mobile" name="mobile" type="number" placeholder="e.g 923211234567" autocomplete="off">
+                                        <input class="input" v-model="AgentFrom.mobile" name="mobile" type="number" placeholder="e.g 923211234567" autocomplete="off">
                                         <span class="help is-danger">{{ allerros.mobile }}</span>
                                     </div>
                                 </div>
@@ -73,7 +73,7 @@
                                 <div class="field">
                                     <label class="label">Telephone:</label>
                                     <div class="control">
-                                        <input class="input" v-model="agents.tel" name="tel" type="number" placeholder="e.g 92992654321" autocomplete="off">
+                                        <input class="input" v-model="AgentFrom.tel" name="tel" type="number" placeholder="e.g 92992654321" autocomplete="off">
                                         <span class="help is-danger">{{ allerros.tel }}</span>
                                     </div>
                                 </div>
@@ -82,7 +82,7 @@
                                 <div class="field">
                                     <label class="label">Email:</label>
                                     <div class="control">
-                                        <input class="input" v-model="agents.email" name="email" type="email" placeholder="e.g agent@abc.com" autocomplete="off">
+                                        <input class="input" v-model="AgentFrom.email" name="email" type="email" placeholder="e.g agent@abc.com" autocomplete="off">
                                         <span class="help is-danger">{{ allerros.email }}</span>
                                     </div>
                                 </div>
@@ -91,7 +91,7 @@
                                 <div class="field">
                                     <label class="label">Business Address:</label>
                                     <div class="control">
-                                        <input class="input" v-model="agents.baddress" name="baddress" type="text" placeholder="e.g Business address" autocomplete="off">
+                                        <input class="input" v-model="AgentFrom.baddress" name="baddress" type="text" placeholder="e.g Business address" autocomplete="off">
                                         <span class="help is-danger">{{ allerros.baddress }}</span>
                                     </div>
                                 </div>
@@ -100,7 +100,7 @@
                                 <div class="field">
                                     <label class="label">Home Address:</label>
                                     <div class="control">
-                                        <input class="input" v-model="agents.haddress" name="haddress" type="text" placeholder="e.g Home address" autocomplete="off">
+                                        <input class="input" v-model="AgentFrom.haddress" name="haddress" type="text" placeholder="e.g Home address" autocomplete="off">
                                         <span class="help is-danger">{{ allerros.haddress }}</span>
                                     </div>
                                 </div>
@@ -115,12 +115,12 @@
                         </div>
                     </div>
                         
-                        
+                         </div>
                         <div class="control is-flex is-pulled-right">
                             <button class="button is-primary">Update Agent</button>
                         </div>
                     </div>
-                </div>
+               
             </div>
         </div>
             <div class="notification is-success" v-if="success">
@@ -144,7 +144,7 @@
                 status: '',
                 isLoading: false,
                 agentsload: {},
-                agents: {
+                AgentFrom: {
                     company: '',
                     person: '',
                     cnic: '',
@@ -161,7 +161,7 @@
         },
         methods: {
                 updateSignal: function (id) {
-                 axios.post('/agents./AgentUpdate/' + id, this.agents)
+                 axios.post('/agents./AgentUpdate/' + id, this.AgentFrom)
                 .then(response => { this.success = true;
                  })
                     .catch((error) => {
@@ -172,7 +172,7 @@
             
              ShowSingle(){
             axios.get(`/agents./AgentEdit/${this.$route.params.id}`)
-                .then((response)=> this.agents = this.temp = response.data)
+                .then((response)=> this.AgentFrom = this.temp = response.data)
                 .catch((error) => this.errors = error.response.data.errors)
                         }    
                 },

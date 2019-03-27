@@ -1,5 +1,5 @@
 <template>
-<form method="POST"  @submit.prevent="updateSignal(settings.id)">
+<form method="POST" enctype="multipart/form-data"  @submit.prevent="updateSignal(settings.id)">
     <div class="columns" v-if="!success">
     <div class="column is-10 is-offset-1">
             <div v-if="isLoading">
@@ -97,7 +97,7 @@
                     <div class="field">
                         <div class="control">
                             <b-field class="file">
-                            <b-upload v-model="settings.file" name="logo">
+                            <b-upload v-model="settings.file" name="file">
                             <a class="button is-primary">
                                 <b-icon icon="upload"></b-icon>
                                 <span>Logo upload</span>
@@ -112,7 +112,13 @@
                     </div>
                 </div>
             </div>
+      <label>File
 
+        <input type="file" name="logo" @change="imageChanged"/>
+                
+      </label>
+
+        
             <div class="control is-flex is-pulled-right">
                 <button class="button is-primary">Save Setting</button>
             </div>
@@ -140,7 +146,7 @@
                 
                 settings: {
                     company: '',
-                    //logo: '',
+                    logo: '',
                     phone: '',
                     address: '',
                     mobile: '',
@@ -151,12 +157,22 @@
                     strn: '',
                     file: null
                 },
-                
+                logo: '',
                
                 
             }
         },
         methods: {
+            imageChanged (e) {
+                console.log(e.target.files[0])
+                var fileReader = new FileReader()
+
+                fileReader.readAsDataURL(e.target.files[0])
+                fileReader.onload = (e) => {
+                    this.settings.logo = e.target.result
+                }
+            
+            },
                 updateSignal: function (id) {
                  axios.post('/settings./updatesetting/' + id, this.settings)
                 .then(response => { this.success = true;
@@ -173,6 +189,10 @@
                 //.catch((error) => this.errors = error.response.data.errors)
                         }    
                 },
+                      
+         upload(){
+            axios.post('/upload', {'image':this.logo})
+         },
         mounted(){
             this.ShowSingle();  
         },    

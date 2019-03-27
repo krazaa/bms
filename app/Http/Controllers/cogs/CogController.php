@@ -36,6 +36,12 @@ class CogController extends Controller
                         WHEN cogas.incom_balance_id = "2" THEN "Balance Sheet" 
                         ELSE "" 
                         END) AS incmbal'),
+                DB::raw('(CASE 
+                        WHEN cogas.class = "1" THEN "Variable" 
+                        WHEN cogas.class = "2" THEN "Fixed" 
+                        WHEN cogas.class = "3" THEN "Semi Variable" 
+                        ELSE "" 
+                        END) AS class'),
     			DB::raw('(CASE 
                         WHEN cogas.debitcredit = "1" THEN "Both" 
                         WHEN cogas.debitcredit = "2" THEN "Debit" 

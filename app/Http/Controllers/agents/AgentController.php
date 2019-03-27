@@ -16,7 +16,7 @@ class AgentController extends Controller
     
     public function AgentsListGet()
     {
-        $agents = Agent::select('id','company','person','cnic','tel','mobile','email','baddress','haddress','isActive')->paginate(20);
+        $agents = Agent::select('id','company','person','cnic','tel','mobile','email','baddress','haddress','isActive','city')->paginate(20);
         return $agents->toArray();
     }
 
