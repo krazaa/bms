@@ -81,6 +81,8 @@ Route::prefix('categories.')->group(function () {
     Route::get('/ChangeStatus/{id}', 'category\CategoriesController@ChangeStatus')->name('categories.ChangeStatus');
     Route::get('/CatDelete/{id}', 'category\CategoriesController@CatDelete')->name('categories.CatDelete');
     Route::get('/SubCatDelete/{id}', 'category\CategoriesController@SubCatDelete')->name('categories.SubCatDelete');
+    Route::get('/CatEditShow/{id}', 'category\CategoriesController@CatEditShow')->name('categories.CatEditShow');
+    Route::post('/CatUpdate/{id}', 'category\CategoriesController@CatUpdate')->name('categories.CatUpdate');
 });
 //End CategoriesController
 

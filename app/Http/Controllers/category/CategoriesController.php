@@ -11,13 +11,13 @@ class CategoriesController extends Controller
 {
     public function index()
     {
-    	$cats = Category::where('sub_id','=','')->orderBy('id','desc')->with('subcats')->paginate(50); 
+    	$cats = Category::where('sub_id','=','')->orderBy('id','desc')->with('subcats')->paginate(20); 
     	return response()->json($cats);
     }
 
     public function SubCats()
     {
-        $cats = Category::where('sub_id', '>', 0)->paginate(50); 
+        $cats = Category::where('sub_id', '>', 0)->paginate(20); 
         return response()->json($cats);
     }
 
@@ -79,6 +79,23 @@ class CategoriesController extends Controller
             }
         }
     }
+
+    public function CatEditShow($id)
+    {
+        $data = Category::find($id);
+           return $data->toArray();    
+    }
+
+    public function CatUpdate(Request $request, $id)
+    {
+         
+         $data = Category::find($id);
+         $data->update($request->all());
+
+    return response()->json(['message' => 'This request succeeded.'], 200);
+
+    }
+
     public function CatDelete($id)
     {
         $data = Category::where('sub_id',$id)->where('id',$id)->count();

@@ -62,6 +62,7 @@ import VendorEdit from './vendors/VendorEdit.vue';
 // category
 import category from './category/Categories.vue';
 import CatCreate from './category/CatCreate.vue';
+import CatEdit from './category/CatEdit.vue';
 
 // dashboard
 import dashboard from './components/dashboard.vue';
@@ -135,6 +136,7 @@ export default [
 // category
   { path: '/category/manage', component: category, name: 'manage'},
   { path: '/category/catcreate', component: CatCreate, name: 'catcreate'},
+  { path: '/category/catedit/:id', component: CatEdit, name: 'catedit', props: true},
 
   { path: '*', component: NotFoundComponent, name: 'NotFoundComponent'}
 

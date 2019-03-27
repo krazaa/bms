@@ -39,7 +39,7 @@
                         :false-value="0"
                         type="is-success" @input="StatusChange(sub.id)">
                     </b-switch>
-                    <a :href="`/manage/users/edit/${props.row.id}`" class="button is-warning is-small"><span class="mdi mdi-pencil-box-outline"></span></a>
+                    <router-link class="button is-info is-small" :to="{ name: 'catedit', params: {id: props.row.id }}"><span class="mdi mdi-pencil-box-outline"></span></router-link>
         <a @click="DataSubDelete(props.row.id)" class="button is-danger is-small"><span class="mdi mdi-trash-can"></span></a>
                     </li>
                 </ul> 
@@ -53,7 +53,7 @@
         </b-table-column>
         
         <b-table-column label="Action" centered>
-        <a :href="`/manage/users/edit/${props.row.id}`" class="button is-warning is-small"><span class="mdi mdi-pencil-box-outline"></span></a>
+        <router-link class="button is-info is-small" :to="{ name: 'catedit', params: {id: props.row.id }}"><span class="mdi mdi-pencil-box-outline"></span></router-link>
         <a @click="DataDelete(props.row.id)" class="button is-danger is-small"><span class="mdi mdi-trash-can"></span></a>
         </b-table-column>
         </template>
