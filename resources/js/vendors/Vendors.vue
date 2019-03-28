@@ -24,7 +24,13 @@
             :default-sort-direction="defaultSortDirection"
              default-sort="vendors.company">
         <template slot-scope="props">
-        <b-table-column field="vnum" label="ID" width="40" sortable>
+        <b-table-column field="id" label="ID" width="40" sortable>
+        {{ props.row.id }}
+        </b-table-column>
+        <b-table-column field="brands.bran" label="Brand"  sortable>
+        {{ props.row.brands.brand }}
+        </b-table-column>
+        <b-table-column field="code" label="Code" sortable>
         {{ props.row.vnum }}
         </b-table-column>
         <b-table-column field="company" label="Vendor Name" sortable>
@@ -117,8 +123,11 @@
             },
              onDelete(id) {
             axios.get('/vendors./VendorDelete/' + id)
-            .then(response => { this.success = true;
-                      })
+            //
+            
+            .then(response => { this.success = true })
+
+            //
             this.loadVendor();
             },
 

@@ -25,7 +25,19 @@
                 </div>
             </div>
             <div class="columns is-multiline">
-                <div class="column is-1">
+                <div class="column is-2">
+                    <div class="field">
+                        <label class="label">Select Brand: </label>
+                        <div class="control">
+                            <div class="select">
+                                <select name="brand_id" v-model="vendors.brand_id" required>
+                                    <option v-for="brand in brands" :value="brand.id">{{ brand.brand }} </option>  
+                                        </select>
+                                    </div>
+                                </div>
+                    </div>
+                </div>
+                <div class="column is-2">
                     <div class="field">
                         <label class="label">Code: </label>
                         <div class="control">
@@ -39,8 +51,6 @@
                         <div class="control">
                             <input class="input" v-model="vendors.company" name="company" type="text" placeholder="e.g Team Xperts"  autocomplete="off">
                         </div>
-                    <!--     <p class="help is-success list-inline" v-if="vendor == 'Available'"> {{ vendor }} is available.</p>
-                        <p class="help is-danger" v-if="vendor == 'Not Available'"> {{ vendor }} Not Available.</p> -->
                     </div>
                 </div>
                 <div class="column is-2">
@@ -144,9 +154,11 @@
     export default {
         props: ['id'], 
         data(){
-            return {                
+            return { 
+                brands:[],               
                 vendors: {
                     vnum:'',
+                    brand_id:'',
                     company:'',
                     person:'',
                     contact:'',
@@ -179,11 +191,16 @@
             axios.get(`/vendors./editVendor/${this.$route.params.id}`)
             .then((response)=> this.vendors = this.temp = response.data)
             .catch((error) => this.errors = error.response.data.errors)
-            }
-
             },
+        loadData(){
+              axios.get("/brands./brands").then(({data}) => {
+                  this.brands = data  });
+            }
+        },
+            
         mounted(){
             this.ShowSingle();            
-        }
+            this.loadData();            
+        },
     }
 </script>

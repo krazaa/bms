@@ -5,14 +5,21 @@ namespace App\Http\Controllers\category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\modules\Category;
+use App\modules\Autoproduct;
 use DB;
 
 class CategoriesController extends Controller
 {
     public function index()
     {
-    	$cats = Category::where('sub_id','=','')->orderBy('id','desc')->with('subcats')->paginate(20); 
+    	$cats = Category::where('sub_id','=','')->orderBy('id','desc')->with('subcats')->orderBy('id','desc')->paginate(20); 
     	return response()->json($cats);
+    }
+
+    public function indexCats()
+    {
+        $cats = Category::where('sub_id','=','')->orderBy('id','desc')->with('subcats')->orderBy('id','desc')->Active()->paginate(20); 
+        return response()->json($cats);
     }
 
     public function SubCats()
@@ -51,7 +58,13 @@ class CategoriesController extends Controller
         $bank->type = $request->type;
         //$bank->ctype = $request->ctype;
         $bank->category = $request->category;
-        $bank->sub_id = $request->ctype;
+            if($request->ctype == null)
+            {
+                //$bank->sub_id = $request->ctype;
+            }else{
+                $bank->sub_id = $request->ctype;
+            }
+
         $bank ->save();
 
         return ['message' => 'successfully Stored'];
@@ -61,7 +74,8 @@ class CategoriesController extends Controller
     {   
         $search = $request->search;
         $cats = Category::where('category','LIKE', "%$search%")
-        ->paginate(50);
+        ->orderBy('id','desc')
+        ->paginate(20);
         return $cats->toArray();    
     }
 
@@ -98,8 +112,7 @@ class CategoriesController extends Controller
 
     public function CatDelete($id)
     {
-        $data = Category::where('sub_id',$id)->where('id',$id)->count();
-        ///return ['error' => 'Category have sub category']; 
+        $data = Category::where('sub_id',$id)->count(); 
             if($data) {
                 return ['error' => 'Category have sub category you cannot delete this'];
                } else {
@@ -109,7 +122,14 @@ class CategoriesController extends Controller
     }
     public function SubCatDelete($id)
     {
-        $data = Category::find($id)->delete();
-        return ['message' => 'successfully Deleted'];
+
+    $data = Autoproduct::where('category_id',$id)->count(); 
+            if($data) {
+                return ['error' => 'Category is not empty'];
+               } else {
+                $count = Category::find($id)->delete();
+                return ['message' => 'Successfully Deleted'];
+            }
+
     }
 }

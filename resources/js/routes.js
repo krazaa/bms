@@ -22,6 +22,12 @@ import agentEdit from './agents/Edit.vue';
 import banks from './banks/Banks.vue';
 import bankCreate from './banks/Create.vue';
 import bankEdit from './banks/Edit.vue';
+
+// Brands
+import brands from './brands/Brands.vue';
+import brandCreate from './brands/Create.vue';
+import brandEdit from './brands/Edit.vue';
+
 // Excise and Taxation
 import excise from './excise/Excise.vue';
 import exciseCreate from './excise/Create.vue';
@@ -107,6 +113,11 @@ export default [
   { path: '/banks', component: banks, name: 'banks'},
   { path: '/banks/bankCreate', component: bankCreate, name: 'bankCreate'},
   { path: '/banks/bankEdit/:id', component: bankEdit, name: 'bankEdit', props: true},
+
+  // Brands
+  { path: '/brands', component: brands, name: 'brands'},
+  { path: '/brands/brandCreate', component: brandCreate, name: 'brandCreate'},
+  { path: '/brands/brandEdit/:id', component: brandEdit, name: 'brandEdit', props: true},
 
 // Excise and Taxation
   { path: '/excisentaxation', component: excise, name: 'excisentaxation'},

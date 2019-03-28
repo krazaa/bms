@@ -158,6 +158,7 @@
                         this.allerros = error.response.data.errors;
                         this.success = false;
                    });
+                     this.loadAgents();
                 }
         },
     

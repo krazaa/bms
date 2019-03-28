@@ -73,6 +73,7 @@ Route::prefix('excise.')->group(function () {
 Route::prefix('categories.')->group(function () {
     
     Route::get('/GetCategories', 'category\CategoriesController@index')->name('categories.GetCategories');
+    Route::get('/indexCats', 'category\CategoriesController@indexCats')->name('categories.indexCats');
     Route::get('/create', 'category\CategoriesController@create')->name('categories.create');
     Route::post('/CatStore', 'category\CategoriesController@CatStore')->name('categories.CatStore');
     Route::get('/CatSearch', 'category\CategoriesController@CatSearch')->name('categories.CatSearch');
@@ -151,12 +152,27 @@ Route::prefix('purchase-order.')->group(function () {
 });
 //End Purchase Orders routes
 
+//Start Brands routes
+Route::prefix('brands.')->group(function () {
+    Route::get('brandslist', 'brands\BrandController@index')->name('brandslist');
+    Route::get('brands', 'brands\BrandController@brands')->name('brands');
+    Route::get('/BrandsListGet', 'brands\BrandController@BrandsListGet')->name('brands.BrandsListGet');
+    Route::get('/BrandSearch', 'brands\BrandController@BrandSearch')->name('brands.BrandSearch');
+    Route::get('/BrandEdit/{id}', 'brands\BrandController@BrandEdit')->name('brands.BrandEdit');
+    Route::get('/BrandED/{id}', 'brands\BrandController@BrandED')->name('brands.BrandED');
+    Route::get('/BrandDelete/{id}', 'brands\BrandController@brandDelete')->name('brands.BrandDelete');
+    Route::get('/CheckAccount', 'brands\BrandController@AvailabilityCheck')->name('brands.CheckAccount');
+    Route::post('/BrandStore', 'brands\BrandController@BrandStore')->name('brands.BrandStore');
+    Route::post('/brandUpdate/{id}', 'brands\BrandController@brandUpdate')->name('brands.brandUpdate');
+    
+
+});
+//End Brands routes
+
 //Start Settings routes
 // Route::post('/cutest', 'SettingController@cutest')->name('cutest');
 Route::prefix('settings.')->group(function () {
-    Route::get('/company', 'SettingController@index')->name('settings.company');
-	Route::get('/getsetting/{id}', 'SettingController@GetSetting')->name('settings.getsetting');
-	Route::post('/updatesetting/{id}', 'SettingController@UpdateSetting')->name('settings.updatesetting');
+
 
     // Branches
     Route::get('/branches', 'settings\BranchesController@index')->name('settings.branches');

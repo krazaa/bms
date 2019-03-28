@@ -27,7 +27,7 @@
                 <div class="field">
                     <b-field label="Category Type">
                     <b-select v-model="DataFrom.ctype" name="ctype">
-                    <option selected disabled>Select name</option>
+                    <option value="0" selected disabled>Select name</option>
                     <option
                         v-for="cat in categories.data"
                         :value="cat.id"
@@ -54,11 +54,11 @@
         </div>
     
 
-<div class="notification is-success" v-if="success">
-    <h2 class="title is-2"> Agent successfully Stored! </h2>
-    <br>
-    <router-link class="button is-primary is-pulled-right" :to="{ name: 'agents' }"><i class="fa fa-user-plus m-r-10"></i>Click to Back Agents</router-link>
 </div>
+<div class="notification is-success" v-if="success">
+    <h2 class="title is-2"> Category successfully Stored! </h2>
+    <br>
+    <router-link class="button is-primary is-pulled-right" :to="{ name: 'manage' }"><i class="fa fa-user-plus m-r-10"></i>Click to Back Category</router-link>
 </div>
 </form>
 </template>
@@ -92,7 +92,7 @@
                 }) 
                     //.catch(error => {"erro found"});
         },
-          onSubmit(){
+            onSubmit(){
                 axios.post('/categories./CatStore', this.DataFrom)
                       .then(response => { this.success = true;
                       })
@@ -100,13 +100,21 @@
                         this.allerros = error.response.data.errors;
                         this.success = false;
                    });
-                }
-
-    },
-    created(){
-         axios.get('/categories./GetCategories')
+                },
+            loadrcats(){
+            axios.get('/categories./indexCats')
             .then(({data}) => (this.categories = data));
-    },
-}
+            //setTimeout(this.loadcats, 5000);
+            }
+        },        
+            mounted(){
+            this.loadrcats();
+        },
+     watch: {
+    // call again the method if the route changes
+    '$route': 'loadrcats'
+  }
+    }
+
 
 </script>

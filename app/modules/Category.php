@@ -16,4 +16,9 @@ class Category extends Model
         return $this->hasMany('App\Subcat');
         //return $this->belongsToMany('App\Branch', 'branch_user', 'branch_id', 'user_id');
     }
+
+     public function scopeActive($query)
+    {
+        return $query->where('isActive', true);
+    }
 }

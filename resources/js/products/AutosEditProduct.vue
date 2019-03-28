@@ -159,7 +159,7 @@
     <div class="notification is-success" v-if="success">
         <h2 class="title is-2"> Vehicle successfully Updated </h2>
         <br>
-        <router-link class="button is-primary is-pulled-right" :to="{ name: 'autos' }"><i class="fa fa-user-plus m-r-10"></i>Click to Back Vehicle</router-link>
+        <router-link class="button is-info is-pulled-right" :to="{ name: 'autos' }"><i class="fa fa-user-plus m-r-10"></i>Click to Back Vehicle</router-link>
     </div>
 </form>
 </template>
@@ -208,7 +208,7 @@
                         this.allerros = error.response.data.errors;
                         this.success = false;
                    });
-            },
+            }, 
             
              ShowSingle(){
             axios.get(`/products./autos/ShowSingle/${this.$route.params.id}`)

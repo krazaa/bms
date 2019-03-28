@@ -16,7 +16,7 @@ class AgentController extends Controller
     
     public function AgentsListGet()
     {
-        $agents = Agent::select('id','company','person','cnic','tel','mobile','email','baddress','haddress','isActive','city')->paginate(20);
+        $agents = Agent::select('id','company','person','cnic','tel','mobile','email','baddress','haddress','isActive','city')->orderBy('id','desc')->paginate(20);
         return $agents->toArray();
     }
 
@@ -25,6 +25,7 @@ class AgentController extends Controller
     	$agents = Agent::find($id);
         return $agents->toArray();
     }
+
     public function AgentED($id)
     {
     $agent = Agent::find($id);
@@ -39,6 +40,7 @@ class AgentController extends Controller
 
     	return ['message' => 'Agent successfully Updated'];
     }
+
     public function AgentUpdate(Request $request, $id)
     {
     	 
@@ -56,9 +58,11 @@ class AgentController extends Controller
         ->orwhere('cnic','LIKE', "%$search%")
         ->orwhere('mobile','LIKE', "%$search%")
         ->orwhere('tel','LIKE', "%$search%")
+        ->orderBy('id','desc')
         ->paginate(20);
         return $agents->toArray();    
     }
+
     public function AgentStore(Request $request)
     {
  		$this->validate($request, [
@@ -78,11 +82,13 @@ class AgentController extends Controller
         $Agent->haddress = $request->haddress;
         $Agent->email = $request->email;
         $Agent->baddress = $request->baddress;
+        $Agent->city = $request->city;
         $Agent->isActive = 1;
         $Agent ->save();
 
     	return ['message' => 'Agent successfully Stored'];
     }
+
     public function AvailabilityCheck(request $request)
     {
          if ($request->ajax())
@@ -97,6 +103,7 @@ class AgentController extends Controller
             }
         }
     }
+    
     public function AgentDelete($id)
     {
     	$data = Agent::find($id)->delete();

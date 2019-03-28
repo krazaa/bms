@@ -25,7 +25,21 @@
                 </div>
             </div>
             <div class="columns is-multiline">
-                <div class="column is-1">
+                
+                <div class="column is-2">
+                    <div class="field">
+                        <label class="label">Select Brand: </label>
+                        <div class="control">
+                            <div class="select">
+                                <select name="brand_id" v-model="FromData.brand_id" required>
+                                    <option selected disabled>Select one</option>
+                                    <option v-for="brand in brands" :value="brand.id">{{ brand.brand }} </option>  
+                                        </select>
+                                    </div>
+                                </div>
+                    </div>
+                </div>
+                <div class="column is-2">
                     <div class="field">
                         <label class="label">Code: </label>
                         <div class="control">
@@ -146,10 +160,12 @@
             return {
                 vendor: '',
                 search:'',
+                brands:[],
                 success: false,
                 allerros:'',
                 loading: false,
                 FromData: {
+                    brand_id: '',
                     vnum: '',
                     company: '',
                     person: '',
@@ -186,8 +202,19 @@
                         this.allerros = error.response.data.errors;
                         this.success = false;
                    });
-                }
-    }
+                    this.loadVendor();
+                },
+         loadData(){
+              axios.get("/brands./brands").then(({data}) => {
+                  this.brands = data  });
+
+            },
+    },
+       mounted(){
+        this.loadData();  
+        
+    },
+
 }
 
 </script>

@@ -121,7 +121,7 @@ class AutosProductController extends Controller
     	$products = 
         Autoproduct::leftjoin('vendors','vendors.id','=' ,'autoproducts.vendor_id')
         ->leftjoin('categories','categories.id','=' ,'autoproducts.category_id')
-        ->select('autoproducts.id','autoproducts.name','autoproducts.code','autoproducts.model','autoproducts.cost','autoproducts.shortname','autoproducts.vendor_id','autoproducts.reorder','autoproducts.maxqty','autoproducts.cost','autoproducts.cashdis','autoproducts.discountallowed','autoproducts.saleprice','autoproducts.isActive','autoproducts.wsaleprice')->find($id);
+        ->select('autoproducts.id','autoproducts.name','autoproducts.code','autoproducts.category_id','autoproducts.model','autoproducts.cost','autoproducts.shortname','autoproducts.vendor_id','autoproducts.reorder','autoproducts.maxqty','autoproducts.cost','autoproducts.cashdis','autoproducts.discountallowed','autoproducts.saleprice','autoproducts.isActive','autoproducts.wsaleprice')->find($id);
         return $products->toArray();	
     }
 

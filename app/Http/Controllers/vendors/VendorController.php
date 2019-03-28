@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 use App\modules\Vendor;
+use App\modules\Autoproduct;
 use DB;
 
 class VendorController extends Controller
@@ -17,7 +18,7 @@ class VendorController extends Controller
 
     public function GetVendors()
     {
-    	$vendors = Vendor::paginate(20);
+    	$vendors = Vendor::orderBy('id','desc')->with('brands:id,brand')->orderBy('id','desc')->paginate(20);
         return $vendors->toArray();
     }
 
@@ -43,6 +44,7 @@ class VendorController extends Controller
     public function VendorStore(request $request)
         {
         $product = new Vendor();
+        $product->brand_id = $request->brand_id;
         $product->vnum = $request->vnum;
         $product->company = $request->company;
         $product->person = $request->person;
@@ -50,6 +52,7 @@ class VendorController extends Controller
         $product->mobile = $request->mobile;
         $product->bmobile = $request->bmobile;
         $product->address = $request->address;
+        $product->city = $request->city;
         $product->email = $request->email;
         $product->website = $request->website;
         $product->ntn = $request->ntn;
@@ -80,7 +83,8 @@ class VendorController extends Controller
         $vendors = Vendor::select('id','vnum','company','person','mobile','contact')
         ->where('company','LIKE', "%$search%")
         ->orwhere('vnum','LIKE', "%$search%")
-        ->paginate(50);
+        ->orderBy('id','desc')
+        ->paginate(20);
         return $vendors->toArray();    
     }
 
@@ -100,7 +104,15 @@ class VendorController extends Controller
     }
     public function RecordDelete($id)
     {
-        $data = Vendor::find($id)->delete();
-        return ['message' => 'Vendor successfully Deleted'];
+        $autos = Autoproduct::where('vendor_id',$id)->count();
+            if($autos) {
+                return ['message' => 'Vendor is not empty'];
+               } else {
+                //$count = Vendor::find($id)->delete();
+                return ['message' => 'Successfully Deleted'];
+            }
+
+        // $data = Vendor::find($id)->delete();
+        // return ['message' => 'Vendor successfully Deleted'];
     }
 }

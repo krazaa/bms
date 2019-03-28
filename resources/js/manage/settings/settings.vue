@@ -1,5 +1,6 @@
 <template>
-<form method="POST" enctype="multipart/form-data"  @submit.prevent="updateSignal(settings.id)">
+<form method="POST" enctype="multipart/form-data">
+    <!-- @submit.prevent="updateSignal(settings.id)" -->
     <div class="columns" v-if="!success">
     <div class="column is-10 is-offset-1">
             <div v-if="isLoading">
@@ -114,7 +115,8 @@
             </div>
       <label>File
 
-        <input type="file" name="logo" @change="imageChanged"/>
+        <input type="file" @change="onFileSelected"/>
+        <button @click="onUpload">dddd</button>
                 
       </label>
 
@@ -158,21 +160,33 @@
                     file: null
                 },
                 logo: '',
+                selectedFile: null,
                
                 
             }
         },
         methods: {
-            imageChanged (e) {
-                console.log(e.target.files[0])
-                var fileReader = new FileReader()
-
-                fileReader.readAsDataURL(e.target.files[0])
-                fileReader.onload = (e) => {
-                    this.settings.logo = e.target.result
-                }
-            
+            onFileSelected(event){
+                this.selectedFile = event.target.files[0]
             },
+            onUpload(){
+                const fd = new FormData();
+                fd.append('image', this.selectedFile, this.selectedFile.name)
+                axios.post('/settings./updatesetting/1',fd)
+                    .then(res => {
+                        console.log(res)
+                    })
+            },
+            // imageChanged (e) {
+            //     console.log(e.target.files[0])
+            //     var fileReader = new FileReader()
+
+            //     fileReader.readAsDataURL(e.target.files[0])
+            //     fileReader.onload = (e) => {
+            //         this.settings.logo = e.target.result
+            //     }
+            
+            // },
                 updateSignal: function (id) {
                  axios.post('/settings./updatesetting/' + id, this.settings)
                 .then(response => { this.success = true;
