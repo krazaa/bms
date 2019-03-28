@@ -5,7 +5,7 @@
     </div>
     <div v-if="!isLoading">
     <template>
-    <section>
+    <section v-if="vendors.data.length > 0">>
         <b-field grouped group-multiline>
         <div class="control is-flex">
             <h3 class="title is-4">Manage Vedors</h3>
