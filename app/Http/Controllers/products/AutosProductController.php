@@ -60,7 +60,7 @@ class AutosProductController extends Controller
     	$products = Autoproduct::leftjoin('vendors','vendors.id','=' ,'autoproducts.vendor_id')
         ->leftjoin('categories','categories.id','=' ,'autoproducts.category_id')
         ->select('autoproducts.id','autoproducts.name','autoproducts.code','autoproducts.model','autoproducts.cost','autoproducts.shortname','vendors.vnum','vendors.company','autoproducts.isActive','categories.category')
-        //->get();
+        ->orderBy('id','desc')
         ->paginate(20);
         return response()->json($products);
     }
@@ -74,6 +74,7 @@ class AutosProductController extends Controller
         ->orwhere('company','LIKE', "%$search%")
         ->orwhere('model','LIKE', "%$search%")
         ->orwhere('shortname','LIKE', "%$search%")
+        ->orderBy('id','desc')
         ->get();
         return $products;         
     }
