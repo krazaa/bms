@@ -18,7 +18,7 @@ class CategoriesController extends Controller
 
     public function indexCats()
     {
-        $cats = Category::where('sub_id','=','')->orderBy('id','desc')->with('subcats')->orderBy('id','desc')->Active()->paginate(20); 
+        $cats = Category::where('sub_id',false)->orderBy('id','desc')->with('subcats')->orderBy('id','desc')->Active()->paginate(20); 
         return response()->json($cats);
     }
 

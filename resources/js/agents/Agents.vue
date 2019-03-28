@@ -60,7 +60,11 @@
             </template>
             </b-table>
         </section>
-        <p v-show="!agentsload.data.length">No Agents available</p>
+         <div class="control has-text-centered" v-show="!agentsload.data.length">
+        <h1 class="title is-2 is-warning">Record not found</h1>
+        <hr>
+        <router-link class="button is-primary " :to="{ name: 'agentCreate' }"><i class="fa fa-user-plus m-r-10"></i> Add your first Agent click here</router-link>
+    </div>
         </template>
         <hr>
     <pagination :limit="5" :show-disabled=false :data="agentsload"  @pagination-change-page="getResults"></pagination>
