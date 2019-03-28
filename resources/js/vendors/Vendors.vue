@@ -63,6 +63,11 @@
         </template>
         </b-table>
     </section>
+       <div class="control has-text-centered" v-show="!vendors.data.length">
+        <h1 class="title is-2 is-warning">Record not found</h1>
+        <hr>
+        <router-link class="button is-primary " :to="{ name: 'create' }"><i class="fa fa-user-plus m-r-10"></i> Add your first Vendor click here</router-link>
+    </div>
     </template>
 <hr>
 
