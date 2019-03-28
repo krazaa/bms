@@ -5,7 +5,7 @@
     </div>
     <div v-if="!isLoading">
     <template>
-    <section>
+    <section v-if="products.data.length > 0">
         <b-field grouped group-multiline>
         <div class="control is-flex">
             <h3 class="title is-4">Manage Vehicles</h3>
@@ -68,6 +68,11 @@
         </template>
         </b-table>
     </section>
+     <div class="control has-text-centered" v-show="!products.data.length">
+        <h1 class="title is-2 is-warning">Record not found</h1>
+        <hr>
+        <router-link class="button is-primary " :to="{ name: 'newproduct' }"><i class="fa fa-user-plus m-r-10"></i> Add your first Vehicle click here</router-link>
+    </div>
     </template>
 <hr>
         <pagination :limit="5" :show-disabled=false :data="products"  @pagination-change-page="getResults"></pagination>
