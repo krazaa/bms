@@ -1,5 +1,6 @@
 <template>
 <form  @submit.prevent="onSubmit()">
+     <div class="columns" v-if="!success">
     <div class="columns">
         <div class="column is-10 is-offset-1">
             <div class="box">
@@ -161,6 +162,14 @@
             </div>
         </div>
     </div>
+        </div>
+    </div>
+    <div class="notification is-success" v-if="success">
+        <h2 class="title is-2"> Record successfully Stored! </h2>
+        <br>
+        <router-link class="button is-info is-pulled-right" :to="{ name: 'electronic' }"><i class="fa fa-user-plus m-r-10"></i>Click to Back Electronic</router-link>
+    </div>
+
 </form>
 </template>
 <script>
