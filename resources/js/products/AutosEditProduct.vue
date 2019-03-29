@@ -93,7 +93,7 @@
                 </div>
                 <div class="column is-2">
                     <div class="field">
-                        <label class="label">Discount Allowed:</label>
+                        <label class="label">Discount Allow:</label>
                         <div class="control">
                             <input class="input" v-model="autos.discountallowed" name="discountallowed" type="text" placeholder="e.g 2000">
                         </div>
