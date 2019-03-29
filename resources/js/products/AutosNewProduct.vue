@@ -4,21 +4,36 @@
     <div class="columns">
         <div class="column is-10 is-offset-1">
             <div class="box">
-                <b-field grouped group-multiline>
-                    <div class="control">
-                        <h3 class="title is-4">Add New Product</h3>
+                 <div class="columns is-multiline">
+                    <div class="column is-4"><h3 class="title is-4">Add New Product</h3></div>
+                    <div class="column is-8">
+                        <nav class="breadcrumb is-right" aria-label="breadcrumbs">
+                            <ul>
+                                <li>
+                                    <span class="icon is-small">
+                                        <i class="mdi mdi-home" aria-hidden="true"></i>
+                                    </span>
+                                    <router-link to="/dashboard"><span>Home</span></router-link>
+                                </li>
+                                <li>
+                                    <span class="icon is-small">
+                                        <i class="mdi mdi-car" aria-hidden="true"></i>
+                                    </span>
+                                    <router-link :to="{ name: 'autos' }"><span>Vehicles Page</span></router-link>
+                                </li>
+                            </ul>
+                        </nav>
                     </div>
-                </b-field>
+                </div>
                 <div class="columns is-multiline">
                        <div class="column is-4">
-                
                      <div class="field">
                         <label class="label">Select Vendor:</label>
                         <div class="control">
                             <div class="select">
                                 <select name="vendor_id" v-model="autos.vendor_id">
                                     <option selected disabled>Select Vendor</option>
-                                    <option v-for="vendor in vendors.data" :value="vendor.id">{{ vendor.company }}</option>
+                                    <option v-for="vendor in vendors.data" :value="vendor.id">{{ vendor.company }} {{ vendor.person }}</option>
                                     
                                 </select>
                             </div>
@@ -100,7 +115,7 @@
                 </div>
                 <div class="column is-2">
                     <div class="field">
-                        <label class="label">Discount Allowed:</label>
+                        <label class="label">Discount Allow:</label>
                         <div class="control">
                             <input class="input" v-model="autos.dautosiscountallowed" name="discountallowed" type="text" placeholder="e.g 2000">
                             
@@ -145,7 +160,7 @@
     <div class="notification is-success" v-if="success">
         <h2 class="title is-2"> Record successfully Stored! </h2>
         <br>
-        <router-link class="button is-info is-pulled-right" :to="{ name: 'banks' }"><i class="fa fa-user-plus m-r-10"></i>Click to Back Vehicles</router-link>
+        <router-link class="button is-info is-pulled-right" :to="{ name: 'autos' }"><i class="fa fa-user-plus m-r-10"></i>Click to Back Vehicles</router-link>
     </div>
 
 </form>

@@ -13,4 +13,9 @@ class Vendor extends Model
         return $this->belongsTo('App\modules\Brand', 'brand_id');
      
     }
+    
+    public function scopeActive($query)
+    {
+        return $query->where('isActive', true);
+    }
 }

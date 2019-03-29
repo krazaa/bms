@@ -5,20 +5,24 @@ namespace App\Http\Controllers\products;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\modules\Electronicproduct;
+
+use Auth;
+
+
 class ElectronicProductController extends Controller
 {
      public function index()
     {
         $cats = Electronicproduct::leftjoin('vendors','vendors.id','=' ,'electronicproducts.vendor_id')
-        ->leftjoin('categories','categories.id','=' ,'electronicproducts.cat_id')
-        ->select('electronicproducts.id','electronicproducts.name','electronicproducts.code','electronicproducts.comppartno','electronicproducts.shortname','electronicproducts.cost','vendors.vnum','vendors.company','categories.category')
-        ->paginate(100); 
+        ->leftjoin('categories','categories.id','=' ,'electronicproducts.category_id')
+        ->select('electronicproducts.id','electronicproducts.name','electronicproducts.code','electronicproducts.comppartno','electronicproducts.cost','vendors.vnum','vendors.company','categories.category','electronicproducts.isActive')
+        ->paginate(20); 
         return response()->json($cats);
     }
 
      public function GetElec()
     {
-        $cats = Electronicproduct::paginate(100);
+        $cats = Electronicproduct::paginate(20);
         return $cats->toArray();
     }
 
@@ -26,14 +30,14 @@ class ElectronicProductController extends Controller
     {   
         $search = $request->search;
         $cats = Electronicproduct::leftjoin('vendors','vendors.id','=' ,'electronicproducts.vendor_id')
-        ->leftjoin('categories','categories.id','=' ,'electronicproducts.cat_id')
+        ->leftjoin('categories','categories.id','=' ,'electronicproducts.category_id')
         ->where('name','LIKE', "%$search%")
         ->orwhere('vnum','LIKE', "%$search%")
         ->orwhere('categories.category','LIKE', "%$search%")
         ->orwhere('comppartno','LIKE', "%$search%")
         ->orwhere('shortname','LIKE', "%$search%")
         ->orwhere('code','LIKE', "%$search%")
-        ->paginate(100);
+        ->paginate(20);
         return $cats->toArray();    
     }
 
@@ -57,5 +61,37 @@ class ElectronicProductController extends Controller
         ->select('electronicproducts.id','electronicproducts.name','electronicproducts.code','electronicproducts.cost','electronicproducts.shortname','vendors.vnum','vendors.company')
         ->find($id);
         return $products->toArray();    
+    }
+
+     public function ElecProductStore(request $request)
+    {   
+       $this->validate($request, [
+            'code' => 'required|unique:autoproducts',
+            'name' => 'required',
+            'model' => 'required'
+            
+        ]);
+                
+        $product = new Electronicproduct();
+        $product->vendor_id = $request->vendor_id;
+        $product->category_id = $request->category_id;
+        $product->subcategory_id = $request->subcategory_id;
+        $product->code = $request->code;
+        $product->name = $request->name;
+        $product->model = $request->model;
+        $product->comppartno = $request->comppartno;
+        $product->discountallowed = $request->discountallowed;
+        $product->saleprice = $request->saleprice;
+        $product->wsaleprice = $request->wsaleprice;
+        $product->reorder = $request->reorder;
+        $product->maxqty = $request->maxqty;
+        $product->cost = $request->cost;
+        $product->saleprice = $request->saleprice;
+        $product->isActive = 1;
+        $product->user_id = Auth::user()->id;
+        $product ->save();
+        
+        return (['message' => 'Product was successfull']);
+        // return redirect('/dashboard')->with('success','Subject updated successfully');
     }
 }

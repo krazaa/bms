@@ -55,7 +55,7 @@ class CogController extends Controller
     public function AcEdit($id)
     {
     	$cogs = DB::table('cogas')
-    	->select('id','typeid','acode','aname','incom_balance_id as inbal','debitcredit','actype_id as actype','acat_id','subtype','subtype','class','isActive')
+    	->select('id','typeid','acode','aname','incom_balance_id as inbal','debitcredit','actype_id as actype','acat_id','subtype','subtype','class','isActive','subtype','subtype2')
     	->find($id);
     	return response()->json($cogs);
     }

@@ -18,7 +18,27 @@ class VendorController extends Controller
 
     public function GetVendors()
     {
-    	$vendors = Vendor::orderBy('id','desc')->with('brands:id,brand')->orderBy('id','desc')->paginate(20);
+    	$vendors = Vendor::select('id','type','brand_id','company','vnum','person','mobile','ntn','salestax','isActive',
+            DB::raw('(CASE 
+                        WHEN type = "1" THEN "Vehicles" 
+                        WHEN type = "2" THEN "Electronic" 
+                        ELSE "" 
+                        END) AS type'))
+        ->orderBy('id','desc')->with('brands:id,brand')->orderBy('id','desc')->paginate(20);
+        return $vendors->toArray();
+    }
+
+public function GetVendorsElec()
+    {
+        $vendors = Vendor::select('id','type','company','person','isActive',
+            DB::raw('(CASE 
+                        WHEN type = "1" THEN "Vehicles" 
+                        WHEN type = "2" THEN "Electronic" 
+                        ELSE "" 
+                        END) AS type'))
+        ->where('type',2)
+        ->Active()
+        ->orderBy('id','desc')->with('brands:id,brand')->orderBy('id','desc')->paginate(20);
         return $vendors->toArray();
     }
 
@@ -45,6 +65,7 @@ class VendorController extends Controller
         {
         $product = new Vendor();
         $product->brand_id = $request->brand_id;
+        $product->type = $request->type;
         $product->vnum = $request->vnum;
         $product->company = $request->company;
         $product->person = $request->person;

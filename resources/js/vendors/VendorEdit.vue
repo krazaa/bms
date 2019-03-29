@@ -26,6 +26,19 @@
             </div>
             <div class="columns is-multiline">
                 <div class="column is-2">
+                    <label class="label">Type:</label>
+                    <div class="control">
+                        <div class="block">
+                            <b-radio v-model="vendors.type" native-value="1">
+                            Vehicle
+                            </b-radio>
+                            <b-radio v-model="vendors.type" native-value="2">
+                            Electronic
+                            </b-radio>
+                        </div>
+                    </div>
+                </div>
+                <div class="column is-2">
                     <div class="field">
                         <label class="label">Select Brand: </label>
                         <div class="control">
@@ -159,6 +172,7 @@
                 vendors: {
                     vnum:'',
                     brand_id:'',
+                    type: '',
                     company:'',
                     person:'',
                     contact:'',

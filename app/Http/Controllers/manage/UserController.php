@@ -9,6 +9,9 @@ use App\Branch;
 use App\Role;
 use DB;
 use Hash;
+use Auth;
+use Image;
+
 
 class UserController extends Controller
 {
@@ -179,4 +182,22 @@ class UserController extends Controller
         $data = User::find($id)->delete();
         return ['message' => 'User successfully Deleted'];
     }
+
+    public function myFunction(Request $request)
+{
+    dd($request->all(), $request->hasFile('image'), $request->file('image'));
+}
+
+     public function updateAvatar(Request $request)
+{
+    $user = Auth::user();
+    $user->rolename = $request->rolename;
+    $avatar = $request->file('file');
+    $filename = time() . '.' . $avatar->getClientOriginalExtension();
+    Image::make($avatar)->save( public_path('/uploads/' . $filename) );
+
+    $user->avatar = $filename;
+
+    $user->save();
+}
 }

@@ -8,6 +8,7 @@
             <div class="columns" v-if="!success">
                 <div class="column is-10 is-offset-1">
                     <div class="box">
+                        
                        <div class="columns is-multiline">
                     <div class="column is-4"><h3 class="title is-4">Update Agent</h3></div>
                     <div class="column is-8">

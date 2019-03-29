@@ -6,26 +6,44 @@
     <div v-if="!isLoading">
     <template>
     <section v-if="vendors.data.length > 0">
-        <b-field grouped group-multiline>
-        <div class="control is-flex">
-            <h3 class="title is-4">Manage Vedors</h3>
-        </div>
-        <div class="control is-flex">
-            <input class="input" v-model="searchvendor" name="search" placeholder="Keyword Seach" @input="VendorGet">
-        </div>
-        <div class="control is-flex">
-            <router-link class="button is-primary is-pulled-right" :to="{ name: 'create' }"><i class="fa fa-user-plus m-r-10"></i> New Vendor</router-link>
-        </div>
-        </b-field>
+    <div class="columns is-multiline">
+            <div class="column is-3"><h3 class="title is-4">Manage Vendors</h3></div>
+              <div class="column is-3">
+                <h3 class="title is-4">
+                <b-field>
+            <b-input v-model="searchvendor" name="search" placeholder="Keyword Seach" @input="VendorGet"></b-input>
+            </b-field>
+          </h3>
+          </div>
+          <div class="column is-2">
+              <router-link class="button is-primary d-inline-block is-pulled-right" :to="{ name: 'create' }"><i class="fa fa-user-plus m-r-10"></i> New Vendor</router-link>
+          </div>
+                    <div class="column is-4">
+                        <nav class="breadcrumb is-right" aria-label="breadcrumbs">
+                            <ul>
+                                <li>
+                                    <span class="icon is-small">
+                                        <i class="mdi mdi-home" aria-hidden="true"></i>
+                                    </span>
+                                    <router-link to="/dashboard"><span>Home</span></router-link>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+
         <b-table
             :data="vendors.data"
             :loading="isLoading"
             :narrowed="isNarrowed"
             :default-sort-direction="defaultSortDirection"
-             default-sort="vendors.company">
+             :default-sort="vendors.data.company">
         <template slot-scope="props">
-        <b-table-column field="id" label="ID" width="40" sortable>
+        <b-table-column field="id" label="ID" width="40" sortable numeric>
         {{ props.row.id }}
+        </b-table-column>
+        <b-table-column field="brands.bran" label="Make"  sortable>
+        {{ props.row.type }}
         </b-table-column>
         <b-table-column field="brands.bran" label="Brand"  sortable>
         {{ props.row.brands.brand }}
@@ -56,7 +74,6 @@
             </b-switch>
             </b-table-column>
         <b-table-column label="Action" centered>
-        <!-- <a :href="`/manage/users/singleuser/${props.row.id}`" class="button is-success is-small"><span class="mdi mdi-eye"></span></a> -->
         <router-link class="button is-info is-small" :to="{ name: 'vendorEdit', params: {id: props.row.id }}"><span class="mdi mdi-pencil-box-outline"></span></router-link>
             <a @click="onDelete(props.row.id)" class="button is-danger is-small"><span class="mdi mdi-trash-can"></span></a>
         </b-table-column>
@@ -107,9 +124,6 @@
         methods: { 
             VendorED(id,){
               axios.get("/vendors./VendorED/" + id )
-              // .then(response => { this.success = true;
-              //         })
-            //this.loadVendor();
             },  
              loadVendor(){
               this.isLoading = true

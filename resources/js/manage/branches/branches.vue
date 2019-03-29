@@ -6,17 +6,24 @@
         <b-loading :active.sync="isLoading" :can-cancel="true"></b-loading>
     </div>
     <div v-if="!isLoading">
-        <b-field grouped group-multiline>
-         <div class="control">
-                <h3 class="title is-4">Manage Branches</h3>   
-            </div>
-            
-            <div class="control">
-                <b-field>
-                    <router-link :to="{ name: 'newbranch'}" class="button is-info">New Branch</router-link>
-                </b-field>
-            </div>
-    </b-field>
+      <div class="columns is-multiline">
+            <div class="column is-3"><h3 class="title is-4">Manage Branches</h3></div>
+          <div class="column is-1">
+              <router-link class="button is-primary d-inline-block is-pulled-right" :to="{ name: 'newbranch' }"><i class="fa fa-user-plus m-r-10"></i> New Branch</router-link>
+          </div>
+                    <div class="column is-8">
+                        <nav class="breadcrumb is-right" aria-label="breadcrumbs">
+                            <ul>
+                                <li>
+                                    <span class="icon is-small">
+                                        <i class="mdi mdi-home" aria-hidden="true"></i>
+                                    </span>
+                                    <router-link to="/dashboard"><span>Home</span></router-link>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
     
       <table class="table is-fullwidth is-hoverable is-narrow is-desktop is-mobile" v-if="branches.length > 0">
         

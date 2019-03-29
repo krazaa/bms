@@ -50,7 +50,6 @@
                                 <div class="control">
                                     <div class="select">
                                         <select name="subtype" v-model="cogFrom.subtype">
-                                            <option selected disabled value="0">Select one</option>
                                             <option v-for="scl in subacload" :value="scl.id">{{ scl.aname }} </option>
                                         </select>
                                     </div>
@@ -181,6 +180,7 @@
                 loading: false,
                 cogFrom: {
                     typeid: '',
+                    subtype: '',
                     acode: '',
                     inbal: '',
                     acat_id: '',

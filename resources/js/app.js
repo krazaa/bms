@@ -31,6 +31,7 @@ Vue.use(VeeValidate);
 
 //Vue.component('example-component', require('./components/ExampleComponent.vue').default);
  Vue.component('login', require('./components/login.vue').default);
+ Vue.component('users', require('./components/users.vue').default);
 // Vue.component('dashboard', require('./components/dashboard.vue').default);
 // Vue.component('manageusers', require('./manage/users/UsersComponent.vue').default);
 // Vue.component('singleuser', require('./manage/users/showComponent.vue').default);

@@ -6,6 +6,7 @@
     <div class="box">
         {{-- <dashboard></dashboard> --}}
         <router-view></router-view>
+        {{-- <users></users> --}}	
 	</div>
 </section>
 @endsection

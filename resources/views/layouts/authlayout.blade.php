@@ -98,7 +98,7 @@
                 <router-link class="navbar-item" :to="{ name: 'branches'}">Company Branches</router-link>
                 <router-link class="navbar-item" :to="{ name: 'cogs'}">COA Openings</router-link>
                 <router-link class="navbar-item" :to="{ name: 'banks'}">Bank Setup</router-link>
-                <router-link class="navbar-item" :to="{ name: 'brands'}">Brands Setup</router-link>
+                <router-link class="navbar-item" :to="{ name: 'brands'}">Make Setup</router-link>
                  <router-link class="navbar-item" :to="{ name: 'autos'}">Vehicle Setup</router-link>
                 <router-link class="navbar-item" :to="{ name: 'electronic'}">Electronic Setup</router-link>
                 <router-link class="navbar-item" :to="{ name: 'manage'}">Product Category Setup</router-link>

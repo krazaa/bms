@@ -12,8 +12,20 @@ class CategoriesController extends Controller
 {
     public function index()
     {
-    	$cats = Category::where('sub_id','=','')->orderBy('id','desc')->with('subcats')->orderBy('id','desc')->paginate(20); 
+    	$cats = Category::where('sub_id','=','')
+        ->Active()
+        ->groupby('sub_id')
+        ->orderBy('id','desc')
+        ->with('subcats')
+        ->orderBy('id','desc')
+        ->paginate(20); 
     	return response()->json($cats);
+    }
+
+    public function indexElec()
+    {
+        $cats = Category::where('sub_id','=','')->where('type',2)->Active()->orderBy('id','desc')->with('subcats')->orderBy('id','desc')->paginate(20); 
+        return response()->json($cats);
     }
 
     public function indexCats()
@@ -26,6 +38,19 @@ class CategoriesController extends Controller
     {
         $cats = Category::where('sub_id', '>', 0)->paginate(20); 
         return response()->json($cats);
+    }
+
+    public function SubCatsElec($id)
+    {
+
+         $cats = Category::select('id','category','sub_id','isActive')
+                        ->where('type',2)
+                        ->where('sub_id','=', $id)
+                         ->Active()
+                         ->get();
+                         
+        return response($cats); 
+
     }
 
     public function ChangeStatus($id)

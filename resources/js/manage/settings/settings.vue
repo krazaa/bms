@@ -1,5 +1,5 @@
 <template>
-<form method="POST" enctype="multipart/form-data">
+<form method="POST" enctype="multipart/form-data" @submit.prevent="updateAvatar(settings.id)">
     <!-- @submit.prevent="updateSignal(settings.id)" -->
     <div class="columns" v-if="!success">
     <div class="column is-10 is-offset-1">
@@ -16,7 +16,7 @@
                         <label class="label">Company Name:
                         </label>
                         <div class="control">
-                            <input class="input" v-model="settings.company" name="company" type="text" placeholder="e.g PTCL" autocomplete="off" autofocus>
+                            <input class="input" v-model="settings.company" name="comp" type="text" placeholder="e.g PTCL" autocomplete="off" autofocus>
                             <span class="help is-danger">{{ allerros.company }}</span>
                         </div>
                     </div>
@@ -115,8 +115,7 @@
             </div>
       <label>File
 
-        <input type="file" @change="onFileSelected"/>
-        <button @click="onUpload">dddd</button>
+        <input @change="newAvatar" id="logo" type="file" name="logo" >
                 
       </label>
 
@@ -159,6 +158,11 @@
                     strn: '',
                     file: null
                 },
+                 logo: {
+                },
+                comp:{
+
+                },
                 logo: '',
                 selectedFile: null,
                
@@ -166,47 +170,46 @@
             }
         },
         methods: {
-            onFileSelected(event){
-                this.selectedFile = event.target.files[0]
+             newAvatar(event) {
+               let files = event.target.files;
+               if (files.length) this.logo = files[0];
             },
-            onUpload(){
-                const fd = new FormData();
-                fd.append('image', this.selectedFile, this.selectedFile.name)
-                axios.post('/settings./updatesetting/1',fd)
-                    .then(res => {
-                        console.log(res)
-                    })
-            },
-            // imageChanged (e) {
-            //     console.log(e.target.files[0])
-            //     var fileReader = new FileReader()
+            //updateAvatar: function (id) {
+            updateAvatar: function (e) {
+                 
+       
 
-            //     fileReader.readAsDataURL(e.target.files[0])
-            //     fileReader.onload = (e) => {
-            //         this.settings.logo = e.target.result
-            //     }
+                 var formData = new FormData();
+                 formData.append("logo", file.files[0]);
+                 // formData.append('name', this.formData.name);
+                 // formData.append('email', this.formData.email);
+                 // formData.append('otherField', this.formData.otherField);
+                axios.post('/settings./UpdateSetting/1', formData)
+                //axios.post('/settings./UpdateSetting/1' +id, data)
+                        .then(res => {
+                            console.log(res);
+                         }) 
+                         .catch(error => console.log(error));
+                // window.location.href = "/profile";
+              },
             
+            //     updateSignal: function (id) {
+            //      axios.post('/settings./updatesetting/' + id, this.settings)
+            //     .then(response => { this.success = true;
+            //      })
+            //         .catch((error) => {
+            //             this.allerros = error.response.data.errors;
+            //             this.success = false;
+            //        });
             // },
-                updateSignal: function (id) {
-                 axios.post('/settings./updatesetting/' + id, this.settings)
-                .then(response => { this.success = true;
-                 })
-                    .catch((error) => {
-                        this.allerros = error.response.data.errors;
-                        this.success = false;
-                   });
-            },
             
              ShowSingle(){
-            axios.get(`/settings./getsetting/1`)
+            axios.get(`/settings./GetSetting/1`)
                 .then((response)=> this.settings = this.temp = response.data)
                 //.catch((error) => this.errors = error.response.data.errors)
                         }    
                 },
                       
-         upload(){
-            axios.post('/upload', {'image':this.logo})
-         },
         mounted(){
             this.ShowSingle();  
         },    

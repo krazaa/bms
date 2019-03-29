@@ -14,6 +14,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::prefix('vendors.')->middleware('role:superadministrator|administrator|editor|author|contributor')->group(function () {
     //Route::get('/', 'vendors\VendorController@index')->name('vendors');
     Route::get('/GetVendors', 'vendors\VendorController@GetVendors')->name('vendors.GetVendors');
+    Route::get('/GetVendorsElec', 'vendors\VendorController@GetVendorsElec')->name('vendors.GetVendorsElec');
     Route::get('/editVendor/{id}', 'vendors\VendorController@VendorEdit')->name('vendors.editVendor');
     Route::get('/create', 'vendors\VendorController@create')->name('vendors.create');
     Route::post('/VendorStore', 'vendors\VendorController@VendorStore')->name('vendors.VendorStore');
@@ -73,12 +74,14 @@ Route::prefix('excise.')->group(function () {
 Route::prefix('categories.')->group(function () {
     
     Route::get('/GetCategories', 'category\CategoriesController@index')->name('categories.GetCategories');
+    Route::get('/indexElec', 'category\CategoriesController@indexElec')->name('categories.indexElec');
     Route::get('/indexCats', 'category\CategoriesController@indexCats')->name('categories.indexCats');
     Route::get('/create', 'category\CategoriesController@create')->name('categories.create');
     Route::post('/CatStore', 'category\CategoriesController@CatStore')->name('categories.CatStore');
     Route::get('/CatSearch', 'category\CategoriesController@CatSearch')->name('categories.CatSearch');
     Route::get('/SearchCat', 'category\CategoriesController@SearchCat')->name('categories.SearchCat');
     Route::get('/SubCats', 'category\CategoriesController@SubCats')->name('categories.SubCats');
+    Route::get('/SubCatsElec/{id}', 'category\CategoriesController@SubCatsElec')->name('categories.SubCatsElec');
     Route::get('/ChangeStatus/{id}', 'category\CategoriesController@ChangeStatus')->name('categories.ChangeStatus');
     Route::get('/CatDelete/{id}', 'category\CategoriesController@CatDelete')->name('categories.CatDelete');
     Route::get('/SubCatDelete/{id}', 'category\CategoriesController@SubCatDelete')->name('categories.SubCatDelete');
@@ -133,7 +136,7 @@ Route::prefix('products.')->group(function () {
     //Electronic
     Route::get('/electronic/GetElectronic', 'products\ElectronicProductController@index')->name('products.electronic.GetElectronic');
     Route::get('/electronic/create', 'products\ElectronicProductController@create')->name('products.electronic.create');
-    Route::post('/electronic/ElecStore', 'products\ElectronicProductController@ElecStore')->name('products.electronic.ElectStore');
+    Route::post('/electronic/ElecProductStore', 'products\ElectronicProductController@ElecProductStore')->name('products.electronic.ElecProductStore');
     Route::get('/electronic/ElecSearch', 'products\ElectronicProductController@ElecSearch')->name('products.electronic.ElectSearch');
     Route::get('/electronic/SearchElec', 'products\ElectronicProductController@SearchElec')->name('products.electronic.SearchElec');
     Route::get('/electronic/ShowSingle/{id}', 'products\ElectronicProductController@ShowSingle')->name('products.electronic.ShowSingle');
@@ -174,6 +177,8 @@ Route::prefix('brands.')->group(function () {
 Route::prefix('settings.')->group(function () {
 
 
+    Route::get('/GetSetting/{id}', 'SettingController@GetSetting')->name('settings.GetSetting');
+    Route::post('/UpdateSetting/{id}', 'SettingController@UpdateSetting')->name('settings.UpdateSetting');
     // Branches
     Route::get('/branches', 'settings\BranchesController@index')->name('settings.branches');
     Route::get('/branches/GetBranches', 'settings\BranchesController@GetBranches')->name('settings.branches.GetBranches');
@@ -208,8 +213,9 @@ Route::get('/', function () {
 
 Route::get('/ac', function () {
 
-    $logs = \App\Activity::all();   
-    return view('log', compact('logs'));
+    $data = \App\Test::get()->toTree();
+
+    return $data;
 });
 
 
@@ -224,6 +230,8 @@ Route::get('/users/show/{id}', 'manage\UserController@show')->name('users.show')
 Route::post('/users/store', 'manage\UserController@store')->name('users.store');
 
 Route::get('users/SearchUsers', 'manage\UserController@SearchUsers')->name('manage.SearchUsers');
+Route::post('users/updateAvatar', 'manage\UserController@updateAvatar')->name('manage.updateAvatar');
+Route::post('users/myFunction', 'manage\UserController@myFunction')->name('manage.myFunction');
 
 // branches
 Route::get('branches', 'manage\UserController@GetBranches')->name('manage.branches');

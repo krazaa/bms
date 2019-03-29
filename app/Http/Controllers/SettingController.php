@@ -47,6 +47,7 @@ class SettingController extends Controller
                      
 
         $settings = Setting::findOrFail($id);
+        $settings->company = $request->comp;
     	$settings->update($request->all());
 
 

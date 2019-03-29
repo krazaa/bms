@@ -6,18 +6,36 @@
     <div v-if="!isLoading">
     <template>
        <section v-if="cogsList.data.length > 0">
-        <b-field grouped group-multiline>
-        <div class="control is-flex">
-            <h3 class="title is-4">Manage Chart of Accounts</h3>
-        </div>
-        <div class="control is-flex">
+
+           <div class="columns is-multiline">
+            <div class="column is-4"><h3 class="title is-4">Manage Chart of Accounts</h3></div>
+
+          <div class="column is-3">
             <b-field>
             <b-input v-model="search" name="search" placeholder="Keyword Seach" @input="SearchGet"></b-input>
             </b-field>
-        </div>
+          </div>
+          <div class="column is-1">
+              <router-link class="button is-primary d-inline-block is-pulled-right" :to="{ name: 'cogCreate' }"><i class="fa fa-user-plus m-r-10"></i> New COA</router-link>
+          </div>
+                    <div class="column is-4">
+                        <nav class="breadcrumb is-right" aria-label="breadcrumbs">
+                            <ul>
+                                <li>
+                                    <span class="icon is-small">
+                                        <i class="mdi mdi-home" aria-hidden="true"></i>
+                                    </span>
+                                    <router-link to="/dashboard"><span>Home</span></router-link>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+        <b-field grouped group-multiline>
         <div class="control is-flex">
-            <router-link class="button is-primary is-pulled-right" :to="{ name: 'cogCreate' }"><i class="fa fa-user-plus m-r-10"></i> New COA</router-link>
+            <h3 class="title is-4"></h3>
         </div>
+        
         </b-field>
         <p class="level-item">
             <span class="is-pulled-right" v-if="loading">

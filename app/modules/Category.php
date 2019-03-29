@@ -8,7 +8,7 @@ class Category extends Model
 {
 
 	 protected $fillable = [
-        'type', 'category', 'ctype', 'sub_id', 'isActive'
+        'id','type', 'category', 'ctype', 'sub_id', 'isActive'
     ];
 
     public function subcats()
@@ -19,6 +19,6 @@ class Category extends Model
 
      public function scopeActive($query)
     {
-        return $query->where('isActive', true);
+        return $query->where('isActive', 1);
     }
 }

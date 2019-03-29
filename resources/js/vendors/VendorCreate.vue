@@ -25,7 +25,19 @@
                 </div>
             </div>
             <div class="columns is-multiline">
-                
+                <div class="column is-2">
+                    <label class="label">Type:</label>
+                    <div class="control">
+                        <div class="block">
+                            <b-radio v-model="FromData.type" native-value="1">
+                            Vehicle
+                            </b-radio>
+                            <b-radio v-model="FromData.type" native-value="2">
+                            Electronic
+                            </b-radio>
+                        </div>
+                    </div>
+                </div>
                 <div class="column is-2">
                     <div class="field">
                         <label class="label">Select Brand: </label>
@@ -165,6 +177,7 @@
                 allerros:'',
                 loading: false,
                 FromData: {
+                    type: '1',
                     brand_id: '',
                     vnum: '',
                     company: '',

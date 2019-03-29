@@ -6,19 +6,31 @@
     <div v-if="!isLoading">
         <template>
         <section v-if="agentsload.data.length > 0">
-            <b-field grouped group-multiline>
-            <div class="control is-flex">
-                <h3 class="title is-4">Manage Agents</h3>
-            </div>
-            <div class="control is-flex">
+               <div class="columns is-multiline">
+            <div class="column is-3"><h3 class="title is-4">Manage Agents</h3></div>
+              <div class="column is-3">
+                <h3 class="title is-4">
                 <b-field>
-                <b-input v-model="search" name="search" placeholder="Keyword Seach" @input="SearchGet"></b-input>
-                </b-field>
-            </div>
-            <div class="control is-flex">
-                <router-link class="button is-primary is-pulled-right" :to="{ name: 'agentCreate' }"><i class="fa fa-user-plus m-r-10"></i> New Agent</router-link>
-            </div>
+            <b-input v-model="search" name="search" placeholder="Keyword Seach" @input="SearchGet"></b-input>
             </b-field>
+          </h3>
+          </div>
+          <div class="column is-2">
+              <router-link class="button is-primary d-inline-block is-pulled-right" :to="{ name: 'agentCreate' }"><i class="fa fa-user-plus m-r-10"></i> New Agent</router-link>
+          </div>
+                    <div class="column is-4">
+                        <nav class="breadcrumb is-right" aria-label="breadcrumbs">
+                            <ul>
+                                <li>
+                                    <span class="icon is-small">
+                                        <i class="mdi mdi-home" aria-hidden="true"></i>
+                                    </span>
+                                    <router-link to="/dashboard"><span>Home</span></router-link>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
             
             <b-table
             :data="agentsload.data"
@@ -121,7 +133,7 @@ import moment from 'moment';
                 });
             },
             SearchGet() {
-            axios.get('/agents./CheckAvailable?search=' + this.search)
+            axios.get('/agents./AgentSearch?search=' + this.search)
             .then(({data}) => (this.agentsload = data));
             },
             AgentDelete(id) {
