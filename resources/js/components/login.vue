@@ -5,9 +5,9 @@
         <div class="title is-1 has-text-centered">Pak Motors BMS</div>
     </div>
         <div class="columns is-multilines">
-            <div class="column is-5">({{ logo }})
+            <div class="column is-5">
                 <figure class="image is-256x256">
-                    <img src="/public/logo/">
+                    <img :src="'/public/logo/bmslogo.png'">
                 </figure>
             </div>
             <div class="column is-7">
