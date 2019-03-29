@@ -23,4 +23,10 @@ class Brand extends Model
     {
         return $query->where('type', 2);
     }
+
+    protected $dates = [
+            'created_at',
+            'updated_at',
+            'deleted_at'
+        ];
 }

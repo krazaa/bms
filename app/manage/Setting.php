@@ -14,4 +14,10 @@ class Setting extends Model
     protected static $logFillable = true;
 	
     protected $fillable = ['company', 'logo', 'address', 'phone', 'mobile', 'fax', 'email', 'website', 'ntn', 'strn', 'version','name', 'text'];
+
+    protected $dates = [
+            'created_at',
+            'updated_at',
+            'deleted_at'
+        ];
 }

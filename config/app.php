@@ -169,6 +169,8 @@ return [
 
         Intervention\Image\ImageServiceProvider::class,
 
+        App\Providers\SettingServiceProvider::class,
+
         /*
          * Application Service Providers...
          */

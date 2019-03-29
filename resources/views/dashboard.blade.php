@@ -7,6 +7,7 @@
         {{-- <dashboard></dashboard> --}}
         <router-view></router-view>
         {{-- <users></users> --}}	
+        {{-- <autocomplet></autocomplet> --}}
 	</div>
 </section>
 @endsection

@@ -8,6 +8,12 @@ class Vendor extends Model
 {
     protected $guarded = ['id'];
 
+    protected $dates = [
+            'created_at',
+            'updated_at',
+            'deleted_at'
+        ];
+
      public function brands()
     {
         return $this->belongsTo('App\modules\Brand', 'brand_id');

@@ -26,35 +26,23 @@
                     </div>
                 </div>
                 <div class="columns is-multiline">
-                       <div class="column is-4">
-                     <div class="field">
-                        <label class="label">Select Vendor:</label>
-                        <div class="control">
-                            <div class="select">
-                                <select name="vendor_id" v-model="autos.vendor_id">
-                                    <option selected disabled>Select Vendor</option>
-                                    <option v-for="vendor in vendors.data" :value="vendor.id">{{ vendor.company }} {{ vendor.person }}</option>
-                                    
-                                </select>
-                            </div>
-                        </div>
+                     <div class="column is-4">
+                        <b-field label="Vendor">
+                            <b-select placeholder="Select a Vendor" name="vendor_id" v-model="autos.vendor_id" expanded>
+                                <option v-for="vendor in vendors" :value="vendor.id">{{ vendor.company | Upper }} <a>{{ vendor.person }}</a></option>
+                            </b-select>
+                        </b-field>
+                    </div>
+
+                <div class="column is-4">
+                     <b-field label="Category">
+                            <b-select placeholder="Select a Category" name="category_id" v-model="autos.category_id" expanded>
+                                <option v-for="cat in getcats" :value="cat.id">{{ cat.category }}</option>
+                            </b-select>
+                        </b-field>
                     </div>
                 </div>
 
-                <div class="column is-4">
-                     <div class="field">
-                        <label class="label">Select Category:</label>
-                        <div class="control">
-                            <div class="select">
-                                <select name="category_id" v-model="autos.category_id">
-                                    <option selected disabled>Select Category</option>
-                                    <option v-for="cat in getcats" :value="cat.id">{{ cat.category }}</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
                     <div class="columns is-multiline">
                         <div class="column is-2">
                     <div class="field">
@@ -166,6 +154,7 @@
 </form>
 </template>
 <script>
+
     export default {
         data(){
             return {               
@@ -214,9 +203,15 @@
         },
         mounted(){
         
-            axios.get("/vendors./GetVendors").then(({data}) => (this.vendors = data));
-            axios.get("/products./autos/CatsGet").then(({data}) => (this.getcats = data));
+            axios.get("/vendors./GetVendorsAuto").then(({data}) => (this.vendors = data));
+            axios.get("/categories./indexAutos").then(({data}) => (this.getcats = data));
     
     },
+    filters: {
+        Upper(value) {
+            return value.toUpperCase();
+        }
+    }
+
     }
 </script>

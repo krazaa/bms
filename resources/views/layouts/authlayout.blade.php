@@ -16,10 +16,7 @@
       <nav class="navbar has-shadow navbar-top is-spaced">
         <div class="navbar-brand">
           <a href="{{ route('dashboard') }}" class="navbar-item"> 
-            <i class="mdi mdi-motorbike mdi-36px"></i>
-            {{-- <img src="/public/logo/{{ $logo}}"  height="60"> --}}
-        {{--       <router-view></router-view> --}}
-        
+            <img src="/public/logo/{{ $logo}}" height="80">
           </a>
           <a class="navbar-item is-hidden-desktop" href="#" target="_blank">
             <span class="icon" style="color: #333;">

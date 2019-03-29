@@ -10,6 +10,12 @@ class Branch extends Model
         'name', 'address', 'contact', 'mobile', 'email', 'city','code'
     ];
 
+    protected $dates = [
+            'created_at',
+            'updated_at',
+            'deleted_at'
+        ];
+
 
     public function users()
     {

@@ -1,11 +1,8 @@
 <template>
     <form class="form-horizontal" method="POST" @submit.prevent="updateSignal(autos.id)">
-
     <div class="columns" v-if="!success">
-
         <div class="column is-10 is-offset-1">
             <div class="box">
-        
            <div class="columns is-multiline">
                     <div class="column is-4"><h3 class="title is-4">Update Product</h3></div>
                     <div class="column is-8">
@@ -30,30 +27,18 @@
         
                 <div class="columns is-multiline">
                        <div class="column is-4">
-                
-                     <div class="field">
-                        <label class="label">Select Vendor:</label>
-                        <div class="control">
-                            <div class="select">
-                                <select name="vendor_id" v-model="autos.vendor_id">
-                                    <option v-for="vendor in vendors.data" :value="vendor.id">{{ vendor.company }}</option>
-                                </select>
-                            </div>
-                        </div>
+                        <b-field label="Vendor">
+                            <b-select placeholder="Select a Vendor" name="autos.vendor_id" v-model="autos.vendor_id" expanded>
+                                <option v-for="vendor in vendors.data" :value="vendor.id">{{ vendor.company | Upper }} <a>{{ vendor.person }}</a></option>
+                            </b-select>
+                        </b-field>
                     </div>
-                </div>
-
                 <div class="column is-4">
-                     <div class="field">
-                        <label class="label">Select Category:</label>
-                        <div class="control">
-                            <div class="select">
-                                <select name="category_id" v-model="autos.category_id" required>
-                                    <option v-for="cat in getcats" :value="cat.id">{{ cat.category }}</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
+                    <b-field label="Category">
+                            <b-select placeholder="Select a Category" name="category_id" v-model="autos.category_id" expanded>
+                                <option v-for="cat in getcats" :value="cat.id">{{ cat.category }}</option>
+                            </b-select>
+                        </b-field>
                 </div>
             </div>
                 <div class="columns is-multiline">
@@ -82,11 +67,6 @@
                         </div>
                     </div>
                 </div>
-            
-
-     
-                      
-            
                    <div class="column is-2">
                     <div class="field">
                         <label class="label">Max Qty:</label>
@@ -95,8 +75,6 @@
                         </div>
                     </div>
                     </div>
-
-
                         <div class="column is-2">
                     <div class="field">
                         <label class="label">Reorder Qty:</label>
@@ -226,5 +204,10 @@
                   });
         
         },
+          filters: {
+        Upper(value) {
+            return value.toUpperCase();
+        }
+    }
 }
 </script>

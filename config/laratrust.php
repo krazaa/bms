@@ -245,7 +245,7 @@ return [
              * If the message content is empty it won't be added to the redirection.
              */
             'redirect' => [
-                'url' => '/home',
+                'url' => '/e403',
                 'message' => [
                     'key' => 'error',
                     'content' => ''

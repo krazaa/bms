@@ -34,7 +34,7 @@
                     <div class="field">
                         <label class="label">Mobile:</label>
                         <div class="control">
-                            <input class="input" v-model="settings.phone" name="mobile" type="number" placeholder="e.g Zia" autocomplete="off">
+                            <input class="input" v-model="settings.mobile" name="mobile" type="number" placeholder="e.g Zia" autocomplete="off">
                             <span class="help is-danger">{{ allerros.contacttwo }}</span>
                         </div>
                     </div>
@@ -97,28 +97,12 @@
                     </figure>
                     <div class="field">
                         <div class="control">
-                            <b-field class="file">
-                            <b-upload v-model="settings.file" name="file">
-                            <a class="button is-primary">
-                                <b-icon icon="upload"></b-icon>
-                                <span>Logo upload</span>
-                            </a>
-                            </b-upload>
-                            <span class="file-name" v-if="settings.file">
-                                {{ settings.file.name }}
-                            </span>
-                            </b-field>
+                            <input @change="newAvatar" id="logo" type="file" name="logo" class="input">
                             <span class="help is-danger">{{ allerros.logo }}</span>
                         </div>
                     </div>
                 </div>
             </div>
-      <label>File
-
-        <input @change="newAvatar" id="logo" type="file" name="logo" >
-                
-      </label>
-
         
             <div class="control is-flex is-pulled-right">
                 <button class="button is-primary">Save Setting</button>
@@ -130,7 +114,7 @@
          <div class="notification is-success" v-if="success">
         <h2 class="title is-2"> Company Setting successfully Updated! </h2>
         <br>
-        <router-link class="button is-info is-pulled-right" :to="{ name: 'home' }"><i class="fa fa-user-plus m-r-10"></i>Click to Back Home</router-link>
+        <router-link class="button is-info is-pulled-right" :to="{ name: 'dashboard' }"><i class="fa fa-user-plus m-r-10"></i>Click to Back Home</router-link>
 </div>
 </form>
 </template>
@@ -175,19 +159,22 @@
                if (files.length) this.logo = files[0];
             },
             //updateAvatar: function (id) {
-            updateAvatar: function (e) {
+            updateAvatar: function () {
                  
-       
-
-                 var formData = new FormData();
-                 formData.append("logo", file.files[0]);
-                 // formData.append('name', this.formData.name);
-                 // formData.append('email', this.formData.email);
-                 // formData.append('otherField', this.formData.otherField);
-                axios.post('/settings./UpdateSetting/1', formData)
+                 let data = new FormData();
+                data.append('file', this.logo);
+                data.append('company', this.settings.company,);
+                data.append('phone', this.settings.phone,);
+                data.append('mobile', this.settings.mobile,);
+                data.append('fax', this.settings.fax,);
+                data.append('email', this.settings.email,);
+                data.append('website', this.settings.website,);
+                data.append('ntn', this.settings.ntn,);
+                data.append('strn', this.settings.strn,);
+                data.append('address', this.settings.address,);
+                axios.post('/settings./UpdateSetting/1', data)
                 //axios.post('/settings./UpdateSetting/1' +id, data)
-                        .then(res => {
-                            console.log(res);
+                        .then(response => { this.success = true;
                          }) 
                          .catch(error => console.log(error));
                 // window.location.href = "/profile";

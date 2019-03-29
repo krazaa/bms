@@ -19,4 +19,10 @@ class Autoproduct extends Model
     {
     	return $this->belongsTo(User::class);
     }
+    
+    protected $dates = [
+            'created_at',
+            'updated_at',
+            'deleted_at'
+        ];
 }

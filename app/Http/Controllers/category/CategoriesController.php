@@ -12,27 +12,48 @@ class CategoriesController extends Controller
 {
     public function index()
     {
-    	$cats = Category::where('sub_id','=','')
-        ->Active()
-        //->groupby('sub_id')
-        ->orderBy('id','desc')
-        ->with('subcats')
-        ->orderBy('id','desc')
-        ->paginate(20); 
-    	return response()->json($cats);
+       $users = DB::table('categories')
+        ->leftJoin('categories as subcats', 'subcats.id', '=', 'categories.sub_id')
+       ->select('categories.id','categories.isActive','categories.category','categories.sub_id','subcats.category as subcat',
+                    DB::raw('(CASE 
+                         WHEN categories.type = "1" THEN "Vehicles" 
+                         WHEN categories.type = "2" THEN "Electronic" 
+                         ELSE "" 
+                         END) AS type'))
+       ->groupBy('categories.category')
+       ->groupBy('subcats.category')
+       ->get();     
+
+    	// $cats = Category::select('id','category','sub_id','isActive', DB::raw('(CASE 
+     //                    WHEN type = "1" THEN "Vehicles" 
+     //                    WHEN type = "2" THEN "Electronic" 
+     //                    ELSE "" 
+     //                    END) AS type'))->Active()
+     //    ->orderBy('id','desc')
+     //    ->with('catsubs:id,id,category,sub_id')
+     //    ->orderBy('id','desc')
+     //    ->paginate(25); 
+    	return response()->json($users);
     }
 
     public function indexElec()
     {
-        $cats = Category::where('sub_id','=','')->where('type',2)->Active()->orderBy('id','desc')->with('subcats')->orderBy('id','desc')->paginate(20); 
+        $cats = Category::where('type',2)->where('sub_id',false)->Active()->get();
         return response()->json($cats);
     }
 
-    public function indexCats()
+     public function indexAutos()
+    {
+        $cats = Category::where('type',1)->where('sub_id',false)->Active()->orderBy('id','desc')->get(); 
+        return response()->json($cats);
+    }
+
+    public function indexCats() 
     {
         $cats = Category::where('sub_id',false)->orderBy('id','desc')->with('subcats')->orderBy('id','desc')->Active()->paginate(20); 
         return response()->json($cats);
     }
+
 
     public function SubCats()
     {

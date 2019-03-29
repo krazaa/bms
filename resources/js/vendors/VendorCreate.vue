@@ -27,7 +27,7 @@
             <div class="columns is-multiline">
                 <div class="column is-3">
                     <label class="label">Type:</label>
-                    <div class="control">
+                    
                         <div class="block">
                             <b-radio v-model="FromData.type" native-value="1">
                             Vehicle
@@ -35,27 +35,24 @@
                             <b-radio v-model="FromData.type" native-value="2">
                             Electronic
                             </b-radio>
-                        </div>
+                    
                     </div>
+                </div>
+                <div class="column is-3">
+                    <b-field label="Brand">
+                            <b-select placeholder="Select a Brand" v-model="FromData.brand_id" name="vendor_id" expanded>
+                                <option v-for="brand in brands" :value="brand.id">{{ brand.brand |Upper }} </p></option>
+                            </b-select>
+                        </b-field>
+
+                 
                 </div>
                 <div class="column is-2">
-                    <div class="field">
-                        <label class="label">Select Brand: </label>
-                        <div class="control">
-                            <div class="select">
-                                <select name="brand_id" v-model="FromData.brand_id" required>
-                                    <option selected disabled>Select one</option>
-                                    <option v-for="brand in brands" :value="brand.id">{{ brand.brand }} </option>  
-                                        </select>
-                                    </div>
-                                </div>
-                    </div>
-                </div>
-                <div class="column is-1">
                     <div class="field">
                         <label class="label">Code: </label>
                         <div class="control">
                             <input class="input" v-model="FromData.vnum" name="vnum" type="text" placeholder="e.g B18123456">
+                            <span class="help is-danger">{{ allerros.vnum }}</span>
                         </div>
                     </div>
                 </div>
@@ -67,6 +64,7 @@
                         </div>
                         <p class="help is-success list-inline" v-if="vendor == 'Available'"> {{ vendor }} is available.</p>
                         <p class="help is-danger" v-if="vendor == 'Not Available'"> {{ vendor }} Not Available.</p>
+                        <span class="help is-danger">{{ allerros.company }}</span>
                     </div>
                 </div>
                 <div class="column is-2">
@@ -74,6 +72,23 @@
                         <label class="label">Contact Person: </label>
                         <div class="control">
                             <input class="input" v-model="FromData.person" name="person" type="text" placeholder="e.g Person name">
+                            <span class="help is-danger">{{ allerros.person }}</span>
+                        </div>
+                    </div>
+                </div>
+                    <div class="column is-2">
+                    <div class="field">
+                        <label class="label">NTN No:</label>
+                        <div class="control">
+                            <input class="input" v-model="FromData.ntn" name="ntn" type="text" placeholder="445566">
+                        </div>
+                    </div>
+                </div>
+                <div class="column is-2">
+                    <div class="field">
+                        <label class="label">Sales Tax No:</label>
+                        <div class="control">
+                            <input class="input" v-model="FromData.salestax" name="salestax" type="text" placeholder="1232">
                         </div>
                     </div>
                 </div>
@@ -82,6 +97,7 @@
                         <label class="label">Telephone: </label>
                         <div class="control">
                             <input class="input" v-model="FromData.contact" name="contact" type="text" placeholder="e.g Telephone no">
+                            <span class="help is-danger">{{ allerros.contact }}</span>
                         </div>
                     </div>
                 </div>
@@ -90,6 +106,7 @@
                         <label class="label">Mobile:</label>
                         <div class="control">
                             <input class="input" v-model="FromData.mobile" name="mobile" type="text" placeholder="e.g 923219802672">
+                            <span class="help is-danger">{{ allerros.mobile }}</span>
                         </div>
                     </div>
                 </div>
@@ -102,22 +119,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="column is-3">
-                    <div class="field">
-                        <label class="label">Address:</label>
-                        <div class="control">
-                            <input class="input" v-model="FromData.address" name="address" type="text" placeholder="e.g your address">
-                        </div>
-                    </div>
-                </div>
-                <div class="column is-2">
-                    <div class="field">
-                        <label class="label">City:</label>
-                        <div class="control">
-                            <input class="input" v-model="FromData.city" name="city" type="text" placeholder="e.g your city">
-                        </div>
-                    </div>
-                </div>
+               
                 <div class="column is-2">
                     <div class="field">
                         <label class="label">Email:</label>
@@ -134,19 +136,21 @@
                         </div>
                     </div>
                 </div>
-                <div class="column is-2">
+            
+                 <div class="column is-3">
                     <div class="field">
-                        <label class="label">NTN No:</label>
+                        <label class="label">Address:</label>
                         <div class="control">
-                            <input class="input" v-model="FromData.ntn" name="ntn" type="text" placeholder="445566">
+                            <input class="input" v-model="FromData.address" name="address" type="text" placeholder="e.g your address">
+                            <span class="help is-danger">{{ allerros.address }}</span>
                         </div>
                     </div>
                 </div>
                 <div class="column is-2">
                     <div class="field">
-                        <label class="label">Sales Tax No:</label>
+                        <label class="label">City:</label>
                         <div class="control">
-                            <input class="input" v-model="FromData.salestax" name="salestax" type="text" placeholder="1232">
+                            <input class="input" v-model="FromData.city" name="city" type="text" placeholder="e.g your city">
                         </div>
                     </div>
                 </div>

@@ -43,7 +43,7 @@
                 </div>
                 <div class="field">
                     <b-field label="Category Type">
-                    <b-select v-model="DataFrom.ctype" name="ctype">
+                    <b-select v-model="DataFrom.ctype" name="ctype" @input="loadSubCats">
                     <option value="0" selected disabled>Select name</option>
                     <option
                         v-for="cat in categories.data"
@@ -54,6 +54,7 @@
                     </b-select>
                     </b-field>
                 </div>
+                
                 <div class="field">
                     <label class="label">Category Name:
                     </label>
@@ -84,10 +85,12 @@
         data(){
             return {
                 categories: [],
+                subcategories: [],
                 loading: false,
                 DataFrom: {
                     type: '1',
                     search:'',
+                    sub_id:'',
                     ctype: '',
                     category: '',
                 },
@@ -123,6 +126,7 @@
             .then(({data}) => (this.categories = data));
             //setTimeout(this.loadcats, 5000);
             }
+
         },        
             mounted(){
             this.loadrcats();

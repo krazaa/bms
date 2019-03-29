@@ -15,6 +15,7 @@ Route::prefix('vendors.')->middleware('role:superadministrator|administrator|edi
     //Route::get('/', 'vendors\VendorController@index')->name('vendors');
     Route::get('/GetVendors', 'vendors\VendorController@GetVendors')->name('vendors.GetVendors');
     Route::get('/GetVendorsElec', 'vendors\VendorController@GetVendorsElec')->name('vendors.GetVendorsElec');
+    Route::get('/GetVendorsAuto', 'vendors\VendorController@GetVendorsAuto')->name('vendors.GetVendorsAuto');
     Route::get('/editVendor/{id}', 'vendors\VendorController@VendorEdit')->name('vendors.editVendor');
     Route::get('/create', 'vendors\VendorController@create')->name('vendors.create');
     Route::post('/VendorStore', 'vendors\VendorController@VendorStore')->name('vendors.VendorStore');
@@ -75,6 +76,8 @@ Route::prefix('categories.')->group(function () {
     
     Route::get('/GetCategories', 'category\CategoriesController@index')->name('categories.GetCategories');
     Route::get('/indexElec', 'category\CategoriesController@indexElec')->name('categories.indexElec');
+    Route::get('/indexAutos', 'category\CategoriesController@indexAutos')->name('categories.indexAutos');
+    
     Route::get('/indexCats', 'category\CategoriesController@indexCats')->name('categories.indexCats');
     Route::get('/create', 'category\CategoriesController@create')->name('categories.create');
     Route::post('/CatStore', 'category\CategoriesController@CatStore')->name('categories.CatStore');

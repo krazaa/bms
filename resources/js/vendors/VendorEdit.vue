@@ -25,9 +25,9 @@
                 </div>
             </div>
             <div class="columns is-multiline">
-                <div class="column is-2">
+                <div class="column is-3">
                     <label class="label">Type:</label>
-                    <div class="control">
+                    
                         <div class="block">
                             <b-radio v-model="vendors.type" native-value="1">
                             Vehicle
@@ -35,20 +35,17 @@
                             <b-radio v-model="vendors.type" native-value="2">
                             Electronic
                             </b-radio>
-                        </div>
+                    
                     </div>
                 </div>
-                <div class="column is-2">
-                    <div class="field">
-                        <label class="label">Select Brand: </label>
-                        <div class="control">
-                            <div class="select">
-                                <select name="brand_id" v-model="vendors.brand_id" required>
-                                    <option v-for="brand in brands" :value="brand.id">{{ brand.brand }} </option>  
-                                        </select>
-                                    </div>
-                                </div>
-                    </div>
+                <div class="column is-3">
+                    <b-field label="Brand">
+                            <b-select placeholder="Select a Brand" v-model="vendors.brand_id" name="vendor_id" expanded>
+                                <option v-for="brand in brands" :value="brand.id">{{ brand.brand |Upper }} </p></option>
+                            </b-select>
+                        </b-field>
+
+                  
                 </div>
                 <div class="column is-2">
                     <div class="field">
@@ -71,6 +68,22 @@
                         <label class="label">Contact Person: </label>
                         <div class="control">
                             <input class="input" v-model="vendors.person" name="person" type="text" placeholder="e.g Person name">
+                        </div>
+                    </div>
+                </div>
+                 <div class="column is-2">
+                    <div class="field">
+                        <label class="label">NTN No:</label>
+                        <div class="control">
+                            <input class="input" v-model="vendors.ntn" name="ntn" type="text" placeholder="e.g NTN 445566">
+                        </div>
+                    </div>
+                </div>
+                <div class="column is-2">
+                    <div class="field">
+                        <label class="label">Sales Tax No:</label>
+                        <div class="control">
+                            <input class="input" v-model="vendors.salestax" name="salestax" type="text" placeholder="e.g ST-33-44545">
                         </div>
                     </div>
                 </div>
@@ -99,22 +112,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="column is-3">
-                    <div class="field">
-                        <label class="label">Address:</label>
-                        <div class="control">
-                            <input class="input" v-model="vendors.address" name="address" type="text" placeholder="e.g your address">
-                        </div>
-                    </div>
-                </div>
-                <div class="column is-2">
-                    <div class="field">
-                        <label class="label">City:</label>
-                        <div class="control">
-                            <input class="input" v-model="vendors.city" name="city" type="text" placeholder=" your city">
-                        </div>
-                    </div>
-                </div>
+                
                 <div class="column is-2">
                     <div class="field">
                         <label class="label">Email:</label>
@@ -131,19 +129,20 @@
                         </div>
                     </div>
                 </div>
-                <div class="column is-2">
+               
+                <div class="column is-3">
                     <div class="field">
-                        <label class="label">NTN No:</label>
+                        <label class="label">Address:</label>
                         <div class="control">
-                            <input class="input" v-model="vendors.ntn" name="ntn" type="text" placeholder="e.g NTN 445566">
+                            <input class="input" v-model="vendors.address" name="address" type="text" placeholder="e.g your address">
                         </div>
                     </div>
                 </div>
                 <div class="column is-2">
                     <div class="field">
-                        <label class="label">Sales Tax No:</label>
+                        <label class="label">City:</label>
                         <div class="control">
-                            <input class="input" v-model="vendors.salestax" name="salestax" type="text" placeholder="e.g ST-33-44545">
+                            <input class="input" v-model="vendors.city" name="city" type="text" placeholder=" your city">
                         </div>
                     </div>
                 </div>

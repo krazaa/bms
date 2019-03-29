@@ -27,39 +27,24 @@
                         </nav>
                     </div>
                 </div>
-
-        
-        
-        
-        
         <b-table
-            :data="categories.data" 
+            :data="categories" 
             :loading="loading"
             :narrowed="isNarrowed"
             :default-sort-direction="defaultSortDirection"
-             default-sort="categories.name">
+             default-sort="categories.data.category">
         <template slot-scope="props">
         <b-table-column field="id" label="ID" width="40" sortable>
         {{ props.row.id }}
         </b-table-column>
         <b-table-column field="type" label="Type" sortable>
-            {{ props.row.type == '1' ? 'Vehicle' : 'Electronic' }}
+            {{ props.row.type}}
         </b-table-column>
         <b-table-column field="catgory" label="Catgory">
         <b>{{ props.row.category }} </b>
-                 <ul>        
-                    <li v-for="sub in props.row.subcats">
-                        <i class="mdi mdi-subdirectory-arrow-right"></i>
-                    {{ sub.category }} 
-                    <b-switch v-model="sub.isActive" name="isActive"
-                        :true-value="1"
-                        :false-value="0"
-                        type="is-success" @input="StatusChange(sub.id)">
-                    </b-switch>
-                    <router-link class="button is-info is-small" :to="{ name: 'catedit', params: {id: props.row.id }}"><span class="mdi mdi-pencil-box-outline"></span></router-link>
-        <a @click="DataSubDelete(props.row.id)" class="button is-danger is-small"><span class="mdi mdi-trash-can"></span></a>
-                    </li>
-                </ul> 
+        </b-table-column>
+        <b-table-column field="subcat" label="Sub Catgory of" sortable>
+                {{ props.row.subcat}}
         </b-table-column>        
         <b-table-column label="Status">
             <b-switch v-model="props.row.isActive" name="isActive"
@@ -130,11 +115,11 @@ import moment from 'moment';
                     this.categories = response.data;
                 });
             },
-            loadSubCats(){
-              this.loading = true
-              axios.get("/categories./SubCats").then(({data}) => (this.subcats = data));
-              this.loading = false
-            },
+            // loadSubCats(){
+            //   this.loading = true
+            //   axios.get("/categories./SubCats").then(({data}) => (this.subcats = data));
+            //   this.loading = false
+            // },
 
             SearchGet() {
             axios.get('/categories./CatSearch?search=' + this.search)

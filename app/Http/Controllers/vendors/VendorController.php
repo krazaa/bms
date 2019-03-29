@@ -28,19 +28,33 @@ class VendorController extends Controller
         return $vendors->toArray();
     }
 
-public function GetVendorsElec()
-    {
-        $vendors = Vendor::select('id','type','company','person','isActive',
-            DB::raw('(CASE 
-                        WHEN type = "1" THEN "Vehicles" 
-                        WHEN type = "2" THEN "Electronic" 
-                        ELSE "" 
-                        END) AS type'))
-        ->where('type',2)
-        ->Active()
-        ->orderBy('id','desc')->with('brands:id,brand')->orderBy('id','desc')->paginate(20);
-        return $vendors->toArray();
-    }
+    public function GetVendorsElec()
+        {
+            $vendors = Vendor::select('id','type','company','person','isActive',
+                DB::raw('(CASE 
+                            WHEN type = "1" THEN "Vehicles" 
+                            WHEN type = "2" THEN "Electronic" 
+                            ELSE "" 
+                            END) AS type'))
+            ->where('type',2)
+            ->Active()
+            ->orderBy('id','desc')->with('brands:id,brand')->orderBy('id','desc')->paginate(20);
+            return $vendors->toArray();
+        }
+
+        public function GetVendorsAuto()
+        {
+            $vendors = Vendor::select('id','type','company','person','isActive',
+                DB::raw('(CASE 
+                            WHEN type = "1" THEN "Vehicles" 
+                            WHEN type = "2" THEN "Electronic" 
+                            ELSE "" 
+                            END) AS type'))
+            ->where('type',1)
+            ->Active()
+            ->get();
+            return $vendors->toArray();
+        }
 
     public function create()
     {
@@ -63,6 +77,24 @@ public function GetVendorsElec()
 
     public function VendorStore(request $request)
         {
+            $this->validate($request, [
+            'company' => 'required|unique:vendors',
+            'vnum' => 'required|unique:vendors',
+            'person' => 'required',
+            'mobile' => 'required',
+            'contact' => 'required',
+            'address' => 'required'
+        ],[
+
+            'company.required' => 'Company Name required.',
+            'vnum.required' => 'Code required.',
+            'person.required' => 'Person required',
+            'mobile.required' => 'Mobile required',
+            'contact.required' => 'Telephone required',
+            'address.required' => 'Address required'
+
+           ]);
+
         $product = new Vendor();
         $product->brand_id = $request->brand_id;
         $product->type = $request->type;
@@ -104,8 +136,8 @@ public function GetVendorsElec()
         $vendors = Vendor::select('id','vnum','company','person','mobile','contact')
         ->where('company','LIKE', "%$search%")
         ->orwhere('vnum','LIKE', "%$search%")
-        ->orderBy('id','desc')
-        ->paginate(20);
+        ->orderBy('id','desc')->get();
+        //->paginate(20);
         return $vendors->toArray();    
     }
 
@@ -129,7 +161,7 @@ public function GetVendorsElec()
             if($autos) {
                 return ['message' => 'Vendor is not empty'];
                } else {
-                //$count = Vendor::find($id)->delete();
+                $count = Vendor::find($id)->delete();
                 return ['message' => 'Successfully Deleted'];
             }
 

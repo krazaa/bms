@@ -1,5 +1,6 @@
 import example from './components/ExampleComponent.vue';
 import NotFoundComponent from './components/ExampleComponent.vue';
+import e403 from './errors/403.vue';
 import companysetting from './manage/settings/settings.vue';
 import branches from './manage/branches/branches.vue';
 import newbranch from './manage/branches/AddBranch.vue';
@@ -149,6 +150,8 @@ export default [
   { path: '/category/catcreate', component: CatCreate, name: 'catcreate'},
   { path: '/category/catedit/:id', component: CatEdit, name: 'catedit', props: true},
 
-  { path: '*', component: NotFoundComponent, name: 'NotFoundComponent'}
+  { path: '*', component: NotFoundComponent, name: 'NotFoundComponent'},
+
+  { path: 'e403', component: e403, name: 'e403'}
 
   ];

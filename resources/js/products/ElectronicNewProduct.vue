@@ -26,48 +26,34 @@
                 </div>
                 <div class="columns is-multiline">
                     <div class="column is-4">
-                        <div class="field">
-                            <div class="field">
-                                <label class="label">Vendor:</label>
-                                <div class="control">
-                                    <div class="select">
-                                        <select name="vendor_id" v-model="FormData.vendor_id">
-                                            <option selected disabled>Select one</option>
-                                            <option v-for="vendor in vendors.data" :value="vendor.id">{{ vendor.company }} {{ vendor.person }}</p></option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                            <b-field label="Vendor">
+                            <b-select placeholder="Select a Vendor" v-model="FormData.vendor_id" name="vendor_id" expanded>
+                                <option v-for="vendor in vendors.data" :value="vendor.id">{{ vendor.company |Upper }} {{ vendor.person }}</p></option>
+                            </b-select>
+                        </b-field>
+
                     </div>
                     <div class="column is-4">
-                        <div class="field">
-                            <div class="field">
-                                <label class="label">Category:</label>
-                                <div class="control">
-                                    <div class="select">
-                                        <select name="category_id" v-model="FormData.category_id" @change="subCats()">
-                                            <option v-for="lc in Loadcategory.data" :value="lc.id">{{ lc.category }}</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                           <b-field label="Category">
+                            <b-select placeholder="Select a Category" v-model="FormData.category_id" name="category_id" @input="subCats" expanded>
+                                <option v-for="lc in Loadcategory" :value="lc.id">{{ lc.category }}</option>
+                            </b-select>
+                        </b-field>
+                        
+                     
+
                     </div>
                     <div class="column is-4" v-if="FormData.category_id > 0">
-                        <div class="field">
-                            <div class="field">
-                                <label class="label">Sub Category:</label>
-                                <div class="control">
-                                    <div class="select">
-                                        <select name="subcategory_id" v-model="FormData.subcategory_id">
-                                            <option selected disabled>Select one</option>
-                                            <option v-for="subcat in subcats" :value="subcat.id">{{ subcat.category }}</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+
+                          <b-field label="Sub Category">
+                            <b-select placeholder="Select a Sub Category" v-model="FormData.subcategory_id" name="subcategory_id" expanded>
+                                 <option v-for="subcat in subcats" :value="subcat.id">{{ subcat.category }}</option>
+                            </b-select>
+                        </b-field>
+
+
+
+                       
                     </div>
                 </div>
                 
@@ -220,7 +206,7 @@
             '$route': 'cats'
         },
          methods: {
-                    onSubmit(){
+            onSubmit(){
                 axios.post('/products./electronic/ElecProductStore', this.FormData)
                       .then(response => { this.success = true;
                       })
@@ -249,7 +235,12 @@
         },
          mounted(){
         this.cats();  
+        },
+        filters: {
+        Upper(value) {
+            return value.toUpperCase();
         }
+    }
 
     }
 </script>
