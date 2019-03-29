@@ -25,7 +25,7 @@
                 </div>
             </div>
             <div class="columns is-multiline">
-                <div class="column is-2">
+                <div class="column is-3">
                     <label class="label">Type:</label>
                     <div class="control">
                         <div class="block">
@@ -51,7 +51,7 @@
                                 </div>
                     </div>
                 </div>
-                <div class="column is-2">
+                <div class="column is-1">
                     <div class="field">
                         <label class="label">Code: </label>
                         <div class="control">

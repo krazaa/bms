@@ -14,7 +14,7 @@ class CategoriesController extends Controller
     {
     	$cats = Category::where('sub_id','=','')
         ->Active()
-        ->groupby('sub_id')
+        //->groupby('sub_id')
         ->orderBy('id','desc')
         ->with('subcats')
         ->orderBy('id','desc')
