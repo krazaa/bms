@@ -49,7 +49,7 @@
         <b-table-column field="id" label="ID" width="60" sortable>
         {{ props.row.id }}
         </b-table-column>
-        <b-table-column field="code" label="Product No" width="60" sortable>
+        <b-table-column field="code" label="Product No" width="100" sortable>
         {{ props.row.code }}
         </b-table-column>
         <b-table-column field="name" label="Product" sortable>
@@ -64,10 +64,10 @@
         <b-table-column field="category" label="Category" sortable>
         {{ props.row.category }}
         </b-table-column>
-        <b-table-column field="cost" label="Cost" sortable>
+        <b-table-column field="cost" label="Cost" width="80" sortable>
         {{ props.row.cost }}
         </b-table-column>
-        <b-table-column field="isActive" label="Status" sortable>
+        <b-table-column field="isActive" label="Status" width="30" sortable>
             
             <b-switch v-model="props.row.isActive" name="isActive"
             :true-value="1" 
@@ -75,7 +75,7 @@
             type="is-success" @input="ChangeStatus(props.row.id)">
             </b-switch>
         </b-table-column>
-        <b-table-column label="Action" centered>
+        <b-table-column label="Action" width="90" centered>
              <!-- <router-link class="button is-success is-small" :to="{ name: 'AutosShow', params: {id: props.row.id}}"><span class="mdi mdi-eye-circle-outline"></span></router-link> -->
              <router-link class="button is-info is-small" :to="{ name: 'editproduct', params: {id: props.row.id}}"><span class="mdi mdi-pencil-box-outline"></span></router-link>
         
