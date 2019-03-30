@@ -43,12 +43,20 @@
         <b-table-column field="id" label="ID" width="40" sortable>
         {{ props.row.id }}
         </b-table-column>
-        <b-table-column field="photo" label="Photo" sortable>
-            <p class="image is-16x16" v-if="props.row.photo != empty">
-               <img :src="`/electronic/${props.row.photo}`">
-            <p class="image is-32x32" v-else>
+        <b-table-column field="photo" label="Photo">
+            <figure class="image is-16x16" v-if="props.row.photo != empty">
+                <a href="#">
+                    <img :src="`/electronic/${props.row.photo}`" v-on:click='isOpen = !isOpen'>
+                </a>
+
+                <figure class="image is-64x64" v-show="isOpen">
+                 <img :src="`/electronic/${props.row.photo}`">
+            </figure>
+            </figure>
+               
+                               
+       
             
-        </p>
         </b-table-column>
         <b-table-column field="code" label="Product Code" sortable>
         {{ props.row.code }}
@@ -104,6 +112,7 @@
                 isLoading: false,
                 defaultSortDirection: 'asc',
                 isAvailable: 0,
+                isOpen: false
             }
         },
         mounted(){
@@ -127,6 +136,9 @@
               axios.get('/products./electronic/ElecSearch?search=' + this.search)
                 .then(({data}) => (this.electronic = data));
                 
+            },
+             toggle: function(){
+            this.isOpen = !this.isOpen
         },
     }        
 }
