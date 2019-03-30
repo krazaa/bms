@@ -49,7 +49,7 @@
         <b-table-column field="id" label="ID" width="60" sortable>
         {{ props.row.id }}
         </b-table-column>
-        <b-table-column field="code" label="Product No" width="100" sortable>
+        <b-table-column field="code" label="Product No" width="120" sortable>
         {{ props.row.code }}
         </b-table-column>
         <b-table-column field="name" label="Product" sortable>
