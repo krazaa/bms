@@ -62,11 +62,11 @@
         {{ props.row.cname}}
         </b-table-column>
         <b-table-column label="Sub Account Of">
- 
-                
+           <i class="mdi mdi-subdirectory-arrow-right has-text-weight-semibold" v-if="props.row.subname != empty">{{ props.row.subname}} </i>
+            <i class="mdi mdi-arrow-right has-text-weight-semibold" v-if="props.row.sub2name != empty">{{ props.row.sub2name}}</i> 
         </b-table-column>
-        <b-table-column field="incmbal" label="Income/ Balance" sortable>
-        {{ props.row.incmbal }}
+        <b-table-column field="inbal" label="Income/ Balance" sortable>
+        {{ props.row.inbal }}
         </b-table-column>
         <b-table-column field="debitcredit" label="Dr/Cr" sortable>
         {{ props.row.debitcredit }}
@@ -77,16 +77,17 @@
         <b-table-column field="actype_id" label="Type" sortable>
         {{ props.row.tname}}
         </b-table-column>
-        <b-table-column field="isActive" label="Status" sortable>
+        <b-table-column field="isActive" label="Status" sortable centered>
             <b-switch v-model="props.row.isActive"
             :true-value="1" 
             :false-value="0"
-                type="is-success" @change="AccED(props.row.isActive)">
+            size="is-small"
+            type="is-success" @change="AccED(props.row.isActive)">
             </b-switch>
         </b-table-column>
         
         <b-table-column label="Action" centered>
-            <router-link class="button is-success is-small" :to="{ name: 'cogShow', params: {id: props.row.id }}"><span class="mdi mdi-eye"></span></router-link>
+            <router-link class="button is-info is-small" :to="{ name: 'cogShow', params: {id: props.row.id }}"><span class="mdi mdi-eye"></span></router-link>
             <router-link class="button is-warning is-small" :to="{ name: 'cogEdit', params: {id: props.row.id }}"><span class="mdi mdi-pencil-box-outline"></span></router-link>
         <a @click="CoaDelete(props.row.id)" class="button is-danger is-small"><span class="mdi mdi-trash-can"></span></a>
         </b-table-column>

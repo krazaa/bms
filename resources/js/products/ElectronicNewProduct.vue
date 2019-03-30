@@ -32,7 +32,6 @@
                                 <option v-for="vendor in vendors.data" :value="vendor.id">{{ vendor.company |Upper }} {{ vendor.person }}</p></option>
                             </b-select>
                         </b-field>
-
                     </div>
                     <div class="column is-4">
                            <b-field label="Category">
@@ -40,21 +39,15 @@
                                 <option v-for="lc in Loadcategory" :value="lc.id">{{ lc.category }}</option>
                             </b-select>
                         </b-field>
-                        
-                     
-
                     </div>
                     <div class="column is-4" v-if="FormData.category_id > 0">
-
                           <b-field label="Sub Category">
                             <b-select placeholder="Select a Sub Category" v-model="FormData.subcategory_id" name="subcategory_id" expanded>
                                  <option v-for="subcat in subcats" :value="subcat.id">{{ subcat.category }}</option>
                             </b-select>
                         </b-field>
-                       
                     </div>
                 </div>
-                
                 <div class="columns is-multiline">
                     <div class="column is-2">
                         <div class="field">
@@ -64,7 +57,6 @@
                                 <input class="input" type="text" placeholder="e.g B18123456" v-model="FormData.code" @input="Checkcode">
                                 {{ state }}
                             </div>
-                            
                             <p class="help is-success list-inline" v-if="state == '0'">{{ state }} Available</p>
                             <p class="help is-danger" v-if="state == '1'"> Not Available</p>
                         </div>
@@ -85,7 +77,6 @@
                             </div>
                         </div>
                     </div>
-                    
                     <div class="column is-2">
                         <div class="field">
                             <label class="label">Qty:</label>
@@ -102,7 +93,6 @@
                             </div>
                         </div>
                     </div>
-                    
                     <div class="column is-2">
                         <div class="field">
                             <label class="label">Reorder Qty:</label>
@@ -127,7 +117,6 @@
                             </div>
                         </div>
                     </div>
-                    
                     <div class="column is-2">
                         <div class="field">
                             <label class="label">Cost Price:</label>
@@ -238,7 +227,7 @@
                 data.append('subcategory_id', this.FormData.subcategory_id,);
                 data.append('code', this.FormData.code,);
                 data.append('name', this.FormData.name,);
-                data.append('manparno', this.FormData.manparno,);
+                data.append('manpartno', this.FormData.manpartno,);
                 data.append('qty', this.FormData.qty,);
                 data.append('maxqty', this.FormData.maxqty,);
                 data.append('reorder', this.FormData.reorder,);
@@ -247,7 +236,6 @@
                 data.append('wsaleprice', this.FormData.wsaleprice,);
                 data.append('discountallowed', this.FormData.discountallowed,);
                 data.append('cashdis', this.FormData.cashdis,);
-                
                 axios.post('/products./electronic/ElecProductStore', data)
                 //axios.post('/settings./UpdateSetting/1' +id, data)
                         .then(response => { this.success = true;

@@ -59,7 +59,7 @@
                     <div class="column is-2">
                             <b-field label="Class">
                             <b-select name="class" v-model="cogFrom.class" required expanded>
-                                <option value="0">None</option>
+                                        <option value="0">None</option>
                                         <option value="1">Variable</option>
                                         <option value="2">Fixed</option>
                                         <option value="3">Semi Variable</option>

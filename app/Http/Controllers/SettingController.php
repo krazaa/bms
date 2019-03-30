@@ -26,7 +26,6 @@ class SettingController extends Controller
 
         $settings = Setting::findOrFail($id);
         $settings->company = $request->comp;
-    	$settings->update($request->all());
 
 
         if($request->hasFile('file')){
@@ -41,6 +40,7 @@ class SettingController extends Controller
          if ($oldlogo)
             Storage::delete($oldlogo);
         }
+        $settings->update($request->all());
 
         $settings ->save();
 

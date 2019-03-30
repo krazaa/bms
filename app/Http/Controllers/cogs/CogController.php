@@ -28,28 +28,58 @@ class CogController extends Controller
     }
     public function CogsList()
     {
-    	$cogs = Cogas::leftjoin('cogacctypes','cogacctypes.id','=' ,'cogas.actype_id')
-    	->leftjoin('cogcategories','cogcategories.id','=' ,'cogas.acat_id')
-    	->select('cogas.id','cogas.acode','cogas.aname','cogas.incom_balance_id','cogacctypes.name as tname','cogcategories.name as cname','cogas.isActive',
-    			DB::raw('(CASE 
-                        WHEN cogas.incom_balance_id = "1" THEN "Income Statement" 
-                        WHEN cogas.incom_balance_id = "2" THEN "Balance Sheet" 
-                        ELSE "" 
-                        END) AS incmbal'),
-                DB::raw('(CASE 
+        $cats = DB::table('cogas')
+        ->leftJoin('cogas as subcogas', 'subcogas.id', '=', 'cogas.subtype')
+        ->leftJoin('cogas as sub2cogas', 'sub2cogas.id', '=', 'cogas.subtype2')
+        ->leftjoin('cogacctypes','cogacctypes.id','=' ,'cogas.actype_id')
+        ->leftjoin('cogcategories','cogcategories.id','=' ,'cogas.acat_id')
+       ->select('cogas.id','cogas.acode','cogas.aname','subcogas.aname as subname','cogacctypes.name as tname','cogacctypes.name as cname','cogas.isActive','sub2cogas.aname as sub2name',
+        DB::raw('(CASE 
                         WHEN cogas.class = "1" THEN "Variable" 
                         WHEN cogas.class = "2" THEN "Fixed" 
                         WHEN cogas.class = "3" THEN "Semi Variable" 
                         ELSE "" 
                         END) AS class'),
-    			DB::raw('(CASE 
+                DB::raw('(CASE 
                         WHEN cogas.debitcredit = "1" THEN "Both" 
                         WHEN cogas.debitcredit = "2" THEN "Debit" 
                         WHEN cogas.debitcredit = "3" THEN "Credit" 
                         ELSE "" 
-                        END) AS debitcredit'))
-    	->with('subheads')->paginate(20); 
-    	return response()->json($cogs);
+                        END) AS debitcredit'),
+                    DB::raw('(CASE 
+                         WHEN cogas.incom_balance_id = "1" THEN "Income Statement " 
+                         WHEN cogas.incom_balance_id = "2" THEN " Balance Sheet " 
+                         ELSE "" 
+                         END) AS inbal'))
+       
+    ->paginate(20); 
+    return response()->json($cats);
+
+
+
+
+    	// $cogs = Cogas::leftjoin('cogacctypes','cogacctypes.id','=' ,'cogas.actype_id')
+    	// ->leftjoin('cogcategories','cogcategories.id','=' ,'cogas.acat_id')
+    	// ->select('cogas.id','cogas.acode','cogas.aname','cogas.incom_balance_id','cogacctypes.name as tname','cogcategories.name as cname','cogas.isActive',
+    	// 		DB::raw('(CASE 
+     //                    WHEN cogas.incom_balance_id = "1" THEN "Income Statement" 
+     //                    WHEN cogas.incom_balance_id = "2" THEN "Balance Sheet" 
+     //                    ELSE "" 
+     //                    END) AS incmbal'),
+     //            DB::raw('(CASE 
+     //                    WHEN cogas.class = "1" THEN "Variable" 
+     //                    WHEN cogas.class = "2" THEN "Fixed" 
+     //                    WHEN cogas.class = "3" THEN "Semi Variable" 
+     //                    ELSE "" 
+     //                    END) AS class'),
+    	// 		DB::raw('(CASE 
+     //                    WHEN cogas.debitcredit = "1" THEN "Both" 
+     //                    WHEN cogas.debitcredit = "2" THEN "Debit" 
+     //                    WHEN cogas.debitcredit = "3" THEN "Credit" 
+     //                    ELSE "" 
+     //                    END) AS debitcredit'))
+    	// ->with('subheads')->paginate(20); 
+    	// return response()->json($cogs);
     }
 
     public function AcEdit($id)

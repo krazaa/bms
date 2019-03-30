@@ -140,6 +140,7 @@ Route::prefix('products.')->group(function () {
     Route::get('/electronic/GetElectronic', 'products\ElectronicProductController@index')->name('products.electronic.GetElectronic');
     Route::get('/electronic/create', 'products\ElectronicProductController@create')->name('products.electronic.create');
     Route::post('/electronic/ElecProductStore', 'products\ElectronicProductController@ElecProductStore')->name('products.electronic.ElecProductStore');
+    Route::post('/electronic/UpdateElecProduct/{id}', 'products\ElectronicProductController@UpdateElecProduct')->name('products.electronic.UpdateElecProduct');
     Route::get('/electronic/ElecSearch', 'products\ElectronicProductController@ElecSearch')->name('products.electronic.ElectSearch');
     Route::get('/electronic/SearchElec', 'products\ElectronicProductController@SearchElec')->name('products.electronic.SearchElec');
     Route::get('/electronic/ShowSingle/{id}', 'products\ElectronicProductController@ShowSingle')->name('products.electronic.ShowSingle');

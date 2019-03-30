@@ -12,7 +12,7 @@ class CategoriesController extends Controller
 {
     public function index()
     {
-       $users = DB::table('categories')
+       $cats = DB::table('categories')
         ->leftJoin('categories as subcats', 'subcats.id', '=', 'categories.sub_id')
        ->select('categories.id','categories.isActive','categories.category','categories.sub_id','subcats.category as subcat',
                     DB::raw('(CASE 
@@ -33,7 +33,7 @@ class CategoriesController extends Controller
      //    ->with('catsubs:id,id,category,sub_id')
      //    ->orderBy('id','desc')
      //    ->paginate(25); 
-    	return response()->json($users);
+    	return response()->json($cats);
     }
 
     public function indexElec()

@@ -120,6 +120,7 @@
                                 <div class="select">
                                     <select name="class" v-model="cogFrom.class" required>
                                         <option selected disabled>Select one</option>
+                                        <option value="0">None</option>
                                         <option value="1">Variable</option>
                                         <option value="2">Fixed</option>
                                         <option value="3">Semi Variable</option>
@@ -181,6 +182,7 @@
                 cogFrom: {
                     typeid: '',
                     subtype: '',
+                    subtype2: '',
                     acode: '',
                     inbal: '',
                     acat_id: '',

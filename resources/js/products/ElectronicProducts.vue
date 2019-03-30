@@ -45,18 +45,11 @@
         </b-table-column>
         <b-table-column field="photo" label="Photo">
             <figure class="image is-16x16" v-if="props.row.photo != empty">
-                <a href="#">
-                    <img :src="`/electronic/${props.row.photo}`" v-on:click='isOpen = !isOpen'>
-                </a>
-
-                <figure class="image is-64x64" v-show="isOpen">
-                 <img :src="`/electronic/${props.row.photo}`">
+                <a href="#"><img :src="`/electronic/${props.row.photo}`" @click='isOpen = !isOpen'></a>
+                <figure class="image is-96x96" v-if="isOpen">
+                     <img :src="`/electronic/${props.row.photo}`">
+                </figure>
             </figure>
-            </figure>
-               
-                               
-       
-            
         </b-table-column>
         <b-table-column field="code" label="Product Code" sortable>
         {{ props.row.code }}

@@ -60,7 +60,7 @@ class ElectronicProductController extends Controller
      public function ShowSingle($id)
     {
         $products = Electronicproduct::leftjoin('vendors','vendors.id' ,'=','electronicproducts.vendor_id')
-        ->select('electronicproducts.id','electronicproducts.name','electronicproducts.code','electronicproducts.cost','electronicproducts.shortname','vendors.vnum','vendors.company')
+        ->select('electronicproducts.id','electronicproducts.name','electronicproducts.code','electronicproducts.cost','electronicproducts.manpartno','vendors.vnum','vendors.company','electronicproducts.vendor_id','electronicproducts.category_id','electronicproducts.subcategory_id','electronicproducts.qty','electronicproducts.maxqty','electronicproducts.reorder','electronicproducts.cashdis','electronicproducts.discountallowed','electronicproducts.wsaleprice','electronicproducts.saleprice','electronicproducts.photo')
         ->find($id);
         return $products->toArray();    
     }
@@ -94,7 +94,7 @@ class ElectronicProductController extends Controller
          if($request->hasFile('file')){
         $elecPhoto = $request->file('file');
         $filename = time() . '.' . $elecPhoto->getClientOriginalExtension();
-        Image::make($elecPhoto)->resize(400, 600)->save( public_path('/electronic/' . $filename ) );
+        Image::make($elecPhoto)->resize(400, 400)->save( public_path('/electronic/' . $filename ) );
         //$user = Auth::user();
         $product->photo = $filename;
         }
@@ -103,5 +103,47 @@ class ElectronicProductController extends Controller
         
         return (['message' => 'Product was successfull']);
         // return redirect('/dashboard')->with('success','Subject updated successfully');
+    }
+
+     public function UpdateElecProduct(Request $request, $id)
+       {
+                      
+        $updateData = Electronicproduct::findOrFail($id);
+
+        $updateData->vendor_id = $request->vendor_id;
+        $updateData->category_id = $request->category_id;
+        $updateData->subcategory_id = $request->subcategory_id;
+        $updateData->code = $request->code;
+        $updateData->name = $request->name;
+        $updateData->manpartno = $request->manpartno;
+        $updateData->discountallowed = $request->discountallowed;
+        $updateData->saleprice = $request->saleprice;
+        $updateData->wsaleprice = $request->wsaleprice;
+        $updateData->reorder = $request->reorder;
+        $updateData->maxqty = $request->maxqty;
+        $updateData->cost = $request->cost;
+        $updateData->saleprice = $request->saleprice;
+        $updateData->isActive = 1;
+        $updateData->user_id = Auth::user()->id;   
+
+
+        if($request->hasFile('file')){
+        $productPhoto = $request->file('file');
+        $filename = time() . '.' . $productPhoto->getClientOriginalExtension();
+        Image::make($productPhoto)->resize(400, 400)->save(public_path('/electronic/' . $filename));
+        
+        $oldPhoto = $updateData->photo;
+        //updateimg
+        $updateData->photo = $filename;
+        //delet img
+         if ($oldPhoto)
+            Storage::delete($oldPhoto);
+        }
+        
+
+        $updateData ->save();
+
+
+        return ['message' => 'Company Setting successfully Updated'];
     }
 }
