@@ -17,7 +17,7 @@ class ElectronicProductController extends Controller
     {
         $cats = Electronicproduct::leftjoin('vendors','vendors.id','=' ,'electronicproducts.vendor_id')
         ->leftjoin('categories','categories.id','=' ,'electronicproducts.category_id')
-        ->select('electronicproducts.id','electronicproducts.name','electronicproducts.code','electronicproducts.comppartno','electronicproducts.cost','vendors.vnum','vendors.company','categories.category','electronicproducts.isActive')->orderBy('id','desc')
+        ->select('electronicproducts.id','electronicproducts.name','electronicproducts.code','electronicproducts.comppartno','electronicproducts.cost','vendors.vnum','vendors.company','categories.category','electronicproducts.isActive','electronicproducts.photo')->orderBy('id','desc')
         ->paginate(20); 
         return response()->json($cats);
     }

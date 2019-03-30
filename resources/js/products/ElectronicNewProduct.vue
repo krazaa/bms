@@ -232,7 +232,7 @@
             onSubmit: function () {
                  
                  let data = new FormData();
-                data.append('file', this.logo);
+                data.append('file', this.photo);
                 data.append('vendor_id', this.FormData.vendor_id,);
                 data.append('category_id', this.FormData.category_id,);
                 data.append('subcategory_id', this.FormData.subcategory_id,);
