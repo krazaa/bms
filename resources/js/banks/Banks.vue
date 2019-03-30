@@ -63,7 +63,8 @@
             <b-switch v-model="props.row.isActive" name="isActive"
             :true-value="1" 
             :false-value="0"
-            type="is-success" @input="BankED(props.row.id)">
+            type="is-success"
+            size="is-small" @input="BankED(props.row.id)">
             </b-switch>
         </b-table-column>
         <b-table-column label="Action" centered>

@@ -6,10 +6,8 @@
     <div v-if="!isLoading">
     <template>
        <section v-if="cogsList.data.length > 0">
-
            <div class="columns is-multiline">
             <div class="column is-4"><h3 class="title is-4">Manage Chart of Accounts</h3></div>
-
           <div class="column is-3">
             <b-field>
             <b-input v-model="search" name="search" placeholder="Keyword Seach" @input="SearchGet"></b-input>
@@ -35,7 +33,6 @@
         <div class="control is-flex">
             <h3 class="title is-4"></h3>
         </div>
-        
         </b-field>
         <p class="level-item">
             <span class="is-pulled-right" v-if="loading">
@@ -85,9 +82,8 @@
             type="is-success" @change="AccED(props.row.isActive)">
             </b-switch>
         </b-table-column>
-        
         <b-table-column label="Action" centered>
-            <router-link class="button is-info is-small" :to="{ name: 'cogShow', params: {id: props.row.id }}"><span class="mdi mdi-eye"></span></router-link>
+            <!-- <router-link class="button is-info is-small" :to="{ name: 'cogShow', params: {id: props.row.id }}"><span class="mdi mdi-eye"></span></router-link> -->
             <router-link class="button is-warning is-small" :to="{ name: 'cogEdit', params: {id: props.row.id }}"><span class="mdi mdi-pencil-box-outline"></span></router-link>
         <a @click="CoaDelete(props.row.id)" class="button is-danger is-small"><span class="mdi mdi-trash-can"></span></a>
         </b-table-column>
