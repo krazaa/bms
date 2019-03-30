@@ -17,7 +17,7 @@ class ElectronicProductController extends Controller
     {
         $cats = Electronicproduct::leftjoin('vendors','vendors.id','=' ,'electronicproducts.vendor_id')
         ->leftjoin('categories','categories.id','=' ,'electronicproducts.category_id')
-        ->select('electronicproducts.id','electronicproducts.name','electronicproducts.code','electronicproducts.comppartno','electronicproducts.cost','vendors.vnum','vendors.company','categories.category','electronicproducts.isActive','electronicproducts.photo')->orderBy('id','desc')
+        ->select('electronicproducts.id','electronicproducts.name','electronicproducts.code','electronicproducts.manpartno','electronicproducts.cost','vendors.vnum','vendors.company','categories.category','electronicproducts.isActive','electronicproducts.photo')->orderBy('id','desc')
         ->paginate(20); 
         return response()->json($cats);
     }
@@ -70,7 +70,7 @@ class ElectronicProductController extends Controller
        $this->validate($request, [
             'code' => 'required|unique:autoproducts',
             'name' => 'required',
-            'model' => 'required'
+            'cost' => 'required'
             
         ]);
                 
@@ -80,8 +80,7 @@ class ElectronicProductController extends Controller
         $product->subcategory_id = $request->subcategory_id;
         $product->code = $request->code;
         $product->name = $request->name;
-        $product->model = $request->model;
-        $product->comppartno = $request->comppartno;
+        $product->manpartno = $request->manpartno;
         $product->discountallowed = $request->discountallowed;
         $product->saleprice = $request->saleprice;
         $product->wsaleprice = $request->wsaleprice;

@@ -79,9 +79,9 @@
                     </div>
                     <div class="column is-2">
                         <div class="field">
-                            <label class="label">Model:</label>
+                            <label class="label">Man Part no:</label>
                             <div class="control">
-                                <input class="input" v-model="FormData.model" name="model" type="text" placeholder="e.g XX-0013">
+                                <input class="input" v-model="FormData.manpartno" name="manpartno" type="text" placeholder="e.g XX-0013">
                             </div>
                         </div>
                     </div>
@@ -195,7 +195,7 @@
                     subcategory_id:'',
                     code:'',
                     name:'',
-                    model:'',
+                    manparno:'',
                     qty:'',
                     maxqty:'',
                     reorder:'',
@@ -238,7 +238,7 @@
                 data.append('subcategory_id', this.FormData.subcategory_id,);
                 data.append('code', this.FormData.code,);
                 data.append('name', this.FormData.name,);
-                data.append('model', this.FormData.model,);
+                data.append('manparno', this.FormData.manparno,);
                 data.append('qty', this.FormData.qty,);
                 data.append('maxqty', this.FormData.maxqty,);
                 data.append('reorder', this.FormData.reorder,);

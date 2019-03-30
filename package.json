@@ -10,7 +10,7 @@
         "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
     },
     "devDependencies": {
-        "axios": "^0.18",
+        "axios": "^0.18.0",
         "bulma": "^0.7.2",
         "bulma-extensions": "^4.0.0",
         "cross-env": "^5.1",
@@ -23,6 +23,7 @@
     },
     "dependencies": {
         "@mdi/font": "^3.5.95",
+        "autocomplete-vue": "^1.1.0",
         "buefy": "^0.7.3",
         "laravel-vue-bulma-paginator": "^1.0.0",
         "moment": "^2.24.0",

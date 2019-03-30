@@ -70,8 +70,8 @@
         <b-table-column field="vendor" label="Vendor" sortable>
         {{ props.row.company }}
         </b-table-column>
-        <b-table-column field="comppartno" label="Man Part No" sortable>
-        {{ props.row.comppartno }}
+        <b-table-column field="manpartno" label="Man Part No" sortable>
+        {{ props.row.manpartno }}
         </b-table-column>
         <b-table-column field="cost" label="Cost" sortable>
         {{ props.row.cost }}

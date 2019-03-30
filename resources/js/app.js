@@ -18,10 +18,15 @@ import VueRouter from 'vue-router'
 import ourRoutes from './routes.js'
 import VeeValidate from 'vee-validate';
 
+
+
+
 Vue.use(VueRouter)
 Vue.use(Buefy);
 Vue.use(Datepicker);
 Vue.use(VeeValidate);
+
+
 //
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -50,6 +55,7 @@ Vue.use(VeeValidate);
 // Vue.component('editbranch', require('./manage/branches/EditBranch.vue').default);
 Vue.component('pagination', require('laravel-vue-bulma-paginator'));
 
+import Autocomplete from './components/autocomplet'
 //Vue.component('showelectronic', require('./products/ElectronicShow.vue').default);
 
 Vue.use(VueRouter);

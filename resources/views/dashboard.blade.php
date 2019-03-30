@@ -4,10 +4,10 @@
 @include('layouts.success')
 	<section class="section">
     <div class="box">
+        {{-- <autocomplet></autocomplet> --}}
         {{-- <dashboard></dashboard> --}}
         <router-view></router-view>
         {{-- <users></users> --}}	
-        {{-- <autocomplet></autocomplet> --}}
 	</div>
 </section>
 @endsection

@@ -69,12 +69,13 @@ class AutosProductController extends Controller
        
         $search = $request->search;     
         $products = Autoproduct::leftjoin('vendors','vendors.id','=' ,'autoproducts.vendor_id')
+        ->select('*')
         ->where('name','LIKE', "%$search%")
         ->orwhere('code','LIKE', "%$search%")
         ->orwhere('company','LIKE', "%$search%")
         ->orwhere('model','LIKE', "%$search%")
         ->orwhere('shortname','LIKE', "%$search%")
-        ->orderBy('id','desc')
+        //->orderBy('id','desc')
         ->get();
         return $products;         
     }

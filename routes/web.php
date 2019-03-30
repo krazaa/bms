@@ -210,15 +210,21 @@ Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
 |
 */
 
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
+
+
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/ac', function () {
+Route::get('/users', function () {
 
-    $data = \App\Test::get()->toTree();
+    //$queryString = Input::get('queryString');
+    $users = \App\User::all();
 
-    return $data;
+
+    return response()->json($users);
 });
 
 
