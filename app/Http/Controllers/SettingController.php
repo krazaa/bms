@@ -22,29 +22,7 @@ class SettingController extends Controller
 
     public function UpdateSetting(Request $request, $id)
     {
-    	
-        //\Log::info($request->all());
-
-        // $exploded = explode(',', $request->logo);
-
-        // $decoded = base64_decode($exploded[1]);
-        //     if(str_contains($exploded[0], 'jpeg'))
-        //         $extension = 'jpg';
-
-        //     else
-        //         $extension = 'png';
-        //     $fileName = str_random().'.'.$extension;
-
-        //     $path = public_path('/logo').'.'.$fileName;
-
-        //         file_put_contents($path, $decoded);
-
-
-        //         $settings = Setting::create($request->except('image')
-        //             + ['logo' => $fileName]
-        //         );
-
-                     
+    	              
 
         $settings = Setting::findOrFail($id);
         $settings->company = $request->comp;

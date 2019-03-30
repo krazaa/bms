@@ -8,6 +8,8 @@ use App\modules\Electronicproduct;
 
 use Auth;
 
+use Image;
+use Storage;
 
 class ElectronicProductController extends Controller
 {
@@ -15,7 +17,7 @@ class ElectronicProductController extends Controller
     {
         $cats = Electronicproduct::leftjoin('vendors','vendors.id','=' ,'electronicproducts.vendor_id')
         ->leftjoin('categories','categories.id','=' ,'electronicproducts.category_id')
-        ->select('electronicproducts.id','electronicproducts.name','electronicproducts.code','electronicproducts.comppartno','electronicproducts.cost','vendors.vnum','vendors.company','categories.category','electronicproducts.isActive')
+        ->select('electronicproducts.id','electronicproducts.name','electronicproducts.code','electronicproducts.comppartno','electronicproducts.cost','vendors.vnum','vendors.company','categories.category','electronicproducts.isActive')->orderBy('id','desc')
         ->paginate(20); 
         return response()->json($cats);
     }
@@ -89,6 +91,15 @@ class ElectronicProductController extends Controller
         $product->saleprice = $request->saleprice;
         $product->isActive = 1;
         $product->user_id = Auth::user()->id;
+        
+         if($request->hasFile('file')){
+        $elecPhoto = $request->file('file');
+        $filename = time() . '.' . $elecPhoto->getClientOriginalExtension();
+        Image::make($elecPhoto)->resize(400, 600)->save( public_path('/electronic/' . $filename ) );
+        //$user = Auth::user();
+        $product->photo = $filename;
+        }
+
         $product ->save();
         
         return (['message' => 'Product was successfull']);

@@ -1,5 +1,5 @@
 <template>
-<form  @submit.prevent="onSubmit()">
+<form enctype="multipart/form-data" @submit.prevent="onSubmit">
      <div class="columns" v-if="!success">
     <div class="columns">
         <div class="column is-10 is-offset-1">
@@ -51,9 +51,6 @@
                                  <option v-for="subcat in subcats" :value="subcat.id">{{ subcat.category }}</option>
                             </b-select>
                         </b-field>
-
-
-
                        
                     </div>
                 </div>
@@ -155,6 +152,14 @@
                             </div>
                         </div>
                     </div>
+                    <div class="column is-2">
+                        <div class="field">
+                            <label class="label">Photo:</label>
+                            <div class="control">
+                                 <input @change="newProduct" id="photo" type="file" name="photo" class="input">
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="control is-flex is-pulled-right">
                     <button  class="button is-primary">Add Product</button>
@@ -199,9 +204,12 @@
                     wsaleprice:'',
                     discountallowed:'',
                     cashdis:'',
+                    photo:'',
+                    file: null
 
                 },
                 state:'',
+                photo:'',
                
             }
         },
@@ -216,15 +224,49 @@
             '$route': 'cats'
         },
          methods: {
-            onSubmit(){
-                axios.post('/products./electronic/ElecProductStore', this.FormData)
-                      .then(response => { this.success = true;
-                      })
-                    .catch((error) => {
-                        this.allerros = error.response.data.errors;
+             newProduct(event) {
+               let files = event.target.files;
+               if (files.length) this.photo = files[0];
+            },
+            //updateAvatar: function (id) {
+            onSubmit: function () {
+                 
+                 let data = new FormData();
+                data.append('file', this.logo);
+                data.append('vendor_id', this.FormData.vendor_id,);
+                data.append('category_id', this.FormData.category_id,);
+                data.append('subcategory_id', this.FormData.subcategory_id,);
+                data.append('code', this.FormData.code,);
+                data.append('name', this.FormData.name,);
+                data.append('model', this.FormData.model,);
+                data.append('qty', this.FormData.qty,);
+                data.append('maxqty', this.FormData.maxqty,);
+                data.append('reorder', this.FormData.reorder,);
+                data.append('cost', this.FormData.cost,);
+                data.append('saleprice', this.FormData.saleprice,);
+                data.append('wsaleprice', this.FormData.wsaleprice,);
+                data.append('discountallowed', this.FormData.discountallowed,);
+                data.append('cashdis', this.FormData.cashdis,);
+                
+                axios.post('/products./electronic/ElecProductStore', data)
+                //axios.post('/settings./UpdateSetting/1' +id, data)
+                        .then(response => { this.success = true;
+                         }) 
+                         .catch((error) => { 
+                            this.allerros = error.response.data.errors;
                         this.success = false;
-                   });
-                } ,
+                    });
+                // window.location.href = "/profile";
+              },
+            // onSubmit(){
+            //     axios.post('/products./electronic/ElecProductStore', this.FormData)
+            //           .then(response => { this.success = true;
+            //           })
+            //         .catch((error) => {
+            //             this.allerros = error.response.data.errors;
+            //             this.success = false;
+            //        });
+            //     } ,
             cats(){
                 axios.get("/categories./indexElec").then(({data}) => (this.Loadcategory = data));
             },
@@ -235,7 +277,7 @@
                     
             },
             Checkcode() {
-                axios.get('/products./autos/SearchCode?code=' + this.Addvendor.code)
+                axios.get('/products./autos/SearchCode?code=' + this.vendors.code)
                     .then((response)=> this.state = this.temp = response.data)
                     //console.log(this.state)
                 },
