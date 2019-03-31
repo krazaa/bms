@@ -31,8 +31,6 @@
                         </nav>
                     </div>
                 </div>
-    
-     
         <b-table
             :data="electronic.data"
             :loading="isLoading"
@@ -51,7 +49,7 @@
                 </figure>
             </figure>
         </b-table-column>
-        <b-table-column field="code" label="Product Code" sortable>
+        <b-table-column field="code" label="Code" sortable>
         {{ props.row.code }}
         </b-table-column>
         <b-table-column field="name" label="Product Name" sortable>
