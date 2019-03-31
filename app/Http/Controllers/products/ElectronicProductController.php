@@ -37,7 +37,7 @@ class ElectronicProductController extends Controller
         ->where('electronicproducts.name','LIKE', "%$search%")
         ->orwhere('vendors.company','LIKE', "%$search%")
         ->orwhere('categories.category','LIKE', "%$search%")
-        ->orwhere('electronicproducts.comppartno','LIKE', "%$search%")
+        ->orwhere('electronicproducts.manpartno','LIKE', "%$search%")
         ->orwhere('electronicproducts.code','LIKE', "%$search%")
         ->paginate(20);
         return $cats->toArray();    
