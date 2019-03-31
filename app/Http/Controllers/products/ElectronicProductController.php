@@ -34,11 +34,11 @@ class ElectronicProductController extends Controller
         $search = $request->search;
         $cats = Electronicproduct::leftjoin('vendors','vendors.id','=' ,'electronicproducts.vendor_id')
         ->leftjoin('categories','categories.id','=' ,'electronicproducts.category_id')
-        ->where('name','LIKE', "%$search%")
-        ->orwhere('company','LIKE', "%$search%")
+        ->where('electronicproducts.name','LIKE', "%$search%")
+        ->orwhere('vendors.company','LIKE', "%$search%")
         ->orwhere('categories.category','LIKE', "%$search%")
-        ->orwhere('comppartno','LIKE', "%$search%")
-        ->orwhere('code','LIKE', "%$search%")
+        ->orwhere('electronicproducts.comppartno','LIKE', "%$search%")
+        ->orwhere('electronicproducts.code','LIKE', "%$search%")
         ->paginate(20);
         return $cats->toArray();    
     }
