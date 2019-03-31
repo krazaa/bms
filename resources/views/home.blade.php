@@ -10,7 +10,7 @@
                             Dashboard
                         </p>
                     </header>
-                    <example-component></example-component>
+                    {{-- <example></example-component> --}}
                     <div class="card-content">
                         You are logged in!
                     </div>

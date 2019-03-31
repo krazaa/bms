@@ -267,6 +267,7 @@
         //.catch((error) => this.errors = error.response.data.errors)
         //console.log(this.vendors)
         this.cats();  
+        this.subCats();  
         },
         filters: {
         Upper(value) {

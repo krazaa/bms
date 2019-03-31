@@ -28,14 +28,14 @@
                 <div class="columns is-multiline">
                     <div class="column is-4">
                             <b-field label="Vendor">
-                            <b-select placeholder="Select a Vendor" v-model="FormData.vendor_id" name="vendor_id" expanded>
-                                <option v-for="vendor in vendors.data" :value="vendor.id">{{ vendor.company |Upper }} {{ vendor.person }}</p></option>
+                            <b-select placeholder="Select a Vendor" v-model="FormData.vendor_id" name="vendor_id" expanded required>
+                                <option v-for="vendor in vendors.data" :value="vendor.id">{{ vendor.company |Upper }} <small>{{ vendor.person }}</small></p></option>
                             </b-select>
                         </b-field>
                     </div>
                     <div class="column is-4">
                            <b-field label="Category">
-                            <b-select placeholder="Select a Category" v-model="FormData.category_id" name="category_id" @input="subCats" expanded>
+                            <b-select placeholder="Select a Category" v-model="FormData.category_id" name="category_id" @input="subCats" expanded required>
                                 <option v-for="lc in Loadcategory" :value="lc.id">{{ lc.category }}</option>
                             </b-select>
                         </b-field>
@@ -50,15 +50,14 @@
                 </div>
                 <div class="columns is-multiline">
                     <div class="column is-2">
+                            <label class="label">Product Code:</label>
                         <div class="field">
-                            <label class="label">Product Code:
-                            </label>
                             <div class="control">
                                 <input class="input" type="text" placeholder="e.g B18123456" v-model="FormData.code" @input="Checkcode">
-                                {{ state }}
                             </div>
-                            <p class="help is-success list-inline" v-if="state == '0'">{{ state }} Available</p>
-                            <p class="help is-danger" v-if="state == '1'"> Not Available</p>
+                            <p class="help is-success" v-if="state == 'Available'">{{ FormData.code }} Available</p>
+                            <p class="help is-danger" v-if="state == 'Not Available'"> Not Available</p>
+                            <span class="help is-danger">{{ allerros.code }}</span>
                         </div>
                     </div>
                     <div class="column is-2">
@@ -66,6 +65,7 @@
                             <label class="label">Product Name:</label>
                             <div class="control">
                                 <input class="input" v-model="FormData.name" name="name" type="text" placeholder="e.g Honda 125">
+                                 <span class="help is-danger">{{ allerros.name }}</span>
                             </div>
                         </div>
                     </div>
@@ -74,6 +74,7 @@
                             <label class="label">Man Part no:</label>
                             <div class="control">
                                 <input class="input" v-model="FormData.manpartno" name="manpartno" type="text" placeholder="e.g XX-0013">
+                                 <span class="help is-danger">{{ allerros.manpartno }}</span>
                             </div>
                         </div>
                     </div>
@@ -90,6 +91,7 @@
                             <label class="label">Max Qty:</label>
                             <div class="control">
                                 <input class="input" v-model="FormData.maxqty" name="maxqty" type="text" placeholder="e.g 10">
+                                 <span class="help is-danger">{{ allerros.maxqty }}</span>
                             </div>
                         </div>
                     </div>
@@ -98,6 +100,7 @@
                             <label class="label">Reorder Qty:</label>
                             <div class="control">
                                 <input class="input" v-model="FormData.reorder" name="reorder" type="text" placeholder="e.g 15">
+                                 <span class="help is-danger">{{ allerros.reorder }}</span>
                             </div>
                         </div>
                     </div>
@@ -106,6 +109,7 @@
                             <label class="label">Cash Discount:</label>
                             <div class="control">
                                 <input class="input" v-model="FormData.cashdis" name="cashdis" type="text" placeholder="e.g 2000">
+                                <span class="help is-danger">{{ allerros.cashdis }}</span>
                             </div>
                         </div>
                     </div>
@@ -114,6 +118,7 @@
                             <label class="label">Discount Allow:</label>
                             <div class="control">
                                 <input class="input" v-model="FormData.discountallowed" name="discountallowed" type="text" placeholder="e.g 2000">
+                                <span class="help is-danger">{{ allerros.discountallowed }}</span>
                             </div>
                         </div>
                     </div>
@@ -122,6 +127,7 @@
                             <label class="label">Cost Price:</label>
                             <div class="control">
                                 <input class="input" v-model="FormData.cost" name="cost" type="text" placeholder="e.g 50,000">
+                                <span class="help is-danger">{{ allerros.cost }}</span>
                             </div>
                         </div>
                     </div>
@@ -130,6 +136,7 @@
                             <label class="label">Whole Sale Price:</label>
                             <div class="control">
                                 <input class="input" v-model="FormData.wsaleprice" name="wsaleprice" type="text" placeholder="e.g 45,000">
+                                <span class="help is-danger">{{ allerros.wsaleprice }}</span>
                             </div>
                         </div>
                     </div>
@@ -138,6 +145,7 @@
                             <label class="label">Selling Price:</label>
                             <div class="control">
                                 <input class="input" v-model="FormData.saleprice" name="saleprice" type="text" placeholder="e.g 55,000">
+                                <span class="help is-danger">{{ allerros.saleprice }}</span>
                             </div>
                         </div>
                     </div>
@@ -178,21 +186,22 @@
                 loading:false,
                 vendors: [],
                 subcats: [],
+                allerros: [],
                 FormData: {
                     vendor_id:'',
                     category_id:'',
                     subcategory_id:'',
                     code:'',
                     name:'',
-                    manparno:'',
-                    qty:'',
+                    manpartno:'',
+                    qty:'1',
                     maxqty:'',
                     reorder:'',
                     cost:'',
                     saleprice:'',
                     wsaleprice:'',
-                    discountallowed:'',
-                    cashdis:'',
+                    discountallowed:'0',
+                    cashdis:'0',
                     photo:'',
                     file: null
 
@@ -244,17 +253,8 @@
                             this.allerros = error.response.data.errors;
                         this.success = false;
                     });
-                // window.location.href = "/profile";
               },
-            // onSubmit(){
-            //     axios.post('/products./electronic/ElecProductStore', this.FormData)
-            //           .then(response => { this.success = true;
-            //           })
-            //         .catch((error) => {
-            //             this.allerros = error.response.data.errors;
-            //             this.success = false;
-            //        });
-            //     } ,
+            
             cats(){
                 axios.get("/categories./indexElec").then(({data}) => (this.Loadcategory = data));
             },
@@ -265,8 +265,11 @@
                     
             },
             Checkcode() {
-                axios.get('/products./autos/SearchCode?code=' + this.vendors.code)
-                    .then((response)=> this.state = this.temp = response.data)
+                var searchv = this
+                axios.get('/products./electronic/SearchCode?code=' + this.FormData.code)
+                    .then(function(response) {
+                    Vue.set(searchv.$data, 'state', response.data)
+                    })
                     //console.log(this.state)
                 },
                 getCatVan(){

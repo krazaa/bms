@@ -34,7 +34,7 @@ Vue.use(VeeValidate);
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-//Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+Vue.component('example', require('./components/ExampleComponent.vue').default);
  Vue.component('login', require('./components/login.vue').default);
  Vue.component('autocomplet', require('./components/autocomplet.vue').default);
 // Vue.component('dashboard', require('./components/dashboard.vue').default);
@@ -55,7 +55,7 @@ Vue.use(VeeValidate);
 // Vue.component('editbranch', require('./manage/branches/EditBranch.vue').default);
 Vue.component('pagination', require('laravel-vue-bulma-paginator'));
 
-import Autocomplete from './components/autocomplet'
+// import Autocomplete from './components/autocomplet'
 //Vue.component('showelectronic', require('./products/ElectronicShow.vue').default);
 
 Vue.use(VueRouter);

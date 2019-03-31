@@ -44,7 +44,7 @@
         {{ props.row.id }}
         </b-table-column>
         <b-table-column field="photo" label="Photo">
-            <figure class="image is-16x16" v-if="props.row.photo != empty">
+            <figure class="image is-16x16" v-if="props.row.photo">
                 <a href="#"><img :src="`/electronic/${props.row.photo}`" @click='isOpen = !isOpen'></a>
                 <figure class="image is-96x96" v-if="isOpen">
                      <img :src="`/electronic/${props.row.photo}`">
@@ -58,7 +58,7 @@
         {{ props.row.name }}
         </b-table-column>
         <b-table-column field="category" label="Category" sortable>
-        {{ props.row.category }}
+        {{ props.row.category }} <i class="mdi mdi-arrow-right" v-if="props.row.subcategory"></i>{{ props.row.subcategory }}
         </b-table-column>
         <b-table-column field="vendor" label="Vendor" sortable>
         {{ props.row.company }}
@@ -70,10 +70,10 @@
         {{ props.row.cost }}
         </b-table-column>
            <b-table-column field="isActive" label="Status" sortable>
-            
             <b-switch v-model="props.row.isActive" name="isActive"
             :true-value="1" 
             :false-value="0"
+            size="is-small"
             type="is-success">
             </b-switch>
         </b-table-column>

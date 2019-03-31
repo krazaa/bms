@@ -1,4 +1,4 @@
-import example from './components/ExampleComponent.vue';
+//import example from './components/ExampleComponent.vue';
 import NotFoundComponent from './components/ExampleComponent.vue';
 import e403 from './errors/403.vue';
 import companysetting from './manage/settings/settings.vue';

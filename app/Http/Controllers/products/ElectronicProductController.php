@@ -17,7 +17,8 @@ class ElectronicProductController extends Controller
     {
         $cats = Electronicproduct::leftjoin('vendors','vendors.id','=' ,'electronicproducts.vendor_id')
         ->leftjoin('categories','categories.id','=' ,'electronicproducts.category_id')
-        ->select('electronicproducts.id','electronicproducts.name','electronicproducts.code','electronicproducts.manpartno','electronicproducts.cost','vendors.vnum','vendors.company','categories.category','electronicproducts.isActive','electronicproducts.photo')->orderBy('id','desc')
+        ->leftjoin('categories as subcategory','subcategory.id','=' ,'electronicproducts.subcategory_id')
+        ->select('electronicproducts.id','electronicproducts.name','electronicproducts.code','electronicproducts.manpartno','electronicproducts.cost','vendors.company','categories.category','subcategory.category as subcategory','electronicproducts.isActive','electronicproducts.photo')->orderBy('id','desc')
         ->paginate(20); 
         return response()->json($cats);
     }
@@ -68,11 +69,27 @@ class ElectronicProductController extends Controller
      public function ElecProductStore(request $request)
     {   
        $this->validate($request, [
-            'code' => 'required|unique:autoproducts',
+            'code' => 'required|unique:electronicproducts',
             'name' => 'required',
+            'manpartno' => 'required',
+            'maxqty' => 'required',
+            'reorder' => 'required',
+            'saleprice' => 'required',
+            'wsaleprice' => 'required',
             'cost' => 'required'
             
-        ]);
+        ],[
+
+            'code.required' => 'Code required.',
+            'name.required' => 'Product required.',
+            'manpartno.required' => 'Manufacturer required',
+            'maxqty.required' => 'Max Qty required',
+            'reorder.required' => 'Reorder required',
+            'saleprice.required' => 'Sale Price required',
+            'wsaleprice.required' => 'Whole Sale Price required',
+            'cost.required' => 'Cost required'
+
+           ]);
                 
         $product = new Electronicproduct();
         $product->vendor_id = $request->vendor_id;
@@ -82,12 +99,13 @@ class ElectronicProductController extends Controller
         $product->name = $request->name;
         $product->manpartno = $request->manpartno;
         $product->discountallowed = $request->discountallowed;
+        $product->cashdis = $request->cashdis;
         $product->saleprice = $request->saleprice;
         $product->wsaleprice = $request->wsaleprice;
         $product->reorder = $request->reorder;
+        $product->qty = $request->qty;
         $product->maxqty = $request->maxqty;
         $product->cost = $request->cost;
-        $product->saleprice = $request->saleprice;
         $product->isActive = 1;
         $product->user_id = Auth::user()->id;
         
@@ -109,7 +127,6 @@ class ElectronicProductController extends Controller
        {
                       
         $updateData = Electronicproduct::findOrFail($id);
-
         $updateData->vendor_id = $request->vendor_id;
         $updateData->category_id = $request->category_id;
         $updateData->subcategory_id = $request->subcategory_id;
@@ -117,33 +134,47 @@ class ElectronicProductController extends Controller
         $updateData->name = $request->name;
         $updateData->manpartno = $request->manpartno;
         $updateData->discountallowed = $request->discountallowed;
+        $updateData->cashdis = $request->cashdis;
         $updateData->saleprice = $request->saleprice;
         $updateData->wsaleprice = $request->wsaleprice;
         $updateData->reorder = $request->reorder;
+        $updateData->qty = $request->qty;
         $updateData->maxqty = $request->maxqty;
         $updateData->cost = $request->cost;
-        $updateData->saleprice = $request->saleprice;
-        $updateData->isActive = 1;
         $updateData->user_id = Auth::user()->id;   
 
-
-        if($request->hasFile('file')){
+            if($request->hasFile('file')){
         $productPhoto = $request->file('file');
         $filename = time() . '.' . $productPhoto->getClientOriginalExtension();
         Image::make($productPhoto)->resize(400, 400)->save(public_path('/electronic/' . $filename));
-        
         $oldPhoto = $updateData->photo;
         //updateimg
         $updateData->photo = $filename;
         //delet img
-         if ($oldPhoto)
+             if ($oldPhoto)
             Storage::delete($oldPhoto);
-        }
-        
+            }
 
         $updateData ->save();
 
 
         return ['message' => 'Company Setting successfully Updated'];
     }
+
+    public function SearchCode(request $request){
+       
+        if ($request->ajax())
+        {
+            $products = Electronicproduct::select('id','code')->where('code','=', $request->code)->count();
+                if($products) {
+                //abort(405, 'Code already entered'); 
+                    $count = 'Not Available';
+                return Response($count);
+                } else {
+                    $count = 'Available';
+                return Response($count);
+            }     
+        }
+    }
+
 }

@@ -136,8 +136,9 @@ class VendorController extends Controller
         $vendors = Vendor::select('id','vnum','company','person','mobile','contact')
         ->where('company','LIKE', "%$search%")
         ->orwhere('vnum','LIKE', "%$search%")
-        ->orderBy('id','desc')->get();
-        //->paginate(20);
+        ->orderBy('id','desc')
+        //->get();
+        ->paginate(5);
         return $vendors->toArray();    
     }
 

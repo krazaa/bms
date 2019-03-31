@@ -1,4 +1,66 @@
+
 <template>
+<section>
+        <p class="content"><b>Selected:</b> {{ vendor_id }}</p>
+        <b-field label="Find a movie">
+            <b-autocomplete v-model="person"
+               :data="data"
+                placeholder="e.g. Fight Club"
+                field="company"
+                
+                :loading="isFetching"
+                @input="getAsyncData"
+            @select="option => vendor_id = option.id">
+
+<template slot-scope="props">
+    <div class="media">
+        
+        <div class="media-content">
+            {{ props.option.company }}
+            <br>
+            <small>
+                Contact Person: {{ props.option.person }}
+                
+            </small>
+        </div>
+    </div>
+</template>
+            </b-autocomplete>
+        </b-field>
+    </section>
+</template>
+
+<script>
+    export default {
+        data() {
+            return {
+                data: [],
+person: '',
+vendor_id: null,
+isFetching: false
+            }
+        },
+        methods: {
+            // You have to install and import _.debounce to use it,
+            // it's not mandatory though.
+            getAsyncData: _.debounce(function () {
+this.data = []
+this.isFetching = true
+axios.get(`/vendors./VendorSearch?search=${this.person}`)
+    .then(({ data }) => {
+        data.data.forEach((item) => this.data.push(item))
+        this.isFetching = false
+    })
+    .catch((error) => {
+        this.isFetching = false
+        throw error
+    })
+            }, 500)
+        }
+    }
+</script>
+
+<!-- <template>
     <section>
         <p class="content"><b>Selected:</b> {{ selected }}</p>
         <b-field label="Find a movie">
@@ -48,12 +110,11 @@
                     return
                 }
                 this.isFetching = true
-                axios.get(`/products./autos/SearchAutosProduct?search=${name}`, )
-                //axios.get(`/products./autos/SearchAutosProduct?search=${name}`)
-                // this.$http.get(`https://api.themoviedb.org/3/search/movie?api_key=bb6f51bef07465653c3e553d6ab161a8&query=${name}`)
+                axios.get(`/products./autos/SearchAutosProduct?search=${name}` )
+                
                     .then(({ data }) => {
                         this.data = []
-                        data.results.forEach((item) => this.data.push(item))
+                        data.data.forEach((item) => this.data.push(item))
                     })
                     .catch((error) => {
                         this.data = []
@@ -66,3 +127,4 @@
         }
     }
 </script>
+ -->

@@ -144,6 +144,7 @@ Route::prefix('products.')->group(function () {
     Route::get('/electronic/ElecSearch', 'products\ElectronicProductController@ElecSearch')->name('products.electronic.ElectSearch');
     Route::get('/electronic/SearchElec', 'products\ElectronicProductController@SearchElec')->name('products.electronic.SearchElec');
     Route::get('/electronic/ShowSingle/{id}', 'products\ElectronicProductController@ShowSingle')->name('products.electronic.ShowSingle');
+    Route::get('/electronic/SearchCode/', 'products\ElectronicProductController@SearchCode')->name('products.electronic.SearchCode');
 
     
     }); 
@@ -256,6 +257,15 @@ Route::get('permissions', 'manage\PermissionController@index')->name('manage.per
 //for vue
 
 Route::get('manage/users/singleuser/{id}', 'manage\UserController@GetSingleUser')->name('manage.singleuser');
+
+
+
+// BackupController
+Route::get('backup', 'manage\BackupController@index')->name('manage.backup');
+Route::get('create', 'manage\BackupController@create')->name('manage.create');
+
+
+
 });
 
 // bms path end
