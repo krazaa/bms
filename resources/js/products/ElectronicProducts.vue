@@ -116,6 +116,7 @@
                   this.isLoading = false
                   this.electronic = data   });  
             },
+            
             getResults(page = 1) {
                 axios.get('/products./electronic/GetElectronic?page=' + page)
                   .then(response => {
