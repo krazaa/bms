@@ -15,10 +15,9 @@ class ElectronicProductController extends Controller
 {
      public function index()
     {
-        $cats = Electronicproduct::leftjoin('vendors','vendors.id','=' ,'electronicproducts.vendor_id')
-        ->leftjoin('categories','categories.id','=' ,'electronicproducts.category_id')
+        $cats = Electronicproduct::leftjoin('categories','categories.id','=' ,'electronicproducts.category_id')
         ->leftjoin('categories as subcategory','subcategory.id','=' ,'electronicproducts.subcategory_id')
-        ->select('electronicproducts.id','electronicproducts.name','electronicproducts.code','electronicproducts.manpartno','electronicproducts.cost','vendors.company','categories.category','subcategory.category as subcategory','electronicproducts.isActive','electronicproducts.photo')->orderBy('id','desc')
+        ->select('electronicproducts.id','electronicproducts.name','electronicproducts.code','electronicproducts.manpartno','electronicproducts.cost','categories.category','subcategory.category as subcategory','electronicproducts.isActive','electronicproducts.photo')->orderBy('id','desc')
         ->paginate(20); 
         return response()->json($cats);
     }
@@ -35,7 +34,7 @@ class ElectronicProductController extends Controller
         $cats = Electronicproduct::leftjoin('vendors','vendors.id','=' ,'electronicproducts.vendor_id')
         ->leftjoin('categories','categories.id','=' ,'electronicproducts.category_id')
         ->where('electronicproducts.name','LIKE', "%$search%")
-        ->orwhere('vendors.company','LIKE', "%$search%")
+        // ->orwhere('vendors.company','LIKE', "%$search%")
         ->orwhere('categories.category','LIKE', "%$search%")
         ->orwhere('electronicproducts.manpartno','LIKE', "%$search%")
         ->orwhere('electronicproducts.code','LIKE', "%$search%")
@@ -59,8 +58,7 @@ class ElectronicProductController extends Controller
     }
      public function ShowSingle($id)
     {
-        $products = Electronicproduct::leftjoin('vendors','vendors.id' ,'=','electronicproducts.vendor_id')
-        ->select('electronicproducts.id','electronicproducts.name','electronicproducts.code','electronicproducts.cost','electronicproducts.manpartno','vendors.vnum','vendors.company','electronicproducts.vendor_id','electronicproducts.category_id','electronicproducts.subcategory_id','electronicproducts.qty','electronicproducts.maxqty','electronicproducts.reorder','electronicproducts.cashdis','electronicproducts.discountallowed','electronicproducts.wsaleprice','electronicproducts.saleprice','electronicproducts.photo')
+        $products = Electronicproduct::select('electronicproducts.id','electronicproducts.name','electronicproducts.code','electronicproducts.cost','electronicproducts.manpartno','electronicproducts.category_id','electronicproducts.subcategory_id','electronicproducts.qty','electronicproducts.maxqty','electronicproducts.reorder','electronicproducts.cashdis','electronicproducts.discountallowed','electronicproducts.wsaleprice','electronicproducts.saleprice','electronicproducts.photo')
         ->find($id);
         return $products->toArray();    
     }
@@ -91,7 +89,6 @@ class ElectronicProductController extends Controller
            ]);
                 
         $product = new Electronicproduct();
-        $product->vendor_id = $request->vendor_id;
         $product->category_id = $request->category_id;
         $product->subcategory_id = $request->subcategory_id;
         $product->code = $request->code;
@@ -126,7 +123,7 @@ class ElectronicProductController extends Controller
        {
                       
         $updateData = Electronicproduct::findOrFail($id);
-        $updateData->vendor_id = $request->vendor_id;
+        
         $updateData->category_id = $request->category_id;
         $updateData->subcategory_id = $request->subcategory_id;
         $updateData->code = $request->code;

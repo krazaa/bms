@@ -34,7 +34,7 @@ class AutosProductController extends Controller
                 
         $product = new Autoproduct();
         $product->name = $request->name;
-        $product->vendor_id = $request->vendor_id;
+        //$product->vendor_id = $request->vendor_id;
         $product->code = $request->code;
         $product->shortname = $request->shortname;
         $product->model = $request->model;
@@ -57,9 +57,8 @@ class AutosProductController extends Controller
 
     public function GetAutosProducts()
     {
-    	$products = Autoproduct::leftjoin('vendors','vendors.id','=' ,'autoproducts.vendor_id')
-        ->leftjoin('categories','categories.id','=' ,'autoproducts.category_id')
-        ->select('autoproducts.id','autoproducts.name','autoproducts.code','autoproducts.model','autoproducts.cost','autoproducts.shortname','vendors.vnum','vendors.company','autoproducts.isActive','categories.category')
+    	$products = Autoproduct::leftjoin('categories','categories.id','=' ,'autoproducts.category_id')
+        ->select('autoproducts.id','autoproducts.name','autoproducts.code','autoproducts.model','autoproducts.cost','autoproducts.shortname','autoproducts.isActive','categories.category')
         ->orderBy('id','desc')
         ->paginate(20);
         return response()->json($products);
@@ -68,11 +67,9 @@ class AutosProductController extends Controller
     public function SearchAutosProduct(request $request){
        
         $search = $request->search;     
-        $products = Autoproduct::leftjoin('vendors','vendors.id','=' ,'autoproducts.vendor_id')
-        ->select('*')
+        $products = Autoproduct::select('*')
         ->where('name','LIKE', "%$search%")
         ->orwhere('code','LIKE', "%$search%")
-        ->orwhere('company','LIKE', "%$search%")
         ->orwhere('model','LIKE', "%$search%")
         ->orwhere('shortname','LIKE', "%$search%")
         //->orderBy('id','desc')
@@ -121,9 +118,8 @@ class AutosProductController extends Controller
     public function ShowSingle($id)
     {
     	$products = 
-        Autoproduct::leftjoin('vendors','vendors.id','=' ,'autoproducts.vendor_id')
-        ->leftjoin('categories','categories.id','=' ,'autoproducts.category_id')
-        ->select('autoproducts.id','autoproducts.name','autoproducts.code','autoproducts.category_id','autoproducts.model','autoproducts.cost','autoproducts.shortname','autoproducts.vendor_id','autoproducts.reorder','autoproducts.maxqty','autoproducts.cost','autoproducts.cashdis','autoproducts.discountallowed','autoproducts.saleprice','autoproducts.isActive','autoproducts.wsaleprice')->find($id);
+        Autoproduct::leftjoin('categories','categories.id','=' ,'autoproducts.category_id')
+        ->select('autoproducts.id','autoproducts.name','autoproducts.code','autoproducts.category_id','autoproducts.model','autoproducts.cost','autoproducts.shortname','autoproducts.reorder','autoproducts.maxqty','autoproducts.cost','autoproducts.cashdis','autoproducts.discountallowed','autoproducts.saleprice','autoproducts.isActive','autoproducts.wsaleprice')->find($id);
         return $products->toArray();	
     }
 

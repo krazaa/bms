@@ -58,9 +58,6 @@
         <b-table-column field="category" label="Category" sortable>
         {{ props.row.category }} <i class="mdi mdi-arrow-right" v-if="props.row.subcategory"></i>{{ props.row.subcategory }}
         </b-table-column>
-        <b-table-column field="vendor" label="Vendor" sortable>
-        {{ props.row.company }}
-        </b-table-column>
         <b-table-column field="manpartno" label="Man Part No" sortable>
         {{ props.row.manpartno }}
         </b-table-column>

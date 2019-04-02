@@ -26,13 +26,7 @@
                 </div>
         
                 <div class="columns is-multiline">
-                       <div class="column is-4">
-                        <b-field label="Vendor">
-                            <b-select placeholder="Select a Vendor" name="autos.vendor_id" v-model="autos.vendor_id" expanded>
-                                <option v-for="vendor in vendors.data" :value="vendor.id">{{ vendor.company | Upper }} <a>{{ vendor.person }}</a></option>
-                            </b-select>
-                        </b-field>
-                    </div>
+                     
                 <div class="column is-4">
                     <b-field label="Category">
                             <b-select placeholder="Select a Category" name="category_id" v-model="autos.category_id" expanded>
@@ -198,10 +192,6 @@
     mounted(){
         this.getCats();
         this.ShowSingle();
-        
-        axios.get('/vendors./GetVendors/').then(response => {
-                  this.vendors = response.data;
-                  });
         
         },
           filters: {

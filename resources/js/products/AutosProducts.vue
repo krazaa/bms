@@ -58,9 +58,6 @@
         <b-table-column field="model" label="Model" sortable>
         {{ props.row.model }}
         </b-table-column>
-        <b-table-column field="vendor" label="Vendor" sortable>
-        {{ props.row.company }}
-        </b-table-column>
         <b-table-column field="category" label="Category" sortable>
         {{ props.row.category }}
         </b-table-column>
@@ -72,6 +69,7 @@
             <b-switch v-model="props.row.isActive" name="isActive"
             :true-value="1" 
             :false-value="0"
+            size="is-small"
             type="is-success" @input="ChangeStatus(props.row.id)">
             </b-switch>
         </b-table-column>

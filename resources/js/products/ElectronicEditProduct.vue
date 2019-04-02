@@ -26,13 +26,7 @@
                     </div>
                 </div>
   <div class="columns is-multiline">
-                    <div class="column is-4">
-                            <b-field label="Vendor">
-                            <b-select placeholder="Select a Vendor" v-model="FormData.vendor_id" name="vendor_id" expanded>
-                                <option v-for="vendor in vendors.data" :value="vendor.id">{{ vendor.company |Upper }} {{ vendor.person }}</p></option>
-                            </b-select>
-                        </b-field>
-                    </div>
+                
                     <div class="column is-4">
                            <b-field label="Category">
                             <b-select placeholder="Select a Category" v-model="FormData.category_id" name="category_id" @input="subCats" expanded>
