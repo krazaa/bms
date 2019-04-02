@@ -77,7 +77,7 @@
             <tr v-for="(addRow, index) in addRows">
                 <td>
             <b-field>
-            <b-autocomplete v-model="addRow.product"
+            <b-autocomplete v-model="product"
                 :data="products"
                 placeholder="Type Product name"
                 field="name"
