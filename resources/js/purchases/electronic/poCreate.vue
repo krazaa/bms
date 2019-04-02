@@ -25,7 +25,7 @@
             <div class="columns">
                 <div class="column is-4">
                     <b-field label="Vendor">
-                        <b-autocomplete v-model="person"
+                        <b-autocomplete v-model="vendors"
                             :data="data"
                             placeholder="Type Vendor name"
                             field="company"
@@ -77,13 +77,13 @@
             <tr v-for="(addRow, index) in addRows">
                 <td>
             <b-field>
-            <b-autocomplete v-model="product"
+            <b-autocomplete v-model="addRow.items"
                 :data="products"
                 placeholder="Type Product name"
                 field="name"
                 :loading="isFetching2"
                 @typing="getAsyncData"
-                @select="option => addRow.product_id = option.id" expanded>
+                @select="option => addRows.product_id = option.id" expanded>
                 <template slot-scope="props">
                     <div class="media">
                         <div class="media-left">
@@ -135,6 +135,7 @@
             </div>
         </div>
     </div>
+
     <!-- <div class="notification is-success" v-if="success">
         <h2 class="title is-2"> Record successfully Stored! </h2>
         <br>
@@ -159,7 +160,7 @@ export default {
                     product_id: '',
                     qty: '',
                     branch_id: '',
-                    product:'',
+                    items:'',
                     vendor_id:'',
                     refno:'',
                     podate:'',
@@ -167,8 +168,8 @@ export default {
                 
                 success: false,
                 branches:[],
-                 person:'',
-                 product:'',
+                 vendors:'',
+                 items:'',
                  
                 //vendor_id:'',
                 //branch_id:'',
@@ -176,8 +177,8 @@ export default {
                 //refno:'',
                 
                 allerros:[],
+
                 products:[],
-                
                 data: [],
                 isFetching: false,
                 isFetching2: false,
@@ -192,7 +193,7 @@ export default {
                     return
                 }
                 this.isFetching = true
-                 axios.get(`/vendors./VendorSearch?search=${this.person}`)
+                 axios.get(`/vendors./VendorSearch?search=${this.vendors}`)
                     .then(({ data }) => {
                         this.data = []
                         data.data.forEach((item) => this.data.push(item))
@@ -212,8 +213,9 @@ export default {
                     return
                 }
                 this.isFetching2 = true
-                 axios.get(`/purchases./electronic/GetElecProducts?search=${this.product}`)
                 
+
+                 axios.get(`/purchases./electronic/GetElecProducts?search=${name}`)
                     .then(({ data }) => {
                         this.data = []
                         data.data.forEach((item) => this.products.push(item))
@@ -247,13 +249,10 @@ export default {
                 data.append('product_id', this.addRows.product_id);
                 data.append('qty', this.addRows.qty);
                 data.append('branch_id', this.addRows.branch_id);
-                console.log(data);
 
-                axios.post('/purchases./electronic/StoreElecPO', data).then(response =>{
-                  
-                })
-
-                      .then(response => { this.success = true;
+                axios.post('/purchases./electronic/StoreElecPO', data)
+                .then(response =>{
+                }).then(response => { this.success = true;
                       })
                     .catch((error) => {
                         this.allerros = error.response.data.errors;
