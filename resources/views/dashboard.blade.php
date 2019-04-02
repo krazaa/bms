@@ -4,7 +4,7 @@
 @include('layouts.success')
 	<section class="section">
     <div class="box">
-    	<example></example>
+    	{{-- <example></example> --}}
         {{-- <autocomplet></autocomplet> --}}
         {{-- <dashboard></dashboard> --}}
         <router-view></router-view>

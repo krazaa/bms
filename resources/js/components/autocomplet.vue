@@ -44,15 +44,15 @@ isFetching: false
             // You have to install and import _.debounce to use it,
             // it's not mandatory though.
             getAsyncData: _.debounce(function () {
-this.data = []
-this.isFetching = true
-axios.get(`/vendors./VendorSearch?search=${this.person}`)
-    .then(({ data }) => {
-        data.data.forEach((item) => this.data.push(item))
-        this.isFetching = false
-    })
-    .catch((error) => {
-        this.isFetching = false
+            this.data = []
+            this.isFetching = true
+                axios.get(`/vendors./VendorSearch?search=${this.person}`)
+            .then(({ data }) => {
+            data.data.forEach((item) => this.data.push(item))
+            this.isFetching = false
+            })
+            .catch((error) => {
+            this.isFetching = false
         throw error
     })
             }, 500)

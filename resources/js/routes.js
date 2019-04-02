@@ -7,6 +7,10 @@ import newbranch from './manage/branches/AddBranch.vue';
 import editbranch from './manage/branches/EditBranch.vue';
 
 
+// Purchase Orders
+import poELists from './purchases/electronic/PoLists.vue';  
+import poECreate from './purchases/electronic/poCreate.vue';  
+
 // COGS Account
 import cogList from './cogaccounts/cogaccounts.vue';
 import cogCreate from './cogaccounts/Create.vue';
@@ -144,6 +148,13 @@ export default [
   { path: '/vendors/', component: vendors, name: 'vendors'},
   { path: '/vendors/create', component: vendorCreate, name: 'create'},
   { path: '/vendors/vendorEdit/:id', component: VendorEdit, name: 'vendorEdit', props: true},
+
+  // purchases electronic
+  { path: '/purchases/electronic', component: poELists, name: 'poELists'},
+  { path: '/purchases/electronic/create', component: poECreate, name: 'poECreate'},
+  //{ path: '/vendors/vendorEdit/:id', component: VendorEdit, name: 'vendorEdit', props: true},
+
+
 
 // category
   { path: '/category/manage', component: category, name: 'manage'},

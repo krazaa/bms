@@ -61,7 +61,7 @@
                         </div>
                     </div>
                     
-                    <div class="column is-2">
+                    <div class="column is-3">
                         <div class="field">
                             <label class="label">Email:</label>
                             <div class="control">

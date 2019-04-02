@@ -151,11 +151,16 @@ Route::prefix('products.')->group(function () {
 //End products routes
 
 //Start Purchase Orders routes
-Route::prefix('purchase-order.')->group(function () {
-    Route::get('autos/', 'purchaseorders\AutosPurchaseOrdersController@index')->name('purchase-order.autos');
+Route::prefix('purchases.')->group(function () {
+    Route::get('autos/', 'purchaseorders\AutosPurchaseOrdersController@index')->name('purchases.autos');
     
     //Electronic
-    Route::get('electronic/', 'purchaseorders\ElectronicPurchaseOrdersController@index')->name('purchase-order.electronic');
+    Route::get('electronic/', 'purchases\ElecPurchaseOrderController@GetPOList')->name('purchases.electronic');
+    Route::get('electronic/RecordDelete', 'purchases\ElecPurchaseOrderController@RecordDelete')->name('purchases.electronic.RecordDelete');
+    Route::get('electronic/StatusChange/{id}', 'purchases\ElecPurchaseOrderController@StatusChange')->name('purchases.electronic.StatusChange');
+    Route::post('electronic/StoreElecPO', 'purchases\ElecPurchaseOrderController@StoreElecPO')->name('purchases.electronic.StoreElecPO');
+    Route::get('electronic/GetElecProducts', 'purchases\ElecPurchaseOrderController@GetElecProducts')->name('purchases.electronic.GetElecProducts');
+    Route::get('electronic/GetBranches', 'purchases\ElecPurchaseOrderController@GetBranches')->name('purchases.electronic.GetBranches');
     
 });
 //End Purchase Orders routes

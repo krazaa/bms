@@ -12,13 +12,19 @@ window.Vue = require('vue');
 import Buefy from 'buefy';
 import 'buefy/dist/buefy.css';
 import Datepicker from 'buefy/dist/components/datepicker';
-// import Vue from 'vue'
+import moment from 'moment';
 
 import VueRouter from 'vue-router'
 import ourRoutes from './routes.js'
 import VeeValidate from 'vee-validate';
 
+Vue.filter('formatDate', function(value) {
 
+  if (value) {
+    return moment(String(value)).format('MM/DD/YYYY')
+  }
+
+});
 
 
 Vue.use(VueRouter)
