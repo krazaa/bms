@@ -10,6 +10,14 @@ import editbranch from './manage/branches/EditBranch.vue';
 // Purchase Orders
 import poELists from './purchases/electronic/PoLists.vue';  
 import poECreate from './purchases/electronic/poCreate.vue';  
+import poEShow from './purchases/electronic/Show.vue';  
+import poEReceive from './purchases/electronic/poReceive.vue';  
+
+//Stocks Electronic
+import StockElec from './stocks/electronic/ElectronicStocks.vue';  
+
+
+//
 
 // COGS Account
 import cogList from './cogaccounts/cogaccounts.vue';
@@ -87,6 +95,9 @@ export default [
   { path: '/cogs/cogEdit/:id', component: cogEdit, name: 'cogEdit', props: true},
   { path: '/cogs/cogShow/:id', component: cogShow, name: 'cogShow', props: true},
   
+
+  // Stocks Electronic
+  { path: '/Stocks/StockElec', component: StockElec, name: 'StockElec'},
 // Settings 
   { path: '/settings/branches', component: branches, name: 'branches'},
   { path: '/settings/branches/newbranch', component: newbranch, name: 'newbranch'},
@@ -152,7 +163,8 @@ export default [
   // purchases electronic
   { path: '/purchases/electronic', component: poELists, name: 'poELists'},
   { path: '/purchases/electronic/create', component: poECreate, name: 'poECreate'},
-  //{ path: '/vendors/vendorEdit/:id', component: VendorEdit, name: 'vendorEdit', props: true},
+  { path: '/purchases/electronic/poEShow/:id', component: poEShow, name: 'poEShow', props: true},
+  { path: '/purchases/electronic/poEReceive/:id', component: poEReceive, name: 'poEReceive', props: true},
 
 
 

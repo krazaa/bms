@@ -55,6 +55,7 @@
               <div class="navbar-dropdown ">
                 {{-- <router-link class="navbar-item" :to="{ name: 'poELists'}">Vehicles PO & CN</router-link> --}}
                 <router-link class="navbar-item" :to="{ name: 'poELists'}">Electronic PO & CN</router-link>
+                <router-link class="navbar-item" :to="{ name: 'StockElec'}">Electronic Stocks</router-link>
               </div>
             </div>
             <div class="navbar-item has-dropdown is-hoverable">

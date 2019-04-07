@@ -40,26 +40,18 @@
             :default-sort-direction="defaultSortDirection"
              default-sort="getDataload.data.name">
         <template slot-scope="props">
-        <b-table-column field="poid" label="PO ID" width="60" sortable>
+        <b-table-column field="poid" label="PO ID" width="80" sortable>
         EPO-{{ props.row.poid }}
         </b-table-column>
-        <b-table-column field="company" label="Vendor" sortable>
+        <b-table-column field="vendor" label="Vendor Name" sortable>
         {{ props.row.company }}
         </b-table-column>
         <b-table-column field="refno" label="Reference No" sortable>
         {{ props.row.refno }}
         </b-table-column>
-        <b-table-column field="podate" label="Order Date" width="60" sortable>
+        <b-table-column field="podate" label="Order Date" width="80" sortable>
         {{ props.row.podate | formatDate }}
         </b-table-column>
-        
-        <b-table-column field="branch" label="Branch" sortable>
-        {{ props.row.branch }}
-        </b-table-column>
-        <!-- <b-table-column field="cost" label="Cost" width="80" sortable>
-        {{ props.row.cost }}
-        </b-table-column> -->
-
         <b-table-column field="isActive" label="Status" width="30" sortable right>
             <b-switch v-model="props.row.isActive" name="isActive"
             :true-value="1" 
@@ -68,9 +60,11 @@
             type="is-success" @input="ChangeStatus(props.row.id)">
             </b-switch>
         </b-table-column>
-        <b-table-column label="Action" width="140" centered>
-             <!-- <router-link class="button is-success is-small" :to="{ name: 'AutosShow', params: {id: props.row.id}}"><span class="mdi mdi-eye-circle-outline"></span></router-link>
-             <router-link class="button is-info is-small" :to="{ name: 'editproduct', params: {id: props.row.id}}"><span class="mdi mdi-pencil-box-outline"></span></router-link> -->
+        <b-table-column label="Action" width="180" centered>
+          
+          <router-link class="button is-warning is-small" :to="{ name: 'poEReceive', params: {id: props.row.poid}}"><span class="mdi mdi-arrow-down-bold-hexagon-outline"></span></router-link>
+             <router-link class="button is-success is-small" :to="{ name: 'poEShow', params: {id: props.row.poid}}"><span class="mdi mdi-eye-circle-outline"></span></router-link>
+             <router-link class="button is-info is-small" :to="{ name: 'editproduct', params: {id: props.row.id}}"><span class="mdi mdi-pencil-box-outline"></span></router-link>
         
         <a @click="vDelete(props.row.id)" class="button is-danger is-small"><span class="mdi mdi-trash-can"></span></a>
         </b-table-column>
@@ -80,7 +74,7 @@
      <div class="control has-text-centered" v-show="!getDataload.data.length">
         <h1 class="title is-2 is-warning">Record not found</h1>
         <hr>
-        <router-link class="button is-primary " :to="{ name: 'newproduct' }"><i class="fa fa-user-plus m-r-10"></i> Add your first Vehicle click here</router-link>
+        <router-link class="button is-primary " :to="{ name: 'poECreate' }"><i class="fa fa-user-plus m-r-10"></i> Add your first PO click here</router-link>
     </div>
     </template>
 <hr>

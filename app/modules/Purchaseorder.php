@@ -8,6 +8,11 @@ class Purchaseorder extends Model
 {
     protected $fillable = ['product_id','qty','branch_id','vendor_id'];
 
+    protected $casts = [
+      'product_id' => 'array',
+      'branch_id ' => 'array',
+      'qty' => 'array',
+	];
 
     public function setPoDateAttribute($value)
 	{

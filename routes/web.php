@@ -155,7 +155,10 @@ Route::prefix('purchases.')->group(function () {
     Route::get('autos/', 'purchaseorders\AutosPurchaseOrdersController@index')->name('purchases.autos');
     
     //Electronic
+    
     Route::get('electronic/', 'purchases\ElecPurchaseOrderController@GetPOList')->name('purchases.electronic');
+    Route::get('electronic/GetPOshow/{id}', 'purchases\ElecPurchaseOrderController@GetPOshow')->name('purchases.electronic.GetPOshow');
+    Route::get('electronic/GetPOshowPDF/{id}', 'purchases\ElecPurchaseOrderController@GetPOshowPDF')->name('purchases.electronic.GetPOshowPDF');
     Route::get('electronic/RecordDelete', 'purchases\ElecPurchaseOrderController@RecordDelete')->name('purchases.electronic.RecordDelete');
     Route::get('electronic/StatusChange/{id}', 'purchases\ElecPurchaseOrderController@StatusChange')->name('purchases.electronic.StatusChange');
     Route::post('electronic/StoreElecPO', 'purchases\ElecPurchaseOrderController@StoreElecPO')->name('purchases.electronic.StoreElecPO');
@@ -181,6 +184,21 @@ Route::prefix('brands.')->group(function () {
 
 });
 //End Brands routes
+
+//Stocks routes
+Route::prefix('stocks.')->group(function () {
+
+
+    Route::get('/electronic/getstocks', 'stocks\ElecStockController@GetStock')->name('electronic.getstocks');
+    
+    
+    
+    
+    
+});
+//End Stocks routes
+
+
 
 //Start Settings routes
 // Route::post('/cutest', 'SettingController@cutest')->name('cutest');
@@ -228,10 +246,12 @@ Route::get('/', function () {
 Route::get('/users', function () {
 
     //$queryString = Input::get('queryString');
-    $users = \App\User::all();
+    $user = \App\User::all();
 
 
-    return response()->json($users);
+    //return $user->toJson(JSON_PRETTY_PRINT);
+
+    var_dump(json_decode($user, true));
 });
 
 

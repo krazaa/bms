@@ -2,15 +2,20 @@
 
 namespace App\Http\Controllers\purchases;
 
+use Illuminate\Http\Response;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\modules\Purchaseorder;
 use App\modules\Electronicproduct;
 use App\Branch;
 use Auth;
+use DB;
+use PDF;
 
 class ElecPurchaseOrderController extends Controller
 {
+
+   
 
 	public function GetElecProducts(Request $request)
 	{
@@ -33,13 +38,48 @@ class ElecPurchaseOrderController extends Controller
 
     public function GetPOList()
     {
-    	$data = Purchaseorder::leftjoin('vendors','vendors.id','=','purchaseorders.vendor_id')
+    	$data = DB::table('purchaseorders')
+        ->leftjoin('vendors','vendors.id','=','purchaseorders.vendor_id')
         ->leftjoin('branches','branches.id','=','purchaseorders.branch_id')
-    	->select('vendors.company','purchaseorders.isActive','purchaseorders.cost','purchaseorders.refno','purchaseorders.podate','purchaseorders.selling','purchaseorders.statusPaid','purchaseorders.poid','branches.name as branch')
+    	->select('vendors.company','purchaseorders.id','purchaseorders.poid','purchaseorders.isActive','purchaseorders.refno','purchaseorders.podate','purchaseorders.statusPaid','purchaseorders.poid','branches.name as branch')
         ->orderBy('purchaseorders.poid','desc')
+        ->groupby('purchaseorders.poid')
     	->paginate(15);
 
     	return $data->toArray();	
+    }
+
+    public function GetPOshow($id)
+    {
+        $data = DB::table('purchaseorders')
+        ->leftjoin('vendors','vendors.id','=','purchaseorders.vendor_id')
+        ->leftjoin('branches','branches.id','=','purchaseorders.branch_id')
+        ->leftjoin('electronicproducts','electronicproducts.id','=','purchaseorders.product_id')
+        ->leftjoin('categories','categories.id', '=', 'electronicproducts.category_id')
+        ->leftjoin('categories as sub','categories.id', '=', 'electronicproducts.subcategory_id')
+        ->select('vendors.company','vendors.address','vendors.contact','vendors.mobile','purchaseorders.id','purchaseorders.isActive','purchaseorders.refno','purchaseorders.qty','purchaseorders.podate','purchaseorders.statusPaid','purchaseorders.poid','branches.name as branch','electronicproducts.code','electronicproducts.name','categories.category','sub.category as subcat','electronicproducts.cost','electronicproducts.wsaleprice','electronicproducts.saleprice')
+        ->where('purchaseorders.poid','=',$id)
+        ->orderBy('purchaseorders.poid','desc')
+        ->get();
+
+        return $data->toArray();    
+    }
+
+    public function GetPOshowPDF($id)
+    {
+        $data = DB::table('purchaseorders')
+        ->leftjoin('vendors','vendors.id','=','purchaseorders.vendor_id')
+        ->leftjoin('branches','branches.id','=','purchaseorders.branch_id')
+        ->leftjoin('electronicproducts','electronicproducts.id','=','purchaseorders.product_id')
+        ->leftjoin('categories','categories.id', '=', 'electronicproducts.category_id')
+        ->leftjoin('categories as sub','categories.id', '=', 'electronicproducts.subcategory_id')
+        ->select('vendors.company','vendors.address','vendors.contact','vendors.mobile','purchaseorders.id','purchaseorders.isActive','purchaseorders.refno','purchaseorders.qty','purchaseorders.podate','purchaseorders.statusPaid','purchaseorders.poid','branches.name as branch','electronicproducts.code','electronicproducts.name','categories.category','sub.category as subcat')
+        ->where('purchaseorders.poid','=',$id)
+        ->orderBy('purchaseorders.poid','desc')
+        ->get();
+        $pdf = PDF::loadView('pdfs.poshow', compact('data'));
+        return $pdf->stream('po.pdf');
+        
     }
 
         public function StatusChange($id)
@@ -59,46 +99,102 @@ class ElecPurchaseOrderController extends Controller
 
     	public function StoreElecPO(Request $request)
     		{
+                
+                $pon = Purchaseorder::orderBy('id', 'desc')->first();
+                if ( ! $pon )
+                   $number = 0;
+                    else 
+                 $number = substr($pon->poid, 6);
+                 $ponum =  sprintf('%08d', intval($number) + 1);
 
-            return $request->all();
-        // //          $this->validate($request, [
-        // //     //'code' => 'required|unique:electronicproducts',
-        // //     'vendor_id' => 'required',
-        // //     'poid' => 'required',
-        // //     'refno' => 'required',
-        // //     'podate' => 'required',
-        // //     'qty' => 'required',
-        // //     'product_id' => 'required',
-        // //     'branch_id' => 'required'
+                
+                // $data1 = $request->all();
+                // // Purchaseorder::insert($data);
+
+                // foreach ($data1 as $key =>$v)
+                // {
+                    
+
+                // $data=array(
+                //             $v,
+
+                //           'poid'=>$ponum
+                        
+                //     );
+                // //dd($data);
+                //  Purchaseorder::insert($data);
+
+                // }
+                
+                
+                // }
+/////////////////////////////////////////
+
+ $data = $request->all();
+         $finalArray = array();
+         foreach($data as $key=>$value){
+         array_push($finalArray, 
+            array(
+                'poid'=>$ponum,
+                'vendor_id'=>$request[0]['vendor_id'],
+                'podate'=>$request[0]['podate'],
+                'refno'=>$request[0]['refno'],
+                'type'=>2,
+                'isActive'=>1,
+                'user_id'=> Auth::user()->id,
+                'product_id'=>$value['product_id'],
+                'qty'=>$value['qty'],
+                'branch_id'=> $value['branch_id'] )
+     );
+    }
+    //    dd($finalArray);
+    Purchaseorder::insert($finalArray);
+}
+
+/////////////////////////////////////////
+
+
+
+            // $this->validate($request, [
+            // //'code' => 'required|unique:electronicproducts',
+            // 'vendor_id' => 'required',
+            // 'poid' => 'required',
+            // 'refno' => 'required',
+            // 'podate' => 'required',
+            // 'qty' => 'required',
+            // 'product_id' => 'required',
+            // 'branch_id' => 'required'
             
-        // // ]);
+            // ]);
+
+
     			
-            $pon = Purchaseorder::orderBy('id', 'desc')->first();
-    			if ( ! $pon )
-        		      $number = 0;
-    		      else 
-        	$number = substr($pon->poid, 6);
-        	$ponum =  sprintf('%08d', intval($number) + 1);
+       //      $pon = Purchaseorder::orderBy('id', 'desc')->first();
+    			// if ( ! $pon )
+       //  		      $number = 0;
+    		 //      else 
+       //  	$number = substr($pon->poid, 6);
+       //  	$ponum =  sprintf('%08d', intval($number) + 1);
 
-             //for($i=0;$i<count($request['vendor_id']);$i++)
+            // $vendor = json_decode($request[0]['vendor_id']);
+            // $podate = json_decode($request[0]['podate']);
+            // $refno = json_decode($request[0]['refno']);
 
-        
-//        {
+            // $Data = new Purchaseorder();            
+            // $Data->user_id = Auth::user()->id;
+            // $Data->type = 2;
+            // $Data->poid = $ponum;
+            // $Data->vendor_id = $vendor;
+            // $Data->podate = $podate;
+            // $Data->refno = $refno;
 
-
-            $Data = new Purchaseorder();
-            
-            $Data->vendor_id = $request->vendor_id;
-            $Data->poid = $ponum;
-            $Data->type = 2;
-            $Data->refno = $request->refno;
-            $Data->podate = $request->podate;
-            $Data->qty = $request->qty;
-            $Data->product_id = $request->product_id;
-            $Data->branch_id = $request->branch_id;
-            $Data->user_id = Auth::user()->id;
-            $Data->save();
-         }              
+            // $Data->qty = $request->qty;
+            // $Data->branch_id = $request->branch_id;
+            // $Data->product_id = $request->product_id;
+            // $Data->save();
+         
+                //return $request->all();
+     //}
 
 
     public function RecordDelete($id)

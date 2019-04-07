@@ -1,7 +1,7 @@
 <template>
     <section>
         <form  @submit.prevent="onSubmit">
-        <!-- <div class="columns" v-if="!success"> -->
+        <div class="columns" v-if="!success">
             <div class="column is-10 is-offset-1">
                 <div class="box">
                      <div class="columns is-multiline">
@@ -31,14 +31,14 @@
                             field="company"
                             :loading="isFetching"
                             @typing="getAsyncData1"
-                            @select="option => addRows.vendor_id = option.id">
+                            @select="option => addRows[0].vendor_id = option.id">
                             <template slot-scope="props">
                                 <div class="media">
                                     <div class="media-content">
                                         {{ props.option.company }}
                                         <br>
                                         <small>
-                                            Person {{ props.option.person }},
+                                            Person {{ props.option.person }},<br>
                                             Mobile <b>{{ props.option.mobile }}</b>
                                         </small>
                                     </div>
@@ -50,13 +50,13 @@
                 </div>
                     <div class="column is-3">
                          <b-field label="Reference No:">
-                            <b-input v-model="addRows.refno" name="refno" expanded></b-input>
+                            <b-input v-model="addRows[0].refno" name="refno" expanded></b-input>
                          </b-field>
                          <span class="help is-danger"> </span>
                     </div>
                     <div class="column is-4">
-                     <b-field label="Date:">
-                        <input class="input" v-model="addRows.podate" type="date" placeholder="Text input" expanded>
+                     <b-field label="Order Date:">
+                        <input class="input" v-model="addRows[0].podate" type="date" placeholder="Text input" expanded>
                          
                     </b-field>
                          <span class="help is-danger"> </span>
@@ -83,7 +83,7 @@
                 field="name"
                 :loading="isFetching2"
                 @typing="getAsyncData"
-                @select="option => addRows.product_id = option.id" expanded>
+                @select="option => addRow.product_id = option.id">
                 <template slot-scope="props">
                     <div class="media">
                         <div class="media-left">
@@ -136,11 +136,11 @@
         </div>
     </div>
 
-    <!-- <div class="notification is-success" v-if="success">
+    <div class="notification is-success" v-if="success">
         <h2 class="title is-2"> Record successfully Stored! </h2>
         <br>
-        <router-link class="button is-info is-pulled-right" :to="{ name: 'poELists' }"><i class="fa fa-user-plus m-r-10"></i>Click to Back Electronic</router-link>
-    </div> -->
+        <router-link class="button is-info is-pulled-right" :to="{ name: 'poELists' }"><i class="fa fa-user-plus m-r-10"></i>Click to Back POs</router-link>
+    </div>
 
 </form>
 </section>
@@ -242,22 +242,23 @@ export default {
          
             onSubmit: function(){
 
-                let data = new FormData();
-                data.append('vendor_id',this.addRows.vendor_id);
-                data.append('refno', this.addRows.refno);
-                data.append('podate', this.addRows.podate);
-                data.append('product_id', this.addRows.product_id);
-                data.append('qty', this.addRows.qty);
-                data.append('branch_id', this.addRows.branch_id);
-
-                axios.post('/purchases./electronic/StoreElecPO', data)
-                .then(response =>{
-                }).then(response => { this.success = true;
+                // let data = new FormData();
+                // data.append('vendor_id',this.addRows.vendor_id);
+                // data.append('refno', this.addRows.refno);
+                // data.append('podate', this.addRows.podate);
+                // data.append('product_id', this.addRows.product_id);
+                // data.append('qty', this.addRows.qty);
+                // data.append('branch_id', this.addRows.branch_id);
+                var addRows = _.map(this.addRows, function(num){ return _.pick(num, 'qty','branch_id','podate','product_id','refno','vendor_id')})
+                axios.post('/purchases./electronic/StoreElecPO', addRows)
+                //.then(response =>{ 
+                //})
+                .then(response => { this.success = true;
                       })
-                    .catch((error) => {
-                        this.allerros = error.response.data.errors;
-                        this.success = false;
-                   });
+                   //  .catch((error) => {
+                   //      this.allerros = error.response.data.errors;
+                   //      this.success = false;
+                   // });
                 },
               
             },

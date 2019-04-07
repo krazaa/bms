@@ -41,6 +41,7 @@ Vue.use(VeeValidate);
  */
 
 Vue.component('example', require('./components/ExampleComponent.vue').default);
+Vue.component('pocreate', require('./purchases/electronic/poCreate.vue').default);
  Vue.component('login', require('./components/login.vue').default);
  Vue.component('autocomplet', require('./components/autocomplet.vue').default);
 // Vue.component('dashboard', require('./components/dashboard.vue').default);
