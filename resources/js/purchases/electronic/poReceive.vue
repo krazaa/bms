@@ -59,25 +59,22 @@
         <thead>
             <tr>
                 <td><strong>Code</strong></td>
-                <td><strong>Name</strong></td>
-                <td><strong>category</strong></td>
                 <td><strong>Qty</strong></td>
                 <td><strong>Cost</strong></td>
                 <td><strong>Amount:</strong></td>
                 <td><strong>Cargo Cost</strong></td>
                 <td><strong>Cargo Per Unit</strong></td>
                 <td><strong>Cost Price:</strong></td>
+                <td><strong>Profit %:</strong></td>
                 <td><strong>Whole Sale:</strong></td>
+                <td><strong>Profit %:</strong></td>
                 <td><strong>Sale Price:</strong></td>
                 
             </tr>
         </thead>
         <tbody>
             <tr v-for="(dload, index)  in Dataload">
-                
-                <td>{{ dload.code }}</td>
-                <td>{{ dload.name }}</td>
-                <td>{{ dload.category }} {{ dload.subcat }}</td>
+                <td width="150px">{{ dload.code }}</td>
                 <td><input type="hidden" v-model.number="dload.qty">{{ dload.qty }}</td>
                 <td><input type="number" v-model.number="dload.cost" class="input"></td>
                 <td>{{ tcost = dload.qty * dload.cost | currency}}</td> 
@@ -85,42 +82,51 @@
                     <input type="hidden" v-model.number="ct" class="input">
                 </td>
                 <td>{{ cargocost = ct / dload.qty | currency }}</td>
-                <td><input type="text" v-model.number="dload.totalcost=dload.cost + cargocost | currency" class="input" readonly> </td>
-                <td>
-                    <b-input type="number" name="wsaleprice" v-model="dload.wsp= (wsprice / 100) * (dload.cost + cargocost) + dload.cost | currency" readonly></b-input></td>
-                <td>
-                    <b-input type="number" name="saleprice" v-model="dload.psprice= (sprice / 100) * (dload.cost + cargocost) + dload.cost | currency"></b-input>
-                </td>
+                    <td>
+                        <input type="text" v-model.number="dload.totalcost=dload.cost + cargocost | currency" class="input" readonly> 
+                    </td>
+                    <td>
+                        <b-input placeholder="%" type="number" v-model="dload.wsprice"> </b-input>
+                    </td>
+                    <td><input type="hidden" v-model="dload.wolSale=(dload.wsprice / 100) * (dload.cost + cargocost) + dload.cost">
+                        <b-input type="number" name="wsaleprice" v-model="dload.wsp= (dload.wsprice / 100) * (dload.cost + cargocost) + dload.cost | currency" readonly></b-input>
+                    </td>
+                    
+                    <td>
+                        <b-input placeholder="%" type="number" v-model="dload.sprice"> </b-input>
+                    </td>
+                    <td><input type="hidden" v-model="dload.salPrice= (dload.sprice / 100) * (dload.cost + cargocost) + dload.cost">
+                        <b-input type="number" name="saleprice" v-model="dload.psprice= (dload.sprice / 100) * (dload.cost + cargocost) + dload.cost | currency" readonly></b-input>
+                    </td>
                 
                 
             </tr>
         </tbody>
         <tfoot>
-            <tr>
-                <td colspan="5">Total</td>
-                <td><b>{{ total }}</b></td>
-                <td><b> </b></td>
-                <td><b></b></td>
-            </tr>
-            <tr>
-                <td colspan="9"></td>
-                <td><b>Sale Price Profit % </b></td>
-                <td><b-input placeholder="%" type="number" v-model="sprice"> </b-input></td>
-            </tr>
-            <tr><td colspan="9"></td>
-                <td><b>Whole Sale Profit % </b></td>
-                <td><b-input placeholder="%" type="number" v-model="wsprice"> </b-input></td>
-            </tr>
+            
              <tr>
-               <td colspan="9"></td>
-               <td><b>Income Tax %</b></td>
+               <td colspan="8"></td>
+               <td><b>Income Tax:</b></td>
+               <td><b>{{ incomtax }} Rs.</b></td>
                <td><input name="taxpage" type="number" class="input" v-model="taxpage"></td>
                <td><input name="itax" type="hidden" class="input" v-model="incomtax"></td>
             </tr>
             <tr>
                 <td colspan="9"></td>
                 <td ><b>Cargo Charges</b></td> 
-                <td><input name="cargo" type="number" class="input" v-model="cargo"></td>
+                <td><input name="cargo" type="number" class="input" v-model="cargoamount = cargo"></td>
+            </tr>
+            <tr>
+                <td colspan="9"></td>
+                <td width="190px"><b>Total without Cargo:</b></td> 
+                <td><b>{{ total }} Rs.</b></td>
+            </tr>
+            <tr>
+                <td colspan="9"></td>
+                <td><b>Total Payable</b></td> 
+                <td><b>{{ payable }} Rs.</b>
+                    <input name="payableamount" type="hidden" class="input" v-model="payable">
+                </td>
             </tr>
         </tfoot>
     </table>
@@ -159,16 +165,21 @@ export default {
                 Dataload: {
                     totalcost:'',
                     wsp:'',
-                    psprice:''
+                    psprice:'',
+                    wsprice:'',
+                    sprice:'',
+                    wolSale:'',
+                    salPrice:''
                 },
                 cargo:'0',
                 amount:'',
-                incomtax:'',
                 totalcost:'',
+                cargoamount:'',
                 itax:'',
                 taxpage:'%',
                 wsprice:'',
                 sprice:'',
+                payableamount:'',
                 success: false,
                 branches:[],
                 vendors:'',
@@ -191,11 +202,13 @@ export default {
            
 
             incomtax: function() {
-                if(this.total > 0){
             return ((this.taxpage / 100) * this.total).toFixed(0)
-                }else{
-                return ((this.total / 100) * this.incomtax1).toFixed(0)
-                }
+            },
+
+            payable: function() {
+            //return ((this.total + this.cargo));
+            return this.total = parseFloat(this.total) + parseFloat(this.cargo);
+            
             },
 
         },
