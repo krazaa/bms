@@ -62,7 +62,7 @@
                 <td><strong>Qty</strong></td>
                 <td><strong>Cost</strong></td>
                 <td><strong>Amount:</strong></td>
-                <td><strong>Cargo Cost</strong></td>
+                <td><strong>Cargo</strong></td>
                 <td><strong>Cargo Per Unit</strong></td>
                 <td><strong>Cost Price:</strong></td>
                 <td><strong>Profit %:</strong></td>
