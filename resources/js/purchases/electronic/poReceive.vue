@@ -75,7 +75,7 @@
         <tbody>
             <tr v-for="(dload, index)  in Dataload">
                 
-                <td><b-checkbox >{{ dload.code }}</b-checkbox> </td>
+                <td>{{ dload.code }}</td>
                 <td>{{ dload.name }}</td>
                 <td>{{ dload.category }} {{ dload.subcat }}</td>
                 <td><input type="hidden" v-model.number="dload.qty">{{ dload.qty }}</td>
