@@ -58,14 +58,15 @@
         <table class="table">
         <thead>
             <tr>
-                <td><strong>Product Code</strong></td>
-                <td><strong>Product Name</strong></td>
+                <td><strong>Code</strong></td>
+                <td><strong>Name</strong></td>
                 <td><strong>category</strong></td>
                 <td><strong>Qty</strong></td>
                 <td><strong>Cost</strong></td>
                 <td><strong>Amount:</strong></td>
-                <td><strong>Transportation Cost</strong></td>
-                <td><strong>Transportation/Per</strong></td>
+                <td><strong>Cargo Cost</strong></td>
+                <td><strong>Cargo Per Unit</strong></td>
+                <td><strong>Cost Price:</strong></td>
                 <td><strong>Whole Sale:</strong></td>
                 <td><strong>Sale Price:</strong></td>
                 
@@ -78,27 +79,44 @@
                 <td>{{ dload.category }} {{ dload.subcat }}</td>
                 <td><input type="hidden" v-model.number="dload.qty">{{ dload.qty }}</td>
                 <td><input type="number" v-model.number="dload.cost" class="input"></td>
-                <td>{{ tcost = dload.qty * dload.cost }}</td> 
-                <td>{{ ct = tcost / total * cargo }}
+                <td>{{ tcost = dload.qty * dload.cost | currency}}</td> 
+                <td>{{ ct = tcost / total * cargo | currency}} 
                     <input type="hidden" v-model.number="ct" class="input">
                 </td>
-                <td>{{ ct / dload.qty }}</td>
-                <td><b-input name="wsaleprice" v-model="dload.wsaleprice"></b-input></td>
-                <td><b-input name="saleprice" v-model="dload.saleprice"></b-input></td>
+                <td>{{ cargocost = ct / dload.qty | currency }}</td>
+                <td><input type="text" v-model.number="dload.totalcost=dload.cost + cargocost" class="input"> </td>
+                <td>
+                    <b-input type="number" name="wsaleprice" v-model="dload.wsp= (wsprice / 100) * (dload.cost + cargocost) + dload.cost" readonly></b-input></td>
+                <td>
+                    <b-input type="number" name="saleprice" v-model="dload.psprice= (sprice / 100) * (dload.cost + cargocost) + dload.cost"></b-input>
+                </td>
                 
                 
             </tr>
         </tbody>
         <tfoot>
             <tr>
-                <td colspan="7">Total</td>
+                <td colspan="5">Total</td>
                 <td><b>{{ total }}</b></td>
-                <td><b>{{ wtotal }}</b></td>
-                <td><b>{{ sptotal }}</b></td>
+                <td><b> </b></td>
+                <td><b></b></td>
+            </tr>
+            <tr>
+                <td colspan="10">Sale Price Profit %</td>
+                <td><b-input placeholder="%" type="number" v-model="sprice"> </b-input></td>
+            </tr>
+            <tr>
+                <td colspan="10">Whole Sale Profit % </td>
+                <td><b-input placeholder="%" type="number" v-model="wsprice"> </b-input></td>
             </tr>
              <tr>
-                <td colspan="6">Transportation</td> 
-               <td><input name="cargo" type="text" class="input" v-model="cargo"></td>
+               <td colspan="10">Income Tax %</td>
+               <td><input name="taxpage" type="number" class="input" v-model="taxpage"></td>
+               <td><input name="itax" type="hidden" class="input" v-model="incomtax"></td>
+            </tr>
+            <tr>
+                <td colspan="10">Cargo Charges</td> 
+               <td><input name="cargo" type="number" class="input" v-model="cargo"></td>
             </tr>
         </tfoot>
     </table>
@@ -123,6 +141,7 @@
 </section>
 </template>
 <script>
+
 import debounce from 'lodash/debounce'   
 import Datepicker from 'vue-bulma-datepicker'
 export default {
@@ -133,9 +152,19 @@ export default {
         data(){
             return { 
                 poe:[],
-                Dataload: [],
+                Dataload: {
+                    totalcost:'',
+                    wsp:'',
+                    psprice:''
+                },
                 cargo:'0',
                 amount:'',
+                incomtax:'',
+                totalcost:'',
+                itax:'',
+                taxpage:'%',
+                wsprice:'',
+                sprice:'',
                 success: false,
                 branches:[],
                 vendors:'',
@@ -153,17 +182,16 @@ export default {
             total() {
             return this.Dataload.reduce((total, dload) => {
             return total + dload.qty * dload.cost;
-          }, 0).toFixed(2);
+          }, 0).toFixed(0);
             },
-            wtotal() {
-            return this.Dataload.reduce((wtotal, dload) => {
-            return wtotal + dload.wsaleprice;
-          }, 0).toFixed(2);
-            },
-            sptotal() {
-            return this.Dataload.reduce((sptotal, dload) => {
-            return sptotal + dload.saleprice;
-          }, 0).toFixed(2);
+           
+
+            incomtax: function() {
+                if(this.total > 0){
+            return ((this.taxpage / 100) * this.total).toFixed(0)
+                }else{
+                return ((this.total / 100) * this.incomtax1).toFixed(0)
+                }
             },
 
         },
@@ -212,7 +240,11 @@ export default {
     filters: {
         Upper(value) {
             return value.toUpperCase();
-        }
+        },
+        currency(amount) {
+      const amt = Number(amount)
+      return amt && amt.toLocaleString(undefined, {minimumIntegerDigits:2}) || '0'
+    }
     }
 
     }

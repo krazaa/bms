@@ -1,31 +1,13 @@
-
-/**
- * First we will load all of this project's JavaScript dependencies which
- * includes Vue and other libraries. It is a great starting point when
- * building robust, powerful web applications using Vue and Laravel.
- */
-
 require('./bootstrap');
-
 window.Vue = require('vue');
 
 import Buefy from 'buefy';
 import 'buefy/dist/buefy.css';
 import Datepicker from 'buefy/dist/components/datepicker';
 import moment from 'moment';
-
 import VueRouter from 'vue-router'
 import ourRoutes from './routes.js'
 import VeeValidate from 'vee-validate';
-
-Vue.filter('formatDate', function(value) {
-
-  if (value) {
-    return moment(String(value)).format('MM/DD/YYYY')
-  }
-
-});
-
 
 Vue.use(VueRouter)
 Vue.use(Buefy);
@@ -33,12 +15,6 @@ Vue.use(Datepicker);
 Vue.use(VeeValidate);
 
 
-//
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
 
 Vue.component('example', require('./components/ExampleComponent.vue').default);
 Vue.component('pocreate', require('./purchases/electronic/poCreate.vue').default);
@@ -62,10 +38,15 @@ Vue.component('pocreate', require('./purchases/electronic/poCreate.vue').default
 // Vue.component('editbranch', require('./manage/branches/EditBranch.vue').default);
 Vue.component('pagination', require('laravel-vue-bulma-paginator'));
 
-// import Autocomplete from './components/autocomplet'
-//Vue.component('showelectronic', require('./products/ElectronicShow.vue').default);
 
-Vue.use(VueRouter);
+// date Formate
+Vue.filter('formatDate', function(value) {
+
+  if (value) {
+    return moment(String(value)).format('MM/DD/YYYY')
+  }
+
+});
 
 // const router = new VueRouter({
 //   routes: ourRoutes,
