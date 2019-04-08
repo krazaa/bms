@@ -25,7 +25,7 @@
             <div class="columns">
                 <div class="column is-4">
                     <b-field label="Vendor">
-                        <b-autocomplete v-model="vendors"
+                        <b-autocomplete v-model="vendors" required
                             :data="data"
                             placeholder="Type Vendor name"
                             field="company"
@@ -50,13 +50,13 @@
                 </div>
                     <div class="column is-3">
                          <b-field label="Reference No:">
-                            <b-input v-model="addRows[0].refno" name="refno" expanded></b-input>
+                            <b-input v-model="addRows[0].refno" name="refno" expanded required></b-input>
                          </b-field>
                          <span class="help is-danger"> </span>
                     </div>
                     <div class="column is-4">
                      <b-field label="Order Date:">
-                        <input class="input" v-model="addRows[0].podate" type="date" placeholder="Text input" expanded>
+                        <input class="input" v-model="addRows[0].podate" type="date" placeholder="Text input" expanded required>
                          
                     </b-field>
                          <span class="help is-danger"> </span>
@@ -77,7 +77,7 @@
             <tr v-for="(addRow, index) in addRows">
                 <td>
             <b-field>
-            <b-autocomplete v-model="addRow.items"
+            <b-autocomplete v-model="addRow.items" required
                 :data="products"
                 placeholder="Type Product name"
                 field="name"
@@ -105,13 +105,13 @@
                 </td>
                 <td>
                      <b-field>
-                            <b-input v-model="addRow.qty" expanded name="qty[]" type="number"></b-input>
+                            <b-input v-model="addRow.qty" expanded name="qty[]" type="number" required></b-input>
                          </b-field>
                          <span class="help is-danger"> </span>
                 </td>
                 <td>
                     <b-field>
-                            <b-select  name="branch_id[]" v-model="addRow.branch_id" expanded>
+                            <b-select  name="branch_id[]" v-model="addRow.branch_id" expanded required>
                                 <option v-for="br in branches" :value="br.id">{{ br.name }}</option>
                             </b-select>
                         </b-field>
@@ -124,6 +124,8 @@
                 </td>
             </tr>
         </tbody>
+        <button class="button is-info" @click.prevent="addRow">+ Add row</button>
+            
     </table>
             </div>
                 </div>
@@ -131,7 +133,7 @@
              <div class="control is-flex is-pulled-right">
                     <button  class="button is-primary">Add Product</button>
             </div>
-            <a class="button is-info" @click="addRow">+ Add row</a>
+            
             </div>
         </div>
     </div>
