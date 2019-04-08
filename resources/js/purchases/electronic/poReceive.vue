@@ -74,7 +74,8 @@
         </thead>
         <tbody>
             <tr v-for="(dload, index)  in Dataload">
-                <td>{{ dload.code }}</td>
+                
+                <td><b-checkbox >{{ dload.code }}</b-checkbox> </td>
                 <td>{{ dload.name }}</td>
                 <td>{{ dload.category }} {{ dload.subcat }}</td>
                 <td><input type="hidden" v-model.number="dload.qty">{{ dload.qty }}</td>
@@ -84,11 +85,11 @@
                     <input type="hidden" v-model.number="ct" class="input">
                 </td>
                 <td>{{ cargocost = ct / dload.qty | currency }}</td>
-                <td><input type="text" v-model.number="dload.totalcost=dload.cost + cargocost" class="input"> </td>
+                <td><input type="text" v-model.number="dload.totalcost=dload.cost + cargocost | currency" class="input" readonly> </td>
                 <td>
-                    <b-input type="number" name="wsaleprice" v-model="dload.wsp= (wsprice / 100) * (dload.cost + cargocost) + dload.cost" readonly></b-input></td>
+                    <b-input type="number" name="wsaleprice" v-model="dload.wsp= (wsprice / 100) * (dload.cost + cargocost) + dload.cost | currency" readonly></b-input></td>
                 <td>
-                    <b-input type="number" name="saleprice" v-model="dload.psprice= (sprice / 100) * (dload.cost + cargocost) + dload.cost"></b-input>
+                    <b-input type="number" name="saleprice" v-model="dload.psprice= (sprice / 100) * (dload.cost + cargocost) + dload.cost | currency"></b-input>
                 </td>
                 
                 
@@ -102,21 +103,24 @@
                 <td><b></b></td>
             </tr>
             <tr>
-                <td colspan="10">Sale Price Profit %</td>
+                <td colspan="9"></td>
+                <td><b>Sale Price Profit % </b></td>
                 <td><b-input placeholder="%" type="number" v-model="sprice"> </b-input></td>
             </tr>
-            <tr>
-                <td colspan="10">Whole Sale Profit % </td>
+            <tr><td colspan="9"></td>
+                <td><b>Whole Sale Profit % </b></td>
                 <td><b-input placeholder="%" type="number" v-model="wsprice"> </b-input></td>
             </tr>
              <tr>
-               <td colspan="10">Income Tax %</td>
+               <td colspan="9"></td>
+               <td><b>Income Tax %</b></td>
                <td><input name="taxpage" type="number" class="input" v-model="taxpage"></td>
                <td><input name="itax" type="hidden" class="input" v-model="incomtax"></td>
             </tr>
             <tr>
-                <td colspan="10">Cargo Charges</td> 
-               <td><input name="cargo" type="number" class="input" v-model="cargo"></td>
+                <td colspan="9"></td>
+                <td ><b>Cargo Charges</b></td> 
+                <td><input name="cargo" type="number" class="input" v-model="cargo"></td>
             </tr>
         </tfoot>
     </table>
@@ -124,7 +128,7 @@
                 </div>
             
              <div class="control is-flex is-pulled-right">
-                    <button  class="button is-primary">Add Product</button>
+                    <button  class="button is-primary" disabled="">Reveive Product</button>
             </div>
             
             </div>
