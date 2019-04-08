@@ -76,7 +76,7 @@
             <tr v-for="(dload, index)  in Dataload">
                 <td width="150px">{{ dload.code }}</td>
                 <td><input type="hidden" v-model.number="dload.qty">{{ dload.qty }}</td>
-                <td><input type="number" v-model.number="dload.cost" class="input"></td>
+                <td width="120px"><input type="number" v-model.number="dload.cost" class="input"></td>
                 <td>{{ tcost = dload.qty * dload.cost | currency}}</td> 
                 <td>{{ ct = tcost / total * cargo | currency}} 
                     <input type="hidden" v-model.number="ct" class="input">
