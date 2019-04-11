@@ -230,7 +230,7 @@ export default {
 
             incomtax: function() {
             let total = 0;    
-                return  total += ((this.taxpage / 100) * this.total).toFixed(0)
+                return  total = ((this.taxpage / 100) * this.total).toFixed(0)
             },
 
             payable: function() {
