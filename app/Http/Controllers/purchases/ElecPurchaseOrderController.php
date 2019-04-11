@@ -133,7 +133,7 @@ class ElecPurchaseOrderController extends Controller
     $Payable->po_id = $request[0]['poid'];
     $Payable->vendor_id = $request[0]['vendor_id'];
     $Payable->product_id = $request[0]['product_id'];
-    $Payable->cr = $request[0]['tpayable'];
+    $Payable->cr = $request[0]['tpayable'] + $request[0]['tax'];;
     $Payable->date_at = Carbon::now();
     $Payable->save();
 
