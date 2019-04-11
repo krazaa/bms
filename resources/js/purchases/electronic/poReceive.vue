@@ -23,31 +23,37 @@
                     </div>
  
             <div class="columns">
-                <div class="column is-3">
-                    <b-field label="Delivery No:">
-                        <b-input name="dno" ></b-input>
+                <div class="column is-2">
+                    <b-field label="Purchase Order Number:">
+                        <b-input name="poid" v-model="Dataload[0].poid" readonly></b-input>
                     </b-field>
                     <span class="help is-danger"> </span>
                 </div>
-                    <div class="column is-3">
+                    <div class="column is-2">
+                        <b-field label="Delivery No:">
+                        <b-input name="dno" v-model="Dataload[0].dno"></b-input>
+                    </b-field>
+                         
+                    </div>
+                    <div class="column is-2">
                         <b-field label="Sales Tax Invoice No:">
-                        <b-input name="dno" ></b-input>
+                        <b-input name="stinv" v-model="Dataload[0].stinv"></b-input>
                     </b-field>
                          
                     </div>
                     <div class="column is-2">
                      <b-field label="Dispatch Date:">
-                       <b-input name="dno" type="date"></b-input>
+                       <b-input name="ddate" type="date" v-model="Dataload[0].ddate"></b-input>
                     </b-field>
                 </div>
                 <div class="column is-2">
                      <b-field label="Receiving Date:">
-                       <b-input name="dno" type="date"></b-input>
+                       <b-input name="rdate" type="date" v-model="Dataload[0].rdate"></b-input>
                     </b-field>
                 </div>
                 <div class="column is-2">
                      <b-field label="Due Date:">
-                       <b-input name="dno" type="date"></b-input>
+                       <b-input name="duedate" type="date" v-model="Dataload[0].duedate"></b-input>
                     </b-field>
                 </div>
 
@@ -65,9 +71,9 @@
                 <td><strong>Cargo</strong></td>
                 <td><strong>Cargo Per Unit</strong></td>
                 <td><strong>Cost Price:</strong></td>
-                <td><strong>Profit %:</strong></td>
+                <td><strong>Profit:</strong></td>
                 <td><strong>Whole Sale:</strong></td>
-                <td><strong>Profit %:</strong></td>
+                <td><strong>Profit:</strong></td>
                 <td><strong>Sale Price:</strong></td>
                 
             </tr>
@@ -78,25 +84,34 @@
                 <td><input type="hidden" v-model.number="dload.qty">{{ dload.qty }}</td>
                 <td width="120px"><input type="number" v-model.number="dload.cost" class="input"></td>
                 <td>{{ tcost = dload.qty * dload.cost | currency}}</td> 
-                <td>{{ ct = tcost / total * cargo | currency}} 
-                    <input type="hidden" v-model.number="ct" class="input">
+                <td>{{ totalcargo = tcost / total * cargo | currency}} 
+                    <input type="hidden" v-model.number="totalcargo" class="input">
                 </td>
-                <td>{{ cargocost = ct / dload.qty | currency }}</td>
+                <td>{{ cargocost = totalcargo / dload.qty | currency }}</td>
                     <td>
-                        <input type="text" v-model.number="dload.totalcost=dload.cost + cargocost | currency" class="input" readonly> 
+                        <input type="text" v-model.number="totalcost=dload.cost + cargocost " class="input" readonly> 
                     </td>
                     <td>
-                        <b-input placeholder="%" type="number" v-model="dload.wsprice"> </b-input>
+                        <b-input type="number" v-model="hsp = dload.wsprice"> </b-input>
                     </td>
-                    <td><input type="hidden" v-model="dload.wolSale=(dload.wsprice / 100) * (dload.cost + cargocost) + dload.cost">
-                        <b-input type="number" name="wsaleprice" v-model="dload.wsp= (dload.wsprice / 100) * (dload.cost + cargocost) + dload.cost | currency" readonly></b-input>
+                    <td>
+                        <input type="hidden" v-model="dload.wolSale = totalWholeSale">
+                        <b-input type="number" name="wsaleprice" v-model="totalWholeSale" readonly></b-input>
                     </td>
                     
                     <td>
-                        <b-input placeholder="%" type="number" v-model="dload.sprice"> </b-input>
-                    </td>
-                    <td><input type="hidden" v-model="dload.salPrice= (dload.sprice / 100) * (dload.cost + cargocost) + dload.cost">
-                        <b-input type="number" name="saleprice" v-model="dload.psprice= (dload.sprice / 100) * (dload.cost + cargocost) + dload.cost | currency" readonly></b-input>
+                        <b-input type="number" v-model="wspp = dload.sprice"> </b-input>
+                    </td> 
+                    <td>
+                        <input type="hidden" v-model="dload.salPrice = totalSalePrice">
+                        <b-input type="number" name="saleprice" v-model="totalSalePrice" readonly></b-input>
+
+                        <input name="CostAmount" type="hidden" class="input" v-model="dload.CostAmount = totalcost">
+                        <input name="itax" type="hidden" class="input" v-model="dload.tax = incomtax">
+                        <input name="payable" type="hidden" class="input" v-model="dload.totalPayable = payable">
+                        <input name="cargo" type="hidden" class="input" v-model="dload.cargoamount = cargo">
+                        <input name="cargo" type="hidden" class="input" v-model="dload.branch_id">
+                        <input name="payableamount" type="hidden" class="input" v-model="dload.tpayable =payable">
                     </td>
                 
                 
@@ -109,7 +124,7 @@
                <td><b>Income Tax:</b></td>
                <td><b>{{ incomtax }} Rs.</b></td>
                <td><input name="taxpage" type="number" class="input" v-model="taxpage"></td>
-               <td><input name="itax" type="hidden" class="input" v-model="incomtax"></td>
+               <td></td>
             </tr>
             <tr>
                 <td colspan="9"></td>
@@ -125,7 +140,7 @@
                 <td colspan="9"></td>
                 <td><b>Total Payable</b></td> 
                 <td><b>{{ payable }} Rs.</b>
-                    <input name="payableamount" type="hidden" class="input" v-model="payable">
+                    
                 </td>
             </tr>
         </tfoot>
@@ -134,7 +149,7 @@
                 </div>
             
              <div class="control is-flex is-pulled-right">
-                    <button  class="button is-primary" disabled="">Reveive Product</button>
+                    <button  class="button is-primary" >Reveive Product</button>
             </div>
             
             </div>
@@ -163,13 +178,23 @@ export default {
             return { 
                 poe:[],
                 Dataload: {
-                    totalcost:'',
+                    dno:'',
+                    branch_id:'',
+                    stinv:'',
+                    ddate:'',
+                    rdate:'',
+                    duedate:'',
                     wsp:'',
                     psprice:'',
                     wsprice:'',
-                    sprice:'',
+                    tax:'',
                     wolSale:'',
-                    salPrice:''
+                    salPrice:'',
+                    cargoamount:'',
+                    CostAmount:'',
+                    totalPayable:'',
+                    tpayable:''
+                    
                 },
                 cargo:'0',
                 amount:'',
@@ -183,6 +208,8 @@ export default {
                 success: false,
                 branches:[],
                 vendors:'',
+                wspricetotal:'0',
+                
             
                 allerros:[],
                 products:[],
@@ -196,49 +223,66 @@ export default {
         computed: {
             total() {
             return this.Dataload.reduce((total, dload) => {
-            return total + dload.qty * dload.cost;
+            return total + parseInt(dload.qty) * parseInt(dload.cost);
           }, 0).toFixed(0);
             },
-           
+            
 
             incomtax: function() {
-            return ((this.taxpage / 100) * this.total).toFixed(0)
+            let total = 0;    
+                return  total += ((this.taxpage / 100) * this.total).toFixed(0)
             },
 
             payable: function() {
-            //return ((this.total + this.cargo));
-            return this.total = parseFloat(this.total) + parseFloat(this.cargo);
-            
+                let total = 0;    
+                return  total +=  parseFloat(this.total) + parseFloat(this.cargo);            
             },
+            // totalSalePrice: function() {
+                
+            //     return parseFloat(this.wspp) + parseFloat(this.totalcost);            
+            // },
+        
+             totalWholeSale() {
+                let total = 0;    
+                return  total +=  parseInt(this.hsp) + parseInt(this.totalcost);
+              },
+
+      
+            totalSalePrice: function() {
+             let total = 0;    
+             return  total += parseInt(this.wspp) + parseInt(this.totalcost);
+             },
+
 
         },
+
          methods: {
             //vendors Search
-            getAsyncData1: debounce(function (name) {
-                if (!name.length) {
-                    this.data = []
-                    return
-                }
-                this.isFetching = true
-                 axios.get(`/vendors./VendorSearch?search=${this.vendors}`)
-                    .then(({ data }) => {
-                        this.data = []
-                        data.data.forEach((item) => this.data.push(item))
-                    })
-                    .catch((error) => {
-                        this.data = []
-                        throw error
-                    })
-                    .finally(() => {
-                        this.isFetching = false
-                    })
-            }, 500),
+            // getAsyncData1: debounce(function (name) {
+            //     if (!name.length) {
+            //         this.data = []
+            //         return
+            //     }
+            //     this.isFetching = true
+            //      axios.get(`/vendors./VendorSearch?search=${this.vendors}`)
+            //         .then(({ data }) => {
+            //             this.data = []
+            //             data.data.forEach((item) => this.data.push(item))
+            //         })
+            //         .catch((error) => {
+            //             this.data = []
+            //             throw error
+            //         })
+            //         .finally(() => {
+            //             this.isFetching = false
+            //         })
+            // }, 500),
             //products Search
 
          
             onSubmit: function(){                
                 var addRows = _.map(this.addRows, function(num){ return _.pick(num, 'qty','branch_id','podate','product_id','refno','vendor_id')})
-                axios.post('/purchases./electronic/StoreElecPO', addRows)
+                axios.post('/purchases./electronic/ReceivePOStore', this.Dataload, this.totalcost)
                 
                 .then(response => { this.success = true;
                       })
@@ -247,13 +291,23 @@ export default {
                         this.success = false;
                    });
                 },
-              
+                
+                GetPOShow: function(){
+                //var showpo = this
+                 axios.get("/purchases./electronic/GetPOshow/" + this.id)
+                 .then(response => this.Dataload = response.data);
+                 //.then(({data}) => (this.Dataload = data))
+               //   .then(function(response) {
+               //      Vue.set(showpo.$data, 'Dataload', response.data)
+                    
+               // })
+             }
+                              
             },
             mounted(){
-            axios.get("/purchases./electronic/GetPOshow/" + this.id).then(({data}) => (this.Dataload = data))
-            
-    
-    },
+                this.GetPOShow();
+        
+            },
     filters: {
         Upper(value) {
             return value.toUpperCase();

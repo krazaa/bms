@@ -37,7 +37,8 @@
                     <span style="color: Mediumslateblue;">
                         <i class="mdi mdi-card-bulleted mdi-48px"></i>
                     </span>
-                    <div class="ribbon is-medium is-light">Reports</div>
+                    <div class="ribbon is-medium is-light"><router-link class="button is-primary is-pulled-right" :to="{ name: 'abr' }"><i class="fa fa-user-plus m-r-10"></i>Account Balance Report</router-link></div>
+                    
                 </div>
             </a>
         </div>

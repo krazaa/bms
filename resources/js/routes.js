@@ -13,6 +13,9 @@ import poECreate from './purchases/electronic/poCreate.vue';
 import poEShow from './purchases/electronic/Show.vue';  
 import poEReceive from './purchases/electronic/poReceive.vue';  
 
+//reports
+import abr from './reports/abr.vue';  
+
 //Stocks Electronic
 import StockElec from './stocks/electronic/ElectronicStocks.vue';  
 
@@ -166,7 +169,8 @@ export default [
   { path: '/purchases/electronic/poEShow/:id', component: poEShow, name: 'poEShow', props: true},
   { path: '/purchases/electronic/poEReceive/:id', component: poEReceive, name: 'poEReceive', props: true},
 
-
+  //Reports
+  { path: '/reports/abr', component: abr, name: 'abr'},
 
 // category
   { path: '/category/manage', component: category, name: 'manage'},

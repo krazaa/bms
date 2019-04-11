@@ -7,15 +7,16 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\modules\Purchaseorder;
 use App\modules\Electronicproduct;
+use App\modules\ElecStock;
 use App\Branch;
+use App\Payment;
+use App\Purchase;
 use Auth;
 use DB;
 use PDF;
-
+use Carbon\Carbon;
 class ElecPurchaseOrderController extends Controller
 {
-
-   
 
 	public function GetElecProducts(Request $request)
 	{
@@ -42,9 +43,10 @@ class ElecPurchaseOrderController extends Controller
         ->leftjoin('vendors','vendors.id','=','purchaseorders.vendor_id')
         ->leftjoin('branches','branches.id','=','purchaseorders.branch_id')
     	->select('vendors.company','purchaseorders.id','purchaseorders.poid','purchaseorders.isActive','purchaseorders.refno','purchaseorders.podate','purchaseorders.statusPaid','purchaseorders.poid','branches.name as branch')
+        ->where('purchaseorders.stockReceive',true)
         ->orderBy('purchaseorders.poid','desc')
         ->groupby('purchaseorders.poid')
-    	->paginate(15);
+        ->paginate(15);
 
     	return $data->toArray();	
     }
@@ -57,12 +59,13 @@ class ElecPurchaseOrderController extends Controller
         ->leftjoin('electronicproducts','electronicproducts.id','=','purchaseorders.product_id')
         ->leftjoin('categories','categories.id', '=', 'electronicproducts.category_id')
         ->leftjoin('categories as sub','categories.id', '=', 'electronicproducts.subcategory_id')
-        ->select('vendors.company','vendors.address','vendors.contact','vendors.mobile','purchaseorders.id','purchaseorders.isActive','purchaseorders.refno','purchaseorders.qty','purchaseorders.podate','purchaseorders.statusPaid','purchaseorders.poid','branches.name as branch','electronicproducts.code','electronicproducts.name','categories.category','sub.category as subcat','electronicproducts.cost','electronicproducts.wsaleprice','electronicproducts.saleprice')
+        ->select('vendors.company','vendors.address','vendors.contact','vendors.mobile','purchaseorders.id','purchaseorders.isActive','purchaseorders.refno','purchaseorders.qty','purchaseorders.podate','purchaseorders.product_id','purchaseorders.branch_id','purchaseorders.vendor_id','purchaseorders.poid','branches.name as branch','electronicproducts.code','electronicproducts.name','categories.category','sub.category as subcat','electronicproducts.cost','electronicproducts.wsaleprice','electronicproducts.saleprice')
         ->where('purchaseorders.poid','=',$id)
+        ->where('purchaseorders.stockReceive',true)
         ->orderBy('purchaseorders.poid','desc')
         ->get();
 
-        return $data->toArray();    
+        return $data;    
     }
 
     public function GetPOshowPDF($id)
@@ -73,14 +76,127 @@ class ElecPurchaseOrderController extends Controller
         ->leftjoin('electronicproducts','electronicproducts.id','=','purchaseorders.product_id')
         ->leftjoin('categories','categories.id', '=', 'electronicproducts.category_id')
         ->leftjoin('categories as sub','categories.id', '=', 'electronicproducts.subcategory_id')
-        ->select('vendors.company','vendors.address','vendors.contact','vendors.mobile','purchaseorders.id','purchaseorders.isActive','purchaseorders.refno','purchaseorders.qty','purchaseorders.podate','purchaseorders.statusPaid','purchaseorders.poid','branches.name as branch','electronicproducts.code','electronicproducts.name','categories.category','sub.category as subcat')
+        ->select('vendors.company','vendors.address','vendors.contact','vendors.mobile','purchaseorders.id','purchaseorders.isActive','purchaseorders.refno','purchaseorders.qty','purchaseorders.podate','purchaseorders.product_id','purchaseorders.poid','branches.name as branch','electronicproducts.code','electronicproducts.name','categories.category','sub.category as subcat')
         ->where('purchaseorders.poid','=',$id)
+        ->where('purchaseorders.stockReceive',true)
         ->orderBy('purchaseorders.poid','desc')
+        
         ->get();
         $pdf = PDF::loadView('pdfs.poshow', compact('data'));
         return $pdf->stream('po.pdf');
         
     }
+
+        public function ReceivePOStore(Request $request)
+        {
+            
+
+        $data = $request->all();
+             $finalArray = array();
+
+         foreach($data as $key=>$value){
+
+            array_push($finalArray, 
+            array(
+                'vendor_id'=>$request[0]['vendor_id'],
+                'poid'=>$request[0]['poid'],
+                'cargoamount'=>$request[0]['cargoamount'],
+                'dno'=>$request[0]['dno'],
+                'stinv'=>$request[0]['stinv'],
+                'ddate'=>$request[0]['ddate'],
+                'rdate'=>$request[0]['rdate'],
+                'duedate'=>$request[0]['duedate'],
+                'tax'=>$request[0]['tax'],
+                'branch_id'=>$request[0]['branch_id'],
+                'product_id'=>$value['product_id'],
+                'qty'=>$value['qty'],
+                'CostAmount'=>$value['CostAmount'],
+                'wolSale'=>$value['wolSale'],
+                'salPrice'=> $value['salPrice'] )
+                );
+        }
+    ElecStock::insert($finalArray);
+
+    DB::table('purchaseorders')->where('poid', $request[0]['poid'])->update(['stockReceive' => 0]);
+
+    $tax = new Purchase();
+    $tax->account_id = 56;
+    $tax->po_id = $request[0]['poid'];
+    $tax->vendor_id = $request[0]['vendor_id'];
+    $tax->product_id = $request[0]['product_id'];
+    $tax->dr = $request[0]['tax'];
+    $tax->date_at = Carbon::now();
+    $tax->save();
+
+    $Payable = new Purchase();
+    $Payable->account_id = 60;
+    $Payable->po_id = $request[0]['poid'];
+    $Payable->vendor_id = $request[0]['vendor_id'];
+    $Payable->product_id = $request[0]['product_id'];
+    $Payable->cr = $request[0]['tpayable'];
+    $Payable->date_at = Carbon::now();
+    $Payable->save();
+
+    $INVENTORY = new Purchase();
+    $INVENTORY->account_id = 5;
+    $INVENTORY->po_id = $request[0]['poid'];
+    $INVENTORY->vendor_id = $request[0]['vendor_id'];
+    $INVENTORY->product_id = $request[0]['product_id'];
+    $INVENTORY->dr = $request[0]['tpayable'];
+    $INVENTORY->date_at = Carbon::now();
+    $INVENTORY->save();
+
+    
+
+    // $Purchase = new Purchase();
+    // $Purchase->product_id =$request[0]['product_id'];
+    // $Purchase->vendor_id =$request[0]['vendor_id'];
+    // $Purchase->rate =$request[0]['rate'];
+    // $Purchase->qty =$request[0]['qty'];
+    // $Purchase->tax =$request[0]['tax'];
+    // $Purchase->date_at = Carbon::now();
+
+    // $Purchase = $request->all();
+    //          $PurchasefinalArray = array();
+
+    //      foreach($Purchase as $key=>$value){
+
+    //         array_push($PurchasefinalArray, 
+    //         array(
+    //             'vendor_id'=>$request[0]['vendor_id'],
+    //             'tax'=>$request[0]['tax'],
+    //             'date_at'=>Carbon::now(),
+    //             'qty'=>$value['qty'],
+    //             'product_id'=>$value['product_id'],
+    //             'rate'=>$value['CostAmount'])
+                
+    //             );
+    //     }
+    // Purchase::insert($PurchasefinalArray);
+
+
+        //     for($i=0;$i<count($request[0]['id']);$i++){
+
+        //     $Data = new ElecStock();
+        //     $Data->vendor_id = $request[0]['vendor_id'];
+        //     $Data->poid = $request[0]['id'];
+        //     $Data->cargoamount = $request[0]['cargoamount'];
+        //     $Data->dno = $request[0]['dno'];
+        //     $Data->stinv = $request[0]['stinv'];
+        //     $Data->ddate = $request[0]['ddate'];
+        //     $Data->rdate = $request[0]['rdate'];
+        //     $Data->duedate = $request[0]['duedate'];
+        //     $Data->tax = $request[0]['tax'];
+        //     $Data->branch_id = $request[0]['branch_id'];
+        //     $Data->product_id = $request[0]['product_id'];
+        //     $Data->qty = $request[0]['qty'][$i];
+        //     $Data->CostAmount = $request[0]['CostAmount'][$i];
+        //     $Data->wolSale = $request[0]['wolSale'][$i];
+        //     $Data->salPrice = $request[0]['salPrice'][$i];
+        // }
+            
+        //     $Data->save();
+        }
 
         public function StatusChange($id)
     {
@@ -108,26 +224,6 @@ class ElecPurchaseOrderController extends Controller
                  $ponum =  sprintf('%08d', intval($number) + 1);
 
                 
-                // $data1 = $request->all();
-                // // Purchaseorder::insert($data);
-
-                // foreach ($data1 as $key =>$v)
-                // {
-                    
-
-                // $data=array(
-                //             $v,
-
-                //           'poid'=>$ponum
-                        
-                //     );
-                // //dd($data);
-                //  Purchaseorder::insert($data);
-
-                // }
-                
-                
-                // }
 /////////////////////////////////////////
 
  $data = $request->all();
@@ -169,32 +265,6 @@ class ElecPurchaseOrderController extends Controller
 
 
     			
-       //      $pon = Purchaseorder::orderBy('id', 'desc')->first();
-    			// if ( ! $pon )
-       //  		      $number = 0;
-    		 //      else 
-       //  	$number = substr($pon->poid, 6);
-       //  	$ponum =  sprintf('%08d', intval($number) + 1);
-
-            // $vendor = json_decode($request[0]['vendor_id']);
-            // $podate = json_decode($request[0]['podate']);
-            // $refno = json_decode($request[0]['refno']);
-
-            // $Data = new Purchaseorder();            
-            // $Data->user_id = Auth::user()->id;
-            // $Data->type = 2;
-            // $Data->poid = $ponum;
-            // $Data->vendor_id = $vendor;
-            // $Data->podate = $podate;
-            // $Data->refno = $refno;
-
-            // $Data->qty = $request->qty;
-            // $Data->branch_id = $request->branch_id;
-            // $Data->product_id = $request->product_id;
-            // $Data->save();
-         
-                //return $request->all();
-     //}
 
 
     public function RecordDelete($id)

@@ -32,8 +32,11 @@ class CogController extends Controller
         ->leftJoin('cogas as subcogas', 'subcogas.id', '=', 'cogas.subtype')
         ->leftJoin('cogas as sub2cogas', 'sub2cogas.id', '=', 'cogas.subtype2')
         ->leftjoin('cogacctypes','cogacctypes.id','=' ,'cogas.actype_id')
+        ->leftjoin('purchases','purchases.account_id','=' ,'cogas.id')
         ->leftjoin('cogcategories','cogcategories.id','=' ,'cogas.acat_id')
-       ->select('cogas.id','cogas.acode','cogas.aname','subcogas.aname as subname','cogacctypes.name as tname','cogacctypes.name as cname','cogas.isActive','sub2cogas.aname as sub2name',
+       ->select('cogas.id','cogas.acode','cogas.aname','subcogas.aname as subname','cogacctypes.name as tname','cogacctypes.name as cname','cogas.isActive','sub2cogas.aname as sub2name','purchases.cr',
+        DB::raw('SUM(purchases.cr) as bal'),
+        DB::raw('SUM(purchases.dr) as debit'),
         DB::raw('(CASE 
                         WHEN cogas.class = "1" THEN "Variable" 
                         WHEN cogas.class = "2" THEN "Fixed" 
@@ -51,12 +54,14 @@ class CogController extends Controller
                          WHEN cogas.incom_balance_id = "2" THEN " Balance Sheet " 
                          ELSE "" 
                          END) AS inbal'))
-       
+    //  ->where('purchases.type', '=', 3)
+    ->groupby('cogas.typeid')
+    ->groupby('cogas.acode')
     ->paginate(20); 
     return response()->json($cats);
+}
 
-
-
+     
 
     	// $cogs = Cogas::leftjoin('cogacctypes','cogacctypes.id','=' ,'cogas.actype_id')
     	// ->leftjoin('cogcategories','cogcategories.id','=' ,'cogas.acat_id')
@@ -80,7 +85,7 @@ class CogController extends Controller
      //                    END) AS debitcredit'))
     	// ->with('subheads')->paginate(20); 
     	// return response()->json($cogs);
-    }
+    
 
     public function AcEdit($id)
     {

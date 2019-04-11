@@ -93,10 +93,16 @@ Route::prefix('categories.')->group(function () {
 });
 //End CategoriesController
 
+// reports
+Route::prefix('reports.')->group(function () {
+Route::get('/CogABR', 'reports\ReportsController@CogABR')->name('reports.CogABR');
+
+});
 //Start cogs
 Route::prefix('cogs.')->group(function () {
     
     Route::get('/AcCheck', 'cogs\CogController@AcCheck')->name('cogs.AcCheck');
+    Route::get('/CogsList', 'cogs\CogController@CogsList')->name('cogs.CogsList');
     Route::get('/CogsList', 'cogs\CogController@CogsList')->name('cogs.CogsList');
     Route::get('/AcEdit/{id}', 'cogs\CogController@AcEdit')->name('cogs.AcEdit');
     Route::get('/AcCat', 'cogs\CogController@AcCat')->name('cogs.AcCat');
@@ -164,6 +170,7 @@ Route::prefix('purchases.')->group(function () {
     Route::post('electronic/StoreElecPO', 'purchases\ElecPurchaseOrderController@StoreElecPO')->name('purchases.electronic.StoreElecPO');
     Route::get('electronic/GetElecProducts', 'purchases\ElecPurchaseOrderController@GetElecProducts')->name('purchases.electronic.GetElecProducts');
     Route::get('electronic/GetBranches', 'purchases\ElecPurchaseOrderController@GetBranches')->name('purchases.electronic.GetBranches');
+    Route::post('electronic/ReceivePOStore', 'purchases\ElecPurchaseOrderController@ReceivePOStore')->name('purchases.electronic.ReceivePOStore');
     
 });
 //End Purchase Orders routes

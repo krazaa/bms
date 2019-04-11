@@ -21,4 +21,8 @@ class Cogas extends Model
     	return $this->hasMany(CoaSubHead::class, 'coga_id');
     }
 
+
+   
+    
+
 }

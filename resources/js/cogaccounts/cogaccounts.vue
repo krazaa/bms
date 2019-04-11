@@ -74,6 +74,9 @@
         <b-table-column field="actype_id" label="Type" sortable>
         {{ props.row.tname}}
         </b-table-column>
+        <b-table-column field="bal" label="Balance" sortable>
+        {{ props.row.bal + props.row.debit}} 
+        </b-table-column>
         <b-table-column field="isActive" label="Status" sortable centered>
             <b-switch v-model="props.row.isActive"
             :true-value="1" 

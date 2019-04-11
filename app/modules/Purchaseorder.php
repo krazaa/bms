@@ -18,4 +18,9 @@ class Purchaseorder extends Model
 	{
     $this->attributes['podate'] = date("Y-m-d H:i:s");
 	}
+
+  public function scopeSR($query)
+    {
+        return $query->where('stockReceive', false);
+    }
 }
