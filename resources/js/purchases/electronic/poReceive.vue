@@ -84,11 +84,11 @@
                 <td><input type="hidden" v-model.number="dload.qty">{{ dload.qty }}</td>
                 <td width="120px"><input type="number" v-model.number="dload.cost" class="input"></td>
                 <td>{{ stockg = dload.qty * dload.cost | currency }}</td> 
-                <td>{{ totalcargo = (dload.qty * dload.cost / totalSumm) * cargopo | currency }} 
+                <td>{{ totalcargo = (dload.qty * dload.cost) / (totalSumm) * cargopo | currency }} 
                     <input type="hidden" v-model.number="dload.cargoStore = totalcargo" class="input">
                 </td>
-                <td width="120px">{{ cpu= (cargopo / dload.qty) | currency }}</td>
-                <td>{{ costprice = (cpu + dload.cost) | currency }}</td>
+                <td width="120px">{{ cpu= (totalcargo / dload.qty) | currency }}</td>
+                <td> {{ costprice = (cpu + dload.cost) | currency }}</td>
                 <td><input name="profit1" type="number" class="input" v-model.number="dload.profit" required></td>
                 <td width="120px"><input type="hidden" v-model.number="dload.salPrice = costprice + dload.profit" class="input">
                 {{ costprice + dload.profit | currency }} </td> 
@@ -104,16 +104,20 @@
         <tfoot>
             
              <tr>
-               <td colspan="8"></td>
+               <td></td>
+               <td><b>{{ qtytotal }}</b></td>
+               <td><b></b></td>
+               <td><b>{{ Amounttotal }}</b></td>
+               <td><b>{{ Cargotot }}</b></td>
+               <td colspan="2"></td>
                <td><b>Income Tax:</b></td>
                <td><b>{{ paytax = (taxpay / 100) * totalSumm }} Rs.  </b></td>
                <td><input name="taxpage" type="text" class="input" v-model.number="taxpay" required>
-                
                </td>
                <td></td>
             </tr>
             <tr>
-                <td colspan="9"></td>
+                <td colspan="2"></td>
                 <td ><b>Cargo Charges</b></td> 
                 <td>
                 <input name="cargo" type="number" class="input" v-model.number="cargopo" required>
@@ -236,6 +240,26 @@ export default {
             },
  
         computed: {
+
+            qtytotal: function(){
+            return this.Dataload.reduce(function(total, dload){
+            return total + dload.qty; 
+            },0);
+            },
+
+             Cargotot: function(){
+            return this.Dataload.reduce(function(total, dload){
+            return total + dload.cargoStore; 
+            },0);
+            },
+
+            Amounttotal: function(){
+            return this.Dataload.reduce(function(total, dload){
+            return total + dload.qty * dload.cost; 
+            },0);
+            },
+            
+
             CargoAll: function() {
             return this.Dataload.reduce(function(total, dload) {
             return total = parseInt(dload.qty) * parseInt(dload.cost);

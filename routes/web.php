@@ -100,6 +100,7 @@ Route::get('/ivs', 'reports\ReportsController@IVS')->name('reports.IVS');
 Route::get('/itaxledger', 'reports\ReportsController@itaxledger')->name('reports.itaxledger');
 Route::get('/inventAccledger', 'reports\ReportsController@inventAccledger')->name('reports.inventAccledger');
 
+
 });
 //Start cogs
 Route::prefix('cogs.')->group(function () {
@@ -154,6 +155,8 @@ Route::prefix('products.')->group(function () {
     Route::get('/electronic/SearchElec', 'products\ElectronicProductController@SearchElec')->name('products.electronic.SearchElec');
     Route::get('/electronic/ShowSingle/{id}', 'products\ElectronicProductController@ShowSingle')->name('products.electronic.ShowSingle');
     Route::get('/electronic/SearchCode/', 'products\ElectronicProductController@SearchCode')->name('products.electronic.SearchCode');
+
+    Route::get('/electronic/GetPOGrn/{id}', 'purchases\ElecPurchaseOrderController@GetPOGrn')->name('electronic.GetPOGrn');
 
     
     }); 

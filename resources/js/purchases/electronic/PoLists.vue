@@ -6,6 +6,7 @@
     </div>
     <div v-if="!isLoading">
     <template>
+
     <section v-if="getDataload.data.length > 0">
         <div class="columns is-multiline">
             <div class="column is-3"><h3 class="title is-4">Manage Purchase Order</h3></div>
@@ -38,7 +39,7 @@
             :loading="isLoading"
             :narrowed="isNarrowed"
             :default-sort-direction="defaultSortDirection"
-             default-sort="getDataload.data.name">
+             default-sort="getDataload.name">
         <template slot-scope="props">
         <b-table-column field="poid" label="PO ID" width="80" sortable>
         EPO-{{ props.row.poid }}
@@ -74,10 +75,10 @@
      <div class="control has-text-centered" v-show="!getDataload.data.length">
         <h1 class="title is-2 is-warning">Record not found</h1>
         <hr>
-        <router-link class="button is-primary " :to="{ name: 'poECreate' }"><i class="fa fa-user-plus m-r-10"></i> Add your first PO click here</router-link>
+        <router-link class="button is-primary " :to="{ name: 'poECreate' }"> Add your first PO click here</router-link>
     </div>
     </template>
-<hr>
+  <hr>
         <pagination :limit="5" :show-disabled=false :data="getDataload"  @pagination-change-page="getResults"></pagination>
 </div>
 <!-- </div> -->

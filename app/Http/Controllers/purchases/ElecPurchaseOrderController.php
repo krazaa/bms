@@ -26,7 +26,7 @@ class ElecPurchaseOrderController extends Controller
         ->orwhere('code','LIKE', "%$search%")
         ->orderBy('id','desc')
         //->get();
-        ->paginate(5);
+        ->paginate(15);
         return $data->toArray(); 
 	}
 
@@ -62,6 +62,24 @@ class ElecPurchaseOrderController extends Controller
         ->select('vendors.company','vendors.address','vendors.contact','vendors.mobile','purchaseorders.id','purchaseorders.isActive','purchaseorders.refno','purchaseorders.qty','purchaseorders.podate','purchaseorders.product_id','purchaseorders.branch_id','purchaseorders.vendor_id','purchaseorders.poid','branches.name as branch','electronicproducts.code','electronicproducts.name','categories.category','sub.category as subcat','electronicproducts.cost','electronicproducts.wsaleprice','electronicproducts.saleprice')
         ->where('purchaseorders.poid','=',$id)
         ->where('purchaseorders.stockReceive',true)
+        ->orderBy('purchaseorders.poid','desc')
+        ->get();
+
+        return $data;    
+    }
+
+      public function GetPOGrn($id)
+    {
+        $data = DB::table('purchaseorders')
+        ->leftjoin('vendors','vendors.id','=','purchaseorders.vendor_id')
+        ->leftjoin('branches','branches.id','=','purchaseorders.branch_id')
+        ->leftjoin('electronicproducts','electronicproducts.id','=','purchaseorders.product_id')
+        ->leftjoin('categories','categories.id', '=', 'electronicproducts.category_id')
+        ->leftjoin('categories as sub','categories.id', '=', 'electronicproducts.subcategory_id')
+        ->leftjoin('elecstocks','elecstocks.poid', '=', 'purchaseorders.id')
+        ->select('vendors.company','vendors.address','vendors.contact','vendors.mobile','purchaseorders.id','purchaseorders.isActive','purchaseorders.refno','purchaseorders.podate','purchaseorders.product_id','purchaseorders.branch_id','purchaseorders.vendor_id','purchaseorders.poid','branches.name as branch','electronicproducts.code','electronicproducts.name','categories.category','sub.category as subcat','electronicproducts.cost','electronicproducts.wsaleprice','electronicproducts.saleprice','elecstocks.cargoamount','elecstocks.qty','elecstocks.CostAmount')
+        ->where('purchaseorders.poid','=',$id)
+        ->where('purchaseorders.stockReceive',false)
         ->orderBy('purchaseorders.poid','desc')
         ->get();
 

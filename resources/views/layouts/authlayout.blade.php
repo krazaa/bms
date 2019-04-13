@@ -57,6 +57,7 @@
                 <router-link class="navbar-item" :to="{ name: 'ivs'}">ivs</router-link>
                 <router-link class="navbar-item" :to="{ name: 'incometaxledger'}">Income Tax Ledger</router-link>
                 <router-link class="navbar-item" :to="{ name: 'iventAccledger'}">Inventory Account Ledger</router-link>
+                <router-link class="navbar-item" :to="{ name: 'grn'}">Goods Received Note.</router-link>
               </div>
             </div>
             <div class="navbar-item has-dropdown is-hoverable">
