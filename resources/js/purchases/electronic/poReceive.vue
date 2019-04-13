@@ -108,20 +108,19 @@
                <td><b>{{ qtytotal }}</b></td>
                <td><b></b></td>
                <td><b>{{ Amounttotal }}</b></td>
-               <td><b>{{ Cargotot }}</b></td>
-               <td colspan="2"></td>
-               <td><b>Income Tax:</b></td>
-               <td><b>{{ paytax = (taxpay / 100) * totalSumm }} Rs.  </b></td>
-               <td><input name="taxpage" type="text" class="input" v-model.number="taxpay" required>
+               <td><b>{{ cargopo }}</b></td>
+               <td colspan="4"></td>
+               <td><b>Cargo Charges</b></td> 
+                <td><input name="cargo" type="number" class="input" v-model.number="cargopo" required>
+            
                </td>
                <td></td>
             </tr>
             <tr>
-                <td colspan="2"></td>
-                <td ><b>Cargo Charges</b></td> 
-                <td>
-                <input name="cargo" type="number" class="input" v-model.number="cargopo" required>
-            </td>
+                <td colspan="8"></td>
+                <td><b>Income Tax:</b></td>
+               <td><b>{{ paytax = (taxpay / 100) * totalSumm }} Rs.  </b></td>
+               <td><input name="taxpage" type="text" class="input" v-model.number="taxpay" required></td>
             </tr>
             <tr>
                 <td colspan="9"></td>
@@ -247,11 +246,7 @@ export default {
             },0);
             },
 
-             Cargotot: function(){
-            return this.Dataload.reduce(function(total, dload){
-            return total + dload.cargoStore; 
-            },0);
-            },
+     
 
             Amounttotal: function(){
             return this.Dataload.reduce(function(total, dload){
