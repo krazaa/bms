@@ -46,8 +46,6 @@
                 <router-link class="navbar-item" :to="{ name: 'agents'}">Agents</router-link>
                 <router-link class="navbar-item" :to="{ name: 'employees'}">Employees</router-link>
                 <router-link class="navbar-item" :to="{ name: 'users'}">Manage Users</router-link>
-               
-                
               </div>
             </div>
             <div class="navbar-item has-dropdown is-hoverable">
@@ -56,6 +54,9 @@
                 {{-- <router-link class="navbar-item" :to="{ name: 'poELists'}">Vehicles PO & CN</router-link> --}}
                 <router-link class="navbar-item" :to="{ name: 'poELists'}">Electronic PO & CN</router-link>
                 <router-link class="navbar-item" :to="{ name: 'StockElec'}">Electronic Stocks</router-link>
+                <router-link class="navbar-item" :to="{ name: 'ivs'}">ivs</router-link>
+                <router-link class="navbar-item" :to="{ name: 'incometaxledger'}">Income Tax Ledger</router-link>
+                <router-link class="navbar-item" :to="{ name: 'iventAccledger'}">Inventory Account Ledger</router-link>
               </div>
             </div>
             <div class="navbar-item has-dropdown is-hoverable">

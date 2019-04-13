@@ -96,6 +96,9 @@ Route::prefix('categories.')->group(function () {
 // reports
 Route::prefix('reports.')->group(function () {
 Route::get('/CogABR', 'reports\ReportsController@CogABR')->name('reports.CogABR');
+Route::get('/ivs', 'reports\ReportsController@IVS')->name('reports.IVS');
+Route::get('/itaxledger', 'reports\ReportsController@itaxledger')->name('reports.itaxledger');
+Route::get('/inventAccledger', 'reports\ReportsController@inventAccledger')->name('reports.inventAccledger');
 
 });
 //Start cogs

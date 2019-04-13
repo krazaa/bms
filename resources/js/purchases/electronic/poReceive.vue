@@ -22,9 +22,9 @@
                             </div>
                     </div>
  
-            <div class="columns">
+                <div class="columns">
                 <div class="column is-2">
-                    <b-field label="Purchase Order Number:">
+                    <b-field label="PO Number:">
                         <b-input name="poid" v-model="Dataload[0].poid" readonly></b-input>
                     </b-field>
                     <span class="help is-danger"> </span>
@@ -69,8 +69,8 @@
                 <td><strong>Cost</strong></td>
                 <td><strong>Amount:</strong></td>
                 <td><strong>Cargo</strong></td>
-                <td><strong>Cargo Per Unit</strong></td>
-                <td><strong>Cost Price:</strong></td>
+                <td><strong>Cargo P/U</strong></td>
+                <td><strong>Cost:</strong></td>
                 <td><strong>Profit:</strong></td>
                 <td><strong>Whole Sale:</strong></td>
                 <td><strong>Profit:</strong></td>
@@ -83,37 +83,21 @@
                 <td width="150px">{{ dload.code }}</td>
                 <td><input type="hidden" v-model.number="dload.qty">{{ dload.qty }}</td>
                 <td width="120px"><input type="number" v-model.number="dload.cost" class="input"></td>
-                <td>{{ tcost = dload.qty * dload.cost | currency}}</td> 
-                <td>{{ totalcargo = tcost / total * cargo | currency}} 
-                    <input type="hidden" v-model.number="totalcargo" class="input">
+                <td>{{ stockg = dload.qty * dload.cost | currency }}</td> 
+                <td>{{ totalcargo = (dload.qty * dload.cost / totalSumm) * cargopo | currency }} 
+                    <input type="hidden" v-model.number="dload.cargoStore = totalcargo" class="input">
                 </td>
-                <td>{{ cargocost = totalcargo / dload.qty | currency }}</td>
-                    <td>
-                        <input type="text" v-model.number="totalcost=dload.cost + cargocost " class="input" readonly> 
-                    </td>
-                    <td>
-                        <b-input type="number" v-model="hsp = dload.wsprice"> </b-input>
-                    </td>
-                    <td>
-                        <input type="hidden" v-model="dload.wolSale = totalWholeSale">
-                        <b-input type="number" name="wsaleprice" v-model="totalWholeSale" readonly></b-input>
-                    </td>
-                    
-                    <td>
-                        <b-input type="number" v-model="wspp = dload.sprice"> </b-input>
-                    </td> 
-                    <td>
-                        <input type="hidden" v-model="dload.salPrice = totalSalePrice">
-                        <b-input type="number" name="saleprice" v-model="totalSalePrice" readonly></b-input>
-
-                        <input name="CostAmount" type="hidden" class="input" v-model="dload.CostAmount = totalcost">
-                        <input name="itax" type="hidden" class="input" v-model="dload.tax = incomtax">
-                        <input name="payable" type="hidden" class="input" v-model="dload.totalPayable = payable">
-                        <input name="cargo" type="hidden" class="input" v-model="dload.cargoamount = cargo">
-                        <input name="cargo" type="hidden" class="input" v-model="dload.branch_id">
-                        <input name="payableamount" type="hidden" class="input" v-model="dload.tpayable =payable">
-                    </td>
-                
+                <td width="120px">{{ cpu= (cargopo / dload.qty) | currency }}</td>
+                <td>{{ costprice = (cpu + dload.cost) | currency }}</td>
+                <td><input name="profit1" type="number" class="input" v-model.number="dload.profit"></td>
+                <td width="120px"><input type="hidden" v-model.number="dload.salPrice = costprice + dload.profit" class="input">
+                {{ costprice + dload.profit | currency }} </td> 
+                <td><input type="hidden" v-model.number="dload.wolSale = costprice + dload.profit2" class="input">
+                    <input name="profit12" type="number" class="input" v-model.number="dload.profit2"></td>
+                <td>{{ costprice + dload.profit2 | currency }}</td>
+                <input name="taxpage" type="hidden" class="input" v-model.number="dload.tax = paytax">
+                <input name="taxpage" type="hidden" class="input" v-model.number="dload.cargopo = cargopo">
+                <input name="taxpage" type="hidden" class="input" v-model.number="dload.cgt = Gtotal">
                 
             </tr>
         </tbody>
@@ -122,24 +106,28 @@
              <tr>
                <td colspan="8"></td>
                <td><b>Income Tax:</b></td>
-               <td><b>{{ incomtax }} Rs.</b></td>
-               <td><input name="taxpage" type="number" class="input" v-model="taxpage"></td>
+               <td><b>{{ paytax = (taxpay / 100) * totalSumm }} Rs.  </b></td>
+               <td><input name="taxpage" type="text" class="input" v-model.number="taxpay">
+                
+               </td>
                <td></td>
             </tr>
             <tr>
                 <td colspan="9"></td>
                 <td ><b>Cargo Charges</b></td> 
-                <td><input name="cargo" type="number" class="input" v-model="cargoamount = cargo"></td>
+                <td>
+                <input name="cargo" type="number" class="input" v-model.number="cargopo">
+            </td>
             </tr>
             <tr>
                 <td colspan="9"></td>
                 <td width="190px"><b>Total without Cargo:</b></td> 
-                <td><b>{{ total }} Rs.</b></td>
+                <td><b>{{ totalSumm }} Rs.</b></td>
             </tr>
             <tr>
                 <td colspan="9"></td>
                 <td><b>Total Payable</b></td> 
-                <td><b>{{ payable }} Rs.</b>
+                <td><b>{{ Gtotal }} Rs.</b>
                     
                 </td>
             </tr>
@@ -177,6 +165,21 @@ export default {
         data(){
             return { 
                 poe:[],
+
+        //PO final seting
+            pocost:'',
+            cargopo:'',
+            wholesalepo:'',
+            profit:'',
+            profit2:'',
+            cargoStore:'',
+            salPrice:'',
+            wolSale:'',
+            tax:'',
+            paytax:'',
+
+
+
                 Dataload: {
                     dno:'',
                     branch_id:'',
@@ -184,32 +187,28 @@ export default {
                     ddate:'',
                     rdate:'',
                     duedate:'',
-                    wsp:'',
-                    psprice:'',
-                    wsprice:'',
-                    tax:'',
-                    wolSale:'',
-                    salPrice:'',
-                    cargoamount:'',
-                    CostAmount:'',
-                    totalPayable:'',
-                    tpayable:''
+                    qty:'',
+                    cost:'',
+                    paycargo:'',
+                    cargopo:'',
+                    cgt:'',
+
+                   postwsp:'',
+                   stockg:'',
+                   totalcost:'',
+
+                   
+
                     
                 },
-                cargo:'0',
-                amount:'',
-                totalcost:'',
-                cargoamount:'',
-                itax:'',
-                taxpage:'%',
-                wsprice:'',
-                sprice:'',
-                payableamount:'',
+                profit:'',
+                taxpay:'',
+                
                 success: false,
                 branches:[],
                 vendors:'',
-                wspricetotal:'0',
-                
+               
+               
             
                 allerros:[],
                 products:[],
@@ -220,66 +219,8 @@ export default {
  
             }
         },
-        computed: {
-            total() {
-            return this.Dataload.reduce((total, dload) => {
-            return total + parseInt(dload.qty) * parseInt(dload.cost);
-          }, 0).toFixed(0);
-            },
-            
-
-            incomtax: function() {
-            let total = 0;    
-                return  total = ((this.taxpage / 100) * this.total).toFixed(0)
-            },
-
-            payable: function() {
-                let total = 0;    
-                return  total +=  parseFloat(this.total) + parseFloat(this.cargo);            
-            },
-            // totalSalePrice: function() {
-                
-            //     return parseFloat(this.wspp) + parseFloat(this.totalcost);            
-            // },
-        
-             totalWholeSale() {
-                let total = 0;    
-                return  total +=  parseInt(this.hsp) + parseInt(this.totalcost);
-              },
-
-      
-            totalSalePrice: function() {
-             let total = 0;    
-             return  total += parseInt(this.wspp) + parseInt(this.totalcost);
-             },
-
-
-        },
-
          methods: {
-            //vendors Search
-            // getAsyncData1: debounce(function (name) {
-            //     if (!name.length) {
-            //         this.data = []
-            //         return
-            //     }
-            //     this.isFetching = true
-            //      axios.get(`/vendors./VendorSearch?search=${this.vendors}`)
-            //         .then(({ data }) => {
-            //             this.data = []
-            //             data.data.forEach((item) => this.data.push(item))
-            //         })
-            //         .catch((error) => {
-            //             this.data = []
-            //             throw error
-            //         })
-            //         .finally(() => {
-            //             this.isFetching = false
-            //         })
-            // }, 500),
-            //products Search
-
-         
+            
             onSubmit: function(){                
                 var addRows = _.map(this.addRows, function(num){ return _.pick(num, 'qty','branch_id','podate','product_id','refno','vendor_id')})
                 axios.post('/purchases./electronic/ReceivePOStore', this.Dataload, this.totalcost)
@@ -290,32 +231,43 @@ export default {
                         this.allerros = error.response.data.errors;
                         this.success = false;
                    });
-                },
-                
-                GetPOShow: function(){
-                //var showpo = this
-                 axios.get("/purchases./electronic/GetPOshow/" + this.id)
-                 .then(response => this.Dataload = response.data);
-                 //.then(({data}) => (this.Dataload = data))
-               //   .then(function(response) {
-               //      Vue.set(showpo.$data, 'Dataload', response.data)
-                    
-               // })
-             }
-                              
+                }
+
+            },
+ 
+        computed: {
+            CargoAll: function() {
+            return this.Dataload.reduce(function(total, dload) {
+            return total = parseInt(dload.qty) * parseInt(dload.cost);
+          },0);
+            },
+           totalSumm: function(){
+              return this.Dataload.reduce(function(total, dload){
+                return total + (dload.qty * dload.cost); 
+              },0);
+            },
+
+            Gtotal: function(){
+                let total = 0;
+                return total + (this.totalSumm) + (this.cargopo)
+              },            
+          
+/////////////////////////////////////
+                     
             },
             mounted(){
-                this.GetPOShow();
+                //this.GetPOShow();
+
+                axios.get("/purchases./electronic/GetPOshow/" + this.id)
+                 .then(response => this.Dataload = response.data);
         
             },
     filters: {
-        Upper(value) {
-            return value.toUpperCase();
-        },
-        currency(amount) {
+      
+    currency(amount) {
       const amt = Number(amount)
       return amt && amt.toLocaleString(undefined, {minimumIntegerDigits:2}) || '0'
-    }
+        }
     }
 
     }

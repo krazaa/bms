@@ -100,7 +100,7 @@ class ElecPurchaseOrderController extends Controller
             array(
                 'vendor_id'=>$request[0]['vendor_id'],
                 'poid'=>$request[0]['poid'],
-                'cargoamount'=>$request[0]['cargoamount'],
+                'cargoamount'=>$request[0]['cargoStore'],
                 'dno'=>$request[0]['dno'],
                 'stinv'=>$request[0]['stinv'],
                 'ddate'=>$request[0]['ddate'],
@@ -110,7 +110,7 @@ class ElecPurchaseOrderController extends Controller
                 'branch_id'=>$request[0]['branch_id'],
                 'product_id'=>$value['product_id'],
                 'qty'=>$value['qty'],
-                'CostAmount'=>$value['CostAmount'],
+                'CostAmount'=>$value['cgt'],
                 'wolSale'=>$value['wolSale'],
                 'salPrice'=> $value['salPrice'] )
                 );
@@ -133,7 +133,7 @@ class ElecPurchaseOrderController extends Controller
     $Payable->po_id = $request[0]['poid'];
     $Payable->vendor_id = $request[0]['vendor_id'];
     $Payable->product_id = $request[0]['product_id'];
-    $Payable->cr = $request[0]['tpayable'] + $request[0]['tax'];;
+    $Payable->cr = $request[0]['cgt'] + $request[0]['tax'];;
     $Payable->date_at = Carbon::now();
     $Payable->save();
 
@@ -142,7 +142,7 @@ class ElecPurchaseOrderController extends Controller
     $INVENTORY->po_id = $request[0]['poid'];
     $INVENTORY->vendor_id = $request[0]['vendor_id'];
     $INVENTORY->product_id = $request[0]['product_id'];
-    $INVENTORY->dr = $request[0]['tpayable'];
+    $INVENTORY->dr = $request[0]['cgt'];
     $INVENTORY->date_at = Carbon::now();
     $INVENTORY->save();
 

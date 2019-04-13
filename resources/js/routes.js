@@ -15,6 +15,9 @@ import poEReceive from './purchases/electronic/poReceive.vue';
 
 //reports
 import abr from './reports/abr.vue';  
+import ivs from './reports/ivs.vue';  
+import incometaxledger from './reports/incometaxledger.vue';  
+import iventAccledger from './reports/inventoryaccledger.vue';  
 
 //Stocks Electronic
 import StockElec from './stocks/electronic/ElectronicStocks.vue';  
@@ -171,6 +174,9 @@ export default [
 
   //Reports
   { path: '/reports/abr', component: abr, name: 'abr'},
+  { path: '/reports/ivs', component: ivs, name: 'ivs'},
+  { path: '/reports/incometaxledger', component: incometaxledger, name: 'incometaxledger'},
+  { path: '/reports/iventAccledger', component: iventAccledger, name: 'iventAccledger'},
 
 // category
   { path: '/category/manage', component: category, name: 'manage'},
