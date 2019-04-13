@@ -31,29 +31,29 @@
                 </div>
                     <div class="column is-2">
                         <b-field label="Delivery No:">
-                        <b-input name="dno" v-model="Dataload[0].dno"></b-input>
+                        <b-input name="dno" v-model="Dataload[0].dno" required></b-input>
                     </b-field>
                          
                     </div>
                     <div class="column is-2">
                         <b-field label="Sales Tax Invoice No:">
-                        <b-input name="stinv" v-model="Dataload[0].stinv"></b-input>
+                        <b-input name="stinv" v-model="Dataload[0].stinv" required></b-input>
                     </b-field>
                          
                     </div>
                     <div class="column is-2">
                      <b-field label="Dispatch Date:">
-                       <b-input name="ddate" type="date" v-model="Dataload[0].ddate"></b-input>
+                       <b-input name="ddate" type="date" v-model="Dataload[0].ddate" required></b-input>
                     </b-field>
                 </div>
                 <div class="column is-2">
                      <b-field label="Receiving Date:">
-                       <b-input name="rdate" type="date" v-model="Dataload[0].rdate"></b-input>
+                       <b-input name="rdate" type="date" v-model="Dataload[0].rdate" required></b-input>
                     </b-field>
                 </div>
                 <div class="column is-2">
                      <b-field label="Due Date:">
-                       <b-input name="duedate" type="date" v-model="Dataload[0].duedate"></b-input>
+                       <b-input name="duedate" type="date" v-model="Dataload[0].duedate" required></b-input>
                     </b-field>
                 </div>
 
@@ -89,11 +89,11 @@
                 </td>
                 <td width="120px">{{ cpu= (cargopo / dload.qty) | currency }}</td>
                 <td>{{ costprice = (cpu + dload.cost) | currency }}</td>
-                <td><input name="profit1" type="number" class="input" v-model.number="dload.profit"></td>
+                <td><input name="profit1" type="number" class="input" v-model.number="dload.profit" required></td>
                 <td width="120px"><input type="hidden" v-model.number="dload.salPrice = costprice + dload.profit" class="input">
                 {{ costprice + dload.profit | currency }} </td> 
                 <td><input type="hidden" v-model.number="dload.wolSale = costprice + dload.profit2" class="input">
-                    <input name="profit12" type="number" class="input" v-model.number="dload.profit2"></td>
+                    <input name="profit12" type="number" class="input" v-model.number="dload.profit2" required></td>
                 <td>{{ costprice + dload.profit2 | currency }}</td>
                 <input name="taxpage" type="hidden" class="input" v-model.number="dload.tax = paytax">
                 <input name="taxpage" type="hidden" class="input" v-model.number="dload.cargopo = cargopo">
@@ -107,7 +107,7 @@
                <td colspan="8"></td>
                <td><b>Income Tax:</b></td>
                <td><b>{{ paytax = (taxpay / 100) * totalSumm }} Rs.  </b></td>
-               <td><input name="taxpage" type="text" class="input" v-model.number="taxpay">
+               <td><input name="taxpage" type="text" class="input" v-model.number="taxpay" required>
                 
                </td>
                <td></td>
@@ -116,7 +116,7 @@
                 <td colspan="9"></td>
                 <td ><b>Cargo Charges</b></td> 
                 <td>
-                <input name="cargo" type="number" class="input" v-model.number="cargopo">
+                <input name="cargo" type="number" class="input" v-model.number="cargopo" required>
             </td>
             </tr>
             <tr>
