@@ -55,7 +55,7 @@
         <router-link :to="{ name: 'grne', params: {id: props.row.poid }}">{{ props.row.podate | formatDate}}</router-link>
         </b-table-column>
          <b-table-column label="Action">
-          <router-link class="button is-dark is-small" :to="{ name: 'poEReceive', params: {id: props.row.poid}}"><span class="mdi mdi-printer"></span></router-link>
+          <a :href="`/grns./GetGrnpdf/` + props.row.poid" class="button is-dark is-small"><span class="mdi mdi-printer"></span></a>
              <router-link class="button is-success is-small" :to="{ name: 'poEShow', params: {id: props.row.poid}}"><span class="mdi mdi-eye-circle-outline"></span></router-link>
              <router-link class="button is-info is-small" :to="{ name: 'editproduct', params: {id: props.row.id}}"><span class="mdi mdi-pencil-box-outline"></span></router-link>
         
