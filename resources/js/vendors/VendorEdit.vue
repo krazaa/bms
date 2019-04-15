@@ -27,7 +27,6 @@
             <div class="columns is-multiline">
                 <div class="column is-3">
                     <label class="label">Type:</label>
-                    
                         <div class="block">
                             <b-radio v-model="vendors.type" native-value="1">
                             Vehicle
@@ -35,8 +34,10 @@
                             <b-radio v-model="vendors.type" native-value="2">
                             Electronic
                             </b-radio>
-                    
-                    </div>
+                            <b-radio v-model="vendors.type" native-value="3">
+                            Services
+                            </b-radio>
+                        </div>
                 </div>
                 <div class="column is-3">
                     <b-field label="Brand">

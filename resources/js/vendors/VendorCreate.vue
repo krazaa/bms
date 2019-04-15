@@ -35,8 +35,10 @@
                             <b-radio v-model="FromData.type" native-value="2">
                             Electronic
                             </b-radio>
-                    
-                    </div>
+                            <b-radio v-model="FromData.type" native-value="3">
+                            Services
+                            </b-radio>
+                        </div>
                 </div>
                 <div class="column is-3">
                     <b-field label="Brand">

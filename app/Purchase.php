@@ -20,15 +20,17 @@ class Purchase extends Model
         
     }
 
-     public function products()
-    {
-        return $this->belongsTo('App\modules\Electronicproduct', 'product_id');
-        
-    }
+   
 
      public function ponumbers()
     {
         return $this->belongsTo('App\modules\Purchaseorder', 'po_id');
+        
+    }
+
+    public function elecstocks()
+    {
+        return $this->belongsTo('App\modules\ElecStock', 'po_id');
         
     }
      

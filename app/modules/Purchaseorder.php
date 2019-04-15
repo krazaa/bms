@@ -23,4 +23,16 @@ class Purchaseorder extends Model
     {
         return $query->where('stockReceive', false);
     }
+
+     public function products()
+    {
+        return $this->belongsTo('App\modules\Electronicproduct', 'product_id');
+        
+    }
+
+      public function vendors()
+    {
+        return $this->belongsTo('App\modules\Vendor', 'vendor_id');
+        
+    }
 }

@@ -68,23 +68,7 @@ class ElecPurchaseOrderController extends Controller
         return $data;    
     }
 
-      public function GetPOGrn($id)
-    {
-        $data = DB::table('purchaseorders')
-        ->leftjoin('vendors','vendors.id','=','purchaseorders.vendor_id')
-        ->leftjoin('branches','branches.id','=','purchaseorders.branch_id')
-        ->leftjoin('electronicproducts','electronicproducts.id','=','purchaseorders.product_id')
-        ->leftjoin('categories','categories.id', '=', 'electronicproducts.category_id')
-        ->leftjoin('categories as sub','categories.id', '=', 'electronicproducts.subcategory_id')
-        ->leftjoin('elecstocks','elecstocks.poid', '=', 'purchaseorders.id')
-        ->select('vendors.company','vendors.address','vendors.contact','vendors.mobile','purchaseorders.id','purchaseorders.isActive','purchaseorders.refno','purchaseorders.podate','purchaseorders.product_id','purchaseorders.branch_id','purchaseorders.vendor_id','purchaseorders.poid','branches.name as branch','electronicproducts.code','electronicproducts.name','categories.category','sub.category as subcat','electronicproducts.cost','electronicproducts.wsaleprice','electronicproducts.saleprice','elecstocks.cargoamount','elecstocks.qty','elecstocks.CostAmount')
-        ->where('purchaseorders.poid','=',$id)
-        ->where('purchaseorders.stockReceive',false)
-        ->orderBy('purchaseorders.poid','desc')
-        ->get();
 
-        return $data;    
-    }
 
     public function GetPOshowPDF($id)
     {
@@ -117,7 +101,7 @@ class ElecPurchaseOrderController extends Controller
             array_push($finalArray, 
             array(
                 'vendor_id'=>$request[0]['vendor_id'],
-                'poid'=>$request[0]['poid'],
+                'po_id'=>$request[0]['poid'],
                 'cargoamount'=>$request[0]['cargoStore'],
                 'dno'=>$request[0]['dno'],
                 'stinv'=>$request[0]['stinv'],
@@ -126,8 +110,12 @@ class ElecPurchaseOrderController extends Controller
                 'duedate'=>$request[0]['duedate'],
                 'tax'=>$request[0]['tax'],
                 'branch_id'=>$request[0]['branch_id'],
+                'cargo_id'=>$request[0]['trans_id'],
                 'product_id'=>$value['product_id'],
+                'cargo_id'=>$value['trans_id'],
                 'qty'=>$value['qty'],
+                'cost'=>$value['cost'],
+                'cargopu'=>$value['cargopu'],
                 'CostAmount'=>$value['cgt'],
                 'wolSale'=>$value['wolSale'],
                 'salPrice'=> $value['salPrice'] )
@@ -163,6 +151,15 @@ class ElecPurchaseOrderController extends Controller
     $INVENTORY->dr = $request[0]['cgt'];
     $INVENTORY->date_at = Carbon::now();
     $INVENTORY->save();
+
+    $cargo = new Purchase();
+    $cargo->account_id = 60;
+    $cargo->po_id = $request[0]['poid'];
+    $cargo->vendor_id = $request[0]['trans_id'];
+    $cargo->product_id = $request[0]['product_id'];
+    $cargo->dr = $request[0]['cargopo'];
+    $cargo->date_at = Carbon::now();
+    $cargo->save();
 
     
 

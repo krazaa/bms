@@ -16,6 +16,7 @@ Route::prefix('vendors.')->middleware('role:superadministrator|administrator|edi
     Route::get('/GetVendors', 'vendors\VendorController@GetVendors')->name('vendors.GetVendors');
     Route::get('/GetVendorsElec', 'vendors\VendorController@GetVendorsElec')->name('vendors.GetVendorsElec');
     Route::get('/GetVendorsAuto', 'vendors\VendorController@GetVendorsAuto')->name('vendors.GetVendorsAuto');
+    Route::get('/GetVendorsServices', 'vendors\VendorController@GetVendorsServices')->name('vendors.GetVendorsServices');
     Route::get('/editVendor/{id}', 'vendors\VendorController@VendorEdit')->name('vendors.editVendor');
     Route::get('/create', 'vendors\VendorController@create')->name('vendors.create');
     Route::post('/VendorStore', 'vendors\VendorController@VendorStore')->name('vendors.VendorStore');
@@ -100,8 +101,15 @@ Route::get('/ivs', 'reports\ReportsController@IVS')->name('reports.IVS');
 Route::get('/itaxledger', 'reports\ReportsController@itaxledger')->name('reports.itaxledger');
 Route::get('/inventAccledger', 'reports\ReportsController@inventAccledger')->name('reports.inventAccledger');
 
-
 });
+
+//GRNS 
+Route::prefix('grns.')->group(function () {
+    Route::get('/GrnsList', 'grns\GrnsController@GrnsList')->name('grns.GrnsList');
+    Route::get('/GetGrn/{id}', 'grns\GrnsController@GetGrn')->name('grns.GetGrn');
+
+    });
+//GRNS End
 //Start cogs
 Route::prefix('cogs.')->group(function () {
     

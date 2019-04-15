@@ -18,7 +18,10 @@ import abr from './reports/abr.vue';
 import ivs from './reports/ivs.vue';  
 import incometaxledger from './reports/incometaxledger.vue';  
 import iventAccledger from './reports/inventoryaccledger.vue';  
-import grn from './reports/grn.vue';  
+
+//GRNS
+import grnsList from './purchases/grne/grnsList.vue';  
+import grne from './purchases/grne/grn.vue';  
 
 //Stocks Electronic
 import StockElec from './stocks/electronic/ElectronicStocks.vue';  
@@ -178,7 +181,11 @@ export default [
   { path: '/reports/ivs', component: ivs, name: 'ivs'},
   { path: '/reports/incometaxledger', component: incometaxledger, name: 'incometaxledger'},
   { path: '/reports/iventAccledger', component: iventAccledger, name: 'iventAccledger'},
-  { path: '/reports/grn', component: grn, name: 'grn'},
+
+  //GRNS
+
+  { path: '/grns/grnsList', component: grnsList, name: 'grnsList'},
+  { path: '/grns/grne/:id', component: grne, name: 'grne', props: true},
 
 // category
   { path: '/category/manage', component: category, name: 'manage'},

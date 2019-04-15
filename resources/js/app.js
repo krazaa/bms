@@ -8,11 +8,22 @@ import moment from 'moment';
 import VueRouter from 'vue-router'
 import ourRoutes from './routes.js'
 import VeeValidate from 'vee-validate';
+import VueCurrencyFilter from 'vue-currency-filter';
 
 Vue.use(VueRouter)
 Vue.use(Buefy);
 Vue.use(Datepicker);
 Vue.use(VeeValidate);
+//Vue.use(VueCurrencyFilter)
+Vue.use(VueCurrencyFilter,
+{
+  symbol : '',
+  thousandsSeparator: ',',
+  fractionCount: 1,
+  fractionSeparator: '.',
+  symbolPosition: 'front',
+  symbolSpacing: true
+})
 
 
 

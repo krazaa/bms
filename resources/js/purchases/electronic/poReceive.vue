@@ -5,7 +5,7 @@
             <div class="column is-12">
                 <div class="box">
                      <div class="columns is-multiline">
-                        <div class="column is-4"><h3 class="title is-4">Purchase Receive</h3></div>
+                        <div class="column is-4"><h3 class="title is-4">Purchase Receive -> {{ Dataload[0].company }}</h3></div>
                             <div class="column is-8">
                                 <nav class="breadcrumb is-right" aria-label="breadcrumbs">
                                     <ul>
@@ -86,19 +86,26 @@
                 <td>{{ stockg = dload.qty * dload.cost | currency }}</td> 
                 <td>{{ totalcargo = (dload.qty * dload.cost) / (totalSumm) * cargopo | currency }} 
                     <input type="hidden" v-model.number="dload.cargoStore = totalcargo" class="input">
+                    <input type="hidden" v-model.number="dload.cargopu = totalcargo / dload.qty" class="input">
                 </td>
                 <td width="120px">{{ cpu= (totalcargo / dload.qty) | currency }}</td>
                 <td> {{ costprice = (cpu + dload.cost) | currency }}</td>
-                <td><input name="profit1" type="number" class="input" v-model.number="dload.profit" required></td>
+                <td width="120px">
+                    <input type="text" class="input" v-model.number="dload.profit" required>
+                </td>
+                <!-- <td width="120px">    
+                    <input type="text" class="input" v-model.number="dload.page1" required>
+                </td> -->
                 <td width="120px"><input type="hidden" v-model.number="dload.salPrice = costprice + dload.profit" class="input">
                 {{ costprice + dload.profit | currency }} </td> 
                 <td><input type="hidden" v-model.number="dload.wolSale = costprice + dload.profit2" class="input">
-                    <input name="profit12" type="number" class="input" v-model.number="dload.profit2" required></td>
+                <input type="number" class="input" v-model.number="dload.profit2" required></td>
                 <td>{{ costprice + dload.profit2 | currency }}</td>
-                <input name="taxpage" type="hidden" class="input" v-model.number="dload.tax = paytax">
-                <input name="taxpage" type="hidden" class="input" v-model.number="dload.cargopo = cargopo">
-                <input name="taxpage" type="hidden" class="input" v-model.number="dload.cgt = Gtotal">
-                
+                <input type="hidden" class="input" v-model.number="dload.tax = paytax">
+                <input type="hidden" class="input" v-model.number="dload.cargopo = cargopo">
+                <input type="hidden" class="input" v-model.number="dload.cgt = Gtotal">
+                <input type="hidden" class="input" v-model.number="dload.trans_id = trans">
+             
             </tr>
         </tbody>
         <tfoot>
@@ -109,10 +116,16 @@
                <td><b></b></td>
                <td><b>{{ Amounttotal }}</b></td>
                <td><b>{{ cargopo }}</b></td>
-               <td colspan="4"></td>
-               <td><b>Cargo Charges</b></td> 
-                <td><input name="cargo" type="number" class="input" v-model.number="cargopo" required>
-            
+               <td></td>
+               <td></td>
+               <td></td>
+               <td><b-select placeholder="Select a Vendor" v-model="trans" required>
+                                <option v-for="ven in vendors" :value="ven.id">{{ ven.company }} </p></option>
+                        </b-select></td>
+               <td width="140px"><b>Cargo Charges</b></td> 
+                <td>
+                    <input name="cargo" type="number" class="input" v-model.number="cargopo" required>
+                    
                </td>
                <td></td>
             </tr>
@@ -180,9 +193,6 @@ export default {
             wolSale:'',
             tax:'',
             paytax:'',
-
-
-
                 Dataload: {
                     dno:'',
                     branch_id:'',
@@ -195,21 +205,21 @@ export default {
                     paycargo:'',
                     cargopo:'',
                     cgt:'',
-
                    postwsp:'',
                    stockg:'',
                    totalcost:'',
+                   trans_id:'',
+                   cargopu:'',
 
-                   
 
-                    
                 },
                 profit:'',
                 taxpay:'',
+                trans:'',
                 
                 success: false,
                 branches:[],
-                vendors:'',
+                vendors:[],
                
                
             
@@ -222,11 +232,12 @@ export default {
  
             }
         },
+   
          methods: {
             
             onSubmit: function(){                
                 var addRows = _.map(this.addRows, function(num){ return _.pick(num, 'qty','branch_id','podate','product_id','refno','vendor_id')})
-                axios.post('/purchases./electronic/ReceivePOStore', this.Dataload, this.totalcost)
+                axios.post('/purchases./electronic/ReceivePOStore', this.Dataload, this.totalcost, this.trans_id)
                 
                 .then(response => { this.success = true;
                       })
@@ -269,14 +280,12 @@ export default {
             Gtotal: function(){
                 let total = 0;
                 return total + (this.totalSumm) + (this.cargopo)
-              },            
-          
-/////////////////////////////////////
+              }            
                      
             },
             mounted(){
                 //this.GetPOShow();
-
+                axios.get('/vendors./GetVendorsServices').then(response => this.vendors = response.data);
                 axios.get("/purchases./electronic/GetPOshow/" + this.id)
                  .then(response => this.Dataload = response.data);
         

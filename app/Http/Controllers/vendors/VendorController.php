@@ -55,6 +55,19 @@ class VendorController extends Controller
             ->get();
             return $vendors->toArray();
         }
+          public function GetVendorsServices()
+        {
+            $vendors = Vendor::select('id','type','company','person','isActive',
+                DB::raw('(CASE 
+                            WHEN type = "1" THEN "Vehicles" 
+                            WHEN type = "2" THEN "Electronic" 
+                            ELSE "" 
+                            END) AS type'))
+            ->where('type',3)
+            ->Active()
+            ->orderBy('id','desc')->get();
+            return $vendors;
+        }
 
     public function create()
     {
