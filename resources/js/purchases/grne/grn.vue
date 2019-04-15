@@ -35,7 +35,7 @@
                 Delivery No: <b>{{ getdata[0].dno }}</b><br>
                 Sales Tax Inv: <b>{{ getdata[0].stinv }}</b><br>
                 PO Status: <b>Received</b><br>
-                Payable - Vendor <b>{{ totalcost + getdata[0].tax | currency}}</b>
+                Payable - Vendor <b>{{ totalcost + getdata[0].tax }}</b>
             </div>
             <div class="column is-4">
                 Order Date: <b>{{ getdata[0].podate | formatDate}} </b><br>
