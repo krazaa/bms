@@ -141,7 +141,7 @@
                 <div class="columns is-multiline">
                     <div class="column is-6">Debit
                         <br><b>{{ TotalCargo + totalcost | currency}}</b>
-                        <br><b>{{ getdata[0].tax | currency}}</b>
+                        <br><b>{{ getdata[0].tax }}</b>
                         <br><b></b>
                         <br><b></b>
                         <br><b>{{ getdata[0].tax + TotalCargo + totalcost | currency}}</b>
