@@ -18,7 +18,6 @@ class GrnsController extends Controller
       		->leftjoin('electronicproducts as products','products.id','=','elecstocks.product_id')
       		->leftjoin('categories','categories.id', '=', 'products.category_id')
       		->leftjoin('categories as sub','sub.id', '=', 'products.subcategory_id')
-  
         	  ->select('elecstocks.qty','elecstocks.cost','elecstocks.cargopu','elecstocks.cargoamount','elecstocks.tax','elecstocks.ddate','elecstocks.rdate','elecstocks.duedate','purchaseorders.podate','elecstocks.dno','elecstocks.stinv','purchaseorders.poid','vendors.company','vendors.contact','vendors.address','trans.company as transporter','products.code','products.name','products.manpartno','categories.category','sub.category as subcat')
         ->where('purchaseorders.poid','=',$id)
 		->where('purchaseorders.stockReceive', false)

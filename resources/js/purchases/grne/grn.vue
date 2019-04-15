@@ -42,7 +42,7 @@
                 Dispatch Date: <b>{{ getdata[0].ddate | formatDate}}</b><br>
                 Receiving Date: <b>{{ getdata[0].rdate | formatDate}}</b><br>
                 Due Date: <b>{{ getdata[0].duedate | formatDate}}</b><br>
-                Income Tax: <b>{{ getdata[0].tax | currency}}</b>
+                Income Tax: <b>{{ getdata[0].tax }}</b>
             </div>    
         </div>
         
