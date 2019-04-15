@@ -29,8 +29,9 @@ Vue.use(VueCurrencyFilter,
 
 Vue.component('example', require('./components/ExampleComponent.vue').default);
 Vue.component('pocreate', require('./purchases/electronic/poCreate.vue').default);
- Vue.component('login', require('./components/login.vue').default);
- Vue.component('autocomplet', require('./components/autocomplet.vue').default);
+Vue.component('login', require('./components/login.vue').default);
+Vue.component('autocomplet', require('./components/autocomplet.vue').default);
+
 // Vue.component('dashboard', require('./components/dashboard.vue').default);
 // Vue.component('manageusers', require('./manage/users/UsersComponent.vue').default);
 // Vue.component('singleuser', require('./manage/users/showComponent.vue').default);

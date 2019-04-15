@@ -107,6 +107,7 @@ Route::get('/inventAccledger', 'reports\ReportsController@inventAccledger')->nam
 Route::prefix('grns.')->group(function () {
     Route::get('/GrnsList', 'grns\GrnsController@GrnsList')->name('grns.GrnsList');
     Route::get('/GetGrn/{id}', 'grns\GrnsController@GetGrn')->name('grns.GetGrn');
+    Route::get('/GetGrnpdf/{id}', 'grns\GrnsController@GetGrnpdf')->name('grns.GetGrnpdf');
 
     });
 //GRNS End

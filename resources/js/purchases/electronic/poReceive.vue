@@ -294,7 +294,7 @@ export default {
       
     currency(amount) {
       const amt = Number(amount)
-      return amt && amt.toLocaleString(undefined, {minimumIntegerDigits:2}) || '0'
+      return amt && amt.toLocaleString(undefined, {maximumFractionDigits:2}) || '0'
         }
     }
 

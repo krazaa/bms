@@ -27,6 +27,29 @@ class GrnsController extends Controller
         return $data;    
     }
 
+    public function GetGrnpdf($id)
+    {
+      $data = Purchaseorder::leftjoin('elecstocks','elecstocks.po_id','=','purchaseorders.poid')
+      		->leftjoin('vendors','vendors.id','=','elecstocks.vendor_id')
+    		->leftjoin('vendors as trans','trans.id','=','elecstocks.cargo_id')
+      		->leftjoin('electronicproducts as products','products.id','=','elecstocks.product_id')
+      		->leftjoin('categories','categories.id', '=', 'products.category_id')
+      		->leftjoin('categories as sub','sub.id', '=', 'products.subcategory_id')
+        	  ->select('elecstocks.qty','elecstocks.cost','elecstocks.cargopu','elecstocks.cargoamount','elecstocks.tax','elecstocks.ddate','elecstocks.rdate','elecstocks.duedate','purchaseorders.podate','elecstocks.dno','elecstocks.stinv','purchaseorders.poid','vendors.company','vendors.contact','vendors.address','trans.company as transporter','products.code','products.name','products.manpartno','categories.category','sub.category as subcat',
+        	   DB::raw('SUM(elecstocks.qty) as totalqty'),
+        	   DB::raw('SUM(elecstocks.cost * elecstocks.qty) as totalcost'),
+        	   DB::raw('SUM(elecstocks.cargopu) as totalcargo'),
+        	   DB::raw('elecstocks.qty * elecstocks.cost + elecstocks.cargopu as atc')
+        	)
+        ->where('purchaseorders.poid','=',$id)
+		->where('purchaseorders.stockReceive', false)
+        ->groupBy('elecstocks.product_id')
+        ->get();
+
+        //dd($data);
+        return view('pdfs.grnepdf', compact('data'));    
+    }
+
     public function GrnsList()
     {
         $data = DB::table('purchaseorders')->leftjoin('branches','branches.id','=','purchaseorders.branch_id')

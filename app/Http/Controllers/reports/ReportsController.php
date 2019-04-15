@@ -53,8 +53,8 @@ class ReportsController extends Controller
     public function IVS()
     {
         $cats = ElecStock::leftjoin('electronicproducts','electronicproducts.id','=', 'elecstocks.product_id')
-        ->select('elecstocks.id','elecstocks.qty','elecstocks.salPrice','electronicproducts.name','elecstocks.CostAmount',
-        DB::raw('SUM(elecstocks.CostAmount) as amount'))
+        ->select('elecstocks.id','elecstocks.salPrice','electronicproducts.name','elecstocks.cost','elecstocks.wolSale',
+        DB::raw('SUM(elecstocks.qty) as qty'))
         ->groupby('elecstocks.product_id')
                 ->get();
     return $cats;

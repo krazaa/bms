@@ -30,7 +30,7 @@
         <b-table
             :data="getdata"
             :loading="isLoading"
-            :narrowed="isNarrowed"
+            :narrowed="isNarrowed" 
             :default-sort-direction="defaultSortDirection"
              default-sort="getdata.aname">
         <template slot-scope="props">
@@ -44,15 +44,31 @@
         {{ props.row.qty}}  
         </b-table-column>
         <b-table-column field="name" label="Avg Cost" sortable>
-        {{ props.row.CostAmount }}
+        {{ props.row.cost }}
         </b-table-column>
         <b-table-column field="name" label="Asset Value" sortable>
-        {{ props.row.amount }}
+        {{ props.row.cost * props.row.qty }}
         </b-table-column>
         <b-table-column field="name" label="% of Total Asset" sortable>
+            {{ props.row.cost * props.row.qty / av}} %
+        </b-table-column>
+        <b-table-column field="name" label="W.Sale Price" sortable>
+        {{ props.row.wolSale }}
+        </b-table-column>
+        <b-table-column field="name" label="W. Sale Value" sortable>
+            {{ props.row.wolSale * props.row.qty | currency}}
+        </b-table-column>
+        <b-table-column field="name" label="% of Tot W. Sale" sortable>
+            {{ tws / props.row.wolSale  | currency}} %
         </b-table-column>
         <b-table-column field="name" label="Sales Price" sortable>
-        {{ props.row.salPrice }}
+            {{ props.row.salPrice}}
+        </b-table-column>
+        <b-table-column field="name" label="Retail Value" sortable>
+            {{ props.row.salPrice * props.row.qty | currency}}
+        </b-table-column>
+        <b-table-column field="name" label="% of Tot Retail" sortable>
+            {{ tws / props.row.salPrice | currency}} %
         </b-table-column>
         </template>
         <template slot="footer">
@@ -70,19 +86,30 @@
                     <div class="th-wrap is-numeric"> </div>
                 </th>
                 <th class="is-hidden-mobile">
-                    <div class="th-wrap">{{ cost }} </div>
+                    <div class="th-wrap">{{ av }} </div>
                 </th>
                 <th class="is-hidden-mobile">
-                    <div class="th-wrap"> {{ totalcost }} </div>
+                    <div class="th-wrap"> {{ avt }} </div>
                 </th>
                 <th class="is-hidden-mobile" >
                     <div class="th-wrap"> </div>
                 </th>
                 <th class="is-hidden-mobile" >
-                    <div class="th-wrap"></div>
+                    <div class="th-wrap">{{ tws }}</div>
+                </th>
+                <th>
+                        
+                </th>
+                <th>
+                        
+                </th>
+                <th>
+                     dd   
                 </th>
 
-                
+                <th class="is-hidden-mobile" >
+                    <div class="th-wrap">{{ tws }}</div>
+                </th>
             </template>
         
         </b-table>
@@ -144,7 +171,6 @@ import moment from 'moment';
       totalqty: function(){
         
         return this.getdata.reduce(function(total, row){
-
           return total + row.qty; 
         },0);
       },
@@ -155,11 +181,24 @@ import moment from 'moment';
         },0);
       },
 
-        totalcost: function(){
+        tws: function(){
             return this.getdata.reduce(function(total, row){
-            return total + row.CostAmount; 
+            return total + row.wolSale * row.qty;
             },0);
       },
+
+      av: function(){
+            return this.getdata.reduce(function(total, row){
+            return total + row.cost * row.qty;
+            },0);
+      },
+
+      avt: function(){
+            return this.getdata.reduce(function(total, row){
+            return total + row.cost * row.qty / row.qty;
+            },0);
+      },
+
 
       asset: function(){
             return this.getdata.reduce(function(total, row){
@@ -167,19 +206,9 @@ import moment from 'moment';
             },0);
       },
 
-      balance: function(){
-        
-        return this.getdata.reduce(function(total, row){
-
-          return total + row.debit - row.credit; 
-        },0);
-      }
-    },
-    filters: {
-            CreatedAT: function(value){
-            return moment().format("DD-MM-YYYY");
-            }
-        },
+    
+    }
+    
 }
 
     

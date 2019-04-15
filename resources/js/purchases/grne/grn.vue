@@ -75,57 +75,60 @@
         <b-table-column field="qty" label="Qty" sortable>
             {{ props.row.qty}} 
         </b-table-column>
-        <b-table-column field="name" label="Cost" sortable>
+        <b-table-column field="name" label="Cost" sortable numeric>
             {{ props.row.cost}} 
         </b-table-column>
-        <b-table-column field="tcost" label="T. Cost" sortable>
+        <b-table-column field="tcost" label="T. Cost" sortable numeric>
             {{ props.row.cost * props.row.qty}} 
         </b-table-column>
-        <b-table-column field="cargo" label="Cargo" sortable>
+        <b-table-column field="cargo" label="Cargo" sortable numeric>
             {{  props.row.cargopu * props.row.qty | currency}}
         </b-table-column>
-        <b-table-column field="cpu" label="P/U" sortable>
+        <b-table-column field="cpu" label="P/U" sortable numeric>
             {{ props.row.cargopu | currency}}
         </b-table-column>
-        <b-table-column field="name" label="Ad Cost" sortable>
+        <b-table-column field="name" label="Ad Cost" sortable numeric>
         {{ props.row.cost + props.row.cargopu | currency}}
         </b-table-column>
-        <b-table-column field="name" label="Ad T Cost" sortable>
+        <b-table-column field="name" label="Ad T Cost" sortable numeric>
         {{ props.row.cost * props.row.qty + props.row.cargopu | currency}} 
         </b-table-column>
         </template>
         <template slot="footer">
             
-                 <th class="is-hidden-mobile">
+                 <th>
                     <div class="th-wrap is-numeric"></div>
                 </th>
                 
-                <th class="is-hidden-mobile">
+                <th>
                     <div class="th-wrap is-numeric"></div>
                 </th>
-                <th class="is-hidden-mobile">
+                <th>
                     <div class="th-wrap "></div>
                 </th>
-                <th class="is-hidden-mobile">
+                <th>
                     <div class="th-wrap is-numeric"> </div>
                 </th>
-                <th class="is-hidden-mobile">
+                <th>
                     <div class="th-wrap"> </div>
                 </th>
-                <th class="is-hidden-mobile" >
+                <th >
                     <div class="th-wrap"></div>
                 </th>
-                <th class="is-hidden-mobile">
-                    <div class="th-wrap"> {{ totalqty }}</div>
+                <th>
+                    <div class="th-wrap" numeric> {{ totalqty }}</div>
                 </th>
-                <th class="is-hidden-mobile">
-                    <div class="th-wrap"> </div>
+                <th>
+                    <div class="th-wrap" > </div>
                 </th>
-                <th class="is-hidden-mobile">{{ totalcost | currency}}</th>
-                <th class="is-hidden-mobile">{{ TotalCargo | currency}}</th>
-                <th class="is-hidden-mobile"></th>
-                <th class="is-hidden-mobile"></th>
-                <th class="is-hidden-mobile" numeric>{{ atc | currency}}</th>
+                <th>
+                    <div class="th-wrap is-numeric"> {{ totalcost | currency}}</div>
+                </th>
+                <th>
+                    <div class="th-wrap is-numeric">{{ TotalCargo | currency}}</div></th>
+                <th></th>
+                <th></th>
+                <th numeric><p class="has-text-right">{{ atc | currency}}</p></th>
             
             </template>
         </b-table>
