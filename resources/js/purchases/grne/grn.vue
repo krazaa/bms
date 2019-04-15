@@ -84,13 +84,13 @@
         <b-table-column field="cargo" label="Cargo" sortable>
             {{  props.row.cargopu * props.row.qty | currency}}
         </b-table-column>
-        <b-table-column field="cpu" label="C P-U" sortable>
+        <b-table-column field="cpu" label="P/U" sortable>
             {{ props.row.cargopu | currency}}
         </b-table-column>
-        <b-table-column field="name" label="Adj. Cost" sortable>
+        <b-table-column field="name" label="Ad Cost" sortable>
         {{ props.row.cost + props.row.cargopu | currency}}
         </b-table-column>
-        <b-table-column field="name" label="Adj T. Cost" sortable>
+        <b-table-column field="name" label="Ad T Cost" sortable>
         {{ props.row.cost * props.row.qty + props.row.cargopu | currency}} 
         </b-table-column>
         </template>
