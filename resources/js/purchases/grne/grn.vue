@@ -23,21 +23,21 @@
                 </div>
 
         <div class="columns is-multiline">
-            <div class="column is-4">
+            <div class="column is-6">
                 Vendor Name: <b>{{ getdata[0].company }}</b><br> 
                 Phone: <b>{{ getdata[0].contact }}</b><br>
                 Address: <b>{{ getdata[0].address }}</b><br>
                 Transporter Name: <b>{{ getdata[0].transporter }}</b><br>
                 Transportation<b> {{ TotalCargo | currency}}</b><br>
             </div>
-            <div class="column is-4">
+            <div class="column is-3">
                 P. Order No: <b> POE-{{ getdata[0].poid }}</b><br>
                 Delivery No: <b>{{ getdata[0].dno }}</b><br>
                 Sales Tax Inv: <b>{{ getdata[0].stinv }}</b><br>
                 PO Status: <b>Received</b><br>
                 Payable - Vendor <b>{{ totalcost + getdata[0].tax }}</b>
             </div>
-            <div class="column is-4">
+            <div class="column is-3">
                 Order Date: <b>{{ getdata[0].podate | formatDate}} </b><br>
                 Dispatch Date: <b>{{ getdata[0].ddate | formatDate}}</b><br>
                 Receiving Date: <b>{{ getdata[0].rdate | formatDate}}</b><br>
@@ -57,7 +57,7 @@
         <b-table-column field="id" label="ID" width="40" sortable>
         {{ props.index + 1 }}
         </b-table-column>
-        <b-table-column field="name" label="Product Code" sortable>
+        <b-table-column field="name" label="Code" sortable>
         {{ props.row.code }}
         </b-table-column>
         <b-table-column field="qty" label="Product Name." sortable>
@@ -78,19 +78,19 @@
         <b-table-column field="name" label="Cost" sortable>
             {{ props.row.cost}} 
         </b-table-column>
-        <b-table-column field="tcost" label="Total Cost" sortable>
+        <b-table-column field="tcost" label="T. Cost" sortable>
             {{ props.row.cost * props.row.qty}} 
         </b-table-column>
         <b-table-column field="cargo" label="Cargo" sortable>
             {{  props.row.cargopu * props.row.qty | currency}}
         </b-table-column>
-        <b-table-column field="cpu" label="Cargo P/U" sortable>
+        <b-table-column field="cpu" label="C P-U" sortable>
             {{ props.row.cargopu | currency}}
         </b-table-column>
-        <b-table-column field="name" label="Adjusted Cost" sortable>
+        <b-table-column field="name" label="Adj. Cost" sortable>
         {{ props.row.cost + props.row.cargopu | currency}}
         </b-table-column>
-        <b-table-column field="name" label="Adjusted Total Cost" sortable>
+        <b-table-column field="name" label="Adj T. Cost" sortable>
         {{ props.row.cost * props.row.qty + props.row.cargopu | currency}} 
         </b-table-column>
         </template>
