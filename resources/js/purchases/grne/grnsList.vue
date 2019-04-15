@@ -56,7 +56,7 @@
         </b-table-column>
          <b-table-column label="Action">
           <a :href="`/grns./GetGrnpdf/` + props.row.poid" class="button is-dark is-small"><span class="mdi mdi-printer"></span></a>
-             <router-link class="button is-success is-small" :to="{ name: 'poEShow', params: {id: props.row.poid}}"><span class="mdi mdi-eye-circle-outline"></span></router-link>
+             <router-link class="button is-success is-small" :to="{ name: 'grne', params: {id: props.row.poid}}"><span class="mdi mdi-eye-circle-outline"></span></router-link>
              <router-link class="button is-info is-small" :to="{ name: 'editproduct', params: {id: props.row.id}}"><span class="mdi mdi-pencil-box-outline"></span></router-link>
         
         <a @click="vDelete(props.row.id)" class="button is-danger is-small"><span class="mdi mdi-trash-can"></span></a>
