@@ -107,9 +107,8 @@ hr{
       <div class="lenghth-limit">
         <div class="company">
         @foreach($setting as $com)@endforeach
-           
               <h1>{{ $com->company }}</h1>
-              <b style="font-weight: normal; font-size: 14px;"><h2>Goods Received Note</h2></b>
+              <h2>Goods Received Note</h2>
             </div>
         <table>
           <tr>
@@ -223,7 +222,7 @@ hr{
        <tr>
         <td>Payable - Services</td>
         <td width="150px"></td>
-        <td width="150px">{{ number_format($td->totalcargo,2) }}</td>
+        <td width="150px">{{ number_format($data->sum('cargo'),2) }}</td>
        </tr>
        </tbody>
        <tfoot>
