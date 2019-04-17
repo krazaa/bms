@@ -9,9 +9,7 @@ use App\modules\Purchaseorder;
 use App\modules\ElecStock;
 use PDF;
 use Excel;
-namespace App\Exports;
-use Illuminate\Contracts\View\View;
-use Maatwebsite\Excel\Concerns\FromView;
+
 
 class GrnsController extends Controller
 {
