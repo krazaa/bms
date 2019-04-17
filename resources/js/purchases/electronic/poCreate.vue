@@ -2,7 +2,7 @@
     <section>
         <form  @submit.prevent="onSubmit">
         <div class="columns" v-if="!success">
-            <div class="column is-10 is-offset-1">
+            <div class="column is-8 is-offset-2">
                 <div class="box">
                      <div class="columns is-multiline">
                         <div class="column is-4"><h3 class="title is-4">New Purchase Order</h3></div>
@@ -23,7 +23,7 @@
                     </div>
  
             <div class="columns">
-                <div class="column is-4">
+                <div class="column is-5">
                     <b-field label="Vendor">
                         <b-autocomplete v-model="vendors" required
                             :data="data"
@@ -54,7 +54,7 @@
                          </b-field>
                          <span class="help is-danger"> </span>
                     </div>
-                    <div class="column is-4">
+                    <div class="column is-3">
                      <b-field label="Order Date:">
                         <input class="input" v-model="addRows[0].podate" type="date" placeholder="Text input" expanded required>
                          
@@ -69,13 +69,12 @@
             <tr>
                 <td><strong>Product Name</strong></td>
                 <td><strong>Qty</strong></td>
-                <td><strong>Branch</strong></td>
-                <td><strong>Action</strong></td>
+                <td><strong></strong></td>
             </tr>
         </thead>
         <tbody>
             <tr v-for="(addRow, index) in addRows">
-                <td>
+            <td width="360px">
             <b-field>
             <b-autocomplete v-model="addRow.items" required
                 :data="products"
@@ -94,7 +93,6 @@
                             <br>
                             <small>
                                 Code: <b>{{ props.option.code }}</b>
-                                
                             </small>
                         </div>
                     </div>
@@ -103,23 +101,14 @@
         </b-field>
         <span class="help is-danger"> </span>
                 </td>
-                <td>
+                <td width="220px">
                      <b-field>
-                            <b-input v-model="addRow.qty" expanded name="qty[]" type="number" required></b-input>
-                         </b-field>
-                         <span class="help is-danger"> </span>
+                            <b-input v-model="addRow.qty" expanded name="qty[]" type="number" required></b-input></b-field>
+                    <span class="help is-danger"> </span>
                 </td>
-                <td>
-                    <b-field>
-                            <b-select  name="branch_id[]" v-model="addRow.branch_id" expanded required>
-                                <option v-for="br in branches" :value="br.id">{{ br.name }}</option>
-                            </b-select>
-                        </b-field>
-                         <span class="help is-danger"> </span>
-                </td>
-                <td>
-                    <b-field>
-                    <button class="button is-button is-danger" @click="deleteRow(index)">X</button>
+                <td width="220px">
+                    <b-field is-right>
+                    <button class="button is-button is-danger is-pulled-right" @click="deleteRow(index)">X</button>
                 </b-field>
                 </td>
             </tr>
@@ -161,7 +150,6 @@ export default {
              addRows: [{
                     product_id: '',
                     qty: '',
-                    branch_id: '',
                     items:'',
                     vendor_id:'',
                     refno:'',
@@ -203,7 +191,7 @@ export default {
                     .catch((error) => {
                         this.data = []
                         throw error
-                    })
+                    }) 
                     .finally(() => {
                         this.isFetching = false
                     })
