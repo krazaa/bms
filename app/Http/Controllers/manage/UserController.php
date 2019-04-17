@@ -12,6 +12,10 @@ use Hash;
 use Auth;
 use Image;
 
+use App\Exports\UsersExport;
+use Maatwebsite\Excel\Facades\Excel;
+
+
 
 class UserController extends Controller
 {
@@ -20,6 +24,12 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function export() 
+    {
+        return Excel::download(new InvoicesExport, 'users.xlsx');
+        //return Excel::download(new InvoicesExport, 'invoices.xlsx');
+    }
     
 
     public function Getusers()

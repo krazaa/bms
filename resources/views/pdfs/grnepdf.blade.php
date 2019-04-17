@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 <style>
 
 html,body{
@@ -110,17 +111,17 @@ hr{
           </tr>
           <tr>
             <td>
-              Vendor Name: <b> {{ $d->company}} </b>
-              <br> Address: {{ $d->address }}
-              <br> Phone: {{ $d->contact }}
-              <br> Transporter Name: {{ $d->transporter }}
-              <br> Transportation: {{ number_format($d->totalcargo,2) }}</td>
+              Vendor Name: <b> {{ $d->vendors->company}} </b>
+              <br> Address: {{ $d->vendors->address }}
+              <br> Phone: {{ $d->vendors->contact }}
+              <br> Transporter Name: {{ $d->cvendors->company }}
+              <br> Transportation: <b>{{ number_format($data->sum('cargo'),2) }}</b></td>
             <td>
-              P. Order N<sup>o</sup>: <b>{{ $d->poid}}</b><br>
+              P. Order N<sup>o</sup>: <b>{{ $d->po_id}}</b><br>
               Delivery N<sup>o</sup>: <b>{{ $d->dno}}</b><br>
               Sales Tax Invoice N<sup>o</sup>: <b>{{ $d->stinv}}</b><br>
               PO Status: <b>Received</b><br>
-              Payable - Vendor <b>{{ number_format($d->totalcost + $d->tax,2) }}</b><br>
+              Payable - Vendor <b>{{ number_format($data->sum('totalcost') + $d->tax,2) }}</b><br>
             </td>
             <td>
               Order Date: <b>{{ date('d-m-Y', strtotime($d->podate)) }}</b><br>
@@ -138,13 +139,13 @@ hr{
 				<th class="th">Product Name</th>
 				<th class="th">MPN</th>
 				<th class="th">Category</th>
-        <th class="th">Qty</th> 
-        <th class="th">Cost</th> 
-        <th class="th">T. Cost</th> 
-        <th class="th">Cargo</th> 
-        <th class="th">P/U</th> 
-        <th class="th">Ad Cost</th> 
-        <th class="th">Ad T Cost</th> 
+        <th class="th" style="text-align: center;">Qty</th> 
+        <th class="th" style="text-align: right;">Cost</th> 
+        <th class="th" style="text-align: right;">T. Cost</th> 
+        <th class="th" style="text-align: right;">Cargo</th> 
+        <th class="th" style="text-align: right;">P/U</th> 
+        <th class="th" style="text-align: right;">Ad Cost</th> 
+        <th class="th" style="text-align: right;">Ad T Cost</th> 
             </tr>
           </thead>
           <tbody>
@@ -152,17 +153,17 @@ hr{
 		@foreach ($data as $td)    
       <tr>
         <td class="line-row" style="text-align: center;">{{$no++}}</td>
-				<td class="line-row">{{ $td->code }}</td>
-				<td class="line-row">{{ $td->name }}</td>
-				<td class="line-row">{{ $td->manpartno }}</td>
-        <td class="line-row">{{ $td->category }} {{ $td->subcat }}</td>
-        <td class="line-row">{{ $td->qty }}</td>
-        <td class="line-row">{{ $td->cost }}</td>
-				<td class="line-row">{{ $td->cost * $td->qty }}</td>
-        <td class="line-row">{{ $cost=$td->cargopu * $td->qty }}</td>
-        <td class="line-row">{{ $td->cargopu }}</td>
-        <td class="line-row">{{ $td->cargopu + $td->cost }}</td>
-        <td class="line-row">{{ $td->cost * $td->qty + $td->cargopu }}</td>
+				<td class="line-row" >{{ $td->products->code }}</td>
+				<td class="line-row">{{ $td->products->name }}</td>
+				<td class="line-row">{{ $td->products->manpartno }}</td>
+        <td class="line-row">{{ $td->products->cats->category }} </td>
+        <td class="line-row" style="text-align: center;">{{ $td->qty }}</td>
+        <td class="line-row" style="text-align: right;">{{ $td->cost }}</td>
+				<td class="line-row" style="text-align: right;">{{number_format($costs = $td->cost * $td->qty,2) }}</td>
+        <td class="line-row" style="text-align: right;">{{number_format( $cost=$td->cargopu * $td->qty,2) }}</td>
+        <td class="line-row" style="text-align: right;">{{ number_format($td->cargopu,2) }}</td>
+        <td class="line-row" style="text-align: right;">{{ number_format($td->cargopu + $td->cost,2) }}</td>
+        <td class="line-row" style="text-align: right;">{{ number_format($td->cost * $td->qty + $td->cargopu,2) }}</td>
       </tr>
             @endforeach
         </tbody>
@@ -173,57 +174,61 @@ hr{
             <td></td>
             <td></td>
             <td></td>
-            <td><b> {{ $data->sum('qty') }}</b></td>
+            <td style="text-align: center;"><b> {{ $data->sum('qty') }}</b></td>
             <td></td>
-            <td><b>
-              {{ number_format($td->totalcost,2) }}</b></td>
-            <td><b>{{ number_format($td->qty * $td->totalcargo,2) }}</b> </td>
+            <td style="text-align: right;"><b>{{ number_format($data->sum('totalcost'),2) }}</b>
+            <td style="text-align: right;"><b>{{ number_format($data->sum('cargo'),2) }}</b> </td>
             <td></td>
             <td></td>
-            <td>{{ number_format($td->atc,2) }}</td>
+            <td style="text-align: right;"><b>{{ number_format($data->sum('atc'),2) }}</b></td>
           </tr>
         </tfoot>
      </table>
      <table>
-      <th with="400px">Accounts</th>
-      <th with="200">Debit </th>
+      <thead>
+        <tr>
+      <th with="300px">Accounts</th>
+      <th with="200px">Debit </th>
       <th with="200px">Credit </th>
       <th></th>
       <th></th>
       <th></th>
       <th></th>
+    </tr>
+      </thead>
       <tbody>
        <tr>
-         <td width="200">Inventory 
-         <td width="150">{{ number_format($td->totalcargo + $td->totalcost,2) }}</td>
-         <td width="150"></td>
+         <td>Inventory</td>
+         <td width="150px">{{ number_format($td->totalcargo + $data->sum('totalcost'),2) }}</td>
+         <td width="150px"></td>
        </tr>
        <tr>
-        <td>Income Tax </td>
-        <td width="150">{{ number_format($td->tax,2) }}</td>
-        <td width="150"></td>
+        <td width="150px">Income Tax</td>
+        <td width="150px">{{ number_format($td->tax,2) }}</td>
+        <td width="150px"></td>
        </tr>
        <tr>
         <td>Payable - Vendor</td>
-        <td width="150"></td>
-        <td width="150">{{ number_format($td->totalcost + $td->tax,2) }}</td>
+        <td width="150px"></td>
+        <td width="150px">{{ number_format($data->sum('totalcost') + $td->tax,2) }}</td>
        </tr>
        <tr>
         <td>Payable - Services</td>
-        <td width="150"></td>
-        <td width="150">{{ number_format($td->totalcargo,2) }}</td>
+        <td width="150px"></td>
+        <td width="150px">{{ number_format($td->totalcargo,2) }}</td>
        </tr>
        </tbody>
        <tfoot>
          <tr>
            <td></td>
-           <td><b>{{ number_format($td->totalcargo + $td->totalcost + $td->tax,2) }}</b></td>
-           <td><b>{{ number_format($td->totalcargo + $td->totalcost + $td->tax,2) }}</b></td>
+           <td><b>{{ number_format($td->totalcargo + $data->sum('totalcost') + $td->tax,2) }}</b></td>
+           <td><b>{{ number_format($td->totalcargo + $data->sum('totalcost') + $td->tax,2) }}</b></td>
            <td><b>Posted By</b></td>
            <td><b>Store Incharge</b></td>
            <td><b>Approved By</b></td>
          </tr>
        </tfoot>
      </table>
+ </div>
 </body>
 </html>

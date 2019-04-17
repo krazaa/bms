@@ -14,9 +14,18 @@ class ElecStock extends Model
     	return $this->belongsTo(Electronicproduct::class, 'product_id');
     }
 
+     public function vendors()
+    {
+        return $this->belongsTo(Vendor::class, 'vendor_id');
+    }
+    public function cvendors()
+    {
+        return $this->belongsTo(Vendor::class, 'cargo_id');
+    }
+
      public function pos()
     {
-    	return $this->belongsTo(Purchaseorder::class, 'poid');
+    	return $this->belongsTo(Purchaseorder::class, 'po_id');
     }
 
     public function branches()

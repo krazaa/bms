@@ -108,6 +108,7 @@ Route::prefix('grns.')->group(function () {
     Route::get('/GrnsList', 'grns\GrnsController@GrnsList')->name('grns.GrnsList');
     Route::get('/GetGrn/{id}', 'grns\GrnsController@GetGrn')->name('grns.GetGrn');
     Route::get('/GetGrnpdf/{id}', 'grns\GrnsController@GetGrnpdf')->name('grns.GetGrnpdf');
+    Route::get('/GrneExcel/{id}', 'grns\GrnsController@GrneExcel')->name('grns.GrneExcel');
 
     });
 //GRNS End
@@ -213,14 +214,15 @@ Route::prefix('stocks.')->group(function () {
 
     Route::get('/electronic/getstocks', 'stocks\ElecStockController@GetStock')->name('electronic.getstocks');
     
-    
-    
-    
-    
 });
 //End Stocks routes
 
-
+// ledgers
+Route::prefix('ledgers.')->group(function () {
+    Route::get('/apl', 'ledgers\LedgersController@AccountPayableLedger')->name('electronic.apl');
+ 
+ });   
+//end legers 
 
 //Start Settings routes
 // Route::post('/cutest', 'SettingController@cutest')->name('cutest');
@@ -290,6 +292,11 @@ Route::post('/users/store', 'manage\UserController@store')->name('users.store');
 Route::get('users/SearchUsers', 'manage\UserController@SearchUsers')->name('manage.SearchUsers');
 Route::post('users/updateAvatar', 'manage\UserController@updateAvatar')->name('manage.updateAvatar');
 Route::post('users/myFunction', 'manage\UserController@myFunction')->name('manage.myFunction');
+
+
+Route::get('users/export', 'manage\UserController@export')->name('manage.export');
+
+
 
 // branches
 Route::get('branches', 'manage\UserController@GetBranches')->name('manage.branches');

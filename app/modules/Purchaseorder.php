@@ -35,4 +35,10 @@ class Purchaseorder extends Model
         return $this->belongsTo('App\modules\Vendor', 'vendor_id');
         
     }
+
+      public function stocks()
+    {
+        return $this->HasMany('App\modules\ElecStock', 'po_id');
+        
+    }
 }
