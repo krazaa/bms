@@ -208,7 +208,7 @@ export default {
                  axios.get(`/purchases./electronic/GetElecProducts?search=${name}`)
                     .then(({ data }) => {
                         this.data = []
-                        data.data.forEach((item) => this.products.push(item))
+                        data.forEach((item) => this.products.push(item))
                     })
                     .catch((error) => {
                         this.data = []
