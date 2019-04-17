@@ -7,7 +7,8 @@
     <template>
        <section v-if="getdata.length > 0">
            <div class="columns is-multiline">
-            <div class="column is-4"><h3 class="title is-4">Goods Received Note.</h3></div>
+            <div class="column is-4"> 
+                <h3 class="title is-4">Goods Received Note.</h3></div>
                     <div class="column is-8">
                         <nav class="breadcrumb is-right" aria-label="breadcrumbs">
                             <ul>
@@ -189,6 +190,7 @@ import moment from 'moment';
         data(){
             return {
                 getdata: {},
+                company: {},
                 search:'',
                 isActive:'',
                 isNarrowed: true,
@@ -202,13 +204,17 @@ import moment from 'moment';
         },
         mounted(){
         this.FetchData();  
+        this.FetchCompany();  
     },
         methods: { 
              FetchData(){
-                //this.isLoading = true
                axios.get("/grns./GetGrn/" + this.id)
               .then(response => this.getdata = response.data);
+            },        
 
+            FetchCompany(){
+               axios.get("/settings./GetSetting/1")
+              .then(response => this.company = response.data);
             },        
         
     },

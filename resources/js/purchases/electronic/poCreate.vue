@@ -196,15 +196,14 @@ export default {
                         this.isFetching = false
                     })
             }, 500),
+
             //products Search
             getAsyncData: debounce(function (name) {
                 if (!name.length) {
                     this.data = []
                     return
                 }
-                this.isFetching2 = true
-                
-
+                this.isFetching2 = true     
                  axios.get(`/purchases./electronic/GetElecProducts?search=${name}`)
                     .then(({ data }) => {
                         this.data = []

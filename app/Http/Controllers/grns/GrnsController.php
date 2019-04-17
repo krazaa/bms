@@ -47,23 +47,24 @@ class GrnsController extends Controller
         /////dd($data);
         //return view('pdfs.grnepdf', compact('data')); 
         foreach ($data as $key =>  $row)
-         
-
-        $pdf = PDF::loadView('pdfs.grnepdf', compact('data'));
-        $pdf->setPaper('a4', 'landscape');
+        $pdf = PDF::loadView('pdfs.grnepdf', compact('data'))->setPaper('legal', 'landscape');
         return $pdf->stream($row->po_id);  
         
     }
 
     public function GrnsList()
     {
-        $data = DB::table('purchaseorders')->leftjoin('vendors','vendors.id','=','purchaseorders.vendor_id')
-        ->select('purchaseorders.id','purchaseorders.type','purchaseorders.refno','purchaseorders.poid','purchaseorders.podate','purchaseorders.branch_id','purchaseorders.isPaid','vendors.company')
-        ->where('purchaseorders.stockReceive',false)
-        ->orderBy('purchaseorders.poid','desc')
-        ->groupBy('purchaseorders.poid')
+        $data = ElecStock::
+        select('*',
+      DB::raw('SUM(cost * qty) as totalcost'),
+      DB::raw('SUM(cargopu * qty) as cargo'))
+        //->where('stockReceive',false)
+        ->orderBy('po_id','desc')
+        ->groupBy('po_id')->with('vendors:id,company')->with('pos:id,podate,poid,type,refno,isPaid')
         ->get();
 
+        
+        
         return $data;    
     }
 /////// Excel Export

@@ -26,7 +26,7 @@ th { padding-left: 2px; }
   }
 
 .aeu{
-  /*text-align: right;*/
+  /*text-align: center;*/
   padding-right: 10px;
   font-family: 'Helvetica';
 }
@@ -90,7 +90,12 @@ hr{
   background: none;
   height: 0; 
 }
-
+.company {
+  margin: auto;
+  width: 96%;
+  text-align: center;
+  padding: 10px;
+}
 
 </style>
 </head>
@@ -100,13 +105,16 @@ hr{
 <div id="divide">
 <div id="container">
       <div class="lenghth-limit">
+        <div class="company">
+        @foreach($setting as $com)@endforeach
+           
+              <h1>{{ $com->company }}</h1>
+              <b style="font-weight: normal; font-size: 14px;"><h2>Goods Received Note</h2></b>
+            </div>
         <table>
           <tr>
-            {{-- <td style="padding-left: 40px; width: 50px;">
-              <img src="{{ asset('fwmclogo.png') }}" class="imageaeu">
-            </td> --}}
+            
             <td class="aeu">
-              <b style="font-weight: normal; font-size: 14px;"><h2>Goods Received Note</h2></b>
             </td>
           </tr>
           <tr>

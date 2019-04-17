@@ -25,7 +25,7 @@ class ElecStock extends Model
 
      public function pos()
     {
-    	return $this->belongsTo(Purchaseorder::class, 'po_id');
+    	return $this->belongsTo('App\modules\Purchaseorder', 'po_id', 'poid');
     }
 
     public function branches()

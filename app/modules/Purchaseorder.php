@@ -36,9 +36,9 @@ class Purchaseorder extends Model
         
     }
 
-      public function stocks()
+      public function elecstocks()
     {
-        return $this->HasMany('App\modules\ElecStock', 'po_id');
+        return $this->belongsTo('App\modules\ElecStock', 'po_id');
         
     }
 }

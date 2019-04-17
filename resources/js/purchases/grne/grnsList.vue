@@ -37,30 +37,36 @@
         <b-table-column field="id" label="ID" width="40" sortable>
         {{ props.index + 1 }}
         </b-table-column>
+           <b-table-column field="po_id" label="PO Number" sortable>POE-{{ props.row.po_id}}
+        </b-table-column>
+         <b-table-column field="podate" label="Date" sortable>
+        {{ props.row.pos.podate | formatDate}}
+        </b-table-column>
         <b-table-column field="type" label="Type" sortable>
-            <p v-if="props.row.type == 1">Vehicles</p>
-        <p v-if="props.row.type == 2">Electronics</p>
+            <p v-if="props.row.pos.type == 1">Vehicles</p>
+        <p v-if="props.row.pos.type == 2">Electronics</p>
         </b-table-column>
         <b-table-column field="company" label="Vendor" sortable>
-        {{ props.row.company }}
+        {{ props.row.vendors.company }}
         </b-table-column>
-        <b-table-column field="name" label="PO Number" sortable>POE-{{ props.row.poid}}
+        <b-table-column field="refno" label="Ref No" sortable>
+        {{ props.row.pos.refno}}
         </b-table-column>
-        <b-table-column field="refno" label="Ref no" sortable>
-        {{ props.row.refno}}
+        <b-table-column field="refno" label="Cargo" sortable>
+        {{ props.row.cargo | currency }}
         </b-table-column>
-        <b-table-column field="podate" label="Date" sortable>
-        {{ props.row.podate | formatDate}}
+           <b-table-column field="totalcost" label="Amount" sortable>
+        {{ props.row.totalcost }}
         </b-table-column>
-        <b-table-column label="Payment" sortable>
-         <span class="is-success" v-if="props.row.isPaid === 0">Unpaid</span>
-         <span class="is-warning" v-if="props.row.isPaid === 1">Paid</span>
+        <b-table-column field="isPaid" label="Payment" sortable>
+         <span class="is-success" v-if="props.row.pos.isPaid === 0">Unpaid</span>
+         <span class="is-warning" v-if="props.row.pos.isPaid === 1">Paid</span>
         
         </b-table-column>
          <b-table-column label="Action" width="200">
-          <a :href="`/grns./GetGrnpdf/` + props.row.poid" class="button is-dark is-small"><span class="mdi mdi-printer"></span></a>
+          <a :href="`/grns./GetGrnpdf/` + props.row.po_id" target="_blank" class="button is-dark is-small"><span class="mdi mdi-printer"></span></a>
           <!-- <a :href="`/grns./GrneExcel/` + props.row.poid" class="button is-warning is-small"><span class="mdi mdi-file-excel"></span></a> -->
-             <router-link class="button is-success is-small" :to="{ name: 'grne', params: {id: props.row.poid}}"><span class="mdi mdi-eye-circle-outline"></span></router-link>
+             <router-link class="button is-success is-small" :to="{ name: 'grne', params: {id: props.row.po_id}}"><span class="mdi mdi-eye-circle-outline"></span></router-link>
              <router-link class="button is-info is-small" to="/"><span class="mdi mdi-pencil-box-outline"></span></router-link>
         <a @click="vDelete(props.row.id)" class="button is-danger is-small"><span class="mdi mdi-trash-can"></span></a>
         </b-table-column>
@@ -113,11 +119,19 @@ import moment from 'moment';
                axios.get("/grns.//GrnsList/")
               .then(response => this.getdata = response.data);
 
-            },        
+            }, 
+        },
+   
+  filters: {
+      
+    currencyf (amount) {
+      const amt = Number(amount)
+      return amt && amt.toLocaleString(undefined, {maxIntegerDigits:1}) || '0'
+        }
+    }
         
-    },
+    }
      
-}
 
     
 </script>
