@@ -26,7 +26,7 @@ class ElecPurchaseOrderController extends Controller
         ->orwhere('code','LIKE', "%$search%")
         ->orderBy('id','desc')
         //->get();
-        ->paginate(15);
+        ->paginate(5);
         return $data->toArray(); 
 	}
 
