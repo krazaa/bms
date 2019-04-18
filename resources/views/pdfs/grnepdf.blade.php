@@ -228,8 +228,8 @@ hr{
        <tfoot>
          <tr>
            <td></td>
-           <td><b>{{ $data->sum('atc') + $data->sum('cargo') + $td->tax }}</b></td>
-           <td><b>{{ number_format($td->totalcargo + $data->sum('totalcost') + $td->tax,2) }}</b></td>
+           <td><b>{{ number_format($data->sum('atc') + $data->sum('cargo') + $td->tax,2) }}</b></td>
+           <td><b>{{ number_format($td->totalcargo + $data->sum('totalcost') + $td->tax + $data->sum('cargo'),2) }}</b></td>
            <td><b>Posted By</b></td>
            <td><b>Store Incharge</b></td>
            <td><b>Approved By</b></td>
