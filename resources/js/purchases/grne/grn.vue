@@ -244,7 +244,7 @@ import moment from 'moment';
 
       atc: function(){
             return this.getdata.reduce(function(total, row){
-            return total + row.qty * row.cost + row.cargopu; 
+            return total +  row.cost + row.cargopu * row.qty; 
             },0);
       },
 
