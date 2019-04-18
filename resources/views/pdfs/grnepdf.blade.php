@@ -206,12 +206,12 @@ hr{
       <tbody>
        <tr>
          <td>Inventory</td>
-         <td width="150px">{{ number_format($inv,2) }}</td>
+         <td width="150px">{{ number_format($inv,2) }} </td>
          <td width="150px"></td>
        </tr>
        <tr>
         <td width="150px">Income Tax</td>
-        <td width="150px">{{ number_format($td->tax,2) }}</td>
+        <td width="150px">{{ number_format($td->tax,2) }} </td>
         <td width="150px"></td>
        </tr>
        <tr>
