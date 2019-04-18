@@ -228,7 +228,7 @@ hr{
        <tfoot>
          <tr>
            <td></td>
-           <td><b>{{ number_format($td->totalcargo + $data->sum('totalcost') + $td->tax,2) }}</b></td>
+           <td><b>{{ number_format($inv + $td->tax,2) }}</b></td>
            <td><b>{{ number_format($td->totalcargo + $data->sum('totalcost') + $td->tax,2) }}</b></td>
            <td><b>Posted By</b></td>
            <td><b>Store Incharge</b></td>
