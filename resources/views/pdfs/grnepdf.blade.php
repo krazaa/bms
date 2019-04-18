@@ -187,7 +187,7 @@ hr{
             <td style="text-align: right;"><b>{{ number_format($data->sum('cargo'),2) }}</b> </td>
             <td></td>
             <td></td>
-            <td style="text-align: right;"><b>{{ number_format($data->sum('atc') + $data->sum('cargo'),2) }}</b></td>
+            <td style="text-align: right;"><b>{{ $inv=number_format($data->sum('atc') + $data->sum('cargo'),2) }}</b></td>
           </tr>
         </tfoot>
      </table>
@@ -206,7 +206,7 @@ hr{
       <tbody>
        <tr>
          <td>Inventory</td>
-         <td width="150px">{{ number_format($td->totalcargo + $data->sum('totalcost'),2) }}</td>
+         <td width="150px">{{ number_format($inv),2) }}</td>
          <td width="150px"></td>
        </tr>
        <tr>
