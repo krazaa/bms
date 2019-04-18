@@ -126,7 +126,7 @@
                     <div class="th-wrap is-numeric"> {{ totalcost | currency}}</div>
                 </th>
                 <th>
-                    <div class="th-wrap is-numeric">{{ TotalCargo | currency1}}</div></th>
+                    <div class="th-wrap is-numeric">{{ TotalCargo }}</div></th>
                 <th></th>
                 <th></th>
                 <th numeric><p class="has-text-right">{{ atc | currency}}</p></th>
