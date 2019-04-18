@@ -126,7 +126,7 @@
                     <div class="th-wrap is-numeric"> {{ totalcost | currency}}</div>
                 </th>
                 <th>
-                    <div class="th-wrap is-numeric">{{ TotalCargo }}</div></th>
+                    <div class="th-wrap is-numeric">{{ TotalCargo | currency}}</div></th>
                 <th></th>
                 <th></th>
                 <th numeric><p class="has-text-right">{{ atc | currency}}</p></th>
@@ -134,21 +134,21 @@
             </template>
         </b-table>
          <div class="columns is-multiline">
-            <div class="column is-2">
+            <div class="column is-3">
                 Accounts<br>
                 Inventory <br>
                 Income Tax <br>
                 Payable - Vendor <br>
                 Payable - Services <br>
             </div>
-            <div class="column is-2">
+            <div class="column is-3">
                 <div class="columns is-multiline">
                     <div class="column is-6">Debit
                         <br><b>{{ TotalCargo + totalcost | currency}}</b>
                         <br><b>{{ getdata[0].tax }}</b>
                         <br><b></b>
                         <br><b></b>
-                        <br><b>{{ getdata[0].tax + TotalCargo + totalcost }}</b>
+                        <br><b>{{ getdata[0].tax + TotalCargo + totalcost | currency }}</b>
                         
                     </div>
                     <div class="column is-6">Credit
@@ -156,7 +156,7 @@
                         <br>
                         <br><b>{{ totalcost + getdata[0].tax }}</b>
                         <br><b>{{ TotalCargo | currency}}</b>
-                        <br><b>{{ TotalCargo + totalcost + getdata[0].tax}}</b>
+                        <br><b>{{ TotalCargo + totalcost + getdata[0].tax | currency}}</b>
                     </div>
 
                 </div>
@@ -230,7 +230,7 @@ import moment from 'moment';
 
       TotalCargo: function(){
         return this.getdata.reduce(function(total, row){
-          return total + row.cargopu * row.qty.toFixed(2); 
+          return total + row.cargopu * row.qty; 
         },0);
       },
 
@@ -260,8 +260,9 @@ import moment from 'moment';
       
     currency1(amount) {
       const amt = Number(amount)
-      return amt && amt.toLocaleString(undefined, {maxIntegerDigits:1}) || '0'
-        }
+      return amt && amt.toLocaleString(undefined, {maximumIntegerDigits:2}) || '0'
+        },
+        
     }
 }
 
