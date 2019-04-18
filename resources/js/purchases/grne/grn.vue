@@ -230,7 +230,7 @@ import moment from 'moment';
 
       TotalCargo: function(){
         return this.getdata.reduce(function(total, row){
-          return total + row.cargopu * row.qty; 
+          return total + row.cargopu * row.qty.toFixed(); 
         },0);
       },
 
