@@ -19,12 +19,10 @@ class Purchase extends Model
         return $this->belongsTo('App\modules\Vendor', 'vendor_id');
         
     }
-
    
-
      public function ponumbers()
     {
-        return $this->belongsTo('App\modules\Purchaseorder', 'po_id');
+        return $this->belongsTo('App\modules\Purchaseorder', 'po_id', 'poid');
         
     }
 

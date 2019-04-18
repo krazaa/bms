@@ -169,8 +169,8 @@ hr{
 				<td class="line-row" style="text-align: right;">{{number_format($costs = $td->cost * $td->qty,2) }}</td>
         <td class="line-row" style="text-align: right;">{{number_format( $cost=$td->cargopu * $td->qty,2) }}</td>
         <td class="line-row" style="text-align: right;">{{ number_format($td->cargopu,2) }}</td>
-        <td class="line-row" style="text-align: right;">{{ number_format($td->cargopu + $td->cost,2) }}</td>
-        <td class="line-row" style="text-align: right;">{{ number_format($td->cost * $td->qty + $td->cargopu,2) }}</td>
+        <td class="line-row" style="text-align: right;">{{ number_format( $ad=$td->cargopu + $td->cost,2) }}</td>
+        <td class="line-row" style="text-align: right;">{{ number_format($$ad * $td->cargopu,2) }}</td>
       </tr>
             @endforeach
         </tbody>

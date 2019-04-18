@@ -13,6 +13,10 @@ import poECreate from './purchases/electronic/poCreate.vue';
 import poEShow from './purchases/electronic/Show.vue';  
 import poEReceive from './purchases/electronic/poReceive.vue';  
 
+
+// ledger 
+import apl from './ledgers/apl.vue';  
+import vbs from './ledgers/vbs.vue';  
 //reports
 import abr from './reports/abr.vue';  
 import ivs from './reports/ivs.vue';  
@@ -183,9 +187,12 @@ export default [
   { path: '/reports/iventAccledger', component: iventAccledger, name: 'iventAccledger'},
 
   //GRNS
-
   { path: '/grns/grnsList', component: grnsList, name: 'grnsList'},
   { path: '/grns/grne/:id', component: grne, name: 'grne', props: true},
+
+//GRNS
+  { path: '/ledgers/apl', component: apl, name: 'apl'},
+  { path: '/ledgers/vbs', component: vbs, name: 'vbs'},
 
 // category
   { path: '/category/manage', component: category, name: 'manage'},

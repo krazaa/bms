@@ -3,6 +3,28 @@
         <form  @submit.prevent="onSubmit">
         <div class="columns" v-if="!success">
             <div class="column is-8 is-offset-2">
+            
+
+                    <p class="content"><b>Selected:</b> {{ selected }}</p>
+        <b-field label="Find or add a Fruit">
+            <b-autocomplete
+                v-model="product"
+                ref="autocomplete"
+                :data="filteredDataArray"
+                placeholder="e.g. Dog"
+                @select="option => selected = option">
+                <template slot="header">
+                    <a @click="showAddFruit">
+                        <span> Add new... </span>
+                    </a> 
+                </template>
+                <template slot="empty">No results for {{product}} </template>
+            </b-autocomplete>
+
+
+
+
+        </b-field>
                 <div class="box">
                      <div class="columns is-multiline">
                         <div class="column is-4"><h3 class="title is-4">New Purchase Order</h3></div>
@@ -23,6 +45,7 @@
                     </div>
  
             <div class="columns">
+
                 <div class="column is-5">
                     <b-field label="Vendor">
                         <b-autocomplete v-model="vendors" required
@@ -172,7 +195,20 @@ export default {
                 data: [],
                 isFetching: false,
                 isFetching2: false,
+                 data4: [],
+                 name: '',
+                selected: null
  
+            }
+        },
+               computed: {
+            filteredDataArray() {
+                return this.data4.filter((option) => {
+                    return option.name
+                        .toString()
+                        .toLowerCase()
+                        .indexOf(this.name.toLowerCase()) >= 0
+                })
             }
         },
          methods: {
@@ -230,14 +266,6 @@ export default {
             },
          
             onSubmit: function(){
-
-                // let data = new FormData();
-                // data.append('vendor_id',this.addRows.vendor_id);
-                // data.append('refno', this.addRows.refno);
-                // data.append('podate', this.addRows.podate);
-                // data.append('product_id', this.addRows.product_id);
-                // data.append('qty', this.addRows.qty);
-                // data.append('branch_id', this.addRows.branch_id);
                 var addRows = _.map(this.addRows, function(num){ return _.pick(num, 'qty','branch_id','podate','product_id','refno','vendor_id')})
                 axios.post('/purchases./electronic/StoreElecPO', addRows)
                 //.then(response =>{ 
@@ -249,10 +277,28 @@ export default {
                    //      this.success = false;
                    // });
                 },
+                 showAddFruit() {
+                this.$dialog.prompt({
+                    message: `Fruit`,
+                    inputAttrs: {
+                        placeholder: 'e.g. Watermelon',
+                        maxlength: 20,
+                        value: this.name
+                    },
+                    confirmText: 'Add',
+                    onConfirm: (value) => {
+                        this.data4.push(value)
+                        this.$refs.autocomplete.setSelected(value)
+                    }
+                })
+            }
               
             },
+
+     
             mounted(){
             axios.get("/purchases./electronic/GetBranches").then(({data}) => (this.branches = data));
+            axios.get("/purchases./electronic/ElecProductsList").then(response => this.data4 = response.data);
             // axios.get("/vendors./GetVendorsAuto").then(({data}) => (this.vendors = data));
             //axios.get("/categories./indexAutos").then(({data}) => (this.getcats = data));
     

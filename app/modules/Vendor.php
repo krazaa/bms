@@ -24,4 +24,9 @@ class Vendor extends Model
     {
         return $query->where('isActive', true);
     }
+
+     public function accounts()
+    {
+        return $this->belongsTo('App\Purchase', 'vendor_id');
+    }
 }

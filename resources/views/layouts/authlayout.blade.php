@@ -57,7 +57,9 @@
                 <router-link class="navbar-item" :to="{ name: 'ivs'}">ivs</router-link>
                 <router-link class="navbar-item" :to="{ name: 'incometaxledger'}">Income Tax Ledger</router-link>
                 <router-link class="navbar-item" :to="{ name: 'iventAccledger'}">Inventory Account Ledger</router-link>
-                <router-link class="navbar-item" :to="{ name: 'grnsList'}">Goods Received Note.</router-link>
+                <router-link class="navbar-item" :to="{ name: 'grnsList'}">Goods Received Note</router-link>
+                <router-link class="navbar-item" :to="{ name: 'apl'}">Account Payable Ledger</router-link>
+                <router-link class="navbar-item" :to="{ name: 'vbs'}">Vendor Balance Summary</router-link>
               </div>
             </div>
             <div class="navbar-item has-dropdown is-hoverable">

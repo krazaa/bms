@@ -30,6 +30,16 @@ class ElecPurchaseOrderController extends Controller
         return $data->toArray(); 
 	}
 
+        public function ElecProductsList()
+    {
+        
+        $data = Electronicproduct::select('id','name','code')
+        ->orderBy('id','desc')
+        ->get();
+        //->paginate(5);
+        return $data->toArray(); 
+    }
+
 	public function GetBranches()
 	{
 		$data = Branch::select('id','name')->get();

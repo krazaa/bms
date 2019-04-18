@@ -185,6 +185,7 @@ Route::prefix('purchases.')->group(function () {
     Route::get('electronic/StatusChange/{id}', 'purchases\ElecPurchaseOrderController@StatusChange')->name('purchases.electronic.StatusChange');
     Route::post('electronic/StoreElecPO', 'purchases\ElecPurchaseOrderController@StoreElecPO')->name('purchases.electronic.StoreElecPO');
     Route::get('electronic/GetElecProducts', 'purchases\ElecPurchaseOrderController@GetElecProducts')->name('purchases.electronic.GetElecProducts');
+    Route::get('electronic/ElecProductsList', 'purchases\ElecPurchaseOrderController@ElecProductsList')->name('purchases.electronic.ElecProductsList');
     Route::get('electronic/GetBranches', 'purchases\ElecPurchaseOrderController@GetBranches')->name('purchases.electronic.GetBranches');
     Route::post('electronic/ReceivePOStore', 'purchases\ElecPurchaseOrderController@ReceivePOStore')->name('purchases.electronic.ReceivePOStore');
     
@@ -220,6 +221,7 @@ Route::prefix('stocks.')->group(function () {
 // ledgers
 Route::prefix('ledgers.')->group(function () {
     Route::get('/apl', 'ledgers\LedgersController@AccountPayableLedger')->name('electronic.apl');
+    Route::get('/vbs', 'ledgers\LedgersController@VendorBalanceSummary')->name('electronic.vbs');
  
  });   
 //end legers 
