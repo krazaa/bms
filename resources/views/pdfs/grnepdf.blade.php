@@ -124,9 +124,9 @@ hr{
               <br> Transporter Name: {{ $d->cvendors->company }}
               <br> Transportation: <b>{{ number_format($data->sum('cargo'),2) }}</b></td>
             <td>
-              P. Order N<sup>o</sup>: <b>{{ $d->po_id}}</b><br>
-              Delivery N<sup>o</sup>: <b>{{ $d->dno}}</b><br>
-              Sales Tax Invoice N<sup>o</sup>: <b>{{ $d->stinv}}</b><br>
+              P. Order No: <b>{{ $d->po_id}}</b><br>
+              Delivery No: <b>{{ $d->dno}}</b><br>
+              Sales Tax Invoice No: <b>{{ $d->stinv}}</b><br>
               PO Status: <b>Received</b><br>
               Payable - Vendor <b>{{ number_format($data->sum('totalcost') + $d->tax,2) }}</b><br>
             </td>
