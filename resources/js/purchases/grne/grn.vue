@@ -126,7 +126,7 @@
                     <div class="th-wrap is-numeric"> {{ totalcost | currency}}</div>
                 </th>
                 <th>
-                    <div class="th-wrap is-numeric">{{ TotalCargo | currency}}</div></th>
+                    <div class="th-wrap is-numeric">{{ TotalCargo | currency1}}</div></th>
                 <th></th>
                 <th></th>
                 <th numeric><p class="has-text-right">{{ atc | currency}}</p></th>
@@ -260,7 +260,7 @@ import moment from 'moment';
       
     currency1(amount) {
       const amt = Number(amount)
-      return amt && amt.toLocaleString(undefined, {minimumIntegerDigits:1}) || '0'
+      return amt && amt.toLocaleString(undefined, {maxIntegerDigits:1}) || '0'
         }
     }
 }
