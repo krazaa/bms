@@ -36,7 +36,7 @@ class GrnsController extends Controller
       $data = ElecStock::select('*',
       DB::raw('SUM(cost * qty) as totalcost'),
       DB::raw('SUM(cargopu * qty) as cargo'),
-      DB::raw('SUM(cost * qty + cargopu) as atc'))
+      DB::raw('SUM(cost * qty) as atc'))
       ->where('po_id','=',$id)
 		//->where('stockReceive', false)
     ->with('products')

@@ -183,11 +183,11 @@ hr{
             <td></td>
             <td style="text-align: center;"><b> {{ $data->sum('qty') }}</b></td>
             <td></td>
-            <td style="text-align: right;"><b>{{ number_format($data->sum('totalcost') + $td->cargopu,2) }}</b>
+            <td style="text-align: right;"><b>{{ number_format($data->sum('totalcost') ,2) }}</b>
             <td style="text-align: right;"><b>{{ number_format($data->sum('cargo'),2) }}</b> </td>
             <td></td>
             <td></td>
-            <td style="text-align: right;"><b>{{ number_format($data->sum('atc'),2) }}</b></td>
+            <td style="text-align: right;"><b>{{ number_format($data->sum('atc') + $data->sum('cargo'),2) }}</b></td>
           </tr>
         </tfoot>
      </table>
