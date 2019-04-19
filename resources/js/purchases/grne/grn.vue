@@ -154,7 +154,7 @@
                     <div class="column is-6">Credit
                         <br><b></b>
                         <br>
-                        <br><b>{{ totalcost + getdata[0].tax }}</b>
+                        <br><b>{{ totalcost + getdata[0].tax | currency}}</b>
                         <br><b>{{ TotalCargo | currency}}</b>
                         <br><b>{{ TotalCargo + totalcost + getdata[0].tax | currency}}</b>
                     </div>
