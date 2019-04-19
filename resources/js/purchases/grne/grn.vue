@@ -36,14 +36,14 @@
                 Delivery No: <b>{{ getdata[0].dno }}</b><br>
                 Sales Tax Inv: <b>{{ getdata[0].stinv }}</b><br>
                 PO Status: <b>Received</b><br>
-                Payable - Vendor <b>{{ totalcost + getdata[0].tax }}</b>
+                Payable - Vendor <b>{{ totalcost + getdata[0].tax | currency}}</b>
             </div>
             <div class="column is-3">
                 Order Date: <b>{{ getdata[0].podate | formatDate}} </b><br>
                 Dispatch Date: <b>{{ getdata[0].ddate | formatDate}}</b><br>
                 Receiving Date: <b>{{ getdata[0].rdate | formatDate}}</b><br>
                 Due Date: <b>{{ getdata[0].duedate | formatDate}}</b><br>
-                Income Tax: <b>{{ getdata[0].tax }}</b>
+                Income Tax: <b>{{ getdata[0].tax | currency}}</b>
             </div>    
         </div>
         
@@ -129,7 +129,7 @@
                     <div class="th-wrap is-numeric">{{ TotalCargo | currency}}</div></th>
                 <th></th>
                 <th></th>
-                <th numeric><p class="has-text-right">{{ atc | currency}}</p></th>
+                <th numeric><p class="has-text-right">{{ atc | currency }}</p></th>
             
             </template>
         </b-table>
@@ -258,9 +258,9 @@ import moment from 'moment';
     },
    filters: {
       
-    currency1(amount) {
+    currNum (amount) {
       const amt = Number(amount)
-      return amt && amt.toLocaleString(undefined, {maximumIntegerDigits:2}) || '0'
+      return amt && amt.toLocaleString(undefined, {minimumIntegerDigits:1}) || '0'
         },
         
     }

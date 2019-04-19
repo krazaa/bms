@@ -7,6 +7,9 @@ import newbranch from './manage/branches/AddBranch.vue';
 import editbranch from './manage/branches/EditBranch.vue';
 
 
+import autocom from './purchases/electronic/autocom.vue';
+
+
 // Purchase Orders
 import poELists from './purchases/electronic/PoLists.vue';  
 import poECreate from './purchases/electronic/poCreate.vue';  
@@ -193,6 +196,9 @@ export default [
 //GRNS
   { path: '/ledgers/apl', component: apl, name: 'apl'},
   { path: '/ledgers/vbs', component: vbs, name: 'vbs'},
+
+  
+  { path: '/autocom/autocom', component: autocom, name: 'autocom'},
 
 // category
   { path: '/category/manage', component: category, name: 'manage'},

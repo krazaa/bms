@@ -7,18 +7,15 @@
 
                     <p class="content"><b>Selected:</b> {{ selected }}</p>
         <b-field label="Find or add a Fruit">
-            <b-autocomplete
-                v-model="product"
+                <b-autocomplete
+                v-model="code"
                 ref="autocomplete"
                 :data="filteredDataArray"
                 placeholder="e.g. Dog"
-                @select="option => selected = option">
-                <template slot="header">
-                    <a @click="showAddFruit">
-                        <span> Add new... </span>
-                    </a> 
-                </template>
-                <template slot="empty">No results for {{product}} </template>
+                field="product_name"
+                @select="option => selected = option.id">
+                
+                <template slot="empty">No results for {{code}}</template>
             </b-autocomplete>
 
 
@@ -99,7 +96,18 @@
             <tr v-for="(addRow, index) in addRows">
             <td width="360px">
             <b-field>
-            <b-autocomplete v-model="addRow.items" required
+              <b-autocomplete
+                v-model="items"
+                ref="autocomplete"
+                :data="filteredDataArray"
+                placeholder="e.g. Product Code"
+                field="product_name"
+                @select="option => addRow.product_id = option.id">
+                
+                <template slot="empty">No results for {{code}}</template>
+            </b-autocomplete>
+    
+         <!--    <b-autocomplete v-model="addRow.items" required
                 :data="products"
                 placeholder="Type Product name"
                 field="name"
@@ -120,7 +128,7 @@
                         </div>
                     </div>
                 </template>
-            </b-autocomplete>
+            </b-autocomplete> -->
         </b-field>
         <span class="help is-danger"> </span>
                 </td>
@@ -196,18 +204,19 @@ export default {
                 isFetching: false,
                 isFetching2: false,
                  data4: [],
-                 name: '',
+                 code: '',
+                 product: '',
                 selected: null
  
             }
         },
-               computed: {
+        computed: {
             filteredDataArray() {
                 return this.data4.filter((option) => {
-                    return option.name
+                    return option.product_name
                         .toString()
                         .toLowerCase()
-                        .indexOf(this.name.toLowerCase()) >= 0
+                        .indexOf(this.items.toLowerCase()) >= 0
                 })
             }
         },
@@ -277,21 +286,7 @@ export default {
                    //      this.success = false;
                    // });
                 },
-                 showAddFruit() {
-                this.$dialog.prompt({
-                    message: `Fruit`,
-                    inputAttrs: {
-                        placeholder: 'e.g. Watermelon',
-                        maxlength: 20,
-                        value: this.name
-                    },
-                    confirmText: 'Add',
-                    onConfirm: (value) => {
-                        this.data4.push(value)
-                        this.$refs.autocomplete.setSelected(value)
-                    }
-                })
-            }
+                
               
             },
 

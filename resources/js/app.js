@@ -17,13 +17,13 @@ Vue.use(VeeValidate);
 //Vue.use(VueCurrencyFilter)
 Vue.use(VueCurrencyFilter,
 {
-  //symbol : '',
+  symbol : '',
   thousandsSeparator: ',',
-  fractionCount: '',
+  fractionCount: 2,
   fractionSeparator: '.',
-  //symbolPosition: 'front',
-  //symbolSpacing: true
-})
+  symbolPosition: 'front',
+  symbolSpacing: true
+});
 
 
 

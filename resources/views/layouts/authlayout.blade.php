@@ -60,11 +60,13 @@
                 <router-link class="navbar-item" :to="{ name: 'grnsList'}">Goods Received Note</router-link>
                 <router-link class="navbar-item" :to="{ name: 'apl'}">Account Payable Ledger</router-link>
                 <router-link class="navbar-item" :to="{ name: 'vbs'}">Vendor Balance Summary</router-link>
+                
               </div>
             </div>
             <div class="navbar-item has-dropdown is-hoverable">
               <a class="navbar-link" href="#">Sales</a>
               <div class="navbar-dropdown ">
+                <router-link class="navbar-item" :to="{ name: 'autocom'}">Autocom</router-link>
                 <a class="navbar-item" href="#">Vehicles Cash & Whole Sale</a>
                 <a class="navbar-item" href="#">Vehicle Lease Sale</a>
                 <a class="navbar-item" href="#">Product Cash & Whole Sale</a>
